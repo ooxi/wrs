@@ -38,13 +38,14 @@ var rand = function(min, max) {
 var broadcast_socket = dgram.createSocket('udp4');
 
 var broadcast = function(type, obj) {
-	var msg = new Buffer(JSON.stringify({
-		type: type,
-		payload: obj
-	}));
-
 	for (var secret in clients) {
 		var client = clients[secret];
+
+		var msg = new Buffer(JSON.stringify({
+			type: type,
+			secret: secret,
+			payload: obj
+		}));
 
 		broadcast_socket.send(
 			msg, 0, msg.length,

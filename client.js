@@ -1,6 +1,8 @@
 ﻿var http = require('http');
 var dgram = require('dgram');
+
 var server_url = 'http://localhost:31337/';
+var udp_port = 54321;
 
 
 
@@ -32,6 +34,7 @@ var read_object = function(cb) {
 
 /**
  */
+var self = [];
 var clients = {};
 var shots = {};
 
@@ -43,10 +46,17 @@ var socket = dgram.createSocket('udp');
 
 socket.on('message', function(msg, rinfo) {
 	var obj = JSON.parse(msg);
-
-	if ('client' === obj.type) {
-		
-});
+console.log('%j', msg);
+	if ('shot' === obj.type) {
+		var shot = obj.payload;
+		shots[shot.id] = shot;
+	} else if ('client' === obj.type) {
+		var client = obj.payload;
+		clients[client.id] = client;
+	} else {
+		throw 'Unknown type';
+	}
+}).bind(udp_port);
 
 
 
@@ -54,10 +64,18 @@ socket.on('message', function(msg, rinfo) {
 /**
  * Register a new client
  */
-var do_connect = function(cb) {
+var do_connect = function(name, cb) {
+	http.get(server_url +'connect?name='+ encodeURIComponent(name) +'&udp-port='+ encodeURIComponent(udp_port), read_object(function(response) {
+
+		self.push(response.secret);
+		cb();
+	}));
 };
 
 
+
+do_connect('volker-'+ Math.random(), function() {
+});
 
 
 
