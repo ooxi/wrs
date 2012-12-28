@@ -184,17 +184,20 @@ http.createServer(function(request, response) {
 	};
 
 
-	if ("/radar" === action.pathname) {
+	if ('/radar' === action.pathname) {
 		radar(action.query, send);
-	} else if ("/move" === action.pathname) {
+	} else if ('/move' === action.pathname) {
 		move(action.query, send);
-	} else if ("/shoot" === action.pathname) {
+	} else if ('/shoot' === action.pathname) {
 		shoot(action.query, send);
-	} else if ("/connect" === action.pathname) {
+	} else if ('/connect' === action.pathname) {
 		connect(action.query, send);
-	} else if ("/dump" === action.pathname) {
+	} else if ('/udp' === action.pathname) {
+		
+	} else if ('/dump' === action.pathname) {
 		dump(action.query, send);
 	} else {
-		send(404, "Unknown method");
+		send(404, 'Unknown method');
 	}
 }).listen(1337);
+
