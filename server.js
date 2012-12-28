@@ -49,7 +49,7 @@ var broadcast = function(type, obj) {
 
 		broadcast_socket.send(
 			msg, 0, msg.length,
-			client['udp-ip'], client['udp-port']
+			client['udp-port'], client['udp-ip']
 		);
 	}
 };
@@ -237,7 +237,7 @@ var shoot = function(query, cb) {
 	/* Propagate shot
 	 */
 	shots[uuid.v4()] = shot;
-	broadcast(shot.public);
+	broadcast('shot', shot.public);
 
 	cb(200, shot.public);
 };
@@ -292,10 +292,10 @@ setInterval(function() {
  */
 setInterval(function() {
 	for (var secret in clients) {
-		broadcast(clients[secret].public);
+		broadcast('client', clients[secret].public);
 	}
 	for (var id in shots) {
-		broadcast(shots[id].public);
+		broadcast('shot', shots[id].public);
 	}
 }, 500);
 

@@ -42,11 +42,11 @@ var shots = {};
 
 /* Register socket for udp updates
  */
-var socket = dgram.createSocket('udp');
+var socket = dgram.createSocket('udp4');
 
 socket.on('message', function(msg, rinfo) {
 	var obj = JSON.parse(msg);
-console.log('%j', msg);
+
 	if ('shot' === obj.type) {
 		var shot = obj.payload;
 		shots[shot.id] = shot;
@@ -56,7 +56,8 @@ console.log('%j', msg);
 	} else {
 		throw 'Unknown type';
 	}
-}).bind(udp_port);
+});
+socket.bind(udp_port);
 
 
 
