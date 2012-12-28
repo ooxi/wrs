@@ -37,9 +37,9 @@ var rand = function(min, max) {
  */
 var broadcast_socket = dgram.createSocket('udp4');
 
-var broadcast = function(name, obj) {
+var broadcast = function(type, obj) {
 	var msg = new Buffer(JSON.stringify({
-		name: name,
+		type: type,
 		payload: obj
 	}));
 
@@ -86,6 +86,7 @@ var connect = function(query, cb) {
 	var secret = uuid.v4();
 	clients[secret] = {
 		public: {
+			id: uuid.v4(),
 
 			/* Name of ship
 			 */
@@ -220,6 +221,7 @@ var shoot = function(query, cb) {
 	 */
 	var shot = {
 		public: {
+			id: uuid.v4(),
 			x: client.public.x,
 			y: client.public.y,
 			dx: query.dx,

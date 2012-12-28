@@ -1,5 +1,12 @@
-﻿var http = require("http");
+﻿var http = require('http');
+var dgram = require('dgram');
+var server_url = 'http://localhost:31337/';
 
+
+
+/**
+ * Parses a JSON object from a http response
+ */
 var read_object = function(cb) {
 	return function(response) {
 		var message = [];
@@ -20,6 +27,41 @@ var read_object = function(cb) {
 };
 
 
+
+
+
+/**
+ */
+var clients = {};
+var shots = {};
+
+
+
+/* Register socket for udp updates
+ */
+var socket = dgram.createSocket('udp');
+
+socket.on('message', function(msg, rinfo) {
+	var obj = JSON.parse(msg);
+
+	if ('client' === obj.type) {
+		
+});
+
+
+
+
+/**
+ * Register a new client
+ */
+var do_connect = function(cb) {
+};
+
+
+
+
+
+/*
 var name = "boris-"+ Math.random();
 http.get("http://localhost:1337/connect?name="+ encodeURIComponent(name), read_object(function(response) {
 	var secret = response.secret;
@@ -39,3 +81,5 @@ http.get("http://localhost:1337/connect?name="+ encodeURIComponent(name), read_o
 		}));
 	}, 2050);
 }));
+*/
+
