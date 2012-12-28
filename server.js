@@ -1,8 +1,8 @@
-﻿"use strict";
+﻿'use strict';
 
-var http = require("http");
-var url = require("url");
-var uuid = require("./uuid.js");
+var http = require('http');
+var url = require('url');
+var uuid = require('./uuid.js');
 
 var clients = {};
 var shots = {};
@@ -12,12 +12,12 @@ var shots = {};
 
 
 var connect = function(query, cb) {
-	if (!query.hasOwnProperty("name")) {
-		return cb(403, "Missing name argument");
+	if (!query.hasOwnProperty('name')) {
+		return cb(403, 'Missing name argument');
 	}
 	for (var secret in clients) {
 		if (clients[secret].public.name === query.name) {
-			return cb(403, "Client with that name already exists");
+			return cb(403, 'Client with that name already exists');
 		}
 	}
 
@@ -40,12 +40,12 @@ var connect = function(query, cb) {
 
 
 var radar = function(query, cb) {
-	if (!query.hasOwnProperty("secret")) {
-		return cb(403, "Missing secret argument");
+	if (!query.hasOwnProperty('secret')) {
+		return cb(403, 'Missing secret argument');
 	}
 
 	if (!clients.hasOwnProperty(query.secret)) {
-		return cb(404, "Unknown client");
+		return cb(404, 'Unknown client');
 	}
 	var client = clients[query.secret];
 	var nearby_clients = [];
@@ -70,26 +70,26 @@ var radar = function(query, cb) {
 
 
 var move = function(query, cb) {
-	if (!query.hasOwnProperty("secret")) {
-		return cb(403, "Missing secret argument");
+	if (!query.hasOwnProperty('secret')) {
+		return cb(403, 'Missing secret argument');
 	}
 
 	if (!clients.hasOwnProperty(query.secret)) {
-		return cb(404, "Unknown client");
+		return cb(404, 'Unknown client');
 	}
 	var client = clients[query.secret];
 
 
-	if (!query.hasOwnProperty("dx")) {
-		return cb(403, "Missing dx argument");
+	if (!query.hasOwnProperty('dx')) {
+		return cb(403, 'Missing dx argument');
 	}
-	if (!query.hasOwnProperty("dy")) {
-		return cb(403, "Missing dy argument");
+	if (!query.hasOwnProperty('dy')) {
+		return cb(403, 'Missing dy argument');
 	}
 
 	var max_speed = 5.0;
 	if ((query.dx * query.dx + query.dy * query.dy) > (max_speed * max_speed)) {
-		return cb(403, "You are too fast!");
+		return cb(403, 'You are too fast!');
 	}
 
 	client.public.dx = query.dx;
@@ -101,12 +101,12 @@ var move = function(query, cb) {
 
 
 var shoot = function(query, cb) {
-	if (!query.hasOwnProperty("secret")) {
-		return cb(403, "Missing secret argument");
+	if (!query.hasOwnProperty('secret')) {
+		return cb(403, 'Missing secret argument');
 	}
 
 	if (!clients.hasOwnProperty(query.secret)) {
-		return cb(404, "Unknown client");
+		return cb(404, 'Unknown client');
 	}
 	var client = clients[query.secret];
 
@@ -172,9 +172,9 @@ http.createServer(function(request, response) {
 	var action = url.parse(request.url, true);
 
 	var send = function(status, obj) {
-		response.writeHead(status, {"Content-Type": "application/json"});
+		response.writeHead(status, {'Content-Type': 'application/json'});
 
-		if ((200 !== status) && ("string" === typeof(obj))) {
+		if ((200 !== status) && ('string' === typeof(obj))) {
 			obj = {
 				error: true,
 				message: obj
@@ -193,7 +193,7 @@ http.createServer(function(request, response) {
 	} else if ('/connect' === action.pathname) {
 		connect(action.query, send);
 	} else if ('/udp' === action.pathname) {
-		
+		udp(action.query, send);
 	} else if ('/dump' === action.pathname) {
 		dump(action.query, send);
 	} else {
