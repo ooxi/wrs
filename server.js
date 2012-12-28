@@ -1,22 +1,66 @@
 ﻿'use strict';
 
+var dgram = require('dgram');
 var http = require('http');
 var url = require('url');
 var uuid = require('./uuid.js');
 
 var configuration = {
-	'max-speed':	5,
+	'max-ship-speed':	5,
+	'max-shot-speed':	50,
 	'spawn-zone':	1000,
-	'game-zone':	5000
+	'game-zone':	5000,
+	'shot-ticks':	100
 };
 var clients = {};
 var shots = {};
 
 
 
+/**
+ * @return Random number between min and max. If max is not given, than it is
+ *    set to min and min is set to -min
+ */
+var rand = function(min, max) {
+	if ('undefined' === typeof(max)) {
+		max = min;
+		min = -min;
+	}
+
+	return Math.random() * (max - min) + min;
+};
+
+
+
+/**
+ * Used to propagate an object to all clients
+ */
+var broadcast_socket = dgram.createSocket('udp4');
+
+var broadcast = function(name, obj) {
+	var msg = new Buffer(JSON.stringify({
+		name: name,
+		payload: obj
+	}));
+
+	for (var secret in clients) {
+		var client = clients[secret];
+
+		broadcast_socket.send(
+			msg, 0, msg.length,
+			client['udp-ip'], client['udp-port']
+		);
+	}
+};
+
+
+
 
 
 var connect = function(query, cb) {
+
+	/* Argument validation
+	 */
 	if (!query.hasOwnProperty('name')) {
 		return cb(403, 'Missing name argument');
 	}
@@ -26,17 +70,56 @@ var connect = function(query, cb) {
 		}
 	}
 
+	/* Needing port to contact with UDP information (ip will be set in the
+	 * server, not by the client)
+	 */
+	if (!query.hasOwnProperty('udp-ip')) {
+		return cb(403, 'Missing udp-ip argument');
+	}
+	if (!query.hasOwnProperty('udp-port')) {
+		return cb(403, 'Missing udp-port argument');
+	}
+
+
+	/* Add new client
+	 */
 	var secret = uuid.v4();
 	clients[secret] = {
 		public: {
+
+			/* Name of ship
+			 */
 			name: query.name,
-			x: (Math.random() - 0.5) * 1000.0,
-			y: (Math.random() - 0.5) * 1000.0,
+
+			/* Position
+			 */
+			x: rand(configuration['spawn-zone']),
+			y: rand(configuration['spawn-zone']),
+
+			/* Current direction and speed
+			 */
 			dx: 0.0,
-			dy: 0.0
-		}
+			dy: 0.0,
+
+			/* Desired direction and speed
+			 */
+			_dx: 0.0,
+			_dy: 0.0
+		},
+
+		/* UDP information
+		 */
+		'udp-ip': query['udp-ip'],
+		'udp-port': query['udp-port'],
+
+		/* Time of last shot
+		 */
+		'last-shot': 0
 	};
 
+
+	/* Tell client the secret needed for interaction
+	 */
 	cb(200, {
 		secret: secret
 	});
@@ -106,29 +189,54 @@ var move = function(query, cb) {
 
 
 var shoot = function(query, cb) {
+
+	if (!query.hasOwnProperty('dx')) {
+		return cb(403, 'Missing dx argument');
+	}
+	if (!query.hasOwnProperty('dy')) {
+		return cb(403, 'Missing dy argument');
+	}
+
 	if (!query.hasOwnProperty('secret')) {
 		return cb(403, 'Missing secret argument');
 	}
-
 	if (!clients.hasOwnProperty(query.secret)) {
 		return cb(404, 'Unknown client');
 	}
 	var client = clients[query.secret];
 
 
-	shots[uuid.v4()] = {
+	/* Shot must not be too fast
+	 */
+	var speed_sqr = query.dx * query.dx + query.dy * query.dy;
+	var max_speed_sqr = configuration['max-shot-speed'] * configuration['max-shot-speed'];
+
+	if (speed_sqr > max_speed_sqr) {
+		return cb(403, 'Shot is too fast');
+	}
+
+
+	/* Add new shot
+	 */
+	var shot = {
 		public: {
 			x: client.public.x,
 			y: client.public.y,
-			dx: client.public.dx * 5,
-			dy: client.public.dy * 5
+			dx: query.dx,
+			dy: query.dy
 		},
 
 		owner: query.secret,
-		ticks: 100
+		ticks: configuration['shot-ticks']
 	};
 
-	cb(200, {});
+	
+	/* Propagate shot
+	 */
+	shots[uuid.v4()] = shot;
+	broadcast(shot.public);
+
+	cb(200, shot.public);
 };
 
 
@@ -144,6 +252,9 @@ var dump = function(query, cb) {
 
 
 
+/**
+ * Update internal state
+ */
 var last_call = Date.now();
 setInterval(function() {
 	var now = Date.now();
@@ -165,11 +276,27 @@ setInterval(function() {
 		if (shot.ticks < 0) {
 			delete shots[id];
 		} else {
-			shot.x += shot.dx;
-			shot.y += shot.dy;
+			shot.x += shot.dx * elapsed / 1000.0;
+			shot.y += shot.dy * elapsed / 1000.0;
 		}
 	}
-}, 10);
+}, 500);
+
+
+
+/**
+ * Propagate information to clients
+ */
+setInterval(function() {
+	for (var secret in clients) {
+		broadcast(clients[secret].public);
+	}
+	for (var id in shots) {
+		broadcast(shots[id].public);
+	}
+}, 500);
+
+
 
 
 
@@ -189,19 +316,21 @@ http.createServer(function(request, response) {
 	};
 
 
-	if ('/radar' === action.pathname) {
+/*	if ('/radar' === action.pathname) {
 		radar(action.query, send);
 	} else 
+*/
 	if ('/move' === action.pathname) {
 		move(action.query, send);
 	} else if ('/shoot' === action.pathname) {
 		shoot(action.query, send);
 	} else if ('/connect' === action.pathname) {
+		action.query['udp-ip'] = request.connection.remoteAddress;
 		connect(action.query, send);
 	} else if ('/dump' === action.pathname) {
 		dump(action.query, send);
 	} else {
 		send(404, 'Unknown method');
 	}
-}).listen(1337);
+}).listen(31337);
 
