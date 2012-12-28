@@ -11,7 +11,7 @@ var read_object = function(cb) {
 			var obj = JSON.parse(message);
 
 			if (200 != response.statusCode) {
-				throw obj.message;
+				throw 'Received unexpected exception: '+ obj.message;
 			} else {
 				cb(obj);
 			}

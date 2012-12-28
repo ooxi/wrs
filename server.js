@@ -4,6 +4,11 @@ var http = require('http');
 var url = require('url');
 var uuid = require('./uuid.js');
 
+var configuration = {
+	'max-speed':	5,
+	'spawn-zone':	1000,
+	'game-zone':	5000
+};
 var clients = {};
 var shots = {};
 
@@ -186,14 +191,13 @@ http.createServer(function(request, response) {
 
 	if ('/radar' === action.pathname) {
 		radar(action.query, send);
-	} else if ('/move' === action.pathname) {
+	} else 
+	if ('/move' === action.pathname) {
 		move(action.query, send);
 	} else if ('/shoot' === action.pathname) {
 		shoot(action.query, send);
 	} else if ('/connect' === action.pathname) {
 		connect(action.query, send);
-	} else if ('/udp' === action.pathname) {
-		udp(action.query, send);
 	} else if ('/dump' === action.pathname) {
 		dump(action.query, send);
 	} else {
