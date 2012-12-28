@@ -128,6 +128,15 @@ var shoot = function(query, cb) {
 
 
 
+var dump = function(query, cb) {
+	cb(200, {
+		clients: clients,
+		shots: shots
+	});
+};
+
+
+
 
 
 var last_call = Date.now();
@@ -175,14 +184,16 @@ http.createServer(function(request, response) {
 	};
 
 
-	if ("/connect" === action.pathname) {
-		connect(action.query, send);
-	} else if ("/radar" === action.pathname) {
+	if ("/radar" === action.pathname) {
 		radar(action.query, send);
 	} else if ("/move" === action.pathname) {
 		move(action.query, send);
 	} else if ("/shoot" === action.pathname) {
 		shoot(action.query, send);
+	} else if ("/connect" === action.pathname) {
+		connect(action.query, send);
+	} else if ("/dump" === action.pathname) {
+		dump(action.query, send);
 	} else {
 		send(404, "Unknown method");
 	}
