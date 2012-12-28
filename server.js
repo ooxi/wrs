@@ -1,96 +1,189 @@
-/**
- * Copyright (c) 2012 ooxi
- *     https://github.com/ooxi/wrs
- *     violetland@mail.ru
- * 
- * This software is provided 'as-is', without any express or implied warranty.
- * In no event will the authors be held liable for any damages arising from the
- * use of this software.
- * 
- * Permission is granted to anyone to use this software for any purpose,
- * including commercial applications, and to alter it and redistribute it
- * freely, subject to the following restrictions:
- * 
- *  1. The origin of this software must not be misrepresented; you must not
- *     claim that you wrote the original software. If you use this software in a
- *     product, an acknowledgment in the product documentation would be
- *     appreciated but is not required.
- * 
- *  2. Altered source versions must be plainly marked as such, and must not be
- *     misrepresented as being the original software.
- * 
- *  3. This notice may not be removed or altered from any source distribution.
- */
-'use strict';
-var http = require('http');
-var url = require('url');
+﻿"use strict";
 
-var clients = [];
+var http = require("http");
+var url = require("url");
+var uuid = require("./uuid.js");
+
+var clients = {};
+var shots = {};
 
 
 
 
 
-var send = function(code, obj, response) {
-	response.writeHead(code, {
-		'Content-Type': 'application/json'
-	});
-	response.end(JSON.stringify(obj));
-};
-
-
-
-var connect = function(action, response) {
-	if (!action.query.hasOwnProperty('name')) {
-		return send(403, {
-			error: true,
-			message: 'Missing name'
-		}, response);
+var connect = function(query, cb) {
+	if (!query.hasOwnProperty("name")) {
+		return cb(403, "Missing name argument");
+	}
+	for (var secret in clients) {
+		if (clients[secret].public.name === query.name) {
+			return cb(403, "Client with that name already exists");
+		}
 	}
 
-	if (clients.hasOwnProperty(action.query.name)) {
-		return send(403, {
-			error: true,
-			message: 'Duplicated client name'
-		}, response);
-	}
-
-	clients[action.query.name] = {
-		x: (Math.random() - 0.5) * 1000.0,
-		y: (Math.random() - 0.5) * 1000.0
+	var secret = uuid.v4();
+	clients[secret] = {
+		public: {
+			name: query.name,
+			x: (Math.random() - 0.5) * 1000.0,
+			y: (Math.random() - 0.5) * 1000.0,
+			dx: 0.0,
+			dy: 0.0
+		}
 	};
 
-	send(200, clients[action.query.name], response);
+	cb(200, {
+		secret: secret
+	});
 };
 
 
 
-var move = function(action, response) {
-};
-
-
-
-
-
-http.createServer(function (req, res) {
-	var action = url.parse(req.url, true);
-
-	if ('/connect' === action.pathname) {
-		connect(action, res);
-	} else if ('/move' === action) {
-		move(action, res);
-	} else {
-		send(404, {
-			error: true,
-			message: 'Invalid method'
-		}, res);
+var radar = function(query, cb) {
+	if (!query.hasOwnProperty("secret")) {
+		return cb(403, "Missing secret argument");
 	}
 
-}).listen(1337, '127.0.0.1');
-console.log('Server running at http://127.0.0.1:1337/');
+	if (!clients.hasOwnProperty(query.secret)) {
+		return cb(404, "Unknown client");
+	}
+	var client = clients[query.secret];
+	var nearby_clients = [];
+	var nearby_shots = [];
+
+	for (var secret in clients) {
+		if (secret !== query.secret) {
+			nearby_clients.push(clients[secret].public);
+		}
+	}
+	for (var uuid in shots) {
+		nearby_shots.push(shots[uuid].public);
+	}
+
+	cb(200, {
+		me: client.public,
+		nearby_clients: nearby_clients,
+		nearby_shots: nearby_shots
+	});
+};
+
+
+
+var move = function(query, cb) {
+	if (!query.hasOwnProperty("secret")) {
+		return cb(403, "Missing secret argument");
+	}
+
+	if (!clients.hasOwnProperty(query.secret)) {
+		return cb(404, "Unknown client");
+	}
+	var client = clients[query.secret];
+
+
+	if (!query.hasOwnProperty("dx")) {
+		return cb(403, "Missing dx argument");
+	}
+	if (!query.hasOwnProperty("dy")) {
+		return cb(403, "Missing dy argument");
+	}
+
+	var max_speed = 5.0;
+	if ((query.dx * query.dx + query.dy * query.dy) > (max_speed * max_speed)) {
+		return cb(403, "You are too fast!");
+	}
+
+	client.public.dx = query.dx;
+	client.public.dy = query.dy;
+
+	cb(200, {});
+};
+
+
+
+var shoot = function(query, cb) {
+	if (!query.hasOwnProperty("secret")) {
+		return cb(403, "Missing secret argument");
+	}
+
+	if (!clients.hasOwnProperty(query.secret)) {
+		return cb(404, "Unknown client");
+	}
+	var client = clients[query.secret];
+
+
+	shots[uuid.v4()] = {
+		public: {
+			x: client.public.x,
+			y: client.public.y,
+			dx: client.public.dx * 5,
+			dy: client.public.dy * 5
+		},
+
+		owner: query.secret,
+		ticks: 100
+	};
+
+	cb(200, {});
+};
 
 
 
 
 
+var last_call = Date.now();
+setInterval(function() {
+	var now = Date.now();
+	var elapsed = now - last_call;
+	last_call = now;
 
+	for (var secret in clients) {
+		var client = clients[secret];
+		var dx = client.public.dx * elapsed / 1000.0;
+		var dy = client.public.dy * elapsed / 1000.0;
+
+		client.public.x += dx;
+		client.public.y += dy;
+	}
+	for (var id in shots) {
+		var shot = shots[id];
+		shot.ticks--;
+
+		if (shot.ticks < 0) {
+			delete shots[id];
+		} else {
+			shot.x += shot.dx;
+			shot.y += shot.dy;
+		}
+	}
+}, 10);
+
+
+
+http.createServer(function(request, response) {
+	var action = url.parse(request.url, true);
+
+	var send = function(status, obj) {
+		response.writeHead(status, {"Content-Type": "application/json"});
+
+		if ((200 !== status) && ("string" === typeof(obj))) {
+			obj = {
+				error: true,
+				message: obj
+			};
+		}
+		response.end(JSON.stringify(obj));
+	};
+
+
+	if ("/connect" === action.pathname) {
+		connect(action.query, send);
+	} else if ("/radar" === action.pathname) {
+		radar(action.query, send);
+	} else if ("/move" === action.pathname) {
+		move(action.query, send);
+	} else if ("/shoot" === action.pathname) {
+		shoot(action.query, send);
+	} else {
+		send(404, "Unknown method");
+	}
+}).listen(1337);

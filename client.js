@@ -1,36 +1,41 @@
-/**
- * Copyright (c) 2012 ooxi
- *     https://github.com/ooxi/wrs
- *     violetland@mail.ru
- * 
- * This software is provided 'as-is', without any express or implied warranty.
- * In no event will the authors be held liable for any damages arising from the
- * use of this software.
- * 
- * Permission is granted to anyone to use this software for any purpose,
- * including commercial applications, and to alter it and redistribute it
- * freely, subject to the following restrictions:
- * 
- *  1. The origin of this software must not be misrepresented; you must not
- *     claim that you wrote the original software. If you use this software in a
- *     product, an acknowledgment in the product documentation would be
- *     appreciated but is not required.
- * 
- *  2. Altered source versions must be plainly marked as such, and must not be
- *     misrepresented as being the original software.
- * 
- *  3. This notice may not be removed or altered from any source distribution.
- */
-'use strict';
-var http = require('http');
+﻿var http = require("http");
 
-http.get('http://localhost:1337/connect?name=peter&o=p', function(res) {
-	console.log('penis '+ res.statusCode +' '+ res.data);
-});
+var read_object = function(cb) {
+	return function(response) {
+		var message = [];
+
+		response.on("data", function(chunk) {
+			message += chunk
+		});
+		response.on("end", function() {
+			var obj = JSON.parse(message);
+
+			if (200 != response.statusCode) {
+				throw obj.message;
+			} else {
+				cb(obj);
+			}
+		});
+	};
+};
 
 
+var name = "boris-"+ Math.random();
+http.get("http://localhost:1337/connect?name="+ encodeURIComponent(name), read_object(function(response) {
+	var secret = response.secret;
 
+	var dx = 10.0 * (Math.random() - 0.5);
+	var dy = 10.0 * (Math.random() - 0.5);
+	http.get("http://localhost:1337/move?secret="+ encodeURIComponent(secret) +"&dx="+ encodeURIComponent(dx) +"&dy="+ encodeURIComponent(dy), read_object(function(response) {
+	}));
 
+	http.get("http://localhost:1337/radar?secret="+ encodeURIComponent(secret), read_object(function(response) {
+		console.log("%j", response);
+	}));
 
-
-
+	setTimeout(function() {
+		http.get("http://localhost:1337/shoot?secret="+ encodeURIComponent(secret), read_object(function(response) {
+			console.log("Shot!");
+		}));
+	}, 2050);
+}));
