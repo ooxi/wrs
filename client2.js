@@ -25,7 +25,7 @@ var ship = require('./ship.js');
 
 
 
-var s = new ship('volker-1');
+var s = new ship('volker-2');
 
 
 
