@@ -91,11 +91,17 @@ var do_connect = function(name, cb) {
 
 		/* Activate radar
 		 */
+		response.radar = {
+			'nearby-clients': {},
+			'nearby-shots': {}
+		};
+
 		setInterval(function() {
 			do_radar(response.secret, function(echo) {
 				response.radar = echo;
 			});
 		}, 200);
+
 
 		ships.push(response.secret);
 		cb(response);
@@ -108,7 +114,18 @@ var do_connect = function(name, cb) {
  * Change speed and direction of client
  */
 var do_move = function(secret, dx, dy, cb) {
-	http.get(server_url +'move?secret='+ e(secret) +'&dx='+ dx +'&dy='+ dy, read_object(function(response) {
+	http.get(server_url +'move?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(function(response) {
+		cb();
+	}));
+};
+
+
+
+/**
+ * Shoots
+ */
+var do_shoot = function(secret, dx, dy, cb) {
+	http.get(server_url +'shoot?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(function(response) {
 		cb();
 	}));
 };
@@ -121,7 +138,7 @@ var do_move = function(secret, dx, dy, cb) {
 var get_random_enemy = function(self, cb) {
 
 	var check = function() {
-		if ('undefined' === typeof(self.radar)) {
+		if ('undefined' === typeof(self.radar.me)) {
 			return null;
 		}
 		var ids = Object.keys(self.radar['nearby-clients']);
@@ -130,12 +147,11 @@ var get_random_enemy = function(self, cb) {
 		return self.radar['nearby-clients'][id];
 	};
 
-
 	var interval = setInterval(function() {
 		var enemy = check();
 
 		if (null !== enemy) {
-			console.log('Chose '+ enemy.id +' as enemy');
+			console.log('Chose '+ enemy.id +' as enemy ');
 			clearInterval(interval);
 			cb(enemy);
 		} else {
@@ -149,7 +165,7 @@ var get_random_enemy = function(self, cb) {
 /**
  */
 var follow = function(self, enemy) {
-	if ('undefined' === self.radar) {
+	if ('undefined' === self.radar.me) {
 		console.log('I don\'t know myself');
 		return;
 	}
@@ -177,6 +193,7 @@ var follow = function(self, enemy) {
  */
 do_connect('volker-'+ Math.random(), function(client) {
 	var enemy = null;
+	var waiting_for_enemy = false;
 
 
 	/* If an enemy is chosen, that one will be followed. If not a new one
@@ -187,21 +204,24 @@ do_connect('volker-'+ Math.random(), function(client) {
 		/* No enemy chosen (or enemy does not exist anymore)
 		 */
 		if ((null === enemy) || !client.radar['nearby-clients'].hasOwnProperty(enemy.id)) {
-
-
+//console.log('%j %j', enemy, client);
 			/* Move to random direction
 			 */
 			var direction = util.random_direction(configuration['max-ship-speed'] - 0.0001);
 			do_move(client.secret, direction.x, direction.y, function() {});			
 
 			/* And choose new enemy
-			 */	
-			get_random_enemy(client, function(new_enemy) {
-				enemy = new_enemy;
+			 */
+			if (!waiting_for_enemy) {
+				waiting_for_enemy = true;
+				get_random_enemy(client, function(new_enemy) {
+					enemy = new_enemy;
+					waiting_for_enemy = false;
 
-				console.log(client.radar.me.name +' will follow '+ enemy.name);
-				follow_chosen_enemy();
-			});
+					console.log(client.radar.me.name +' will follow '+ enemy.name);
+					follow_chosen_enemy();
+				});
+			}
 
 		/* Follow that enemy :-)
 		 */
@@ -213,7 +233,7 @@ do_connect('volker-'+ Math.random(), function(client) {
 	
 	setInterval(function() {
 		follow_chosen_enemy();
-	});
+	}, 100);
 });
 
 
@@ -228,6 +248,8 @@ do_connect('vagina-'+ Math.random(), function(client) {
 		do_move(client.secret, direction.x, direction.y, function() {
 		});
 	}, 2000);
+
+	
 
 	
 

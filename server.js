@@ -124,16 +124,16 @@ var radar = function(query, cb) {
 		return cb(404, 'Unknown client');
 	}
 	var client = clients[query.secret];
-	var nearby_clients = [];
-	var nearby_shots = [];
+	var nearby_clients = {};
+	var nearby_shots = {};
 
 	for (var secret in clients) {
 		if (secret !== query.secret) {
-			nearby_clients.push(clients[secret].public);
+			nearby_clients[clients[secret].id] = clients[secret].public;
 		}
 	}
 	for (var uuid in shots) {
-		nearby_shots.push(shots[uuid].public);
+		nearby_shots[shots[uuid]] = shots[uuid].public;
 	}
 
 	cb(200, {
@@ -163,7 +163,7 @@ var move = function(query, cb) {
 		return cb(403, 'Missing dy argument');
 	}
 
-	var max_speed = 5.0;
+	var max_speed = configuration['max-ship-speed'];
 	if ((query.dx * query.dx + query.dy * query.dy) > (max_speed * max_speed)) {
 		return cb(403, 'You are too fast!');
 	}
