@@ -127,7 +127,7 @@ module.exports = function(name) {
 		api.connect(name, function(response) {
 			_public_key = response.id;
 			_private_key = response.secret;
-			radar.add(_private_key);
+			radar.add(_public_key, _private_key);
 		});
 	})();
 };

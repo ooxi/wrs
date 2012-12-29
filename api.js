@@ -81,10 +81,10 @@ var do_connect = function(name, success_cb, exception_cb) {
 /**
  * Updates ship and shot information
  */
-var do_radar = function(secret, success_cb, exception_cb) {
-	http.get(server_url +'radar?secret='+ e(secret), read_object(
-		success_cb, exception_cb
-	));
+var do_is_dead = function(public_id, success_cb, exception_cb) {
+	http.get(server_url +'is-alive?id='+ e(public_id), read_object(function(response) {
+		success_cb(response['is-alive']);
+	}, exception_cb));
 };
 
 
@@ -98,6 +98,17 @@ var do_move = function(secret, dx, dy, success_cb, exception_cb) {
 	}
 
 	http.get(server_url +'move?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(
+		success_cb, exception_cb
+	));
+};
+
+
+
+/**
+ * Updates ship and shot information
+ */
+var do_radar = function(secret, success_cb, exception_cb) {
+	http.get(server_url +'radar?secret='+ e(secret), read_object(
 		success_cb, exception_cb
 	));
 };
