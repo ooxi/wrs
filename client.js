@@ -176,11 +176,8 @@ var follow = function(self, enemy) {
 /* Erschaffe einen neuen Bot und waehle ein zufaelliges Target nach 0.5s
  */
 do_connect('volker-'+ Math.random(), function(client) {
-	var direction = util.random_direction(configuration['max-ship-speed'] - 0.0001);
-	do_move(client.secret, direction.x, direction.y, function() {
-	});
-
 	var enemy = null;
+
 
 	/* If an enemy is chosen, that one will be followed. If not a new one
 	 * gets chosen
@@ -190,17 +187,32 @@ do_connect('volker-'+ Math.random(), function(client) {
 		/* No enemy chosen (or enemy does not exist anymore)
 		 */
 		if ((null === enemy) || !client.radar['nearby-clients'].hasOwnProperty(enemy.id)) {
-			enemy = 
+
+
+			/* Move to random direction
+			 */
+			var direction = util.random_direction(configuration['max-ship-speed'] - 0.0001);
+			do_move(client.secret, direction.x, direction.y, function() {});			
+
+			/* And choose new enemy
+			 */	
+			get_random_enemy(client, function(new_enemy) {
+				enemy = new_enemy;
+
+				console.log(client.radar.me.name +' will follow '+ enemy.name);
+				follow_chosen_enemy();
+			});
+
+		/* Follow that enemy :-)
+		 */
+		} else {
+			follow(client, enemy);
+		}
 	};
 
 	
-	get_random_enemy(client, function(enemy) {
-		console.log(client.radar.me.name +' will follow '+ enemy.name);
-		follow(client, enemy);
-
-		setInterval(function() {
-			follow(client, enemy);
-		}, 100);
+	setInterval(function() {
+		follow_chosen_enemy();
 	});
 });
 
