@@ -21,6 +21,7 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
+var ai_dump_victim = require('./ai-dump-victim.js');
 var ship = require('./ship.js');
 var util = require('./util.js');
 
@@ -35,8 +36,19 @@ var do_rectangle = function() {
 		new util.point(-100.0, 100.0)
 	], do_rectangle);
 };
-
 do_rectangle();
+
+
+
+var victims = (function() {
+	var ais = [];
+
+	for (var i = 0; i < 10; ++i) {
+		ais.push(ai_dump_victim());
+	}
+
+	return ais;
+})();
 
 /*
 var s = new ship('roland-'+ Math.random());
@@ -56,6 +68,10 @@ s.fly_to(-300.0, -300.0, function() {
 
 setInterval(function() {
 	s.move();
+
+	for (var i = 0; i < victims.length; ++i) {
+		victims[i].move();
+	}
 }, 50);
 
 

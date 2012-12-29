@@ -36,6 +36,8 @@ module.exports = function() {
 	var _ship = new ship('victim-'+ Math.random());
 
 
+
+
 	
 	/**
 	 * Flies to the next point a view seconds away
@@ -51,6 +53,25 @@ module.exports = function() {
 		});
 	};
 
+
+
+	/**
+	 * Moves the ship
+	 */
+	this.move = function() {
+		_ship.move();
+	};
+
+
+
+
+
+	/**
+	 * Constructor
+	 */
+	(function() {
+		fly_random();
+	})();
 };
 
 
