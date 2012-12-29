@@ -87,8 +87,13 @@ module.exports = function(name) {
 	 * Tries to fly to the desired position while avoiding shots
 	 */
 	this.move = function() {
+		var self = this.position();
+		if (null === self) {
+			return;
+		}
+
 		var direction = util.look_at(
-			this.position(),
+			self,
 			_desired_position
 		);
 
