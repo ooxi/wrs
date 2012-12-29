@@ -27,7 +27,6 @@ var util = require('./util.js');
 
 
 
-var s = new ship('rectangle-'+ Math.random());
 var do_rectangle = function() {
 	s.fly_by_wire([
 		new util.point(100.0, 100.0),
@@ -36,7 +35,10 @@ var do_rectangle = function() {
 		new util.point(-100.0, 100.0)
 	], do_rectangle);
 };
-do_rectangle();
+var s = new ship('rectangle-'+ Math.random(), function() {
+	do_rectangle();
+});
+
 
 
 
@@ -44,7 +46,7 @@ var victims = (function() {
 	var ais = [];
 
 	for (var i = 0; i < 10; ++i) {
-		ais.push(ai_dump_victim());
+		ais.push(new ai_dump_victim());
 	}
 
 	return ais;
