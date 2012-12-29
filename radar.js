@@ -44,7 +44,7 @@ var remove_array_element = function(array, element) {
 /**
  * By aggregating radar information in one place, we get more data :D
  */
-module.exports = function() {
+module.exports = (function() {
 
 	/**
 	 * All available api keys
@@ -115,7 +115,7 @@ module.exports = function() {
 		secrets.push(secret);
 	};
 
-};
+})();
 
 
 
