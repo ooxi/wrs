@@ -3,7 +3,7 @@
  * @return Random number between min and max. If max is not given, than it is
  *    set to min and min is set to -min
  */
-var rand = function(min, max) {
+var random = function(min, max) {
 	if ('undefined' === typeof(max)) {
 		max = min;
 		min = -min;
@@ -36,7 +36,7 @@ var random_direction = function(speed) {
 
 
 module.exports = {
-	rand: rand,
+	random: random,
 	random_direction: random_direction
 };
 

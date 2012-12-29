@@ -144,7 +144,7 @@ var follow = function(self, enemy) {
 	var dy = me.y - enemy.y;
 	var len = Math.sqrt(dx * dx + dy * dy);
 	
-	dx = dx / len * (configuration['max-ship-speed'] - 0.0001);do_connect('volker-'+ Math.random(), function(client) {
+	dx = dx / len * (configuration['max-ship-speed'] - 0.0001);
 	dy = dy / len * (configuration['max-ship-speed'] - 0.0001);
 
 	console.log('Changing direction to '+ dx +':'+ dy);
@@ -179,13 +179,12 @@ do_connect('opfer-'+ Math.random(), function(client) {
 	do_move(client.secret, Math.random() - 0.5, Math.random() - 0.5, function() {
 	});
 
-	get_random_enemy(client, function(enemy) {
-		follow(client, enemy);
+//	var center = {
+//		x: util.random(configuration['game-zone'] - radius),
+//		y: util.random(configuration['game-zone'] - radius)
+//	};
 
-		setInterval(function() {
-			follow(client, enemy);
-		}, 100);
-	});
+//	go_to
 });
 
 

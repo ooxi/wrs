@@ -79,8 +79,8 @@ var connect = function(query, cb) {
 
 			/* Position
 			 */
-			x: util.rand(configuration['spawn-zone']),
-			y: util.rand(configuration['spawn-zone']),
+			x: util.random(configuration['spawn-zone']),
+			y: util.random(configuration['spawn-zone']),
 
 			/* Current direction and speed
 			 */
