@@ -34,7 +34,16 @@ var random_direction = function(speed) {
 
 
 /**
- * @return Normalisierter Richtungsvektor von self nach target
+ * @return Squared distance between a and b
+ */
+var distance_sqr = function(a, b) {
+	return a.x * b.x + a.y * b.y;
+};
+
+
+
+/**
+ * @return Normalized direction from self to target
  */
 var look_at = function(self, target) {
 	var dx = target.x - self.x;
@@ -54,6 +63,7 @@ var look_at = function(self, target) {
 module.exports = {
 	random: random,
 	random_direction: random_direction,
+	distance_sqr: distance_sqr,
 	look_at: look_at
 };
 

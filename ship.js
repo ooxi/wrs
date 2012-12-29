@@ -46,7 +46,7 @@ module.exports = function(name) {
 		x: 0.0,
 		y: 0.0
 	};
-	var _desired_distance_sqr = 100.0 * 100.0;
+	var _desired_distance = 100.0;
 	var _desired_cb = null;
 
 	/* Is this ship still alive?
@@ -101,7 +101,9 @@ module.exports = function(name) {
 		/* If ship is near the desired position, than the callback will
 		 * be invoked once
 		 */
-		
+		if ('function' === typeof(_desired_cb)) {
+			var dx = 
+		}
 	};
 
 
