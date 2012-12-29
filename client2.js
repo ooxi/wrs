@@ -27,8 +27,11 @@ var ship = require('./ship.js');
 
 var s = new ship('roland-'+ Math.random());
 s.fly_to(-300.0, -300.0, function() {
+	console.log('point a');
 	s.fly_to(300.0, -300.0, function() {
+		console.log('point b');
 		s.fly_to(300.0, 300.0, function() {
+			console.log('point c');
 			s.fly_to(-300.0, 300.0, function() {
 				console.log('done :-)');
 			});
