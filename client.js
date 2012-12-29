@@ -4,7 +4,7 @@ var configuration = require('./configuration.js');
 var util = require('./util.js');
 
 var e = encodeURIComponent;
-var server_url = 'http://localhost:31338/';
+var server_url = 'http://localhost:31339/';
 var udp_port = parseInt(10000 + Math.floor(Math.random() * 50000));
 
 
@@ -42,16 +42,8 @@ http.get(server_url +'configuration', read_object(function(response) {
 
 
 
-/**
- */
-var self = [];
-var clients = {};
-var shots = {};
-
-
-
 /* Register socket for udp updates
- */
+ *
 var socket = dgram.createSocket('udp4');
 
 socket.on('message', function(msg, rinfo) {
@@ -68,8 +60,26 @@ socket.on('message', function(msg, rinfo) {
 	}
 });
 socket.bind(udp_port);
+ */
 
 
+
+/* Own ships
+ */
+var ships = [];
+
+
+
+
+
+/**
+ * Aktualisiert die Gegener und Schusspositionen
+ */
+var do_radar = function(secret, cb) {
+	http.get(server_url +'radar?secret='+ e(secret), read_object(function(response) {
+		cb(response);
+	}));
+};
 
 
 
@@ -79,7 +89,15 @@ socket.bind(udp_port);
 var do_connect = function(name, cb) {
 	http.get(server_url +'connect?name='+ e(name) +'&udp-port='+ e(udp_port), read_object(function(response) {
 
-		self.push(response.secret);
+		/* Activate radar
+		 */
+		setInterval(function() {
+			do_radar(response.secret, function(echo) {
+				response.radar = echo;
+			});
+		}, 200);
+
+		ships.push(response.secret);
 		cb(response);
 	}));
 };
@@ -103,18 +121,13 @@ var do_move = function(secret, dx, dy, cb) {
 var get_random_enemy = function(self, cb) {
 
 	var check = function() {
-		var ids = Object.keys(clients);
-
-		if (ids.length < 2) {
+		if ('undefined' === typeof(self.radar)) {
 			return null;
 		}
+		var ids = Object.keys(self.radar['nearby-clients']);
 
-		do {
-			var id = ids[parseInt(Math.floor(Math.random() * ids.length))];
-			if (id != self.id) {
-				return clients[id];
-			}
-		} while (true);
+		var id = ids[parseInt(Math.floor(Math.random() * ids.length))];
+		return self.radar['nearby-clients'][id];
 	};
 
 

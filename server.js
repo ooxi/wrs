@@ -137,9 +137,9 @@ var radar = function(query, cb) {
 	}
 
 	cb(200, {
-		me: client.public,
-		nearby_clients: nearby_clients,
-		nearby_shots: nearby_shots
+		'me': client.public,
+		'nearby-clients': nearby_clients,
+		'nearby-shots': nearby_shots
 	});
 };
 
@@ -279,13 +279,15 @@ setInterval(function() {
  * Propagate information to clients
  */
 setInterval(function() {
+	return;
+
 	for (var secret in clients) {
 		broadcast('client', clients[secret].public);
 	}
 	for (var id in shots) {
 		broadcast('shot', shots[id].public);
 	}
-}, 5000);
+}, 500);
 
 
 
@@ -323,5 +325,5 @@ http.createServer(function(request, response) {
 	} else {
 		send(404, 'Unknown method');
 	}
-}).listen(31338);
+}).listen(31339);
 
