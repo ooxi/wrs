@@ -63,6 +63,8 @@ module.exports = function(name) {
 	/**
 	 * Sets the desired position
 	 */
+	this.fly_to = function(x, y) {
+	};
 
 	
 
