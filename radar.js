@@ -123,6 +123,7 @@ module.exports = new (function() {
 	 */
 	this.add = function(secret) {
 		secrets.push(secret);
+		update_radar();
 	};
 
 })();

@@ -89,6 +89,7 @@ module.exports = function(name) {
 	this.move = function() {
 		var self = this.position();
 		if (null === self) {
+			console.log('I don\'t know myself');
 			return;
 		}
 
