@@ -23,6 +23,7 @@
  */
 var api = require('./api.js');
 var radar = require('./radar.js');
+var util = require('./util.js');
 
 
 
@@ -54,6 +55,13 @@ module.exports = function(name) {
 
 
 	/**
+	 * @return Position of this ship
+	 */
+	this.position = function() {
+		return radar.client(_public_key);
+	};
+
+	/**
 	 * @return true iff ship still is alive
 	 */
 	this.is_alive = function() {
@@ -72,6 +80,12 @@ module.exports = function(name) {
 	 * Tries to fly to the desired position while avoiding shots
 	 */
 	this.move = function() {
+		var is = position();
+
+		var dx = _desired_position.x - is.x;
+		var dy = _desired_position.y - is.y;
+
+		
 	};
 
 

@@ -33,10 +33,27 @@ var random_direction = function(speed) {
 
 
 
+/**
+ * @return Normalisierter Richtungsvektor von self nach target
+ */
+var look_at = function(self, target) {
+	var dx = target.x - self.x;
+	var dy = target.y - self.y;
+	var len = Math.sqrt(dx * dx + dy * dy);
+
+	return {
+		x: dx / len,
+		y: dy / len
+	};
+};
+
+
+
 
 
 module.exports = {
 	random: random,
-	random_direction: random_direction
+	random_direction: random_direction,
+	look_at: look_at
 };
 
