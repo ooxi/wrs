@@ -180,6 +180,20 @@ do_connect('volker-'+ Math.random(), function(client) {
 	do_move(client.secret, direction.x, direction.y, function() {
 	});
 
+	var enemy = null;
+
+	/* If an enemy is chosen, that one will be followed. If not a new one
+	 * gets chosen
+	 */
+	var follow_chosen_enemy = function() {
+		
+		/* No enemy chosen (or enemy does not exist anymore)
+		 */
+		if ((null === enemy) || !client.radar['nearby-clients'].hasOwnProperty(enemy.id)) {
+			enemy = 
+	};
+
+	
 	get_random_enemy(client, function(enemy) {
 		console.log(client.radar.me.name +' will follow '+ enemy.name);
 		follow(client, enemy);
