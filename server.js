@@ -18,6 +18,8 @@ var shots = {};
  * Used to propagate an object to all clients
  */
 var broadcast = function(type, obj) {
+	return;
+
 	for (var secret in clients) {
 		var client = clients[secret];
 
@@ -99,8 +101,9 @@ var connect = function(query, cb) {
 		'udp-ip': query['udp-ip'],
 		'udp-port': query['udp-port'],
 
-		/* Time of last shot
+		/* Time of last actions
 		 */
+		'last-radar': 0,
 		'last-shot': 0
 	};
 
@@ -127,6 +130,18 @@ var radar = function(query, cb) {
 	var nearby_clients = {};
 	var nearby_shots = {};
 
+
+	/* Check if last radar invokation was not long enough away
+	 */
+	var now = Date.now();
+	if (now - client['last-radar'] < configuration['min-radar-interval']) {
+		return cb(403, 'Radar cooldown unfinished (now: '+ now +', last: '+ client['last-radar'] +')');
+	}
+	client['last-radar'] = now;
+
+
+	/* Aggregate client and shot information
+	 */
 	for (var secret in clients) {
 		if (secret !== query.secret) {
 			nearby_clients[clients[secret].public.id] = clients[secret].public;
@@ -192,6 +207,15 @@ var shoot = function(query, cb) {
 		return cb(404, 'Unknown client');
 	}
 	var client = clients[query.secret];
+
+
+	/* Check if last shot invokation was not long enough away
+	 */
+	var now = Date.now();
+	if (now - client['last-shot'] < configuration['min-shot-interval']) {
+		return cb(403, 'Shoot cooldown unfinished');
+	}
+	client['last-shot'] = now;
 
 
 	/* Shot must not be too fast

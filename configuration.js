@@ -4,6 +4,8 @@ module.exports = {
 	'spawn-zone':	1000,
 	'game-zone':	5000,
 	'shot-ticks':	100,
-	'ship-radius':	10
+	'ship-radius':	10,
+	'min-radar-interval': 499,
+	'min-shot-interval': 300
 };
 

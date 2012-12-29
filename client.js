@@ -100,7 +100,7 @@ var do_connect = function(name, cb) {
 			do_radar(response.secret, function(echo) {
 				response.radar = echo;
 			});
-		}, 200);
+		}, 550);
 
 
 		ships.push(response.secret);
@@ -163,6 +163,7 @@ var get_random_enemy = function(self, cb) {
 
 
 /**
+ * Fliegt direkt auf ein gegnerisches Schiff zu
  */
 var follow = function(self, enemy) {
 	if ('undefined' === self.radar.me) {
@@ -175,14 +176,32 @@ var follow = function(self, enemy) {
 	var dy = enemy.y - me.y;
 	var len = Math.sqrt(dx * dx + dy * dy);
 
-	console.log(''+ enemy.x +' '+ me.x +' '+ dx);
-	console.log(''+ enemy.y +' '+ me.y +' '+ dy);
-	
 	dx = dx / len * (configuration['max-ship-speed'] - 0.0001);
 	dy = dy / len * (configuration['max-ship-speed'] - 0.0001);
 
-//	console.log('Changing direction to '+ dx +':'+ dy);
 	do_move(self.secret, dx, dy, function() {});
+};
+
+
+
+/**
+ * Schiesst auf den aktuellen Standort eines gegnerischen Schiffes
+ */
+var shoot_at = function(self, enemy) {
+	if ('undefined' === self.radar.me) {
+		console.log('I don\'t know myself');
+		return;
+	}
+	var me = self.radar.me;
+
+	var dx = enemy.x - me.x;
+	var dy = enemy.y - me.y;
+	var len = Math.sqrt(dx * dx + dy * dy);
+
+	dx = dx / len * (configuration['max-shot-speed'] - 0.0001);
+	dy = dy / len * (configuration['max-shot-speed'] - 0.0001);
+
+	do_shoot(self.secret, dx, dy, function() {});
 };
 
 
@@ -192,7 +211,7 @@ var follow = function(self, enemy) {
 /* Erschaffe einen neuen Bot und waehle ein zufaelliges Target nach 0.5s
  */
 do_connect('volker-'+ Math.random(), function(client) {
-	var enemy = null;
+	var enemy_id = null;
 	var waiting_for_enemy = false;
 
 
@@ -203,22 +222,23 @@ do_connect('volker-'+ Math.random(), function(client) {
 		
 		/* No enemy chosen (or enemy does not exist anymore)
 		 */
-		if ((null === enemy) || !client.radar['nearby-clients'].hasOwnProperty(enemy.id)) {
-console.log('%j %j', enemy, client);
+		if ((null === enemy_id) || !client.radar['nearby-clients'].hasOwnProperty(enemy_id)) {
+
 			/* Move to random direction
 			 */
 			var direction = util.random_direction(configuration['max-ship-speed'] - 0.0001);
-			do_move(client.secret, direction.x, direction.y, function() {});			
+			do_move(client.secret, direction.x, direction.y, function() {});
+			console.log('No enemy');		
 
 			/* And choose new enemy
 			 */
 			if (!waiting_for_enemy) {
 				waiting_for_enemy = true;
 				get_random_enemy(client, function(new_enemy) {
-					enemy = new_enemy;
+					enemy_id = new_enemy.id;
 					waiting_for_enemy = false;
 
-					console.log(client.radar.me.name +' will follow '+ enemy.name);
+					console.log(client.radar.me.name +' will follow '+ new_enemy.name);
 					follow_chosen_enemy();
 				});
 			}
@@ -226,7 +246,9 @@ console.log('%j %j', enemy, client);
 		/* Follow that enemy :-)
 		 */
 		} else {
+			var enemy = client.radar['nearby-clients'][enemy_id];
 			follow(client, enemy);
+			shoot_at(client, enemy);
 		}
 	};
 
@@ -248,16 +270,5 @@ do_connect('vagina-'+ Math.random(), function(client) {
 		do_move(client.secret, direction.x, direction.y, function() {
 		});
 	}, 2000);
-
-	
-
-	
-
-//	var center = {
-//		x: util.random(configuration['game-zone'] - radius),
-//		y: util.random(configuration['game-zone'] - radius)
-//	};
-
-//	go_to
 });
 
