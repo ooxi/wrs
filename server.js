@@ -17,8 +17,6 @@ var shots = {};
 /**
  * Used to propagate an object to all clients
  */
-var broadcast_socket = dgram.createSocket('udp4');
-
 var broadcast = function(type, obj) {
 	for (var secret in clients) {
 		var client = clients[secret];
@@ -29,6 +27,9 @@ var broadcast = function(type, obj) {
 			payload: obj
 		}));
 
+
+		var broadcast_socket = dgram.createSocket('udp4');
+		console.log('%j '+ msg.length, client);
 		broadcast_socket.send(
 			msg, 0, msg.length,
 			client['udp-port'], client['udp-ip']
@@ -284,7 +285,7 @@ setInterval(function() {
 	for (var id in shots) {
 		broadcast('shot', shots[id].public);
 	}
-}, 500);
+}, 5000);
 
 
 
@@ -322,5 +323,5 @@ http.createServer(function(request, response) {
 	} else {
 		send(404, 'Unknown method');
 	}
-}).listen(31337);
+}).listen(31338);
 

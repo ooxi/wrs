@@ -4,8 +4,8 @@ var configuration = require('./configuration.js');
 var util = require('./util.js');
 
 var e = encodeURIComponent;
-var server_url = 'http://localhost:31337/';
-var udp_port = 54321;
+var server_url = 'http://localhost:31338/';
+var udp_port = parseInt(10000 + Math.floor(Math.random() * 50000));
 
 
 
@@ -34,7 +34,9 @@ var read_object = function(cb) {
 /**
  * Konfiguration aktualisieren
  */
-
+http.get(server_url +'configuration', read_object(function(response) {
+	configuration = response;
+}));
 
 
 
@@ -158,7 +160,7 @@ var follow = function(self, enemy) {
 /* Erschaffe einen neuen Bot und waehle ein zufaelliges Target nach 0.5s
  */
 do_connect('volker-'+ Math.random(), function(client) {
-	var direction = util.random_direction(configuration['max-ship-speed']);
+	var direction = util.random_direction(configuration['max-ship-speed'] - 0.0001);
 	do_move(client.secret, direction.x, direction.y, function() {
 	});
 
@@ -186,30 +188,4 @@ do_connect('opfer-'+ Math.random(), function(client) {
 
 //	go_to
 });
-
-
-
-
-
-/*
-var name = "boris-"+ Math.random();
-http.get("http://localhost:1337/connect?name="+ encodeURIComponent(name), read_object(function(response) {
-	var secret = response.secret;
-
-	var dx = 10.0 * (Math.random() - 0.5);
-	var dy = 10.0 * (Math.random() - 0.5);
-	http.get("http://localhost:1337/move?secret="+ encodeURIComponent(secret) +"&dx="+ encodeURIComponent(dx) +"&dy="+ encodeURIComponent(dy), read_object(function(response) {
-	}));
-
-	http.get("http://localhost:1337/radar?secret="+ encodeURIComponent(secret), read_object(function(response) {
-		console.log("%j", response);
-	}));
-
-	setTimeout(function() {
-		http.get("http://localhost:1337/shoot?secret="+ encodeURIComponent(secret), read_object(function(response) {
-			console.log("Shot!");
-		}));
-	}, 2050);
-}));
-*/
 
