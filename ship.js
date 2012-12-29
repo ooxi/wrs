@@ -32,6 +32,11 @@ var radar = require('./radar.js');
  */
 module.exports = function(name) {
 
+	/* Public and private key
+	 */
+	var _public_key = undefined;
+	var _private_key = undefined;
+
 	/* Position which the ship tries to achieve
 	 */
 	var _desired_position = {
@@ -48,16 +53,6 @@ module.exports = function(name) {
 
 
 	/**
-	 * Initializes
-	 */
-	var init = function() {
-	};
-
-
-
-
-
-	/**
 	 * @return true iff ship still is alive
 	 */
 	this.is_alive = function() {
@@ -66,6 +61,18 @@ module.exports = function(name) {
 
 	
 
+
+
+	/**
+	 * Initialize client
+	 */
+	(function() {
+		api.connect(name, function(response) {
+			_public_key = response.id;
+			_private_key = response.secret;
+			radar.add(_private_key);
+		});
+	})();
 };
 
 
