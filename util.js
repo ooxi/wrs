@@ -37,7 +37,9 @@ var random_direction = function(speed) {
  * @return Squared distance between a and b
  */
 var distance_sqr = function(a, b) {
-	return a.x * b.x + a.y * b.y;
+	var dx = a.x - b.x;
+	var dy = a.y - b.y;
+	return dx * dx + dy * dy;
 };
 
 

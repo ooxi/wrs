@@ -1,6 +1,6 @@
 module.exports = {
-	'max-ship-speed':	50,
-	'max-shot-speed':	500,
+	'max-ship-speed':	25,
+	'max-shot-speed':	250,
 	'spawn-zone':	1000,
 	'game-zone':	5000,
 	'shot-ticks':	100,

@@ -84,6 +84,18 @@ module.exports = function(name) {
 	};
 
 	/**
+	 * Flies to a number of points
+	 */
+	this.fly_by_wire = function(points, cb) {
+		if (0 === points.length) {
+			cb();
+			return;
+		}
+
+		var current_point = 0;
+	};
+
+	/**
 	 * Tries to fly to the desired position while avoiding shots
 	 */
 	this.move = function() {
