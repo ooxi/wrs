@@ -21,6 +21,7 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
+var configuration = require('./configuration.js');
 
 
 
@@ -35,6 +36,7 @@ module.exports = function() {
 	 * All available api keys
 	 */
 	var secrets = [];
+	var current_secret = -1;
 
 	/**
 	 * Most current radar information
@@ -56,7 +58,23 @@ module.exports = function() {
 	/**
 	 * Updates...
 	 */
-	
+	var update_radar = function() {
+		if (0 === secrets.length) {
+			console.log('[radar] No secrets available');
+			return;
+		}
+
+		/* Use next secret
+		 */
+		++current_secret;
+		if (current_secret >= secrets.length) {
+			current_secret = 0;
+		}
+
+		/*
+		 */
+		http
+	}
 
 };
 
