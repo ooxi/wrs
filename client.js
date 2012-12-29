@@ -204,7 +204,7 @@ do_connect('volker-'+ Math.random(), function(client) {
 		/* No enemy chosen (or enemy does not exist anymore)
 		 */
 		if ((null === enemy) || !client.radar['nearby-clients'].hasOwnProperty(enemy.id)) {
-//console.log('%j %j', enemy, client);
+console.log('%j %j', enemy, client);
 			/* Move to random direction
 			 */
 			var direction = util.random_direction(configuration['max-ship-speed'] - 0.0001);
