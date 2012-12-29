@@ -31,14 +31,6 @@ var ship = require('./ship.js');
  */
 module.exports = function() {
 
-	/* Every victim has a ship, till it die
-	 */
-	var _ship = new ship('victim-'+ Math.random());
-
-
-
-
-	
 	/**
 	 * Flies to the next point a view seconds away
 	 */	
@@ -66,12 +58,11 @@ module.exports = function() {
 
 
 
-	/**
-	 * Constructor
+	/* Every victim has a ship, till it die
 	 */
-	(function() {
+	var _ship = new ship('victim-'+ Math.random(), function() {
 		fly_random();
-	})();
+	});
 };
 
 

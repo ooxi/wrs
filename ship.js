@@ -33,7 +33,7 @@ var util = require('./util.js');
 /**
  * Manages a single ship with primitive tasks
  */
-module.exports = function(name) {
+module.exports = function(name, cb) {
 
 	/* Reference to self
 	 */
@@ -152,6 +152,7 @@ module.exports = function(name) {
 			_public_key = response.id;
 			_private_key = response.secret;
 			radar.add(_public_key, _private_key);
+			cb();
 		});
 	})();
 };
