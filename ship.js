@@ -60,6 +60,10 @@ module.exports = function(name) {
 		return _is_alive;
 	};
 
+	/**
+	 * Sets the desired position
+	 */
+
 	
 
 

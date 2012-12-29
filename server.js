@@ -264,6 +264,11 @@ var dump = function(query, cb) {
 
 
 
+var is_alive = function(query, cb) {
+};
+
+
+
 
 
 /**
@@ -367,6 +372,8 @@ http.createServer(function(request, response) {
 	} else if ('/connect' === action.pathname) {
 		action.query['udp-ip'] = request.connection.remoteAddress;
 		connect(action.query, send);
+	} else if ('/is-alive' === action.pathname) {
+		is_alive(action.query, send);
 	} else if ('/configuration' === action.pathname) {
 		send(200, configuration);
 	} else if ('/dump' === action.pathname) {
