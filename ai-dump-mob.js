@@ -21,11 +21,28 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
+var ship = require('./ship.js');
+
+
+
+/**
+ * A dump mob picking a victim and blindly shooting at it
+ */
+module.exports = function(size) {
+
+	/* Ships in this mob
+	 */
+	var _ships = [];
 
 
 
 
+	/* Initialize ai
+	 */
+	(function() {
+	})();
 
+};
 
 
 
