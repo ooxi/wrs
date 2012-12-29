@@ -219,14 +219,11 @@ var shoot = function(query, cb) {
 	client['last-shot'] = now;
 
 
-	/* Shot must not be too fast
+	/* Shot will have a fixed speed
 	 */
-	var speed_sqr = query.dx * query.dx + query.dy * query.dy;
-	var max_speed_sqr = configuration['max-shot-speed'] * configuration['max-shot-speed'];
-
-	if (speed_sqr > max_speed_sqr) {
-		return cb(403, 'Shot is too fast');
-	}
+	var speed = Math.sqrt(query.dx * query.dx + query.dy * query.dy);
+	query.dx = query.dx / speed * configuration['max-shot-speed'];
+	query.dy = query.dy / speed * configuration['max-shot-speed'];
 
 
 	/* Add new shot

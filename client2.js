@@ -25,7 +25,21 @@ var ship = require('./ship.js');
 
 
 
-var s = new ship('volker-2');
+var s = new ship('roland-'+ Math.random());
+s.fly_to(-300.0, -300.0, function() {
+	s.fly_to(300.0, -300.0, function() {
+		s.fly_to(300.0, 300.0, function() {
+			s.fly_to(-300.0, 300.0, function() {
+				console.log('done :-)');
+			});
+		});
+	});
+});
+
+
+
+
+
 
 
 
