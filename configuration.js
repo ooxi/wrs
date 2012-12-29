@@ -6,6 +6,6 @@ module.exports = {
 	'shot-ticks':	100,
 	'ship-radius':	10,
 	'min-radar-interval': 500,
-	'min-shoot-interval': 250
+	'min-shoot-interval': 2500
 };
 
