@@ -27,12 +27,16 @@ var util = require('./util.js');
 
 
 var s = new ship('rectangle-'+ Math.random());
-s.fly_by_wire([
-	new util.point(100.0, 100.0),
-	new util.point(100.0, -100.0),
-	new util.point(-100.0, -100.0),
-	new util.point(-100.0, 100.0)
-]);
+var do_rectangle = function() {
+	s.fly_by_wire([
+		new util.point(100.0, 100.0),
+		new util.point(100.0, -100.0),
+		new util.point(-100.0, -100.0),
+		new util.point(-100.0, 100.0)
+	], do_rectangle);
+};
+
+do_rectangle();
 
 /*
 var s = new ship('roland-'+ Math.random());
