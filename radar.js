@@ -31,11 +31,32 @@
  */
 module.exports = function() {
 
-	/* All available api keys
+	/**
+	 * All available api keys
 	 */
 	var secrets = [];
 
+	/**
+	 * Most current radar information
+	 */
+	var radar = {};
 
+
+
+	/**
+	 * @return Most current information about client_id or undefined if does
+	 *     not exist
+	 */
+	this.get = function(client_id) {
+		return radar[client_id];
+	};
+
+
+
+	/**
+	 * Updates...
+	 */
+	
 
 };
 
