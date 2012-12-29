@@ -21,3 +21,56 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
+var e = encodeURIComponent;
+var server_url = 'http://localhost:31339/';
+
+
+
+
+
+/**
+ * Parses a JSON object from a http response
+ */
+var read_object = function(cb) {
+
+	/* Exception callback can be overwritten
+	 */
+	var exception_cb = function(exception) {
+		throw exception;
+	};
+	if (arguments.length >= 2) {
+		exception_cb = arguments[1];
+	}
+
+
+	return function(response) {
+		var message = [];
+
+		response.on("data", function(chunk) {
+			message += chunk
+		});
+		response.on("end", function() {
+			var obj = JSON.parse(message);
+
+			if (200 != response.statusCode) {
+				exception_cb('Received unexpected exception: '+ obj.message);
+			} else {
+				cb(obj);
+			}
+		});
+	};
+};
+
+
+
+
+
+/**
+ * Aktualisiert die Gegener und Schusspositionen
+ */
+var do_radar = function(secret, cb) {
+	http.get(server_url +'radar?secret='+ e(secret), read_object(function(response) {
+		cb(response);
+	}));
+};
+
