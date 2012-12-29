@@ -53,6 +53,11 @@ module.exports = new (function() {
 	var current_secret = -1;
 
 	/**
+	 * Mapping from private to public keys
+	 */
+	var public_keys = {};
+
+	/**
 	 * Most current radar information
 	 */
 	var radar = {
@@ -93,9 +98,10 @@ module.exports = new (function() {
 
 			/* Check if client if dead
 			 */
-			api.is_dead(secret, function(is_dead) {
+			api.is_dead(public_keys[secret], function(is_dead) {
 				console.log('Client '+ secret +' is definetly dead, will remove secret');
 				remove_array_element(secrets, secret);
+				delete public_keys[secret];
 			});
 		});
 
@@ -127,8 +133,9 @@ module.exports = new (function() {
 	/**
 	 * Adds new secret
 	 */
-	this.add = function(secret) {
-		secrets.push(secret);
+	this.add = function(public_key, private_key) {
+		public_keys[private_key] = public_key;
+		secrets.push(private_key);
 		update_radar();
 	};
 
