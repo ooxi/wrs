@@ -86,7 +86,7 @@ module.exports = new (function() {
 				client: echo['nearby-clients'],
 				shot: echo['nearby-shots']
 			};
-			new_radar[echo.me.id] = echo.me;
+			new_radar.client[echo.me.id] = echo.me;
 			radar = new_radar;
 		}, function(exception) {
 			console.log('Failed receiving radar information with '+ secret +'. Maybe client is dead?');
@@ -105,6 +105,7 @@ module.exports = new (function() {
 	 *     not exist
 	 */
 	this.client = function(client_id) {
+console.log('%j %j', client_id, radar.client);
 		if (!radar.client.hasOwnProperty(client_id)) {
 			return null;
 		}
