@@ -129,11 +129,11 @@ var radar = function(query, cb) {
 
 	for (var secret in clients) {
 		if (secret !== query.secret) {
-			nearby_clients[clients[secret].id] = clients[secret].public;
+			nearby_clients[clients[secret].public.id] = clients[secret].public;
 		}
 	}
 	for (var uuid in shots) {
-		nearby_shots[shots[uuid]] = shots[uuid].public;
+		nearby_shots[shots[uuid].public.id] = shots[uuid].public;
 	}
 
 	cb(200, {
