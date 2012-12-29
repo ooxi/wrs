@@ -92,10 +92,14 @@ var do_radar = function(secret, success_cb, exception_cb) {
 /**
  * Change speed and direction of client
  */
-var do_move = function(secret, dx, dy, cb) {
-	http.get(server_url +'move?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(function(response) {
-		cb();
-	}));
+var do_move = function(secret, dx, dy, success_cb, exception_cb) {
+	if ('function' !== typeof(success_cb)) {
+		success_cb = function() {};
+	}
+
+	http.get(server_url +'move?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(
+		success_cb, exception_cb
+	));
 };
 
 
