@@ -38,7 +38,7 @@ var read_object = function(cb) {
 	var exception_cb = function(exception) {
 		throw exception;
 	};
-	if (arguments.length >= 2) {
+	if ('function' === typeof(arguments[1])) {
 		exception_cb = arguments[1];
 	}
 
@@ -66,11 +66,11 @@ var read_object = function(cb) {
 
 
 /**
- * Aktualisiert die Gegener und Schusspositionen
+ * Updates ship and shot information
  */
-var do_radar = function(secret, cb) {
-	http.get(server_url +'radar?secret='+ e(secret), read_object(function(response) {
-		cb(response);
-	}));
+var do_radar = function(secret, success_cb, exception_cb) {
+	http.get(server_url +'radar?secret='+ e(secret), read_object(
+		success_cb, exception_cb
+	));
 };
 
