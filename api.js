@@ -68,6 +68,17 @@ var read_object = function(cb) {
 
 
 /**
+ * Registers a new ship
+ */
+var do_connect = function(name, success_cb, exception_cb) {
+	http.get(server_url +'connect?name='+ e(name) +'&udp-port='+ e(333), read_object(
+		success_cb, exception_cb
+	));
+};
+
+
+
+/**
  * Updates ship and shot information
  */
 var do_radar = function(secret, success_cb, exception_cb) {
@@ -79,12 +90,12 @@ var do_radar = function(secret, success_cb, exception_cb) {
 
 
 /**
- * Registers a new ship
+ * Change speed and direction of client
  */
-var do_connect = function(name, success_cb, exception_cb) {
-	http.get(server_url +'connect?name='+ e(name) +'&udp-port='+ e(333), read_object(
-		success_cb, exception_cb
-	));
+var do_move = function(secret, dx, dy, cb) {
+	http.get(server_url +'move?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(function(response) {
+		cb();
+	}));
 };
 
 
@@ -96,6 +107,7 @@ var do_connect = function(name, success_cb, exception_cb) {
  */
 module.exports = {
 	connect: do_connect,
+	move: do_move,
 	radar: do_radar
 };
 
