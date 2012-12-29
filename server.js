@@ -4,31 +4,13 @@ var dgram = require('dgram');
 var http = require('http');
 var url = require('url');
 var uuid = require('./uuid.js');
+var util = require('./util.js');
 
-var configuration = {
-	'max-ship-speed':	5,
-	'max-shot-speed':	50,
-	'spawn-zone':	1000,
-	'game-zone':	5000,
-	'shot-ticks':	100
-};
+var configuration = require('./configuration.js');
 var clients = {};
 var shots = {};
 
 
-
-/**
- * @return Random number between min and max. If max is not given, than it is
- *    set to min and min is set to -min
- */
-var rand = function(min, max) {
-	if ('undefined' === typeof(max)) {
-		max = min;
-		min = -min;
-	}
-
-	return Math.random() * (max - min) + min;
-};
 
 
 
@@ -84,10 +66,12 @@ var connect = function(query, cb) {
 
 	/* Add new client
 	 */
+	var id = uuid.v4();
 	var secret = uuid.v4();
+
 	clients[secret] = {
 		public: {
-			id: uuid.v4(),
+			id: id,
 
 			/* Name of ship
 			 */
@@ -95,8 +79,8 @@ var connect = function(query, cb) {
 
 			/* Position
 			 */
-			x: rand(configuration['spawn-zone']),
-			y: rand(configuration['spawn-zone']),
+			x: util.rand(configuration['spawn-zone']),
+			y: util.rand(configuration['spawn-zone']),
 
 			/* Current direction and speed
 			 */
@@ -123,6 +107,7 @@ var connect = function(query, cb) {
 	/* Tell client the secret needed for interaction
 	 */
 	cb(200, {
+		id: id,
 		secret: secret
 	});
 };
@@ -271,6 +256,8 @@ setInterval(function() {
 
 		client.public.x += dx;
 		client.public.y += dy;
+
+		
 	}
 	for (var id in shots) {
 		var shot = shots[id];
@@ -319,17 +306,17 @@ http.createServer(function(request, response) {
 	};
 
 
-/*	if ('/radar' === action.pathname) {
+	if ('/radar' === action.pathname) {
 		radar(action.query, send);
-	} else 
-*/
-	if ('/move' === action.pathname) {
+	} else if ('/move' === action.pathname) {
 		move(action.query, send);
 	} else if ('/shoot' === action.pathname) {
 		shoot(action.query, send);
 	} else if ('/connect' === action.pathname) {
 		action.query['udp-ip'] = request.connection.remoteAddress;
 		connect(action.query, send);
+	} else if ('/configuration' === action.pathname) {
+		send(200, configuration);
 	} else if ('/dump' === action.pathname) {
 		dump(action.query, send);
 	} else {
