@@ -13,6 +13,17 @@ var udp_port = parseInt(10000 + Math.floor(Math.random() * 50000));
  * Parses a JSON object from a http response
  */
 var read_object = function(cb) {
+
+	/* Exception callback can be overwritten
+	 */
+	var exception_cb = function(exception) {
+		throw exception;
+	};
+	if (2 >= arguments.length) {
+		exception_cb = arguments[1];
+	}
+
+
 	return function(response) {
 		var message = [];
 
@@ -23,7 +34,7 @@ var read_object = function(cb) {
 			var obj = JSON.parse(message);
 
 			if (200 != response.statusCode) {
-				throw 'Received unexpected exception: '+ obj.message;
+				exception_cb('Received unexpected exception: '+ obj.message);
 			} else {
 				cb(obj);
 			}
@@ -100,7 +111,7 @@ var do_connect = function(name, cb) {
 			do_radar(response.secret, function(echo) {
 				response.radar = echo;
 			});
-		}, 550);
+		}, configuration['min-radar-interval'] + 25);
 
 
 		ships.push(response.secret);
@@ -127,6 +138,8 @@ var do_move = function(secret, dx, dy, cb) {
 var do_shoot = function(secret, dx, dy, cb) {
 	http.get(server_url +'shoot?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(function(response) {
 		cb();
+	}, function(exception) {
+		console.log('Shot failed: %j', exception);
 	}));
 };
 
@@ -252,10 +265,10 @@ do_connect('volker-'+ Math.random(), function(client) {
 		}
 	};
 
-	
+
 	setInterval(function() {
 		follow_chosen_enemy();
-	}, 100);
+	}, configuration['min-shoot-interval'] + 25);
 });
 
 

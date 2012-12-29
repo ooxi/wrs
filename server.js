@@ -212,8 +212,8 @@ var shoot = function(query, cb) {
 	/* Check if last shot invokation was not long enough away
 	 */
 	var now = Date.now();
-	if (now - client['last-shot'] < configuration['min-shot-interval']) {
-		return cb(403, 'Shoot cooldown unfinished');
+	if (now - client['last-shot'] < configuration['min-shoot-interval']) {
+		return cb(403, 'Shoot cooldown unfinished (now: '+ now +', last: '+ client['last-shot'] +')');
 	}
 	client['last-shot'] = now;
 
