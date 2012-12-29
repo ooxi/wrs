@@ -265,6 +265,23 @@ var dump = function(query, cb) {
 
 
 var is_alive = function(query, cb) {
+	if (!query.hasOwnProperty('id')) {
+		return cb(403, 'Missing id argument');
+	}
+
+	var alive = (function() {
+		for (var secret in clients) {
+			if (query.id === clients[secret].public.id) {
+				return true;
+			}
+		}
+
+		return false;
+	})();
+
+	cb(200, {
+		'is-alive': alive
+	});
 };
 
 
