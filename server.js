@@ -79,6 +79,7 @@ var connect = function(query, cb) {
 			/* Name of ship
 			 */
 			name: query.name,
+			team: 'buttsecks',
 
 			/* Position
 			 */
@@ -287,7 +288,7 @@ setInterval(function() {
 			||	client.public.y > configuration['game-zone']
 			||	client.public.y < -configuration['game-zone']) {
 
-			console.log('Client '+ clients[secret].id +' out of bounds');
+			console.log('Client '+ clients[secret].public.name +' out of bounds');
 			delete clients[secret];
 		}
 	}
@@ -298,11 +299,28 @@ setInterval(function() {
 		if (shot.ticks < 0) {
 			delete shots[id];
 		} else {
-			shot.x += shot.dx * elapsed / 1000.0;
-			shot.y += shot.dy * elapsed / 1000.0;
+			shot.public.x += shot.public.dx * elapsed / 1000.0;
+			shot.public.y += shot.public.dy * elapsed / 1000.0;
+
+			/* @warning Not correct but fast, will have to check
+			 *     minimum distance of line segment to ships
+			 */
+			for (var secret in clients) {
+				var client = clients[secret];
+				var dx = client.public.x - shot.public.x;
+				var dy = client.public.y - shot.public.y;
+
+				var distance_sqr = dx * dx + dy * dy;
+				var radius_sqr = configuration['ship-radius'] * configuration['ship-radius'];
+
+				if (distance_sqr <= radius_sqr) {
+					console.log('Client '+ client.public.name +' killed by '+ shot.owner);
+					delete clients[secret];
+				}
+			}
 		}
 	}
-}, 500);
+}, 234);
 
 
 

@@ -19,7 +19,7 @@ var read_object = function(cb) {
 	var exception_cb = function(exception) {
 		throw exception;
 	};
-	if (2 >= arguments.length) {
+	if (arguments.length >= 2) {
 		exception_cb = arguments[1];
 	}
 
@@ -110,6 +110,8 @@ var do_connect = function(name, cb) {
 		setInterval(function() {
 			do_radar(response.secret, function(echo) {
 				response.radar = echo;
+			}, function(exception) {
+				console.log('Radar ignored: '+ exception);
 			});
 		}, configuration['min-radar-interval'] + 25);
 
@@ -277,10 +279,12 @@ do_connect('volker-'+ Math.random(), function(client) {
  */
 do_connect('vagina-'+ Math.random(), function(client) {
 
-	setInterval(function() {
+	var interval = setInterval(function() {
 		var direction = util.random_direction(configuration['max-ship-speed'] - 0.0001);
 		console.log('Vagina '+ client.radar.me.name +' moves to %j', direction);
-		do_move(client.secret, direction.x, direction.y, function() {
+		do_move(client.secret, direction.x, direction.y, function() {}, function(exception) {
+			console.log('Vagina died: '+ exception);
+			clearInterval(interval);
 		});
 	}, 2000);
 });
