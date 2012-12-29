@@ -36,7 +36,9 @@ s.fly_to(-300.0, -300.0, function() {
 	});
 });
 
-
+setInterval(function() {
+	s.move();
+}, 50);
 
 
 
