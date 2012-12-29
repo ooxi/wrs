@@ -76,12 +76,24 @@ var do_radar = function(secret, success_cb, exception_cb) {
 
 
 
+/**
+ * Registers a new ship
+ */
+var do_connect = function(name, success_cb, exception_cb) {
+	http.get(server_url +'connect?name='+ e(name) +'&udp-port='+ e(333), read_object(
+		success_cb, exception_cb
+	));
+};
+
+
+
 
 
 /**
  * Export public api
  */
 module.exports = {
+	connect: do_connect,
 	radar: do_radar
 };
 
