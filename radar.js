@@ -89,8 +89,14 @@ module.exports = new (function() {
 			new_radar.client[echo.me.id] = echo.me;
 			radar = new_radar;
 		}, function(exception) {
-			console.log('Failed receiving radar information with '+ secret +'. Maybe client is dead?');
-			remove_array_element(secrets, secret);
+			console.log('Failed receiving radar information with '+ secret +': '+ exception);
+
+			/* Check if client if dead
+			 */
+			api.is_dead(secret, function(is_dead) {
+				console.log('Client '+ secret +' is definetly dead, will remove secret');
+				remove_array_element(secrets, secret);
+			});
 		});
 
 		/* Set timeout for next check
@@ -105,7 +111,6 @@ module.exports = new (function() {
 	 *     not exist
 	 */
 	this.client = function(client_id) {
-console.log('%j %j', client_id, radar.client);
 		if (!radar.client.hasOwnProperty(client_id)) {
 			return null;
 		}
