@@ -155,14 +155,17 @@ var follow = function(self, enemy) {
 	}
 	var me = self.radar.me;
 
-	var dx = me.x - enemy.x;
-	var dy = me.y - enemy.y;
+	var dx = enemy.x - me.x;
+	var dy = enemy.y - me.y;
 	var len = Math.sqrt(dx * dx + dy * dy);
+
+	console.log(''+ enemy.x +' '+ me.x +' '+ dx);
+	console.log(''+ enemy.y +' '+ me.y +' '+ dy);
 	
 	dx = dx / len * (configuration['max-ship-speed'] - 0.0001);
 	dy = dy / len * (configuration['max-ship-speed'] - 0.0001);
 
-	console.log('Changing direction to '+ dx +':'+ dy);
+//	console.log('Changing direction to '+ dx +':'+ dy);
 	do_move(self.secret, dx, dy, function() {});
 };
 
@@ -178,6 +181,7 @@ do_connect('volker-'+ Math.random(), function(client) {
 	});
 
 	get_random_enemy(client, function(enemy) {
+		console.log(client.radar.me.name +' will follow '+ enemy.name);
 		follow(client, enemy);
 
 		setInterval(function() {
@@ -194,6 +198,7 @@ do_connect('vagina-'+ Math.random(), function(client) {
 
 	setInterval(function() {
 		var direction = util.random_direction(configuration['max-ship-speed'] - 0.0001);
+		console.log('Vagina '+ client.radar.me.name +' moves to %j', direction);
 		do_move(client.secret, direction.x, direction.y, function() {
 		});
 	}, 2000);

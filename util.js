@@ -18,8 +18,8 @@ var random = function(min, max) {
  * @return Zufaellige Richtung mit definierter Geschwindigkeit
  */
 var random_direction = function(speed) {
-	var x = Math.random();
-	var y = Math.random();
+	var x = Math.random() - 0.5;
+	var y = Math.random() - 0.5;
 	var len = Math.sqrt(x * x + y * y);
 
 	x = x / len * speed;
