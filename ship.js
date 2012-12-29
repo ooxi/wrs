@@ -48,6 +48,16 @@ module.exports = function(name) {
 
 
 	/**
+	 * Initializes
+	 */
+	var init = function() {
+	};
+
+
+
+
+
+	/**
 	 * @return true iff ship still is alive
 	 */
 	this.is_alive = function() {
