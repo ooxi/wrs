@@ -55,7 +55,10 @@ module.exports = new (function() {
 	/**
 	 * Most current radar information
 	 */
-	var radar = {};
+	var radar = {
+		client: {},
+		shot: {}
+	};
 
 
 
