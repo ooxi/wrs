@@ -136,7 +136,7 @@ var radar = function(query, cb) {
 	 */
 	var now = Date.now();
 	if (now - client['last-radar'] < configuration['min-radar-interval']) {
-		return cb(403, 'Radar cooldown unfinished (now: '+ now +', last: '+ client['last-radar'] +')');
+		return cb(403, 'Radar cooldown unfinished (now: '+ now +', last: '+ client['last-radar'] +', '+ (now - client['last-radar']) +' too fast)');
 	}
 	client['last-radar'] = now;
 
@@ -214,7 +214,7 @@ var shoot = function(query, cb) {
 	 */
 	var now = Date.now();
 	if (now - client['last-shot'] < configuration['min-shoot-interval']) {
-		return cb(403, 'Shoot cooldown unfinished (now: '+ now +', last: '+ client['last-shot'] +')');
+		return cb(403, 'Shoot cooldown unfinished (now: '+ now +', last: '+ client['last-shot'] +', '+ (now - client['last-shot']) +' too fast)');
 	}
 	client['last-shot'] = now;
 

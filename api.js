@@ -81,7 +81,7 @@ var do_connect = function(name, success_cb, exception_cb) {
 /**
  * Updates ship and shot information
  */
-var do_is_dead = function(public_id, success_cb, exception_cb) {
+var do_is_alive = function(public_id, success_cb, exception_cb) {
 	http.get(server_url +'is-alive?id='+ e(public_id), read_object(function(response) {
 		success_cb(response['is-alive']);
 	}, exception_cb));
@@ -122,6 +122,7 @@ var do_radar = function(secret, success_cb, exception_cb) {
  */
 module.exports = {
 	connect: do_connect,
+	is_alive: do_is_alive,
 	move: do_move,
 	radar: do_radar
 };

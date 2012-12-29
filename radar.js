@@ -98,10 +98,12 @@ module.exports = new (function() {
 
 			/* Check if client if dead
 			 */
-			api.is_dead(public_keys[secret], function(is_dead) {
-				console.log('Client '+ secret +' is definetly dead, will remove secret');
-				remove_array_element(secrets, secret);
-				delete public_keys[secret];
+			api.is_alive(public_keys[secret], function(is_alive) {
+				if (!is_alive) {
+					console.log('Client '+ secret +' is definetly dead, will remove secret');
+					remove_array_element(secrets, secret);
+					delete public_keys[secret];
+				}
 			});
 		});
 
