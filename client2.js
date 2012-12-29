@@ -28,7 +28,10 @@ var util = require('./util.js');
 
 var s = new ship('rectangle-'+ Math.random());
 s.fly_by_wire([
-	new util.point(
+	new util.point(100.0, 100.0),
+	new util.point(100.0, -100.0),
+	new util.point(-100.0, -100.0),
+	new util.point(-100.0, 100.0)
 ]);
 
 /*

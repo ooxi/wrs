@@ -97,6 +97,7 @@ module.exports = function(name) {
 			if (current_point >= points.length) {
 				cb();
 			} else {
+				console.log('Reached point '+ current_point);
 				var point = points[current_point];
 				++current_point;
 				_that.fly_to(point.x, point.y, fly_to_next);
