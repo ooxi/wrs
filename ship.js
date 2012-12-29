@@ -64,9 +64,17 @@ module.exports = function(name) {
 	 * Sets the desired position
 	 */
 	this.fly_to = function(x, y) {
+		_desired_position.x = x;
+		_desired_position.y = y;
 	};
 
-	
+	/**
+	 * Tries to fly to the desired position while avoiding shots
+	 */
+	this.move = function() {
+	};
+
+
 
 
 
