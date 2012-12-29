@@ -24,8 +24,26 @@
 
 
 
+
+
 /**
+ * By aggregating radar information in one place, we get more data :D
  */
 module.exports = function() {
 };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
