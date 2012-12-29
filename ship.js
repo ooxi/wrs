@@ -46,6 +46,8 @@ module.exports = function(name) {
 		x: 0.0,
 		y: 0.0
 	};
+	var _desired_distance_sqr = 100.0 * 100.0;
+	var _desired_cb = null;
 
 	/* Is this ship still alive?
 	 */
@@ -72,9 +74,13 @@ module.exports = function(name) {
 	/**
 	 * Sets the desired position
 	 */
-	this.fly_to = function(x, y) {
+	this.fly_to = function(x, y, cb) {
 		_desired_position.x = x;
 		_desired_position.y = y;
+
+		if ('function' === typeof(cb)) {
+			_desired_cb = cb;
+		}
 	};
 
 	/**
@@ -91,6 +97,11 @@ module.exports = function(name) {
 			direction.x * (configuration['max-ship-speed'] - 0.0001),
 			direction.y * (configuration['max-ship-speed'] - 0.0001)
 		);
+
+		/* If ship is near the desired position, than the callback will
+		 * be invoked once
+		 */
+		
 	};
 
 
