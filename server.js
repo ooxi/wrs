@@ -31,7 +31,7 @@ var broadcast = function(type, obj) {
 
 		broadcast_socket.send(
 			msg, 0, msg.length,
-			client['udp-port'], client['udp-ip'],
+			client['udp-port'], client['udp-ip']
 		);
 	}
 };
