@@ -74,3 +74,14 @@ var do_radar = function(secret, success_cb, exception_cb) {
 	));
 };
 
+
+
+
+
+/**
+ * Export public api
+ */
+module.exports = {
+	radar: do_radar
+};
+

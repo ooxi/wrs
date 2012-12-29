@@ -21,7 +21,21 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
+var api = require('./api.js');
 var configuration = require('./configuration.js');
+
+
+
+/**
+ * @see http://stackoverflow.com/a/9792947
+ */
+var remove_array_element = function(array, element) {
+	for (var i = array.length - 1; i >= 0; i--) {
+		if (array[i] === element) {
+			array.splice(i, 1);
+		}
+	}
+}
 
 
 
@@ -73,7 +87,11 @@ module.exports = function() {
 
 		/*
 		 */
-		http
+		var secret = secret[current_secret];
+		api.radar(secret, function() {}, function(exception) {
+			console.log('Failed receiving radar information with '+ secret +'. Maybe client is dead?');
+			
+		});
 	}
 
 };
