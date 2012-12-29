@@ -22,9 +22,16 @@
  *  3. This notice may not be removed or altered from any source distribution.
  */
 var ship = require('./ship.js');
+var util = require('./util.js');
 
 
 
+var s = new ship('rectangle-'+ Math.random());
+s.fly_by_wire([
+	new util.point(
+]);
+
+/*
 var s = new ship('roland-'+ Math.random());
 s.fly_to(-300.0, -300.0, function() {
 	console.log('point a');
@@ -38,6 +45,7 @@ s.fly_to(-300.0, -300.0, function() {
 		});
 	});
 });
+*/
 
 setInterval(function() {
 	s.move();

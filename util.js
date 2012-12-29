@@ -60,12 +60,23 @@ var look_at = function(self, target) {
 
 
 
+/**
+ * @return Point with x and y coordinates
+ */
+var point = function(x, y) {
+	this.x = x;
+	this.y = y;
+};
+
+
+
 
 
 module.exports = {
 	random: random,
 	random_direction: random_direction,
 	distance_sqr: distance_sqr,
-	look_at: look_at
+	look_at: look_at,
+	point: point
 };
 

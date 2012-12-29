@@ -35,6 +35,10 @@ var util = require('./util.js');
  */
 module.exports = function(name) {
 
+	/* Reference to self
+	 */
+	var _that = this;
+
 	/* Public and private key
 	 */
 	var _public_key = undefined;
@@ -87,12 +91,19 @@ module.exports = function(name) {
 	 * Flies to a number of points
 	 */
 	this.fly_by_wire = function(points, cb) {
-		if (0 === points.length) {
-			cb();
-			return;
-		}
-
 		var current_point = 0;
+
+		var fly_to_next = function() {
+			if (current_point >= points.length) {
+				cb();
+			} else {
+				var point = points[current_point];
+				++current_point;
+				_that.fly_to(point.x, point.y, fly_to_next);
+			}
+		};
+
+		fly_to_next();
 	};
 
 	/**
