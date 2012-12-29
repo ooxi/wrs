@@ -22,6 +22,7 @@
  *  3. This notice may not be removed or altered from any source distribution.
  */
 var api = require('./api.js');
+var configuration = require('./configuration.js');
 var radar = require('./radar.js');
 var util = require('./util.js');
 
@@ -80,12 +81,16 @@ module.exports = function(name) {
 	 * Tries to fly to the desired position while avoiding shots
 	 */
 	this.move = function() {
-		var is = position();
+		var direction = util.look_at(
+			this.position(),
+			_desired_position
+		);
 
-		var dx = _desired_position.x - is.x;
-		var dy = _desired_position.y - is.y;
-
-		
+		api.move(
+			_private_key,
+			direction.x * (configuration['max-ship-speed'] - 0.0001),
+			direction.y * (configuration['max-ship-speed'] - 0.0001)
+		);
 	};
 
 
