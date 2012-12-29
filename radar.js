@@ -60,17 +60,7 @@ module.exports = function() {
 
 
 	/**
-	 * @return Most current information about client_id or undefined if does
-	 *     not exist
-	 */
-	this.get = function(client_id) {
-		return radar[client_id];
-	};
-
-
-
-	/**
-	 * Updates...
+	 * Updates world state
 	 */
 	var update_radar = function() {
 		if (0 === secrets.length) {
@@ -85,14 +75,45 @@ module.exports = function() {
 			current_secret = 0;
 		}
 
-		/*
+		/* Update radar information
 		 */
-		var secret = secret[current_secret];
-		api.radar(secret, function() {}, function(exception) {
+		var secret = secrets[current_secret];
+		api.radar(secret, function(echo) {
+			var new_radar = {
+				client: echo['nearby-clients'],
+				shot: echo['nearby-shots']
+			};
+			new_radar[echo.me.id] = echo.me;
+			radar = new_radar;
+		}, function(exception) {
 			console.log('Failed receiving radar information with '+ secret +'. Maybe client is dead?');
-			
+			remove_array_element(secrets, secret);
 		});
-	}
+
+		/* Set timeout for next check
+		 */
+		setTimeout(update_radar, (configuration['min-radar-interval'] + 10) / secrets.length);
+	};
+
+
+
+	/**
+	 * @return Most current information about client_id or undefined if does
+	 *     not exist
+	 */
+	this.client = function(client_id) {
+		return radar.client[client_id];
+	};
+	this.shot = function(shot_id) {
+		return radar.shot[shot_id];
+	};
+
+	/**
+	 * Adds new secret
+	 */
+	this.add = function(secret) {
+		secrets.push(secret);
+	};
 
 };
 
