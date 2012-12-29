@@ -149,11 +149,11 @@ var get_random_enemy = function(self, cb) {
 /**
  */
 var follow = function(self, enemy) {
-	if (!clients.hasOwnProperty(self.id)) {
-		console.log('I don\'t know, where I am :-(');
+	if ('undefined' === self.radar) {
+		console.log('I don\'t know myself');
 		return;
 	}
-	var me = clients[self.id];
+	var me = self.radar.me;
 
 	var dx = me.x - enemy.x;
 	var dy = me.y - enemy.y;
@@ -190,9 +190,15 @@ do_connect('volker-'+ Math.random(), function(client) {
 
 /* Erschaffe einen neuen Bot und fliege im Kreis mit einem zufaelligen Radius
  */
-do_connect('opfer-'+ Math.random(), function(client) {
-	do_move(client.secret, Math.random() - 0.5, Math.random() - 0.5, function() {
-	});
+do_connect('vagina-'+ Math.random(), function(client) {
+
+	setInterval(function() {
+		var direction = util.random_direction(configuration['max-ship-speed'] - 0.0001);
+		do_move(client.secret, direction.x, direction.y, function() {
+		});
+	}, 2000);
+
+	
 
 //	var center = {
 //		x: util.random(configuration['game-zone'] - radius),

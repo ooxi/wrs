@@ -258,7 +258,14 @@ setInterval(function() {
 		client.public.x += dx;
 		client.public.y += dy;
 
-		
+		if (		client.public.x > configuration['game-zone']
+			||	client.public.x < -configuration['game-zone']
+			||	client.public.y > configuration['game-zone']
+			||	client.public.y < -configuration['game-zone']) {
+
+			console.log('Client '+ clients[secret].id +' out of bounds');
+			delete clients[secret];
+		}
 	}
 	for (var id in shots) {
 		var shot = shots[id];
