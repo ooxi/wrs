@@ -105,9 +105,16 @@ module.exports = new (function() {
 	 *     not exist
 	 */
 	this.client = function(client_id) {
+		if (!radar.client.hasOwnProperty(client_id)) {
+			return null;
+		}
 		return radar.client[client_id];
 	};
+
 	this.shot = function(shot_id) {
+		if (!radar.shot.hasOwnProperty(shot_id)) {
+			return null;
+		}
 		return radar.shot[shot_id];
 	};
 
