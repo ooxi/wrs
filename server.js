@@ -253,11 +253,13 @@ var shoot = function(query, cb) {
 
 
 var dump = function(query, cb) {
-	cb(200, {
-		clients: clients,
-		shots: shots
-	});
+	pending_dumps.push(cb);
+//	cb(200, {
+//		clients: clients,
+//		shots: shots
+//	});
 };
+var pending_dumps = [];
 
 
 
