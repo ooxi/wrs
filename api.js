@@ -122,6 +122,9 @@ var do_shoot = function(secret, dx, dy, success_cb, exception_cb) {
 	if ('function' !== typeof(success_cb)) {
 		success_cb = function() {};
 	}
+	if ('function' !== typeof(exception_cb)) {
+		exception_cb = function() {};
+	}
 
 	http.get(server_url +'shoot?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(
 		success_cb, exception_cb
