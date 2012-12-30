@@ -33,9 +33,19 @@ module.exports = function(_ships) {
 	/**
 	 * Current victim
 	 */
-	
+	var _victim_id = null;
+
+
+
+
+
 	/**
 	 */
+	this.move = function() {
+
+		
+
+	};
 	
 
 
