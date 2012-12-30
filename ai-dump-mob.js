@@ -42,7 +42,9 @@ module.exports = function(_ships) {
 	/**
 	 */
 	var get_next_victim = function() {
-		
+		var is_own_ship = function(client_id) {
+			
+		};
 	};
 
 
