@@ -118,6 +118,7 @@ setInterval(function() {
 	}
 
 	dumb_mob_ai.move();
+	left_right.move();
 }, 500);
 
 

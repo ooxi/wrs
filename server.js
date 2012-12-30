@@ -286,6 +286,25 @@ var is_alive = function(query, cb) {
 
 
 
+/**
+ * Possibility to kill yourself
+ */
+var suicide = function(query, cb) {
+	if (!query.hasOwnProperty('secret')) {
+		return cb(403, 'Missing secret argument');
+	}
+	if (!clients.hasOwnProperty(query.secret)) {
+		return cb(404, 'Unknown client');
+	}
+
+	delete clients[query.secret];
+	cb(200, {
+		'message': 'Fucking moron'
+	});
+};
+
+
+
 
 
 /**
@@ -402,6 +421,8 @@ http.createServer(function(request, response) {
 		is_alive(action.query, send);
 	} else if ('/configuration' === action.pathname) {
 		send(200, configuration);
+	} else if ('/ich-bin-dumm-und-moechte-mich-selbst-toeten' === action.pathname) {
+		suicide(action.query, send);
 	} else if ('/dump' === action.pathname) {
 		dump(action.query, send);
 	} else {
