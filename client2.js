@@ -31,14 +31,20 @@ var util = require('./util.js');
 
 var do_rectangle = function() {
 	s.fly_by_wire([
-		new util.point(100.0, 100.0),
-		new util.point(100.0, -100.0),
-		new util.point(-100.0, -100.0),
-		new util.point(-100.0, 100.0)
+		new util.point(300.0, 300.0),
+		new util.point(300.0, -300.0),
+		new util.point(-300.0, -300.0),
+		new util.point(-300.0, 300.0)
 	], do_rectangle);
 };
 var s = new ship('rectangle-'+ Math.random(), function() {
 	do_rectangle();
+});
+
+var left_right = new ship('left-right-'+ Math.random(), function() {
+	left_right.fly_to(-1000.0, 0.0, function() {
+		left_right.fly_to(1000.0, 0.0);
+	});
 });
 
 
