@@ -21,26 +21,48 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
+var radar = require('./radar.js');
 var ship = require('./ship.js');
 
 
 
 /**
  * A dump mob picking a victim and blindly shooting at it
+ *
+ * @param _ships Array of ships which can be used by this mob
+ * @param _victim_id Id of enemy to attack
+ * @param _cb Callback which will be called as soon as victim is killed
  */
-module.exports = function(_ships, _victim_id) {
+module.exports = function(_ships, _victim_id, _cb) {
 
 	/**
+	 * true iff victim is dead
+	 */
+	var _victim_is_dead = false;
+
+
+
+
+
+	/**
+	 * Tries to kill the vicitim with all ships
 	 */
 	this.move = function() {
 
-		/* Choose next victim
+		/* Vicitim is already dead, nothing to do
 		 */
-		if (null === _victim_id) {
-			for (var id in _ships) {
-			}
+		if (_vicitim_is_dead) {
+			return;
 		}
+		var victim = radar.client(_vicitim_id);
 
+		/* Victim recently died
+		 */
+		if (null === victim) {
+			_victim_is_dead = true;
+			_cb();
+			return;
+		}
 	};
 	
 
