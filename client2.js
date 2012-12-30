@@ -72,12 +72,12 @@ setTimeout(function() {
 	var current_victim = 0;
 
 	var kill_next_victim = function() {
-		if (current_victim >= victims.length) {
-			console.log('All victims killed :-)');
+		var victim_id = ships.get_random_victim_id();
+
+		if (null === victim_id) {
+			console.log('All vicitims killed :-)');
 			return;
 		}
-
-		var victim_id = ships.get_random_vicitim_id();
 
 		console.log('Dumb mob now tries to kill '+ victim_id);
 		ai_dumb_mob = new ai_dumb_mob(dumb_mob, victim_id, kill_next_victim);

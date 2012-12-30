@@ -40,6 +40,10 @@ module.exports = new (function() {
 
 	this.get_random_victim_id = function() {
 		var clients = radar.clients();
+
+		if (0 === clients.length) {
+			return null;
+		}
 		var client_ids = Object.keys(clients);
 		
 		return client_ids[parseInt(Math.floor(Math.random() * client_ids.length))];
