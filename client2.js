@@ -64,7 +64,7 @@ var dumb_mob = [
 	new ship('ai-dumb-mob-2-'+ Math.random(), function() {}),
 	new ship('ai-dumb-mob-3-'+ Math.random(), function() {})
 ];
-var ai_dumb_mob = {
+var dumb_mob_ai = {
 	move: function() {}
 };
 
@@ -79,8 +79,8 @@ setTimeout(function() {
 			return;
 		}
 
-		console.log('Dumb mob now tries to kill '+ victim_id +' %j', ai_dumb_mob);
-		ai_dumb_mob = new ai_dumb_mob(dumb_mob, victim_id, kill_next_victim);
+		console.log('Dumb mob now tries to kill '+ victim_id);
+		dumb_mob_ai = new ai_dumb_mob(dumb_mob, victim_id, kill_next_victim);
 	};
 
 	kill_next_victim();
@@ -111,7 +111,7 @@ setInterval(function() {
 		victims[i].move();
 	}
 
-	ai_dumb_mob.move();
+	dumb_mob_ai.move();
 }, 500);
 
 
