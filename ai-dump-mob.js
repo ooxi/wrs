@@ -28,11 +28,15 @@ var ship = require('./ship.js');
 /**
  * A dump mob picking a victim and blindly shooting at it
  */
-module.exports = function(size) {
+module.exports = function(_ships) {
 
-	/* Ships in this mob
+	/**
+	 * Current victim
 	 */
-	var _ships = [];
+	
+	/**
+	 */
+	
 
 
 

@@ -76,6 +76,13 @@ module.exports = function(name, cb) {
 	};
 
 	/**
+	 * Shoots (if possible) at a point
+	 */
+	this.shoot = function(x, y) {
+		api.shoot(_private_key, x, y);
+	};
+
+	/**
 	 * Sets the desired position
 	 */
 	this.fly_to = function(x, y, cb) {

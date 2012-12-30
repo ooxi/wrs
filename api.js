@@ -115,6 +115,21 @@ var do_radar = function(secret, success_cb, exception_cb) {
 
 
 
+/**
+ * Shoots
+ */
+var do_shoot = function(secret, dx, dy, success_cb, exception_db) {
+	if ('function' !== typeof(success_cb)) {
+		success_cb = function() {};
+	}
+
+	http.get(server_url +'shoot?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(
+		success_cb, exception_cb
+	));
+};
+
+
+
 
 
 /**
@@ -124,6 +139,7 @@ module.exports = {
 	connect: do_connect,
 	is_alive: do_is_alive,
 	move: do_move,
-	radar: do_radar
+	radar: do_radar,
+	shoot: do_shoot
 };
 
