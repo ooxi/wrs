@@ -36,6 +36,10 @@ module.exports = function(_ship) {
 	 */	
 	var fly_random = function() {
 		var position = _ship.position();
+
+		if (null === position) {
+			return;
+		}
 		position.x += configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
 		position.y += configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
 
