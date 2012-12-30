@@ -29,7 +29,12 @@ var ship = require('./ship.js');
 /**
  * A simple victim doing a random walk
  */
-module.exports = function() {
+module.exports = function(_ship) {
+
+	/**
+	 * Is ai still responsible for ship?
+	 */
+	
 
 	/**
 	 * Flies to the next point a view seconds away
@@ -56,13 +61,12 @@ module.exports = function() {
 
 
 
-
-
-	/* Every victim has a ship, till it die
+	/**
+	 * Constructor
 	 */
-	var _ship = new ship('victim-'+ Math.random(), function() {
+	(function() {
 		fly_random();
-	});
+	})();
 };
 
 
