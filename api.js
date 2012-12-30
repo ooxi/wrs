@@ -118,7 +118,7 @@ var do_radar = function(secret, success_cb, exception_cb) {
 /**
  * Shoots
  */
-var do_shoot = function(secret, dx, dy, success_cb, exception_db) {
+var do_shoot = function(secret, dx, dy, success_cb, exception_cb) {
 	if ('function' !== typeof(success_cb)) {
 		success_cb = function() {};
 	}
