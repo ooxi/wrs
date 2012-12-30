@@ -78,8 +78,8 @@ module.exports = function(name, cb) {
 	/**
 	 * Shoots (if possible) at a point
 	 */
-	this.shoot = function(x, y) {
-		api.shoot(_private_key, x, y);
+	this.shoot_at = function(x, y, cb) {
+		api.shoot(_private_key, x, y, cb);
 	};
 
 	/**

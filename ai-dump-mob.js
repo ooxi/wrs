@@ -63,6 +63,14 @@ module.exports = function(_ships, _victim_id, _cb) {
 			_cb();
 			return;
 		}
+
+		/* Fly to the victim
+		 */
+		for (var id in _ships) {
+			var ship = _ships[id];
+			ship.fly_to(victim.x, victim.y);
+			ship.shoot_at(victim.x, vicitim.y);
+		}
 	};
 	
 
