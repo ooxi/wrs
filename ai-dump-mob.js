@@ -40,6 +40,7 @@ module.exports = function(_ships) {
 
 
 	/**
+	 * @return Client id of next victim
 	 */
 	var get_next_victim = function() {
 		var is_own_ship = function(client_id) {
