@@ -63,9 +63,11 @@ var dump_mob = [
 	new ship('ai-dump-mob-2-'+ Math.random(), function() {}),
 	new ship('ai-dump-mob-3-'+ Math.random(), function() {})
 ];
-var ai_dump_mob = null;
+var ai_dump_mob = {
+	move: function() {}
+};
 
-(function() {
+setTimeout(function() {
 	var current_victim = 0;
 
 	var kill_next_victim = function() {
@@ -82,7 +84,7 @@ var ai_dump_mob = null;
 	};
 
 	kill_next_victim();
-})();
+}, 2500);
 
 
 
