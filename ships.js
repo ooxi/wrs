@@ -21,6 +21,7 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
+var radar = require('./radar.js');
 
 
 
@@ -30,6 +31,12 @@
  * Manages the distinction between friendly and unfriendly ships
  */
 module.exports = new (function() {
+
+	/* All controlled ships
+	 */
+	var _friendly = [];
+
+	
 })();
 
 
