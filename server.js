@@ -253,11 +253,12 @@ var shoot = function(query, cb) {
 
 
 var dump = function(query, cb) {
-	pending_dumps.push(cb);
-//	cb(200, {
-//		clients: clients,
-//		shots: shots
-//	});
+	pending_dumps.push(function() {
+		cb(200, {
+			clients: clients,
+			shots: shots
+		});
+	});
 };
 var pending_dumps = [];
 
@@ -340,6 +341,15 @@ setInterval(function() {
 				}
 			}
 		}
+	}
+
+	/* Send pending dump requests
+	 */
+	var dumps = pending_dumps;
+	pending_dumps = [];
+
+	for (var i = 0; i < dumps.length; ++i) {
+		dumps[i]();
 	}
 }, 234);
 
