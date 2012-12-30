@@ -41,12 +41,23 @@ module.exports = function(_ships) {
 
 	/**
 	 */
+	var get_next_victim = function() {
+		
+	};
+
+
+
+
+
+	/**
+	 */
 	this.move = function() {
 
 		/* Choose next victim
 		 */
 		if (null === _victim_id) {
-			
+			for (var id in _ships) {
+			}
 		}
 
 	};
