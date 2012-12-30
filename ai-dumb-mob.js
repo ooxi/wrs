@@ -27,7 +27,7 @@ var ship = require('./ship.js');
 
 
 /**
- * A dump mob picking a victim and blindly shooting at it
+ * A dumb mob picking a victim and blindly shooting at it
  *
  * @param _ships Array of ships which can be used by this mob
  * @param _victim_id Id of enemy to attack

@@ -37,6 +37,14 @@ module.exports = new (function() {
 	var _friendly = [];
 
 	
+
+	this.get_random_victim_id = function() {
+		var clients = radar.clients();
+		var client_ids = Object.keys(clients);
+		
+		return client_ids[parseInt(Math.floor(Math.random() * client_ids.length))];
+	};
+
 })();
 
 
