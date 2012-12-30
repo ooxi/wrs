@@ -45,7 +45,7 @@ var s = new ship('rectangle-'+ Math.random(), function() {
 var victims = (function() {
 	var ais = [];
 
-	for (var i = 0; i < 10; ++i) {
+	for (var i = 0; i < 1; ++i) {
 		ais.push(new ai_dump_victim(
 			new ship('ai-dump-victim-'+ Math.random(), function() {})
 		));
@@ -76,7 +76,7 @@ setInterval(function() {
 	for (var i = 0; i < victims.length; ++i) {
 		victims[i].move();
 	}
-}, 50);
+}, 500);
 
 
 
