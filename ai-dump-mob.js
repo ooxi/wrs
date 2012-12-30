@@ -28,29 +28,7 @@ var ship = require('./ship.js');
 /**
  * A dump mob picking a victim and blindly shooting at it
  */
-module.exports = function(_ships) {
-
-	/**
-	 * Current victim
-	 */
-	var _victim_id = null;
-
-
-
-
-
-	/**
-	 * @return Client id of next victim
-	 */
-	var get_next_victim = function() {
-		var is_own_ship = function(client_id) {
-			
-		};
-	};
-
-
-
-
+module.exports = function(_ships, _victim_id) {
 
 	/**
 	 */
