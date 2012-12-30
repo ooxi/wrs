@@ -133,6 +133,13 @@ module.exports = new (function() {
 	};
 
 	/**
+	 * @return All clients
+	 */
+	this.clients = function() {
+		return radar.client;
+	};
+
+	/**
 	 * Adds new secret
 	 */
 	this.add = function(public_key, private_key) {

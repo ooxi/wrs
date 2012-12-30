@@ -43,7 +43,11 @@ module.exports = function(_ships) {
 	 */
 	this.move = function() {
 
-		
+		/* Choose next victim
+		 */
+		if (null === _victim_id) {
+			
+		}
 
 	};
 	
