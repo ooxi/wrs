@@ -21,6 +21,7 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
+var ai_dump_mob = require('./ai-dump-mob.js');
 var ai_dump_victim = require('./ai-dump-victim.js');
 var ship = require('./ship.js');
 var util = require('./util.js');
@@ -54,6 +55,37 @@ var victims = (function() {
 	return ais;
 })();
 
+
+
+var dump_mob = [
+	new ship('ai-dump-mob-0-'+ Math.random(), function() {}),
+	new ship('ai-dump-mob-1-'+ Math.random(), function() {}),
+	new ship('ai-dump-mob-2-'+ Math.random(), function() {}),
+	new ship('ai-dump-mob-3-'+ Math.random(), function() {})
+];
+var ai_dump_mob = null;
+
+(function() {
+	var current_victim = 0;
+
+	var kill_next_victim = function() {
+		if (current_victim >= victims.length) {
+			console.log('All victims killed :-)');
+			return;
+		}
+
+		var victim_id = victims[current_victim].public_key;
+		++current_victim;
+
+		console.log('Dump mob now tries to kill '+ victim_id);
+		ai_dump_mob = new ai_dump_mob(dumb_mob, victim_id, kill_next_victim);
+	};
+
+	kill_next_victim();
+})();
+
+
+
 /*
 var s = new ship('roland-'+ Math.random());
 s.fly_to(-300.0, -300.0, function() {
@@ -76,6 +108,8 @@ setInterval(function() {
 	for (var i = 0; i < victims.length; ++i) {
 		victims[i].move();
 	}
+
+	ai_dump_mob.move();
 }, 500);
 
 

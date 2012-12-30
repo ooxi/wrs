@@ -76,6 +76,15 @@ module.exports = function(name, cb) {
 	};
 
 	/**
+	 * @return Public ship identification
+	 */
+	this.public_key = function() {
+		return _public_key;
+	};
+
+
+
+	/**
 	 * Shoots (if possible) at a point
 	 */
 	this.shoot_at = function(x, y, cb) {
