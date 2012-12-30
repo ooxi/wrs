@@ -21,8 +21,8 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
-var ai_dump_mob = require('./ai-dump-mob.js');
-var ai_dump_victim = require('./ai-dump-victim.js');
+var ai_dumb_mob = require('./ai-dumb-mob.js');
+var ai_dumb_victim = require('./ai-dumb-victim.js');
 var ship = require('./ship.js');
 var util = require('./util.js');
 
@@ -47,8 +47,8 @@ var victims = (function() {
 	var ais = [];
 
 	for (var i = 0; i < 10; ++i) {
-		ais.push(new ai_dump_victim(
-			new ship('ai-dump-victim-'+ Math.random(), function() {})
+		ais.push(new ai_dumb_victim(
+			new ship('ai-dumb-victim-'+ Math.random(), function() {})
 		));
 	}
 
@@ -57,13 +57,13 @@ var victims = (function() {
 
 
 
-var dump_mob = [
-	new ship('ai-dump-mob-0-'+ Math.random(), function() {}),
-	new ship('ai-dump-mob-1-'+ Math.random(), function() {}),
-	new ship('ai-dump-mob-2-'+ Math.random(), function() {}),
-	new ship('ai-dump-mob-3-'+ Math.random(), function() {})
+var dumb_mob = [
+	new ship('ai-dumb-mob-0-'+ Math.random(), function() {}),
+	new ship('ai-dumb-mob-1-'+ Math.random(), function() {}),
+	new ship('ai-dumb-mob-2-'+ Math.random(), function() {}),
+	new ship('ai-dumb-mob-3-'+ Math.random(), function() {})
 ];
-var ai_dump_mob = {
+var ai_dumb_mob = {
 	move: function() {}
 };
 
@@ -79,8 +79,8 @@ setTimeout(function() {
 		var victim_id = victims[current_victim].public_key;
 		++current_victim;
 
-		console.log('Dump mob now tries to kill '+ victim_id);
-		ai_dump_mob = new ai_dump_mob(dumb_mob, victim_id, kill_next_victim);
+		console.log('Dumb mob now tries to kill '+ victim_id);
+		ai_dumb_mob = new ai_dumb_mob(dumb_mob, victim_id, kill_next_victim);
 	};
 
 	kill_next_victim();
@@ -111,7 +111,7 @@ setInterval(function() {
 		victims[i].move();
 	}
 
-	ai_dump_mob.move();
+	ai_dumb_mob.move();
 }, 500);
 
 
