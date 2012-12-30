@@ -82,7 +82,7 @@ module.exports = new (function() {
 		if (current_secret >= secrets.length) {
 			current_secret = 0;
 		}
-//console.log('Using #'+ current_secret +' at '+ Date.now() +' '+ secrets.length +' '+ ((configuration['min-radar-interval'] + 10) / secrets.length));
+
 		/* Update radar information
 		 */
 		var secret = secrets[current_secret];
