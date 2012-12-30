@@ -45,16 +45,16 @@ module.exports = function(_ships, _victim_id, _cb) {
 
 
 	/**
-	 * Tries to kill the vicitim with all ships
+	 * Tries to kill the victim with all ships
 	 */
 	this.move = function() {
 
-		/* Vicitim is already dead, nothing to do
+		/* Victim is already dead, nothing to do
 		 */
-		if (_vicitim_is_dead) {
+		if (_victim_is_dead) {
 			return;
 		}
-		var victim = radar.client(_vicitim_id);
+		var victim = radar.client(_victim_id);
 
 		/* Victim recently died
 		 */
@@ -69,7 +69,7 @@ module.exports = function(_ships, _victim_id, _cb) {
 		for (var id in _ships) {
 			var ship = _ships[id];
 			ship.fly_to(victim.x, victim.y);
-			ship.shoot_at(victim.x, vicitim.y);
+			ship.shoot_at(victim.x, victim.y);
 		}
 	};
 	
