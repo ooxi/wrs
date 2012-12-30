@@ -47,7 +47,7 @@ var victims = (function() {
 
 	for (var i = 0; i < 10; ++i) {
 		ais.push(new ai_dump_victim(
-			new ship('ai-dump-victim-'+ Math.random())
+			new ship('ai-dump-victim-'+ Math.random(), function() {})
 		));
 	}
 
