@@ -79,7 +79,7 @@ setTimeout(function() {
 			return;
 		}
 
-		console.log('Dumb mob now tries to kill '+ victim_id);
+		console.log('Dumb mob now tries to kill '+ victim_id +' %j', ai_dumb_mob);
 		ai_dumb_mob = new ai_dumb_mob(dumb_mob, victim_id, kill_next_victim);
 	};
 
