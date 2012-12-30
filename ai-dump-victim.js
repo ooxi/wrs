@@ -32,11 +32,6 @@ var ship = require('./ship.js');
 module.exports = function(_ship) {
 
 	/**
-	 * Is ai still responsible for ship?
-	 */
-	
-
-	/**
 	 * Flies to the next point a view seconds away
 	 */	
 	var fly_random = function() {
