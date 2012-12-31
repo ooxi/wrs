@@ -27,6 +27,9 @@ var async = require('async');
 var optimist = require('optimist');
 
 var wrs = {
+	ai: {
+		dumb_victim:	require('ai-dumb-victim.js')
+	},
 	api:		require('./api.js'),
 	radar:		require('./radar.js'),
 	ship:		require('./ship.js'),
@@ -120,7 +123,11 @@ async.waterfall([
 	 * Initialize APIs
 	 */
 	function(api, configuration, radar, ships, cb) {
-		console.log('%j', ships);
+		var ais = [];
+
+		for (var i = 0; i < ships.length; ++i) {
+			ais.push(new wrs.ai.dump_victim(ships[i]));
+		}
 	}
 
 
