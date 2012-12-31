@@ -27,7 +27,8 @@ var http = require('http');
 
 var wrs = {
 	http: {
-		radar: require('./http-radar.js')
+		radar:		require('./http-radar.js'),
+		response:	require('./http-response.js')
 	}
 };
 
@@ -62,9 +63,17 @@ module.exports = function(configuration) {
 	var on_request = function(request, response) {
 		var action = url.parse(request.url, true);
 
+		var response = new wrs.http.response(
+			action.query,
+			response
+		);
+
+
+
 		/* Frequently used commands have to be checked first
 		 */
 		if ('/radar' === action.pathname) {
+			wrs.http.radar(utils);
 			radar(action.query, send);
 		} else if ('/move' === action.pathname) {
 			move(action.query, send);
