@@ -64,6 +64,7 @@ module.exports = function(_game) {
 		var has_name = false;
 
 		_teams_by_public_key.each(function(public_key, team) {
+console.log('%j %j', team.name, name);
 			if (team.name === name) {
 				has_name = true;
 			}
