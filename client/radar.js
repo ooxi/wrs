@@ -67,9 +67,9 @@ module.exports = function(_api, _configuration) {
 	/**
 	 * Most current radar information
 	 */
-	var radar = {
-		client: {},
-		shot: {}
+	var _radar = {
+		ships: {},
+		shots: {}
 	};
 
 
@@ -78,21 +78,21 @@ module.exports = function(_api, _configuration) {
 	 * Updates world state
 	 */
 	var update_radar = function() {
-		if (0 === secrets.length) {
-			console.log('[radar] No secrets available');
+		if (0 === _private_ship_keys.length) {
+			console.log('[radar] No private ship keys available');
 			return;
 		}
 
-		/* Use next secret
+		/* Use next pirvate key
 		 */
 		++current_secret;
-		if (current_secret >= secrets.length) {
+		if (current_secret >= _private_ship_keys.length) {
 			current_secret = 0;
 		}
 
 		/* Update radar information
 		 */
-		var secret = secrets[current_secret];
+		var secret = _private_ship_keys[current_secret];
 		_api.radar(secret, function(echo) {
 			var new_radar = {
 				client: echo['nearby-clients'],
@@ -116,7 +116,7 @@ module.exports = function(_api, _configuration) {
 
 		/* Set timeout for next check
 		 */
-		setTimeout(update_radar, (_configuration['min-radar-interval'] + 10) / secrets.length);
+		setTimeout(update_radar, (_configuration['min-radar-interval'] + 10) / _private_ship_keys.length);
 	};
 
 
@@ -126,17 +126,17 @@ module.exports = function(_api, _configuration) {
 	 *     does not exist
 	 */
 	this.ship = function(public_key) {
-		if (!radar.client.hasOwnProperty(client_id)) {
+		if (!_radar.ships.hasOwnProperty(public_key)) {
 			return null;
 		}
-		return radar.client[client_id];
+		return _radar.ships[public_key];
 	};
 
-	this.shot = function(shot_id) {
-		if (!radar.shot.hasOwnProperty(shot_id)) {
+	this.shot = function(public_key) {
+		if (!_radar.shots.hasOwnProperty(public_key)) {
 			return null;
 		}
-		return radar.shot[shot_id];
+		return _radar.shots[public_key];
 	};
 
 //	/**
