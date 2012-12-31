@@ -29,14 +29,33 @@
 
 /**
  * Adds a new ship, if possible
+ *
+ * @param query.team Team ID
+ * @param query.name Ship name, only used as description
+ *
+ * @return Created ship
  */
 module.exports = function(game, response) {
 	if (!response.require(['name', 'team'])) {
 		return;
 	}
 
-	var ship = new wrs.ship(response
+	/* Valid team?
+	 */
+	if (!game.teams.exists(response.query('team'))) {
+		return response.error(403, 'Unkown team');
+	}
+	var team = game.teams.get(response.query('team'));
+
+	/* Create and spawn new ship
+	 */
+	var ship = new wrs.ship(game, team, response.query('name');
+
+	/* Serialize and send ship information
+	 */
+	send(200, ship.json());
 };
+
 
 
 
