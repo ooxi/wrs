@@ -446,10 +446,10 @@ http.createServer(function(request, response) {
 		suicide(action.query, send);
 	} else if ('/dump' === action.pathname) {
 		dump(action.query, send);
-	} else if ('/gui' === action.pathname) {
+	} else if ('/' === action.pathname) {
 		gui(response);
 	} else {
 		send(404, 'Unknown method');
 	}
-}).listen(31339);
+}).listen(31337);
 

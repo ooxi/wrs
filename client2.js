@@ -29,6 +29,9 @@ var util = require('./util.js');
 
 
 
+
+return;
+
 var do_rectangle = function() {
 	s.fly_by_wire([
 		new util.point(300.0, 300.0),
