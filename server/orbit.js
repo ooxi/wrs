@@ -33,12 +33,17 @@
 module.exports = function() {
 
 	/**
-	 * The objects
+	 * The objects by public identifier
 	 *
 	 * @warning Currenlty a map for fast name based access, a quadtree for
 	 *     fast location based access should be added, too
 	 */
-	var _objects = {};
+	var _objects_by_public_key = {};
+
+	/**
+	 * The objects by private identifier
+	 */
+	var _objects_by_private_key = {};
 
 
 

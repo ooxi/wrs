@@ -28,7 +28,7 @@
 
 
 /**
- * Sends information about all objects 
+ * Sends information about all objects near the client
  */
 module.exports = function(configuration, orbit, response) {
 
