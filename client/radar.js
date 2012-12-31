@@ -85,29 +85,29 @@ module.exports = function(_api, _configuration) {
 
 		/* Use next pirvate key
 		 */
-		++current_secret;
-		if (current_secret >= _private_ship_keys.length) {
-			current_secret = 0;
+		++_current_private_key;
+		if (_current_private_key >= _private_ship_keys.length) {
+			_current_private_key = 0;
 		}
 
 		/* Update radar information
 		 */
-		var secret = _private_ship_keys[current_secret];
+		var secret = _private_ship_keys[_current_private_key];
 		_api.radar(secret, function(echo) {
 			var new_radar = {
 				client: echo['nearby-clients'],
 				shot: echo['nearby-shots']
 			};
 			new_radar.client[echo.me.id] = echo.me;
-			radar = new_radar;
+			_radar = new_radar;
 		}, function(exception) {
-			console.log('Failed receiving radar information with '+ secret +': '+ exception);
+			console.log('[radar] Failed receiving radar information with '+ secret +': '+ exception);
 
 			/* Check if client if dead
 			 */
 			_api.is_alive(public_keys[secret], function(is_alive) {
 				if (!is_alive) {
-					console.log('Client '+ secret +' is definetly dead, will remove secret');
+					console.log('[radar] Client '+ secret +' is definetly dead, will remove secret');
 					remove_array_element(secrets, secret);
 					delete public_keys[secret];
 				}
