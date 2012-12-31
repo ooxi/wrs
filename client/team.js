@@ -51,15 +51,15 @@ module.exports = function(_api, _name, _color, cb) {
 
 	this.color = function() {
 		return _color;
-	}
+	};
 
 	this.public_key = function() {
 		return _public_key;
-	}
+	};
 
 	this.private_key = function() {
 		return _private_key;
-	}
+	};
 
 
 
