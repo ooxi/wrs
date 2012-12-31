@@ -145,7 +145,7 @@ module.exports = function(_api, _configuration) {
 	 */
 	this.add = function(public_key, private_key) {
 		_private_to_public[private_key] = public_key;
-		_private_ship_keys.push(ship.private_key);
+		_private_ship_keys.push(private_key);
 
 		if (1 === _private_ship_keys.length) {
 			update_radar();
