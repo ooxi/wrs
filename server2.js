@@ -54,16 +54,6 @@ var connect = function(query, cb) {
 		}
 	}
 
-//	/* Needing port to contact with UDP information (ip will be set in the
-//	 * server, not by the client)
-//	 */
-//	if (!query.hasOwnProperty('udp-ip')) {
-//		return cb(403, 'Missing udp-ip argument');
-//	}
-//	if (!query.hasOwnProperty('udp-port')) {
-//		return cb(403, 'Missing udp-port argument');
-//	}
-
 
 	/* Add new client
 	 */
@@ -95,10 +85,6 @@ var connect = function(query, cb) {
 			_dy: 0.0
 		},
 
-//		/* UDP information
-//		 */
-//		'udp-ip': query['udp-ip'],
-//		'udp-port': query['udp-port'],
 
 		/* Time of last actions
 		 */
