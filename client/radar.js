@@ -147,13 +147,13 @@ module.exports = function(_api, _configuration) {
 //	};
 
 	/**
-	 * Adds new secret
+	 * Adds new private ship key
 	 */
 	this.add = function(public_key, private_key) {
 		public_keys[private_key] = public_key;
-		secrets.push(private_key);
+		_private_ship_keys.push(private_key);
 
-		if (1 === secrets.length) {
+		if (1 === _private_ship_keys.length) {
 			update_radar();
 		}
 	};
