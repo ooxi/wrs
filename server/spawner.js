@@ -34,13 +34,13 @@ var wrs = {
 /**
  * Different methods for spawning behaviour
  */
-module.exports = function(_configuration) {
+module.exports = function(_game) {
 
 	/**
 	 * Sets the object's position to a random value
 	 */
 	var spawn_random = function(obj) {
-		var spawn_zone = _configuration.getSpawnZone();
+		var spawn_zone = _game.configuration.getSpawnZone();
 
 		obj.x = wrs.util.random(spawn_zone);
 		obj.y = wrs.util.random(spawn_zone);

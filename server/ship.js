@@ -35,7 +35,7 @@ var wrs = {
 /**
  * Every ship can be controlled individually but belongs to a team
  */
-module.exports = function(_configuration, _team, _name) {
+module.exports = function(_game, _team, _name) {
 
 	/**
 	 * Reference to self
@@ -68,7 +68,7 @@ module.exports = function(_configuration, _team, _name) {
 	 * Constructor
 	 */
 	(function() {
-		var spawner = new wrs.spawner(_configuration);
+		var spawner = new wrs.spawner(_game);
 		spawner.spawn(_that);
 	})();
 };
