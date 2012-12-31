@@ -52,10 +52,10 @@ module.exports = function(game, response) {
 	/* Check if last radar invokation was not long enough away
 	 */
 	var now = Date.now();
-	if (now - client['last-radar'] < configuration['min-radar-interval']) {
-		return cb(403, 'Radar cooldown unfinished (now: '+ now +', last: '+ client['last-radar'] +', '+ (now - client['last-radar']) +' too fast)');
+	if (now - ship.last_radar < game.configuration.getMinRadarInterval()) {
+		return cb(403, 'Radar cooldown unfinished (now: '+ now +', last: '+ ship.last_radar +', '+ (now - ship.last_radar) +' too fast)');
 	}
-	client['last-radar'] = now;
+	ship.last_radar = now;
 
 
 	/* Group objects by type
