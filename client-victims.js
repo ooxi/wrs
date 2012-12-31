@@ -28,10 +28,13 @@ var ai_dumb_victim = require('./ai-dumb-victim.js');
 /**
  * Runs a number of dumb cients
  */
+var argv = require('optimist')
+	.default('ships', 5)
+	.argv
+;
 
 
-
-
+console.log('%j', argv);
 
 
 
