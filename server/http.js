@@ -68,7 +68,8 @@ module.exports = function(configuration) {
 		} else if ('/shoot' === action.pathname) {
 			shoot(action.query, send);
 
-		/* Dump must not be called by AIs
+		/* Dump must not be called by AIs but is frequently used by
+		 * GUIs
 		 */
 		} else if ('/dump' === action.pathname) {
 			dump(action.query, send);
