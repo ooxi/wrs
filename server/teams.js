@@ -83,17 +83,24 @@ module.exports = function(_game) {
 		}
 
 		var team = new wrs.team(name, color);
-		_teams[team.public_key] = team;
+		_teams_by_public_key.add(team.public_key, team);
+		_teams_by_private_key.add(team.private_key, team);
 		return team;
 	};
 
 
 
 	/**
-	 * @return true iff game with public key does exist
+	 * @return true iff game with public/private key does exist
 	 */
-	this.exists = function(public_key) {
-		return _teams.hasOwnProperty(public_key);
+	this.exists = {
+		public: function(public_key) {
+			return _teams_by_public_key.exists(public_key);
+		},
+
+		private: function(private_key) {
+			return _teams_by_private_key.exists(private_key);
+		}
 	};
 
 
