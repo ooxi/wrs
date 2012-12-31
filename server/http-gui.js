@@ -23,6 +23,9 @@
  */
 'use strict';
 
+var fs = require('fs');
+var path = require('path');
+
 
 
 
@@ -31,6 +34,19 @@
  * Not really a command, simply ships the gui.html resource for convenience
  */
 module.exports = function(game, response) {
+	response = response.response();
+	var file = path.join(__dirname, 'gui.html');
+
+	fs.stat(file, function(err, stats) {
+		if (err) throw err;
+
+		response.writeHead(200, {
+			'Content-Type': 'text/html',
+			'Content-Length': stats.size
+		});
+
+		fs.createReadStream(file).pipe(response);
+	});
 };
 
 
