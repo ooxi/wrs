@@ -114,10 +114,10 @@ module.exports = function(_api, _configuration) {
 
 
 	/**
-	 * @return Most current information about client_id or undefined if does
-	 *     not exist
+	 * @return Most current information about public_key or undefined if
+	 *     does not exist
 	 */
-	this.client = function(client_id) {
+	this.ship = function(public_key) {
 		if (!radar.client.hasOwnProperty(client_id)) {
 			return null;
 		}
@@ -131,12 +131,12 @@ module.exports = function(_api, _configuration) {
 		return radar.shot[shot_id];
 	};
 
-	/**
-	 * @return All clients
-	 */
-	this.clients = function() {
-		return radar.client;
-	};
+//	/**
+//	 * @return All clients
+//	 */
+//	this.clients = function() {
+//		return radar.client;
+//	};
 
 	/**
 	 * Adds new secret
