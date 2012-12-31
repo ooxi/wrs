@@ -31,22 +31,22 @@
  * Registers a new team
  */
 module.exports = function(game, response) {
-	if (!response.require(['name', 'color'])) {
+	if (!response.require(['team-name', 'team-color'])) {
 		return;
 	}
 
 	/* Create (and autoregister) new team
 	 */
 	var team = game.teams.add(
-		response.query('name'),
-		response.query('color')
+		response.query('team-name'),
+		response.query('team-color')
 	);
 
 	/* Send team identification
 	 */
 	response.json(200, {
-		'public-key': team.public_key,
-		'private-key': team.private_key
+		'team-public-key': team.public_key,
+		'team-private-key': team.private_key
 	});
 };
 

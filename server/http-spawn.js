@@ -40,26 +40,31 @@ var wrs = {
  * @return Created ship
  */
 module.exports = function(game, response) {
-	if (!response.require(['name', 'team'])) {
+	if (!response.require(['ship-name', 'team-private-key'])) {
 		return;
 	}
+	var ship_name = response.query('ship-name');
+	var team_private_key = response.query('team-private-key')
+
 
 	/* Valid team?
 	 */
-	if (!game.teams.exists(response.query('team'))) {
-		return response.error(403, 'Unkown team');
+	if (!game.teams.exists(team_private_key)) {
+		return response.error(403, 'Unkown private team key');
 	}
-	var team = game.teams.get(response.query('team'));
+	var team = game.teams.get(team_private_key);
+
 
 	/* Create and spawn new ship
 	 */
-	var ship = new wrs.ship(game, team, response.query('name'));
+	var ship = new wrs.ship(game, team, ship_name);
+
 
 	/* Send ship identification
 	 */
 	send(200, {
-		'public-key':	ship.public_key,
-		'private-key':	ship.private_key
+		'ship-public-key':	ship.public_key,
+		'ship-private-key':	ship.private_key
 	});
 };
 
