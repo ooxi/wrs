@@ -31,6 +31,7 @@ var wrs = {
 		configuration:	require('./http-configuration.js'),
 		dump:		require('./http-dump.js'),
 		gui:		require('./http-gui.js'),
+		move:		require('./http-move.js'),
 		radar:		require('./http-radar.js'),
 		response:	require('./http-response.js'),
 		spawn:		require('./http-spawn.js'),
