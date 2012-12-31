@@ -27,6 +27,18 @@
 
 
 
+/**
+ * Flys a ship to a position without trying to avoid anything. Will usually be
+ * used by other AIs
+ */
+module.exports = function() {
+};
+
+
+
+
+
+
 
 
 
