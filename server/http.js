@@ -68,20 +68,23 @@ module.exports = function(configuration) {
 		} else if ('/shoot' === action.pathname) {
 			shoot(action.query, send);
 
+		/* Dump must not be called by AIs
+		 */
+		} else if ('/dump' === action.pathname) {
+			dump(action.query, send);
+
 		/* Other commands will only occasionally be invoked, order of
 		 * check does not matter
 		 */
+		} else if ('/configuration' === action.pathname) {
+			send(200, configuration);
 		} else if ('/connect' === action.pathname) {
 			action.query['udp-ip'] = request.connection.remoteAddress;
 			connect(action.query, send);
 		} else if ('/is-alive' === action.pathname) {
 			is_alive(action.query, send);
-		} else if ('/configuration' === action.pathname) {
-			send(200, configuration);
 		} else if ('/suicide' === action.pathname) {
 			suicide(action.query, send);
-		} else if ('/dump' === action.pathname) {
-			dump(action.query, send);
 
 		/* Not a real command, just there for convenience
 		 */
