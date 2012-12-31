@@ -27,6 +27,21 @@
 
 
 
+/**
+ * Changes the desired client movement
+ */
+module.exports = function(game, response) {
+	if (!response.required(['ship-private-key', 'ship-desired-dx', 'ship-desired-dy'])) {
+		return;
+	}
+
+	
+};
+
+
+
+
+
 
 
 
