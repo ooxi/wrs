@@ -43,6 +43,14 @@ module.exports = function(_game, _team, _name) {
 	var _that = this;
 
 	/**
+	 * Time of last actions
+	 */
+	var _last_radar = 0;
+	var _last_shot = 0
+
+
+
+	/**
 	 * Public and private identification
 	 */
 	this.public_key = uuid.v4();
