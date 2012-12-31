@@ -35,9 +35,10 @@ var uuid = require('../common/uuid.js');
 module.exports = function(_game, _name, _color) {
 
 	/**
-	 * Public identifier
+	 * Public and private identifier
 	 */
 	this.public_key = uuid.v4();
+	this.private_key = uuid.v4();
 
 	/**
 	 * Display name and color

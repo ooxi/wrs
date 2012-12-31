@@ -34,6 +34,16 @@ module.exports = function(game, response) {
 	if (!response.require(['name', 'color'])) {
 		return;
 	}
+
+	/* Create (and autoregister) new team
+	 */
+	var team = game.teams.add(
+		response.query('name'),
+		response.query('color')
+	);
+
+	/* Send team information
+	 */
 };
 
 
