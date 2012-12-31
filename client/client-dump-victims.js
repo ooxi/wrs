@@ -128,6 +128,12 @@ async.waterfall([
 		for (var i = 0; i < ships.length; ++i) {
 			ais.push(new wrs.ai.dumb_victim(ships[i]));
 		}
+
+		setInterval(function() {
+			for (var i = 0; i < ais.length; ++i) {
+				ais[i].move();
+			}
+		}, 250);
 	}
 
 
