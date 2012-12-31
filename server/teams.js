@@ -40,9 +40,15 @@ var wrs = {
 module.exports = function(_game) {
 
 	/**
-	 * All teams by public key
+	 * Required team properties
 	 */
-	var _teams = {};
+	var _required_keys = ['name', 'color'];
+
+	/**
+	 * All teams by public and private key
+	 */
+	var _teams_by_public_key = new wrs.orbit.identifier('public_key', _required_keys);
+	var _teams_by_private_key = new wrs.orbit.identifier('private_key', _required_keys);
 
 
 
