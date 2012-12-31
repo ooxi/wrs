@@ -51,9 +51,12 @@ module.exports = function(game, response) {
 	 */
 	var ship = new wrs.ship(game, team, response.query('name');
 
-	/* Serialize and send ship information
+	/* Send ship identification
 	 */
-	send(200, ship.json());
+	send(200, {
+		'public-key':	ship.public_key,
+		'private-key':	ship.private_key
+	});
 };
 
 
