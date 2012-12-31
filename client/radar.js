@@ -21,6 +21,7 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
+'use strict';
 
 
 
@@ -42,7 +43,7 @@ var remove_array_element = function(array, element) {
 /**
  * By aggregating radar information in one place, we get more data :D
  */
-module.exports = new (function() {
+module.exports = function(_api, _configuration) {
 
 	/**
 	 * All available api keys
@@ -149,7 +150,7 @@ module.exports = new (function() {
 		}
 	};
 
-})();
+};
 
 
 
