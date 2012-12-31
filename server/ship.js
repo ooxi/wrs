@@ -26,7 +26,8 @@
 var uuid = require('../common/uuid.js');
 
 var wrs = {
-	spawner: require('./spawner.js')
+	point:		require('./point.js'),
+	spawner:	require('./spawner.js')
 };
 
 
@@ -87,7 +88,7 @@ module.exports = function(_game, _team, _name) {
 		/* Time since last movement
 		 */
 		var now = Date.now();
-		var delta = now - _last_move;
+		var delta = parseFloat(now - _last_move) / 1000.0;
 		_last_move = now;
 
 
@@ -106,7 +107,24 @@ module.exports = function(_game, _team, _name) {
 			this._dy = this.dy;
 		}
 
-		
+		/* @warning Should not happen instant but with delay
+		 */
+		this.dx = this._dx;
+		this.dy = this._dy;
+
+
+		/* Change position
+		 */
+		this.x = this.x + this.dx * delta;
+		this.y = this.y + this.dy * delta;
+
+
+		/* Remember collision information
+		 */
+		return new wrs.ship.collision(
+			new wrs.point(old_x, old_y),
+			new wrs.point(this.x, this.y)
+		);
 	};
 
 
