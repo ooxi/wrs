@@ -26,7 +26,7 @@
 var dgram = require('dgram');
 var http = require('http');
 var url = require('url');
-var uuid = require('./../uuid.js');
+var uuid = require('../common/uuid.js');
 var util = require('./util.js');
 
 var configuration = require('./configuration.js');
