@@ -27,7 +27,7 @@ var uuid = require('../common/uuid.js');
 
 var wrs = {
 	collision: {
-		ship:	require('./ship.js')
+		ship:	require('./collision-ship.js')
 	},
 	point:		require('../common/point.js'),
 	spawner:	require('./spawner.js')
