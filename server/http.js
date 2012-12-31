@@ -29,6 +29,7 @@ var url = require('url');
 var wrs = {
 	http: {
 		configuration:	require('./http-configuration.js'),
+		dump:		require('./http-dump.js'),
 		gui:		require('./http-gui.js'),
 		radar:		require('./http-radar.js'),
 		response:	require('./http-response.js'),
@@ -79,7 +80,7 @@ module.exports = function(_game) {
 			 * GUIs
 			 */
 			} else if ('/dump' === action.pathname) {
-//				dump(action.query, send);
+				wrs.http.dump(game, response);
 
 			/* Other commands will only occasionally be invoked, order of
 			 * check does not matter
