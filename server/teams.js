@@ -63,7 +63,7 @@ module.exports = function(_game) {
 		}
 		var has_name = false;
 
-		_teams_by_public_key.each(function(public_key, team)) {
+		_teams_by_public_key.each(function(public_key, team) {
 			if (team.name === name) {
 				has_name = true;
 			}
