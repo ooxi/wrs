@@ -37,8 +37,7 @@ module.exports = function(game, response) {
 	var public_key = response.query('public-key');
 
 
-
-	cb(200, {
+	response.json(200, {
 		'is-alive':	game.orbit.exists.public(public_key)
 	});
 };
