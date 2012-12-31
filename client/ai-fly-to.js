@@ -65,14 +65,14 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * Tries to fly to the desired position without avoiding shots
 	 */
 	this.move = function() {
-		var position = _radar.ship(_ship);
-		if (null === self) {
+		var current_position = _radar.ship(_ship);
+		if (null === current_position) {
 			console.log('[ai-fly-to] I don\'t know myself');
 			return;
 		}
 
 		var direction = wrs.util.look_at(
-			self,
+			current_position,
 			_desired_position
 		);
 
@@ -86,7 +86,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 		 * be invoked once
 		 */
 		if ('function' === typeof(_desired_cb)) {
-			if (wrs.util.distance_sqr(this.position(), _desired_position) < _desired_distance * _desired_distance) {
+			if (wrs.util.distance_sqr(current_position, _desired_position) < wrs.util.sqr(_desired_distance)) {
 				var cb = _desired_cb;
 				_desired_cb = null;
 				cb();
