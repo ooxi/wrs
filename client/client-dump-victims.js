@@ -28,6 +28,8 @@ var optimist = require('optimist');
 
 var wrs = {
 	api:		require('./api.js'),
+	team:		require('./team.js'),
+
 	client:		'dump-victim',
 	version:	'0.1-beta'
 };
@@ -62,9 +64,18 @@ async.waterfall([
 	 * Register team
 	 */
 	function(api, cb) {
-		api.team(wrs.client +'-'+ Math.random(), 'red', function(
-		cb(null);
+		var team_name = wrs.client +'-'+ wrs.version +'-'+ Math.random();
+		var team_color = 'red';
+
+		var team = new wrs.team(team_name, team_color, function() {
+			cb(null, api, team);
+		});
 	},
+
+
+	/**
+	 * Spawn ships
+	 */
 
 
 
