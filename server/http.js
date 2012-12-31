@@ -30,7 +30,8 @@ var wrs = {
 	http: {
 		connect:	require('./http-connect.js'),
 		radar:		require('./http-radar.js'),
-		response:	require('./http-response.js')
+		response:	require('./http-response.js'),
+		team:		require('./http-team.js')
 	}
 };
 
@@ -85,6 +86,8 @@ module.exports = function(_game) {
 //			is_alive(action.query, send);
 		} else if ('/suicide' === action.pathname) {
 //			suicide(action.query, send);
+		} else if ('/team' === action.pathname) {
+			wrs.http.team(_game, response);
 
 		/* Not a real command, just there for convenience
 		 */
