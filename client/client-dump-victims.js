@@ -108,8 +108,15 @@ async.waterfall([
 		 */
 		async.parallel(add_ships, function(err, ships) {
 			if (err) throw err;
-			console.log('%j', ships);
+			cb(null, ships);
 		});
+	},
+
+
+	/**
+	 * 
+	 */
+	function(ships, cb) {
 	}
 
 
