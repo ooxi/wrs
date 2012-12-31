@@ -35,6 +35,7 @@ var wrs = {
  * Sends information about all objects near the client
  */
 module.exports = function(game, response) {
+console.log('a');
 	if (!response.require(['ship-private-key'])) {
 		return;
 	}
@@ -75,7 +76,7 @@ module.exports = function(game, response) {
 			throw 'Unknown object type';
 			response.error(500, 'Unknown object');
 	});
-console.log('%j', echo);
+
 
 	/* Send gathered information
 	 */
