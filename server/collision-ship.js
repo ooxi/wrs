@@ -73,8 +73,13 @@ module.exports = function(_ship, _old, _new) {
 
 
 	/**
-	 * Computes
+	 * Computes a collision with another ship
 	 */
+	var collide_ship = function(other) {
+		var self_circle = this.bouncing_circle();
+		var other_circle = other.bouncing_circle();
+	};
+
 };
 
 
