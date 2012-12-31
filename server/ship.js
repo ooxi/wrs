@@ -38,10 +38,15 @@ var wrs = {
 module.exports = function(_configuration, _team, _name) {
 
 	/**
+	 * Reference to self
+	 */
+	var _that = this;
+
+	/**
 	 * Public and private identification
 	 */
-	this.public_key = uuid.v4();
-	this.private_key = uuid.v4();
+	var _public_key = uuid.v4();
+	var _private_key = uuid.v4();
 
 	/**
 	 * Position
@@ -54,5 +59,26 @@ module.exports = function(_configuration, _team, _name) {
 	 */
 	this.dx = NaN;
 	this.dy = NaN;
+
+
+
+
+
+	/**
+	 * Constructor
+	 */
+	(function() {
+		var spawner = new wrs.spawner(_configuration);
+		spawner.spawn(_that);
+	})();
 };
+
+
+
+
+
+
+
+
+
 
