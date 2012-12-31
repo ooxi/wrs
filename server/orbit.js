@@ -81,5 +81,14 @@ module.exports = function() {
 		_objects_by_private_key.add(obj);
 	};
 
+	/**
+	 * Iterates over each object in space
+	 */
+	this.each = function(cb) {
+		_objects_by_public_key.each(function(public_key, obj) {
+			cb(obj);
+		});
+	};
+
 };
 
