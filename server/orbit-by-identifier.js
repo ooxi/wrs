@@ -78,6 +78,15 @@ module.exports = function(key, required_keys) {
 	 * @return object identified by id
 	 */
 	this.get = function(id) {
+
+		/* Return all objects
+		 */
+		if ('undefined' === typeof(id)) {
+			return _objects;
+		}
+
+		/* Return one object, identified by id
+		 */
 		if (!this.exists(id)) {
 			throw 'Cannot return unknown object `'+ id +'\'';
 		}
