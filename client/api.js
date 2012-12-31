@@ -48,7 +48,7 @@ module.exports = function(_server_url) {
 		/* Exception callback can be overwritten
 		 */
 		var exception_cb = function(exception) {
-			throw exception;
+			throw new Error(exception);
 		};
 		if ('function' === typeof(arguments[1])) {
 			exception_cb = arguments[1];
