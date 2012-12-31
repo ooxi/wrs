@@ -29,6 +29,7 @@ var optimist = require('optimist');
 
 var wrs = {
 	configuration:	require('./configuration.js'),
+	game:		require('./game.js'),
 	http:		require('./http.js'),
 	orbit:		require('./orbit.js'),
 	version:	'2.1-beta'
@@ -79,8 +80,7 @@ async.waterfall([
 		data = data.replace(/[/](.|[\s])*?[/]/gm, '');
 
 		var properties = JSON.parse(data);
-		var configuration = new wrs.configuration(properties);
-		cb(null, configuration);
+		cb(null, properties);
 	},
 
 
@@ -88,8 +88,12 @@ async.waterfall([
 	 * Initialize game management subsystems
 	 */
 	function(configuration, cb) {
-		var orbit = new wrs.orbit();
-		var http = new wrs.http(configuration);
+		var game = new wrs.game(
+			new wrs.configuration(properties),
+			new wrs.orbit()
+		);
+
+		var http = new wrs.http(game);
 	}
 
 
