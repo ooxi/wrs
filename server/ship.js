@@ -120,7 +120,7 @@ module.exports = function(_game, _team, _name) {
 		 */
 		this.x = this.x + this.dx * delta;
 		this.y = this.y + this.dy * delta;
-
+console.log('%j', this.dx);
 
 		/* Remember collision information
 		 */
