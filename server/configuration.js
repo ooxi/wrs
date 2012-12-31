@@ -28,8 +28,60 @@
 /**
  * Game mechanic configuration
  */
-module.exports = function() {
+module.exports = function(_properties) {
 
+	this.getMaxShipSpeed = function() {
+		return _properties['max-ship-speed'];
+	};
+
+	this.getMaxShotSpeed = function() {
+		return _properties['max-shot-speed'];
+	};
+
+	this.getShipRadius = function() {
+		return _properties['ship-radius'];
+	};	
+
+	this.getMinRadarInterval = function() {
+		return _properties['min-radar-interval'];
+	};	
+
+	this.getMinShootInterval = function() {
+		return _properties['min-shoot-interval'];
+	};	
+
+
+
+	this.getSpawnZone = function() {
+		return _properties['spawn-zone'];
+	};	
+
+	this.getGameZone = function() {
+		return _properties['game-zone'];
+	};	
+
+	this.getShopTicks = function() {
+		return _properties['shot-ticks'];
+	};	
+
+
+
+
+
+
+
+		'max-ship-speed':	25,
+		'':	250,
+		'':	10,
+		'': 500,
+		'': 2500
+	},
+
+	/* Internal
+	 */	
+	'':	500,
+	'':	1000,
+	'':	100
 
 };
 
