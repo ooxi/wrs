@@ -58,16 +58,28 @@ module.exports = function(_query, _response) {
 	/**
 	 * Sends a JSON message
 	 */
-	this.send = function(status, obj) {
-		response.writeHead(status, {'Content-Type': 'application/json'});
-
-		if ((200 !== status) && ('string' === typeof(obj))) {
-			obj = {
-				error: true,
-				message: obj
-			};
+	this.json = function(status, obj) {
+		if ('object' !== typeof(obj)) {
+			throw 'JSON data must be an object';
 		}
+		response.writeHead(status, {'Content-Type': 'application/json'});
 		response.end(JSON.stringify(obj));
+	}
+
+
+
+	/**
+	 * Sends an error message
+	 */
+	this.error = function(status, message) {
+		if ('string' !== typeof(message)) {
+			throw 'Message must be a string';
+		}
+
+		_that.json(status, {
+			error: true,
+			message: obj
+		});
 	};
 
 };
