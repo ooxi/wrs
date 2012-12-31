@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var http = require('http');
+
+
+
 
 
 /**
@@ -30,6 +34,54 @@
  */
 module.exports = function(configuration) {
 
+	/**
+	 * Sends a JSON message
+	 */
+	var send = function(status, obj) {
+		response.writeHead(status, {'Content-Type': 'application/json'});
+
+		if ((200 !== status) && ('string' === typeof(obj))) {
+			obj = {
+				error: true,
+				message: obj
+			};
+		}
+		response.end(JSON.stringify(obj));
+	};
+
+
+
+
+
+	/**
+	 * Initialize server
+	 */
+	http.createServer(function(request, response) {
+		var action = url.parse(request.url, true);
+
+		if ('/radar' === action.pathname) {
+			radar(action.query, send);
+		} else if ('/move' === action.pathname) {
+			move(action.query, send);
+		} else if ('/shoot' === action.pathname) {
+			shoot(action.query, send);
+		} else if ('/connect' === action.pathname) {
+			action.query['udp-ip'] = request.connection.remoteAddress;
+			connect(action.query, send);
+		} else if ('/is-alive' === action.pathname) {
+			is_alive(action.query, send);
+		} else if ('/configuration' === action.pathname) {
+			send(200, configuration);
+		} else if ('/suicide' === action.pathname) {
+			suicide(action.query, send);
+		} else if ('/dump' === action.pathname) {
+			dump(action.query, send);
+		} else if ('/' === action.pathname) {
+			gui(response);
+		} else {
+			send(404, 'Unknown method');
+		}
+	}).listen(configuration.getHttpPort());
 
 
 };
