@@ -62,6 +62,12 @@ module.exports = function(_ship, _old, _new) {
 	 */
 	this.collide = function(other) {
 
+		/* If myself ain't alive it cannot collide with anything else
+		 */
+		if (!_ship.alive()) {
+			return;
+		}
+
 		/* Currently only collisions with other ships are computed,
 		 * collisions with shots are handled in wrs.collision.shot
 		 */
@@ -78,6 +84,12 @@ module.exports = function(_ship, _old, _new) {
 	var collide_ship = function(other) {
 		var self_circle = this.bouncing_circle();
 		var other_circle = other.bouncing_circle();
+
+		var dx = self_circle.x - other_circle.x;
+		var dy = self_circle.y - other_circle.y;
+		var radius_sum = self_circle.radius + other_circle.radius;
+
+		return (dx * dx - dy * dy) < (radius_sum * radius_sum);
 	};
 
 };
