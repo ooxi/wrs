@@ -146,8 +146,8 @@ module.exports = function(_server_url) {
 	/**
 	 * Register new team
 	 */
-	this.team = function(name, color, success_cb, exception_cb) {
-		http.get(_server_url +'team?team-name='+ e(name) +'&team-color='+ e(color), read_object(
+	this.team = function(team_name, team_color, success_cb, exception_cb) {
+		http.get(_server_url +'team?team-name='+ e(team_name) +'&team-color='+ e(team_color), read_object(
 			success_cb, exception_cb
 		));
 	};
