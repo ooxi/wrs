@@ -99,11 +99,11 @@ module.exports = function(_api, _configuration) {
 
 			/* Check if client if dead
 			 */
-			_api.is_alive(_private_to_public.get(private_key), function(is_alive) {
+			_api.is_alive(_private_to_public[private_key], function(is_alive) {
 				if (!is_alive) {
 					console.log('[radar] Client '+ private_key +' is definetly dead, will remove private key');
 					remove_array_element(_private_ship_keys, private_key);
-					_private_to_public.remove(private_key);
+					delete _private_to_public[private_key];
 				}
 			});
 		});
@@ -143,8 +143,8 @@ module.exports = function(_api, _configuration) {
 	/**
 	 * Adds new private ship key
 	 */
-	this.add = function(ship) {
-		_private_to_public.add(ship);
+	this.add = function(public_key, private_key) {
+		_private_to_public[private_key] = public_key;
 		_private_ship_keys.push(ship.private_key);
 
 		if (1 === _private_ship_keys.length) {
