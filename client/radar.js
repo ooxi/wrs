@@ -23,6 +23,14 @@
  */
 'use strict';
 
+var wrs = {
+	orbit: {
+		identifier:	require('../common/orbit-by-identifier.js')
+	}
+};
+
+
+
 
 
 /**
@@ -34,7 +42,7 @@ var remove_array_element = function(array, element) {
 			array.splice(i, 1);
 		}
 	}
-}
+};
 
 
 
@@ -48,13 +56,13 @@ module.exports = function(_api, _configuration) {
 	/**
 	 * All available api keys
 	 */
-	var secrets = [];
-	var current_secret = -1;
+	var _secrets = [];
+	var _current_secret = -1;
 
 	/**
 	 * Mapping from private to public keys
 	 */
-	var public_keys = {};
+	var _public_keys = {
 
 	/**
 	 * Most current radar information
