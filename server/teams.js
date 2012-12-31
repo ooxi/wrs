@@ -70,6 +70,10 @@ module.exports = function(_game) {
 	 * Adds a team if name not yet taken
 	 */
 	this.add = function(name) {
+		if (this.has_name(name)) {
+			throw 'Team name already used';
+		}
+
 		var team = new wrs.team(name);
 		_teams.push(name);
 		return team;
