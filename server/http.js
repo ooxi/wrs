@@ -27,6 +27,7 @@ var http = require('http');
 
 var wrs = {
 	http: {
+		connect:	require('./http-connect.js'),
 		radar:		require('./http-radar.js'),
 		response:	require('./http-response.js')
 	}
@@ -78,8 +79,7 @@ module.exports = function(_configuration, _orbit) {
 		} else if ('/configuration' === action.pathname) {
 			send(200, configuration);
 		} else if ('/connect' === action.pathname) {
-			action.query['udp-ip'] = request.connection.remoteAddress;
-			connect(action.query, send);
+			wrs.http.connect(_configuration, _orbit, response);
 		} else if ('/is-alive' === action.pathname) {
 			is_alive(action.query, send);
 		} else if ('/suicide' === action.pathname) {

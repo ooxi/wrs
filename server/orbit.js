@@ -54,6 +54,7 @@ module.exports = function() {
 
 
 
+
 	/**
 	 * Check object existence
 	 */
