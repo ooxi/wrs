@@ -70,7 +70,13 @@ module.exports = function(_api, _name, _color, cb) {
 	 */
 	(function() {
 		_api.team(_that.name(), _that.color(), function(result) {
-			
+			if (!result.hasOwnProperty('team-public-key')) {
+				throw new Error('Missing team-public-key');
+			}
+			if (!result.hasOwnProperty('team-private-key')) {
+				throw new Error('Missing team-private-key');
+			}
+
 			_public_key = result['team-public-key'];
 			_private_key = result['team-private-key'];
 
