@@ -31,27 +31,15 @@
  * Checks whether an object is still alive
  */
 module.exports = function(game, response) {
-};
+	if (!response.require('public-key')) {
+		return;
+	}
+	var public_key = response.query('public-key');
 
 
-
-
-	var alive = (function() {
-		for (var secret in clients) {
-			if (query.id === clients[secret].public.id) {
-				return true;
-			}
-		}
-
-		return false;
-	})();
 
 	cb(200, {
-		'is-alive': alive
+		'is-alive':	game.orbit.exists.public(public_key)
 	});
-
-
-
-
-
+};
 
