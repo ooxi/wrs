@@ -40,38 +40,38 @@ module.exports = function(_server_url) {
 
 
 
-/**
- * Parses a JSON object from a http response
- */
-var read_object = function(cb) {
-
-	/* Exception callback can be overwritten
+	/**
+	 * Parses a JSON object from a http response
 	 */
-	var exception_cb = function(exception) {
-		throw exception;
+	var read_object = function(cb) {
+
+		/* Exception callback can be overwritten
+		 */
+		var exception_cb = function(exception) {
+			throw exception;
+		};
+		if ('function' === typeof(arguments[1])) {
+			exception_cb = arguments[1];
+		}
+
+
+		return function(response) {
+			var message = [];
+
+			response.on("data", function(chunk) {
+				message += chunk
+			});
+			response.on("end", function() {
+				var obj = JSON.parse(message);
+
+				if (200 != response.statusCode) {
+					exception_cb('Received unexpected exception: '+ obj.message);
+				} else {
+					cb(obj);
+				}
+			});
+		};
 	};
-	if ('function' === typeof(arguments[1])) {
-		exception_cb = arguments[1];
-	}
-
-
-	return function(response) {
-		var message = [];
-
-		response.on("data", function(chunk) {
-			message += chunk
-		});
-		response.on("end", function() {
-			var obj = JSON.parse(message);
-
-			if (200 != response.statusCode) {
-				exception_cb('Received unexpected exception: '+ obj.message);
-			} else {
-				cb(obj);
-			}
-		});
-	};
-};
 
 
 
