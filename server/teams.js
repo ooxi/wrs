@@ -108,12 +108,20 @@ module.exports = function(_game) {
 	/**
 	 * @return Team identified by public key
 	 */
-	this.get = function(public_key) {
-		if (!this.exists(public_key)) {
-			throw 'Unknown team identifier';
+	this.get = {
+		public: function(public_key) {
+			if (!this.exists.public(public_key)) {
+				throw 'Unknown public team identifier';
+			}
+			return _teams_by_public_key.get(public_key);
+		},
+		private: function(private_key) {
+			if (!this.exists.private(private_key)) {
+				throw 'Unknown private team identifier';
+			}
+			return _teams_by_private_key.get(private_key);
 		}
-		return _teams[public_key];
-	}
+	};
 };
 
 
