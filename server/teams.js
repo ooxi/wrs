@@ -40,6 +40,11 @@ var wrs = {
 module.exports = function(_game) {
 
 	/**
+	 * Reference to self
+	 */
+	var _that = this;
+
+	/**
 	 * Required team properties
 	 */
 	var _required_keys = ['name', 'color'];
@@ -78,7 +83,7 @@ module.exports = function(_game) {
 	 * Adds a team if name not yet taken
 	 */
 	this.add = function(name, color) {
-		if (this.has_name(name)) {
+		if (_that.has_name(name)) {
 			throw new Error('Team name already used');
 		}
 
@@ -110,13 +115,13 @@ module.exports = function(_game) {
 	 */
 	this.get = {
 		public: function(public_key) {
-			if (!this.exists.public(public_key)) {
+			if (!_that.exists.public(public_key)) {
 				throw new Error('Unknown public team identifier');
 			}
 			return _teams_by_public_key.get(public_key);
 		},
 		private: function(private_key) {
-			if (!this.exists.private(private_key)) {
+			if (!_that.exists.private(private_key)) {
 				throw new Error('Unknown private team identifier');
 			}
 			return _teams_by_private_key.get(private_key);
