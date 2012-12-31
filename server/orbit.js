@@ -54,5 +54,18 @@ module.exports = function() {
 
 
 
+	/**
+	 * Check object existence
+	 */
+	this.exists = {
+		public: function(public_key) {
+			return _objects_by_public_key.exists(public_key);
+		},
+
+		private: function(private_key) {
+			return _objects_by_private_key.exists(private_key);
+		}
+	};
+
 };
 
