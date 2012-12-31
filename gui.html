@@ -94,14 +94,13 @@ $(function() {
 	 * Initializing GUI
 	 */
 	status('Loading configuration...');
+	var screen = document.getElementById('screen');
 
 	configuration(function(config) {
 		status('Configuration loaded');
 
-		var screen = document.getElementById('screen');
 		screen.width = config['game-zone'] * 2;
 		screen.height = config['game-zone'] * 2;
-
 		var context = screen.getContext('2d');
 
 		dump(function(data) {
