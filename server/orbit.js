@@ -41,7 +41,7 @@ module.exports = function() {
 	/**
 	 * Required object keys
 	 */
-	var _required_keys = ['x', 'y', 'dx', 'dy'];
+	var _required_keys = ['x', 'y', 'dx', 'dy', 'move'];
 
 	/**
 	 * The objects by public key

@@ -28,9 +28,12 @@
 
 
 /**
- * 
+ * Manages object movement and collissions
  */
 module.exports = function() {
+
+	
+
 };
 
 
