@@ -117,8 +117,8 @@ module.exports = function(_server_url) {
 	/**
 	 * Updates ship and shot information
 	 */
-	this.radar = function(secret, success_cb, exception_cb) {
-		http.get(_server_url +'radar?secret='+ e(secret), read_object(
+	this.radar = function(ship_private_key, success_cb, exception_cb) {
+		http.get(_server_url +'radar?ship-private-key='+ e(ship_private_key), read_object(
 			success_cb, exception_cb
 		));
 	};

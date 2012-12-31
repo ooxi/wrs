@@ -35,7 +35,6 @@ var wrs = {
  * Sends information about all objects near the client
  */
 module.exports = function(game, response) {
-console.log('a');
 	if (!response.require(['ship-private-key'])) {
 		return;
 	}
