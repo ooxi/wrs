@@ -92,8 +92,8 @@ module.exports = function(_api, _configuration) {
 
 		/* Update radar information
 		 */
-		var secret = _private_ship_keys[_current_private_key];
-		_api.radar(secret, function(echo) {
+		var private_key = _private_ship_keys[_current_private_key];
+		_api.radar(private_key, function(echo) {
 			var new_radar = {
 				client: echo['nearby-clients'],
 				shot: echo['nearby-shots']
@@ -101,15 +101,15 @@ module.exports = function(_api, _configuration) {
 			new_radar.client[echo.me.id] = echo.me;
 			_radar = new_radar;
 		}, function(exception) {
-			console.log('[radar] Failed receiving radar information with '+ secret +': '+ exception);
+			console.log('[radar] Failed receiving radar information with '+ private_key +': '+ exception);
 
 			/* Check if client if dead
 			 */
-			_api.is_alive(public_keys[secret], function(is_alive) {
+			_api.is_alive(_private_to_public.get(private_key), function(is_alive) {
 				if (!is_alive) {
-					console.log('[radar] Client '+ secret +' is definetly dead, will remove secret');
-					remove_array_element(secrets, secret);
-					delete public_keys[secret];
+					console.log('[radar] Client '+ private_key +' is definetly dead, will remove private key');
+					remove_array_element(_private_ship_keys, private_key);
+					_private_to_public.remove(private_key);
 				}
 			});
 		});
@@ -149,9 +149,9 @@ module.exports = function(_api, _configuration) {
 	/**
 	 * Adds new private ship key
 	 */
-	this.add = function(public_key, private_key) {
-		public_keys[private_key] = public_key;
-		_private_ship_keys.push(private_key);
+	this.add = function(ship) {
+		_private_to_public.add(ship);
+		_private_ship_keys.push(ship.private_key);
 
 		if (1 === _private_ship_keys.length) {
 			update_radar();
