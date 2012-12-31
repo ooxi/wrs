@@ -36,12 +36,25 @@ module.exports = function(game, response) {
 	}
 	var ship_private_key = response.query('ship-private-key');
 
+
 	/* Read ship
 	 */
 	if (!game.orbit.exists.private(ship_private_key)) {
 		return response.error(403, 'Unknown ship private key');
 	}
 	var ship = game.orbit.get.private(ship_private_key);
+
+
+	/* Group objects by type
+	 */
+	var echo = {
+		me: ship.json(),
+		ships: [],
+		shots: []
+	};
+
+
+
 
 
 
