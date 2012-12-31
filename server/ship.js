@@ -69,6 +69,14 @@ module.exports = function(_game, _team, _name) {
 	this.dx = NaN;
 	this.dy = NaN;
 
+	/**
+	 * Wanted rotation and velocity
+	 */
+	this._dx = NaN;
+	this._dy = NaN;
+
+
+
 
 
 	/**
@@ -82,7 +90,12 @@ module.exports = function(_game, _team, _name) {
 
 		/* Change velocity
 		 */
-		this.
+		if (isNaN(this._dx)) {
+			this._dx = this.dx;
+		}
+		if (isNaN(this._dy)) {
+			this._dy = this.dy;
+		}
 	};
 
 
