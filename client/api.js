@@ -81,9 +81,9 @@ module.exports = function(_server_url) {
 	 * Loads game configuration
 	 */
 	this.configuration = function(success_cb, error_cb) {
-		http.get(_server_url +'configuration', read_object(function(configuration) {
-			success_cb(configuration);
-		}, exception_cb));
+		http.get(_server_url +'configuration', read_object(
+			success_cb, exception_cb
+		));
 	};
 
 
