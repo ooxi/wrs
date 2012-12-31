@@ -63,11 +63,14 @@ $(function() {
 		/* Clear screen
 		 */
 		context.fillStyle = 'rgb(255, 0, 255)';
-		context.fillRect(0, 0, screen.width(), screen.height());
+		context.fillRect(0, 0, screen.width, screen.height);
 
 		/* Draw all clients
 		 */
 		context.fillStyle = 'lime';
+		context.lineWidth = 2;
+		context.strokeStyle = 'black';
+
 
 		for (var id in data.clients) {
 			var client = data.clients[id];
@@ -82,8 +85,6 @@ $(function() {
 			);
 			context.closePath();
 			context.fill();
-			context.lineWidth = 5;
-			context.strokeStyle = '#003300';
 			context.stroke();
 		}
 	};
