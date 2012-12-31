@@ -32,6 +32,9 @@
  */
 module.exports = function(game, response) {
 	response.json(200, {
+		'teams':		game.configuration.getTeams(),
+		'ships-per-team':	game.configuration.getShipsPerTeam(),
+
 		'game-zone':		game.configuration.getGameZone(),
 		'ship-radius':		game.configuration.getShipRadius(),
 
