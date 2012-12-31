@@ -38,11 +38,24 @@ var wrs = {
  */
 module.exports = function(_configuration) {
 
+	/* Independend objects
+	 */
 	this.configuration = _configuration;
 	this.orbit = new wrs.orbit();
 	this.teams = new wrs.teams();
 
+	/* Dependend objects
+	 */
 	this.movement = new wrs.movement(this);
+
+
+
+	/**
+	 * Calculate next text
+	 */
+	this.tick = function() {
+		this.movement.move();
+	};
 
 };
 
