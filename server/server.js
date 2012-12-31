@@ -80,19 +80,16 @@ async.waterfall([
 		data = data.replace(/[/](.|[\s])*?[/]/gm, '');
 
 		var properties = JSON.parse(data);
-		cb(null, properties);
+		var configuration = new wrs.configuration(properties);
+		cb(null, configuration);
 	},
 
 
 	/**
 	 * Initialize game management subsystems
 	 */
-	function(properties, cb) {
-		var game = new wrs.game(
-			new wrs.configuration(properties),
-			new wrs.orbit()
-		);
-
+	function(configuration, cb) {
+		var game = new wrs.game(configuration);
 		var http = new wrs.http(game);
 		cb(null);
 	}
