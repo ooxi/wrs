@@ -31,7 +31,7 @@
  * Checks whether an object is still alive
  */
 module.exports = function(game, response) {
-	if (!response.require('public-key')) {
+	if (!response.require(['public-key'])) {
 		return;
 	}
 	var public_key = response.query('public-key');
