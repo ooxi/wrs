@@ -24,6 +24,9 @@
 'use strict';
 
 var wrs = {
+	orbit: {
+		identifier: require('./orbit-by-identifier.js')
+	},
 	team:	require('./team.js')
 };
 
