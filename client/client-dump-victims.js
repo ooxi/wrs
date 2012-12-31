@@ -87,7 +87,20 @@ async.waterfall([
 	 * Spawn ships
 	 */
 	function(api, configuration, team, cb) {
-		
+
+		/* Ships to setup
+		 */
+		var add_ships = [];
+
+		for (var i = 0; i < configuration['ships-per-team']; ++i) {
+		}
+
+
+		/* Setup ships in parallel
+		 */
+		async.parallel(add_ships, function(err, ships) {
+			if (err) throw err;
+		});
 	}
 
 
