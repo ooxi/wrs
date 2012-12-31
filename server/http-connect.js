@@ -27,6 +27,15 @@
 
 
 
+/**
+ * Adds a new ship, if possible
+ */
+module.exports = function(_configuration, _orbit) {
+};
+
+
+
+
 
 
 
