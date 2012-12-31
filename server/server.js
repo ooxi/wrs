@@ -23,11 +23,19 @@
  */
 'use strict';
 
+var wrs = {
+	configuration: require('./configuration.js')
+};
 
 
 
-
-
+/**
+ * Parse command line arguments
+ */
+var argv = require('optimist')
+	.default('teams', Infinity)
+	.argv
+;
 
 
 
