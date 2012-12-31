@@ -21,47 +21,22 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
-var http = require('http');
+'use strict';
 
-var e = encodeURIComponent;
-var server_url = 'http://localhost:31337/';
+var http = require('http');
 
 
 
 
 
 /**
- * Parses a JSON object from a http response
+ * Server API
  */
-var read_object = function(cb) {
+module.exports = function(_server_url) {
 
-	/* Exception callback can be overwritten
+	/* Shortcut for better readability
 	 */
-	var exception_cb = function(exception) {
-		throw exception;
-	};
-	if ('function' === typeof(arguments[1])) {
-		exception_cb = arguments[1];
-	}
-
-
-	return function(response) {
-		var message = [];
-
-		response.on("data", function(chunk) {
-			message += chunk
-		});
-		response.on("end", function() {
-			var obj = JSON.parse(message);
-
-			if (200 != response.statusCode) {
-				exception_cb('Received unexpected exception: '+ obj.message);
-			} else {
-				cb(obj);
-			}
-		});
-	};
-};
+	var e = encodeURIComponent;
 
 
 
@@ -130,6 +105,55 @@ var do_shoot = function(secret, dx, dy, success_cb, exception_cb) {
 		success_cb, exception_cb
 	));
 };
+
+
+};
+
+
+
+var server_url = 'http://localhost:31337/';
+
+
+
+
+
+/**
+ * Parses a JSON object from a http response
+ */
+var read_object = function(cb) {
+
+	/* Exception callback can be overwritten
+	 */
+	var exception_cb = function(exception) {
+		throw exception;
+	};
+	if ('function' === typeof(arguments[1])) {
+		exception_cb = arguments[1];
+	}
+
+
+	return function(response) {
+		var message = [];
+
+		response.on("data", function(chunk) {
+			message += chunk
+		});
+		response.on("end", function() {
+			var obj = JSON.parse(message);
+
+			if (200 != response.statusCode) {
+				exception_cb('Received unexpected exception: '+ obj.message);
+			} else {
+				cb(obj);
+			}
+		});
+	};
+};
+
+
+
+
+
 
 
 
