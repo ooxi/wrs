@@ -93,6 +93,9 @@ async.waterfall([
 		var add_ships = [];
 
 		for (var i = 0; i < configuration['ships-per-team']; ++i) {
+			add_ships.push(function(cb) {
+				api.spawn
+			});
 		}
 
 

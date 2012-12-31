@@ -78,17 +78,6 @@ module.exports = function(_server_url) {
 
 
 	/**
-	 * Registers a new ship
-	 */
-	this.connect = function(name, success_cb, exception_cb) {
-		http.get(_server_url +'connect?name='+ e(name) +'&udp-port='+ e(333), read_object(
-			success_cb, exception_cb
-		));
-	};
-
-
-
-	/**
 	 * Updates ship and shot information
 	 */
 	this.is_alive = function(public_id, success_cb, exception_cb) {
@@ -126,6 +115,17 @@ module.exports = function(_server_url) {
 
 
 	/**
+	 * Registers a new ship
+	 */
+	this.spawn = function(ship_name, team_private_key, success_cb, exception_cb) {
+		http.get(_server_url +'spawn?ship-name='+ e(ship_name) +'&team-private-key='+ e(team_private_key), read_object(
+			success_cb, exception_cb
+		));
+	};
+
+
+
+	/**
 	 * Shoots
 	 */
 	this.shoot = function(secret, dx, dy, success_cb, exception_cb) {
@@ -147,7 +147,7 @@ module.exports = function(_server_url) {
 	 * Register new team
 	 */
 	this.team = function(name, color, success_cb, exception_cb) {
-		http.get(_server_url +'team?name='+ e(name) +'&color='+ e(color), read_object(
+		http.get(_server_url +'team?team-name='+ e(name) +'&team-color='+ e(color), read_object(
 			success_cb, exception_cb
 		));
 	};
