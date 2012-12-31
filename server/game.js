@@ -27,5 +27,19 @@
 
 
 
+/**
+ * Aggregates game related modules
+ */
+module.exports = function(_configuration, _orbit) {
+
+	this.configuration = _configuration;
+	this.orbit = _orbit;
+
+};
+
+
+
+
+
 
 
