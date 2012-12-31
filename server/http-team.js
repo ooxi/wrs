@@ -27,6 +27,15 @@
 
 
 
+/**
+ * Registers a new team
+ */
+module.exports = function(game, response) {
+	if (!response.require(['name', 'color'])) {
+		return;
+	}
+};
+
 
 
 
