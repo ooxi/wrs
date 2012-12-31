@@ -94,7 +94,7 @@ module.exports = function(_query, _response) {
 	this.require = function(arguments) {
 		for (var i = 0; i < arguments.length; ++i) {
 			if (!_query.hasOwnProperty(arguments[i])) {
-				_that.error();
+				_that.error(403, 'Missing `'+ arguments[i] +'\' argument');
 				return false;
 			}
 		}
