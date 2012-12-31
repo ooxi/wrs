@@ -30,7 +30,7 @@
 /**
  * A ship's collision space is determined by 
  */
-module.exports = function(_ship, _old, _new) {
+module.exports = function(_game, _ship, _old, _new) {
 
 	/**
 	 * Only handles ships
@@ -108,6 +108,8 @@ module.exports = function(_ship, _old, _new) {
 
 		/* Both this and the other ship will die
 		 */
+		_game.kill(this.ship(), other.ship());
+		_game.kill(other.ship(), this.ship());
 	};
 
 };
