@@ -24,7 +24,13 @@
 'use strict';
 
 var async = require('async');
+var optimist = require('optimist');
 
+var wrs = {
+	api:		require('./api.js'),
+	client:		'dump-victim',
+	version:	'0.1-beta'
+};
 
 
 
@@ -32,6 +38,22 @@ var async = require('async');
 /* Initialization has to be done in sequence
  */
 async.waterfall([
+
+	/**
+	 * Parse arguments
+	 */
+	function(cb) {
+	},
+	
+	/**
+	 * Register team
+	 */
+	function(cb) {
+		
+		cb(null);
+	},
+
+
 
 /* Inform client of setup success or failure
  */
