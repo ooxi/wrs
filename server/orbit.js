@@ -39,17 +39,22 @@ var wrs = {
 module.exports = function() {
 
 	/**
+	 * Required object keys
+	 */
+	var _required_keys = ['x', 'y', 'dx', 'dy'];
+
+	/**
 	 * The objects by public key
 	 *
 	 * @warning Currenlty a map for fast name based access, a quadtree for
 	 *     fast location based access should be added, too
 	 */
-	var _objects_by_public_key = new wrs.orbit.identifier('public_key');
+	var _objects_by_public_key = new wrs.orbit.identifier('public_key', _required_keys);
 
 	/**
 	 * The objects by private key
 	 */
-	var _objects_by_private_key = new wrs.orbit.identifier('private_key');
+	var _objects_by_private_key = new wrs.orbit.identifier('private_key', _required_keys);
 
 
 
