@@ -39,6 +39,11 @@ var wrs = {
 module.exports = function() {
 
 	/**
+	 * Self reference
+	 */
+	var _that = this;
+
+	/**
 	 * Required object keys
 	 */
 	var _required_keys = ['x', 'y', 'dx', 'dy', 'move'];
@@ -89,6 +94,19 @@ module.exports = function() {
 	 * @return Object identified by key
 	 */
 	this.get = {
+		public: function(public_key) {
+			if (!_that.exists.public(public_key)) {
+				throw new Error('Unknown public ship key `'+ public_key +'\'');
+			}
+			return _objects_by_public_key.get(public_key);
+		},
+		
+		private: function(private_key) {
+			if (!_that.exists.private(private_key)) {
+				throw new Error('Unknown private ship key `'+ private_key +'\'');
+			}
+			return _objects_by_private_key.get(private_key);
+		}	
 	};
 
 
