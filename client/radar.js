@@ -88,6 +88,7 @@ module.exports = function(_api, _configuration) {
 		 */
 		var private_key = _private_ship_keys[_current_private_key];
 		_api.radar(private_key, function(echo) {
+console.log('%j', echo);
 			var new_radar = {
 				client: echo['nearby-clients'],
 				shot: echo['nearby-shots']

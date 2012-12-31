@@ -30,7 +30,20 @@
 /**
  * Sends information about all objects near the client
  */
-module.exports = function(configuration, orbit, response) {
+module.exports = function(game, response) {
+	if (!response.require(['ship-private-key'])) {
+		return;
+	}
+	var ship_private_key = response.query('ship-private-key');
+
+	/* Read ship
+	 */
+	if (!game.orbit.exists.private(ship_private_key)) {
+		return response.error(403, 'Unknown ship private key');
+	}
+	var ship = game.orbit.get.private(ship_private_key);
+
+
 
 	/* Check query
 	 */

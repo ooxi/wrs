@@ -70,7 +70,7 @@ module.exports = function(_game) {
 			/* Frequently used commands have to be checked first
 			 */
 			if ('/radar' === action.pathname) {
-//				wrs.http.radar(_game, response);
+				wrs.http.radar(_game, response);
 			} else if ('/move' === action.pathname) {
 //				move(action.query, send);
 			} else if ('/shoot' === action.pathname) {
