@@ -64,13 +64,19 @@ module.exports = function(_query, _response) {
 	 * Sends an error message
 	 */
 	this.error = function(status, message) {
+
+		/* Simple string message intended for client
+		 */
 		if ('string' === typeof(message)) {
 			_that.json(status, {
 				error: true,
 				message: message
 			});
 
-		/* @warning Do not send stacktrace in production mode
+		/* Internal exception message
+		 *
+		 * @warning Do not send stacktrace in production mode and avoid
+		 *     sending Error messages, might reveal information
 		 */
 		} else if (message instanceof Error) {
 			_that.json(status, {
@@ -78,12 +84,15 @@ module.exports = function(_query, _response) {
 				message: message.message,
 				trace: message.stack
 			});
+
+		/* Unknown message type
+		 */
 		} else {
 			_that.json(500, {
 				error: true,
 				message: 'Error occured while generating report for another error'
 			});
-			throw 'Message must be a string or an error';
+			throw new Error('Message must be a string or an error');
 		}
 	};
 
@@ -94,7 +103,7 @@ module.exports = function(_query, _response) {
 	 */
 	this.json = function(status, obj) {
 		if ('object' !== typeof(obj)) {
-			throw 'JSON data must be an object';
+			throw new Error('JSON data must be an object');
 		}
 		_response.writeHead(status, {'Content-Type': 'application/json'});
 		_response.end(JSON.stringify(obj));

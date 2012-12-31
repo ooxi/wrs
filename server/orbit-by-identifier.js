@@ -59,13 +59,13 @@ module.exports = function(key, required_keys) {
 		/* Check public properties
 		 */
 		if (!obj.hasOwnProperty(key)) {
-			throw 'Missing `'+ key +'\' property';
+			throw new Error('Missing `'+ key +'\' property');
 		}
 		for (var i in required_keys) {
 			var required_key = required_keys[i];
 
 			if (!obj.hasOwnProperty(required_key)) {
-				throw 'Missing `'+ required_key +'\' property';
+				throw new Error('Missing `'+ required_key +'\' property');
 			}
 		}
 		
@@ -79,7 +79,7 @@ module.exports = function(key, required_keys) {
 	 */
 	this.get = function(id) {
 		if (!this.exists(id)) {
-			throw 'Cannot return unknown object `'+ id +'\'';
+			throw new Error('Cannot return unknown object `'+ id +'\'');
 		}
 		return _objects[id];
 	};
@@ -91,7 +91,7 @@ module.exports = function(key, required_keys) {
 	 */
 	this.remove = function(id) {
 		if (!this.exists(id)) {
-			throw 'Cannot remove unknown object `'+ id +'\'';
+			throw new Error('Cannot remove unknown object `'+ id +'\'');
 		}
 		delete _objects[id];
 	};
