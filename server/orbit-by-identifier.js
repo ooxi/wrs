@@ -30,7 +30,7 @@
 /**
  * Objects grouped by identifier
  */
-module.exports = function(key) {
+module.exports = function(key, required_keys) {
 
 	/**
 	 * The objects by identifier
@@ -55,22 +55,20 @@ module.exports = function(key) {
 	 * `x', `y', `dx', `dy'
 	 */
 	this.add = function(obj) {
+
+		/* Check public properties
+		 */
 		if (!obj.hasOwnProperty(key)) {
 			throw 'Missing `'+ key +'\' property';
 		}
-		if (!obj.hasOwnProperty('x')) {
-			throw 'Missing `x\' property';
-		}
-		if (!obj.hasOwnProperty('y')) {
-			throw 'Missing `y\' property';
-		}
-		if (!obj.hasOwnProperty('dx')) {
-			throw 'Missing `dx\' property';
-		}
-		if (!obj.hasOwnProperty('dy')) {
-			throw 'Missing `dy\' property';
-		}
+		for (var i in required_keys) {
+			var required_key = required_key[i];
 
+			if (!obj.hasOwnProperty(required_key)) {
+				throw 'Missing `'+ required_key +'\' property';
+			}
+		}
+		
 		_objects[obj.id] = obj;
 	};
 
