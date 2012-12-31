@@ -104,9 +104,14 @@ $(function() {
 		screen.height = config['game-zone'] * 2;
 		var context = screen.getContext('2d');
 
-		dump(function(data) {
-			render(context, config, data);
-		});
+		var update = function() {
+			dump(function(data) {
+				render(context, config, data);
+				setTimeout(update);
+			});
+		};
+
+		update();
 	});
 });
 
