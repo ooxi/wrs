@@ -75,7 +75,7 @@ module.exports = function(game, response) {
 			throw 'Unknown object type';
 			response.error(500, 'Unknown object');
 	});
-
+console.log('%j', echo);
 
 	/* Send gathered information
 	 */
