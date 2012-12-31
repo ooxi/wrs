@@ -28,8 +28,49 @@
 
 
 /**
+ * 
  */
 module.exports = function(_api, _name, _color, cb) {
+
+	/**
+	 * Reference to self
+	 */
+	var _that = this;
+
+	/**
+	 * Public and private keys
+	 */
+	var _public_key = undefined;
+	var _private_key = undefined;
+
+
+
+	this.name = function() {
+		return _name;
+	};
+
+	this.color = function() {
+		return _color;
+	}
+
+	this.public_key = function() {
+		return _public_key;
+	}
+
+	this.private_key = function() {
+		return _private_key;
+	}
+
+
+
+
+
+	/**
+	 * Constructor
+	 */
+	(function() {
+		api.team(
+	})();
 };
 
 
