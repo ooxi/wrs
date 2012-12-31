@@ -23,3 +23,35 @@
  */
 'use strict';
 
+
+
+
+
+/**
+ * Checks whether an object is still alive
+ */
+module.exports = function(game, response) {
+};
+
+
+
+
+	var alive = (function() {
+		for (var secret in clients) {
+			if (query.id === clients[secret].public.id) {
+				return true;
+			}
+		}
+
+		return false;
+	})();
+
+	cb(200, {
+		'is-alive': alive
+	});
+
+
+
+
+
+
