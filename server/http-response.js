@@ -64,15 +64,27 @@ module.exports = function(_query, _response) {
 	 * Sends an error message
 	 */
 	this.error = function(status, message) {
-		if ('string' !== typeof(message)) {
-			throw 'Message must be a string';
+		if ('string' === typeof(message)) {
+			_that.json(status, {
+				error: true,
+				message: message
+			});
+
+		/* @warning Do not send stacktrace in production mode
+		 */
+		} else if (message instanceof Error) {
+			_that.json(status, {
+				error: true,
+				message: message.message,
+				trace: message.stack
+			});
+		} else {
+			_that.json(500, {
+				error: true,
+				message: 'Error occured while generating report for another error'
+			});
+			throw 'Message must be a string or an error';
 		}
-
-		_that.json(status, {
-			error: true,
-			message: message
-
-		});
 	};
 
 

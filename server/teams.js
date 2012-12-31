@@ -59,7 +59,7 @@ module.exports = function(_game) {
 	 */
 	this.has_name = function(name) {
 		if ('string' !== typeof(name)) {
-			throw new Error('Team name must be a string');
+			throw 'Team name must be a string';
 		}
 		var has_name = false;
 
@@ -79,7 +79,7 @@ module.exports = function(_game) {
 	 */
 	this.add = function(name, color) {
 		if (this.has_name(name)) {
-			throw 'Team name already used';
+			throw new Error('Team name already used');
 		}
 
 		var team = new wrs.team(_game, name, color);
