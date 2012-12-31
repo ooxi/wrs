@@ -128,7 +128,7 @@ module.exports = function(_server_url) {
 	/**
 	 * Registers a new ship
 	 */
-	this.spawn = function(ship_name, team_private_key, success_cb, exception_cb) {
+	this.spawn = function(team_private_key, ship_name, success_cb, exception_cb) {
 		http.get(_server_url +'spawn?ship-name='+ e(ship_name) +'&team-private-key='+ e(team_private_key), read_object(
 			success_cb, exception_cb
 		));

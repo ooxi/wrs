@@ -28,8 +28,14 @@
 
 
 /**
+ * Ship basic information
  */
-module.exports = function(_team, _name, cb) {
+module.exports = function(_api, _team, _name, cb) {
+
+	/**
+	 * Self reference
+	 */
+	var _that = this;
 
 	/**
 	 * Public and private keys
@@ -61,6 +67,17 @@ module.exports = function(_team, _name, cb) {
 	 * Constructor
 	 */
 	(function() {
+		_api.spawn(_that.team().private_key(), _that.name(), function(ship) {
+			if (!ship.hasOwnProperty('ship-public-key')) {
+				throw new Error('Missing ship-public-key');
+			}
+			if (!ship.hasOwnProperty('ship-private-key')) {
+				throw new Error('Missing ship-private-key');
+			}
+
+			_public_key = ship['ship-public-key'];
+			_private_key = ship['ship-private-key'];
+		});
 	})();
 };
 
