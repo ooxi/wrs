@@ -88,7 +88,7 @@ module.exports = function(_game, _team, _name) {
 		var old_x = this.x;
 		var old_y = this.y;
 
-		/* Change velocity
+		/* Change rotation and velocity
 		 */
 		if (isNaN(this._dx)) {
 			this._dx = this.dx;
@@ -96,6 +96,8 @@ module.exports = function(_game, _team, _name) {
 		if (isNaN(this._dy)) {
 			this._dy = this.dy;
 		}
+
+		
 	};
 
 
