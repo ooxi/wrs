@@ -107,7 +107,7 @@ module.exports = function(_game) {
 		/* Print exception on console and forward to client
 		 */
 		} catch (exception) {
-			console.log('Unexpected exception while serving http request: %j', exception.stack);
+			console.log('Unexpected exception while serving http request: '+ exception.stack);
 			response.error(500, exception);
 		}
 	};
