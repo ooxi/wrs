@@ -78,15 +78,6 @@ module.exports = function(key, required_keys) {
 	 * @return object identified by id
 	 */
 	this.get = function(id) {
-
-		/* Return all objects
-		 */
-		if ('undefined' === typeof(id)) {
-			return _objects;
-		}
-
-		/* Return one object, identified by id
-		 */
 		if (!this.exists(id)) {
 			throw 'Cannot return unknown object `'+ id +'\'';
 		}
@@ -103,6 +94,17 @@ module.exports = function(key, required_keys) {
 			throw 'Cannot remove unknown object `'+ id +'\'';
 		}
 		delete _objects[id];
+	};
+
+
+
+	/**
+	 * Calls cb on every object in orbit
+	 */
+	this.each = function(cb) {
+		for (var id in _objects) {
+			cb(id, _objects[id]);
+		}
 	};
 
 };

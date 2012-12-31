@@ -61,16 +61,15 @@ module.exports = function(_game) {
 		if ('string' !== typeof(name)) {
 			throw 'Team name must be a string';
 		}
+		var has_name = false;
 
-		for (var id in _teams_by_public_key.get()) {
-			var team = _teams[id];
-
-			if (name === team.name) {
-				return true;
+		_teams_by_public_key.each(function(public_key, team)) {
+			if (team.name === name) {
+				has_name = true;
 			}
-		}
+		});
 
-		return false;
+		return has_name;
 	};
 
 
