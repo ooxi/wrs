@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var wrs = {
+	ship:	require('./ship.js')
+};
+
 
 
 
@@ -31,6 +35,31 @@
  * Exports internal game state in legacy format
  */
 module.exports = function(game, response) {
+	var ships = [];
+	var shots = [];
+
+	game.orbit.each(function(obj) {
+
+		/* Export ship
+		 */
+		if (obj instanceof wrs.ship) {
+			ships.push({
+			});
+
+		/* Unknown object type
+		 */
+		} else {
+			throw 'Object of unknown type cannot be dumped';
+		}
+	});
+
+
+	/* Send assembled state
+	 */
+	response.json(200, {
+		clients:	ships,
+		shots:		shots
+	});
 };
 
 
