@@ -33,7 +33,8 @@ var async = require('async');
  */
 async.waterfall([
 
-/* Inform client
+/* Inform client of setup success or failure
+ */
 ], function(err) {
 	if (err) throw err;
 	cosole.log('Dump victims client up and running...');
