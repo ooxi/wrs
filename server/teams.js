@@ -64,7 +64,6 @@ module.exports = function(_game) {
 		var has_name = false;
 
 		_teams_by_public_key.each(function(public_key, team) {
-console.log('%j %j', team.name, name);
 			if (team.name === name) {
 				has_name = true;
 			}
@@ -83,7 +82,7 @@ console.log('%j %j', team.name, name);
 			throw 'Team name already used';
 		}
 
-		var team = new wrs.team(name, color);
+		var team = new wrs.team(_game, name, color);
 		_teams_by_public_key.add(team);
 		_teams_by_private_key.add(team);
 		return team;

@@ -69,7 +69,7 @@ module.exports = function(key, required_keys) {
 			}
 		}
 		
-		_objects[obj.id] = obj;
+		_objects[obj[key]] = obj;
 	};
 
 
@@ -102,6 +102,7 @@ module.exports = function(key, required_keys) {
 	 * Calls cb on every object in orbit
 	 */
 	this.each = function(cb) {
+console.log('%j', _objects);
 		for (var id in _objects) {
 			cb(id, _objects[id]);
 		}
