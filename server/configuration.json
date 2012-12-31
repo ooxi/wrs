@@ -1,12 +1,16 @@
 {	/* Will be exported via http	 */
 	"public": {
 		"game-zone":		1000,
+		"ship-radius":		10,
+
 		"max-ship-speed":	25,
 		"max-shot-speed":	250,
-		"ship-radius":		10,
+
 		"min-radar-interval":	500,
 		"min-shoot-interval":	2500
 	},
+
+
 
 	/* Internal
 	 */

@@ -41,6 +41,13 @@ module.exports = function(_properties) {
 	};
 
 	/**
+	 * @return [m]
+	 */
+	this.getShipRadius = function() {
+		return _properties.public['ship-radius'];
+	};
+
+	/**
 	 * @return [m/s]
 	 */
 	this.getMaxShipSpeed = function() {
@@ -52,13 +59,6 @@ module.exports = function(_properties) {
 	 */
 	this.getMaxShotSpeed = function() {
 		return _properties.public['max-shot-speed'];
-	};
-
-	/**
-	 * @return [m]
-	 */
-	this.getShipRadius = function() {
-		return _properties.public['ship-radius'];
 	};
 
 	/**

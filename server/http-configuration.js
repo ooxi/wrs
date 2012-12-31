@@ -32,6 +32,14 @@
  */
 module.exports = function(game, response) {
 	response.json(200, {
+		'game-zone':		game.configuration.getGameZone(),
+		'ship-radius':		game.configuration.getShipRadius(),
+
+		'max-ship-speed':	game.configuration.getMaxShipSpeed(),
+		'max-shot-speed':	game.configuration.getMaxShotSpeed(),
+
+		'min-radar-interval':	game.configuration.getMinRadarInterval(),
+		
 	});
 };
 
