@@ -30,6 +30,14 @@
  */
 module.exports = function(_properties) {
 
+
+	/**
+	 * @return Half width of the quadratic game zone [m]
+	 */
+	this.getGameZone = function() {
+		return _properties['game-zone'];
+	};
+
 	/**
 	 * @return [m/s]
 	 */
@@ -72,13 +80,6 @@ module.exports = function(_properties) {
 	 */
 	this.getSpawnZone = function() {
 		return _properties['spawn-zone'];
-	};
-
-	/**
-	 * @return [m]
-	 */
-	this.getGameZone = function() {
-		return _properties['game-zone'];
 	};
 
 	/**
