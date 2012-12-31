@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var wrs = {
+	util: require('../common/util.js')
+};
+
 
 
 
@@ -36,7 +40,12 @@ module.exports = function(_configuration) {
 	 * Sets the object's position to a random value
 	 */
 	var spawn_random = function(obj) {
-		obj.x = _con
+		var spawn_zone = _configuration.getSpawnZone();
+
+		obj.x = wrs.util.random(spawn_zone);
+		obj.y = wrs.util.random(spawn_zone);
+		obj.dx = 0.0;
+		obj.dy = 0.0;
 	};
 
 
