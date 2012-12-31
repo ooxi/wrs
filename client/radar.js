@@ -23,12 +23,6 @@
  */
 'use strict';
 
-var wrs = {
-	orbit: {
-		identifier:	require('../common/orbit-by-identifier.js')
-	}
-};
-
 
 
 
@@ -62,7 +56,7 @@ module.exports = function(_api, _configuration) {
 	/**
 	 * Mapping from private to public keys
 	 */
-	var _private_to_public = new wrs.orbit.identifier('private_key', []);
+	var _private_to_public = {};
 
 	/**
 	 * Most current radar information
