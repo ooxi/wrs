@@ -44,6 +44,10 @@ module.exports = function(game, response) {
 
 	/* Send team information
 	 */
+	send(200, {
+		'public-key': team.public_key,
+		'private-key': team.private_key
+	});
 };
 
 
