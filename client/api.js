@@ -65,7 +65,7 @@ module.exports = function(_server_url) {
 				var obj = JSON.parse(message);
 
 				if (200 != response.statusCode) {
-					exception_cb('Received unexpected exception: '+ obj.message);
+					exception_cb('Received unexpected exception: '+ (obj.hasOwnProperty(obj.stack) ? obj.stack : obj.message));
 				} else {
 					cb(obj);
 				}
