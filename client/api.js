@@ -91,8 +91,8 @@ module.exports = function(_server_url) {
 	/**
 	 * Updates ship and shot information
 	 */
-	this.is_alive = function(public_id, success_cb, exception_cb) {
-		http.get(_server_url +'is-alive?id='+ e(public_id), read_object(function(response) {
+	this.is_alive = function(public_key, success_cb, exception_cb) {
+		http.get(_server_url +'is-alive?public-key='+ e(public_key), read_object(function(response) {
 			success_cb(response['is-alive']);
 		}, exception_cb));
 	};
