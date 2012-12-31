@@ -23,57 +23,16 @@
  */
 'use strict';
 
-var async = require('async');
-var optimist = require('optimist');
 
-var wrs = {
-	api:		require('./api.js'),
-	client:		'dump-victim',
-	version:	'0.1-beta'
+
+
+
+/**
+ */
+module.exports = function(_api, _name, _color, cb) {
 };
 
 
-
-
-/* Initialization has to be done in sequence
- */
-async.waterfall([
-
-	/**
-	 * Parse arguments
-	 */
-	function(cb) {
-		cb(null, optimist
-			.default('server-url', 'http://localhost:31337/')
-			.argv
-		);
-	},
-
-
-	/**
-	 * Initialize API
-	 */
-	function(argv, cb) {
-		cb(null, new wrs.api(argv['server-url']));
-	},
-
-
-	/**
-	 * Register team
-	 */
-	function(api, cb) {
-		api.team(wrs.client +'-'+ Math.random(), 'red', function(
-		cb(null);
-	},
-
-
-
-/* Inform client of setup success or failure
- */
-], function(err) {
-	if (err) throw err;
-	cosole.log('Dump victims client up and running...');
-});
 
 
 
