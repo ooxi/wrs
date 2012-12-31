@@ -57,7 +57,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 		position.x += _configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
 		position.y += _configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
 
-		_ship.fly_to(position.x, position.y, function() {
+		_fly_to_ai.fly_to(position.x, position.y, function() {
 			console.log('[ai-dumb-victim] Reached %j', position);
 			fly_random();
 		});
@@ -69,7 +69,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * Moves the ship
 	 */
 	this.move = function() {
-		_ship.move();
+		_fly_to_ai.move();
 	};
 
 
