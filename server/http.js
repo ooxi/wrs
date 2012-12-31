@@ -25,6 +25,12 @@
 
 var http = require('http');
 
+var wrs = {
+	http: {
+		radar: require('./http-radar.js')
+	}
+};
+
 
 
 
