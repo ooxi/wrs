@@ -24,6 +24,7 @@
 'use strict';
 
 var uuid = require('../common/uuid.js');
+
 var wrs = {
 	spawner: require('./spawner.js')
 };
@@ -67,6 +68,11 @@ module.exports = function(_game, _team, _name) {
 	 */
 	this.dx = NaN;
 	this.dy = NaN;
+
+	/**
+	 */
+	this.move = function() {
+	};
 
 
 
