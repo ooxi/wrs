@@ -53,7 +53,7 @@ module.exports = function(game, response) {
 	 */
 	var now = Date.now();
 	if (now - ship.last_radar < game.configuration.getMinRadarInterval()) {
-		return cb(403, 'Radar cooldown unfinished (now: '+ now +', last: '+ ship.last_radar +', '+ (now - ship.last_radar) +' too fast)');
+		return response.error(403, 'Radar cooldown unfinished (now: '+ now +', last: '+ ship.last_radar +', '+ (now - ship.last_radar) +' too fast)');
 	}
 	ship.last_radar = now;
 

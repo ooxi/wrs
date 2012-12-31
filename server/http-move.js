@@ -46,7 +46,7 @@ module.exports = function(game, response) {
 	/* Check if client exists
 	 */
 	if (!game.orbit.exists.private(ship_private_key)) {
-		return cb(403, 'Unknown ship private key');
+		return response.error(403, 'Unknown ship private key');
 	}
 	var ship = game.orbit.get.private(ship_private_key);
 
@@ -55,7 +55,7 @@ module.exports = function(game, response) {
 	 */
 	var max_speed = game.configuration.getMaxShipSpeed();
 	if ((wrs.util.sqr(ship_desired_dx) + wrs.util.sqr(ship_desired_dy)) > wrs.util.sqr(max_speed + 0.0001)) {
-		return cb(403, 'You are too fast!');
+		return response.error(403, 'You are too fast!');
 	}
 
 
@@ -67,7 +67,7 @@ module.exports = function(game, response) {
 
 	/* Everything went well
 	 */
-	cb(200, {});
+	response.json(200, {});
 };
 
 
