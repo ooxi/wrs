@@ -54,9 +54,12 @@ module.exports = function(game, response) {
 	/* Client must not fly too fast
 	 */
 	var max_speed = game.configuration.getMaxShipSpeed();
-	if ((wrs.util.sqr(query.dx) + wrs.util.sqr(query.dy)) > wrs.util.sqr(max_speed)) {
+	if ((wrs.util.sqr(query.dx) + wrs.util.sqr(query.dy)) > wrs.util.sqr(max_speed) + 0.0001) {
 		return cb(403, 'You are too fast!');
 	}
+
+
+	
 };
 
 
