@@ -57,15 +57,16 @@ async.waterfall([
 	 */
 	function(argv, cb) {
 	}
-	
+
+
+/**
+ * Tell client if setup was successful
+ */	
 ], function(err) {
 	if (err) throw err;
 	console.log('WRS '+ wrs.version +' up and running :-)');
 });
 
-
-
-require
 
 
 
