@@ -10,7 +10,10 @@
 	border-top: 1px solid black;
 	border-right: 1px solid black;
 	position: fixed;
-	bottom: 30px;
+	bottom: 0px;
+	padding: 0.25em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
 }
 
 		</style>
@@ -27,7 +30,12 @@ $(function() {
 	 * Changes the status message
 	 */
 	var status = function(message) {
-		$('#status').text(message);
+		var dom = $('#status');
+		dom.text(message);
+		dom.show();
+		setTimeout(function() {
+			dom.fadeOut(1500);
+		}, 2500);
 	};
 
 	/**
