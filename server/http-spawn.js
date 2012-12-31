@@ -62,7 +62,7 @@ module.exports = function(game, response) {
 
 	/* Send ship identification
 	 */
-	send(200, {
+	response.json(200, {
 		'ship-public-key':	ship.public_key,
 		'ship-private-key':	ship.private_key
 	});
