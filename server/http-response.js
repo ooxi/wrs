@@ -70,7 +70,7 @@ module.exports = function(_query, _response) {
 
 		_that.json(status, {
 			error: true,
-			message: obj
+			message: message
 
 		});
 	};
