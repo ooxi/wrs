@@ -31,7 +31,6 @@ var wrs = {
 	configuration:	require('./configuration.js'),
 	game:		require('./game.js'),
 	http:		require('./http.js'),
-	orbit:		require('./orbit.js'),
 	version:	'2.1-beta'
 };
 
