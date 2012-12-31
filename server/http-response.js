@@ -42,7 +42,10 @@ module.exports = function(_query, _response) {
 	/**
 	 * @return _query
 	 */
-	this.query = function() {
+	this.query = function(key) {
+		if ('string' === typeof(key)) {
+			return _query[key];
+		}
 		return _query;
 	};
 

@@ -30,10 +30,12 @@
 /**
  * Adds a new ship, if possible
  */
-module.exports = function(configuration, orbit, response) {
+module.exports = function(game, response) {
 	if (!response.require(['name', 'team'])) {
 		return;
 	}
+
+	var ship = new wrs.ship(response
 };
 
 
