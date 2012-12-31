@@ -78,6 +78,17 @@ module.exports = function(_server_url) {
 
 
 	/**
+	 * Loads game configuration
+	 */
+	this.configuration = function(success_cb, error_cb) {
+		http.get(_server_url +'configuration', read_object(function(configuration) {
+			success_cb(configuration);
+		}, exception_cb));
+	};
+
+
+
+	/**
 	 * Updates ship and shot information
 	 */
 	this.is_alive = function(public_id, success_cb, exception_cb) {
