@@ -102,12 +102,12 @@ module.exports = function(_server_url) {
 	/**
 	 * Change speed and direction of client
 	 */
-	this.move = function(secret, dx, dy, success_cb, exception_cb) {
+	this.move = function(ship_private_key, ship_desired_dx, ship_desired_dy, success_cb, exception_cb) {
 		if ('function' !== typeof(success_cb)) {
 			success_cb = function() {};
 		}
 
-		http.get(_server_url +'move?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(
+		http.get(_server_url +'move?ship-private-key='+ e(ship_private_key) +'&ship-desired-dx='+ e(ship_desired_dx) +'&ship-desired-dy='+ e(ship_desired_dy), read_object(
 			success_cb, exception_cb
 		));
 	};
