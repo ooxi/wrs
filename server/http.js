@@ -59,12 +59,18 @@ module.exports = function(configuration) {
 	http.createServer(function(request, response) {
 		var action = url.parse(request.url, true);
 
+		/* Frequently used commands have to be checked first
+		 */
 		if ('/radar' === action.pathname) {
 			radar(action.query, send);
 		} else if ('/move' === action.pathname) {
 			move(action.query, send);
 		} else if ('/shoot' === action.pathname) {
 			shoot(action.query, send);
+
+		/* Other commands will only occasionally be invoked, order of
+		 * check does not matter
+		 */
 		} else if ('/connect' === action.pathname) {
 			action.query['udp-ip'] = request.connection.remoteAddress;
 			connect(action.query, send);
@@ -78,6 +84,8 @@ module.exports = function(configuration) {
 			dump(action.query, send);
 		} else if ('/' === action.pathname) {
 			gui(response);
+
+		/*
 		} else {
 			send(404, 'Unknown method');
 		}
