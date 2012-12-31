@@ -45,7 +45,7 @@ module.exports = function(game, response) {
 	}
 	var ship_name = response.query('ship-name');
 	var team_private_key = response.query('team-private-key')
-console.log('%j', response.query());
+
 
 	/* Valid team?
 	 */

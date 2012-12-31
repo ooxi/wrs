@@ -28,6 +28,7 @@ var optimist = require('optimist');
 
 var wrs = {
 	api:		require('./api.js'),
+	ship:		require('./ship.js'),
 	team:		require('./team.js'),
 
 	client:		'dump-victim',
@@ -95,7 +96,7 @@ async.waterfall([
 		for (var i = 0; i < configuration['ships-per-team']; ++i) {
 			(function(ship_name) {
 				add_ships.push(function(cb) {
-					api.spawn(ship_name, team.private_key(), function(ship) {
+					var ship = new wrs.ship(api, team, ship_name, function() {
 						cb(null, ship);
 					});
 				});
