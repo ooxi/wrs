@@ -29,7 +29,7 @@ var wrs = {
 	collision: {
 		ship:	require('./ship.js')
 	},
-	point:		require('./point.js'),
+	point:		require('../common/point.js'),
 	spawner:	require('./spawner.js')
 };
 
