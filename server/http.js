@@ -28,6 +28,7 @@ var url = require('url');
 
 var wrs = {
 	http: {
+		gui:		require('./http-gui.js'),
 		radar:		require('./http-radar.js'),
 		response:	require('./http-response.js'),
 		spawn:		require('./http-spawn.js'),
@@ -96,7 +97,7 @@ module.exports = function(_game) {
 			/* Not a real command, just there for convenience
 			 */
 			} else if ('/' === action.pathname) {
-//				gui(response);
+				wrs.http.gui(_game, response);
 
 			/* Unknown command
 			 */
