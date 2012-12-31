@@ -43,12 +43,25 @@ async.waterfall([
 	 * Parse arguments
 	 */
 	function(cb) {
+		cb(null, optimist
+			.default('server-url', 'http://localhost:31337/')
+			.argv
+		);
 	},
-	
+
+
+	/**
+	 * Initialize API
+	 */
+	function(argv, cb) {
+		cb(null, new wrs.api(argv['server-url']));
+	},
+
+
 	/**
 	 * Register team
 	 */
-	function(cb) {
+	function(argv, cb) {
 		
 		cb(null);
 	},
