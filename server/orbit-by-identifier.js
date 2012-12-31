@@ -62,7 +62,7 @@ module.exports = function(key, required_keys) {
 			throw 'Missing `'+ key +'\' property';
 		}
 		for (var i in required_keys) {
-			var required_key = required_key[i];
+			var required_key = required_keys[i];
 
 			if (!obj.hasOwnProperty(required_key)) {
 				throw 'Missing `'+ required_key +'\' property';

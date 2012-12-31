@@ -44,7 +44,7 @@ module.exports = function(game, response) {
 
 	/* Send team identification
 	 */
-	send(200, {
+	response.json(200, {
 		'public-key': team.public_key,
 		'private-key': team.private_key
 	});
