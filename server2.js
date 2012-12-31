@@ -23,7 +23,6 @@
  */
 'use strict';
 
-var dgram = require('dgram');
 var http = require('http');
 var url = require('url');
 var uuid = require('./uuid.js');
@@ -37,30 +36,6 @@ var shots = {};
 
 
 
-/**
- * Used to propagate an object to all clients
- */
-var broadcast = function(type, obj) {
-	return;
-
-	for (var secret in clients) {
-		var client = clients[secret];
-
-		var msg = new Buffer(JSON.stringify({
-			type: type,
-			secret: secret,
-			payload: obj
-		}));
-
-
-		var broadcast_socket = dgram.createSocket('udp4');
-		console.log('%j '+ msg.length, client);
-		broadcast_socket.send(
-			msg, 0, msg.length,
-			client['udp-port'], client['udp-ip']
-		);
-	}
-};
 
 
 
@@ -268,8 +243,6 @@ var shoot = function(query, cb) {
 	/* Propagate shot
 	 */
 	shots[uuid.v4()] = shot;
-	broadcast('shot', shot.public);
-
 	cb(200, shot.public);
 };
 
@@ -415,22 +388,6 @@ setInterval(function() {
 		dumps[i]();
 	}
 }, 234);
-
-
-
-/**
- * Propagate information to clients
- */
-setInterval(function() {
-	return;
-
-	for (var secret in clients) {
-		broadcast('client', clients[secret].public);
-	}
-	for (var id in shots) {
-		broadcast('shot', shots[id].public);
-	}
-}, 500);
 
 
 
