@@ -86,6 +86,9 @@ async.waterfall([
 	/**
 	 * Spawn ships
 	 */
+	function(api, configuration, team, cb) {
+		
+	}
 
 
 
