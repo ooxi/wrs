@@ -25,4 +25,21 @@ var ai_dumb_victim = require('./ai-dumb-victim.js');
 
 
 
+/**
+ * Runs a number of dumb cients
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
