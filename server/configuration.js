@@ -105,6 +105,13 @@ module.exports = function(_properties) {
 		return _properties['shot-ticks'];
 	};
 
+	/**
+	 * @return [ms]
+	 */
+	this.getTickInterval = function() {
+		return _properties['tick-interval'];
+	};
+
 
 
 	/**

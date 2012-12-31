@@ -17,8 +17,10 @@
 
 	/* Internal
 	 */
-	"http-port":	31337,
-	"spawn-zone":	500,
-	"shot-ticks":	100
+	"http-port":		31337,
+	"spawn-zone":		500,
+
+	"shot-ticks":		100,
+	"tick-interval":	234
 }
 
