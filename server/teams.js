@@ -56,7 +56,7 @@ module.exports = function(_game) {
 		for (var id in _teams) {
 			var team = _teams[id];
 
-			if (name === team.name()) {
+			if (name === team.name) {
 				return true;
 			}
 		}
@@ -75,10 +75,30 @@ module.exports = function(_game) {
 		}
 
 		var team = new wrs.team(name);
-		_teams.push(name);
+		_teams[team.public_key] = team;
 		return team;
 	};
 
+
+
+	/**
+	 * @return true iff game with public key does exist
+	 */
+	this.exists = function(public_key) {
+		return _teams.hasOwnProperty(public_key);
+	};
+
+
+
+	/**
+	 * @return Team identified by public key
+	 */
+	this.get = function(public_key) {
+		if (!this.exists(public_key)) {
+			throw 'Unknown team identifier';
+		}
+		return _teams[public_key];
+	}
 };
 
 
