@@ -73,7 +73,7 @@ module.exports = function(_game) {
 			if ('/radar' === action.pathname) {
 				wrs.http.radar(_game, response);
 			} else if ('/move' === action.pathname) {
-				response.error(500, 'Move not implemented');	// XXX
+				wrs.http.move(_game, response);
 			} else if ('/shoot' === action.pathname) {
 				response.error(500, 'Shoot not implemented');	// XXX
 
