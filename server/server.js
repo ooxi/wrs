@@ -76,7 +76,8 @@ async.waterfall([
 
 		/* Strip comments (not part of json)
 		 */
-		data = data.replace(/[/]\*.*?\*[/]/, '');
+		data = data.replace(/[*].*?[*]/m, '');
+		console.log(data);
 
 		var properties = JSON.parse(data);
 		var configuration = new wrs.configuration(properties);
