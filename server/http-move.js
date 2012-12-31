@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var wrs = {
+	util:	require('../common/util.js')
+};
+
 
 
 
@@ -47,10 +51,10 @@ module.exports = function(game, response) {
 	var ship = game.orbit.get.private(ship_private_key);
 
 
-	/*
+	/* Client must not fly too fast
 	 */
-	var max_speed = configuration['max-ship-speed'];
-	if ((query.dx * query.dx + query.dy * query.dy) > (max_speed * max_speed)) {
+	var max_speed = game.configuration.getMaxShipSpeed();
+	if ((wrs.util.sqr(query.dx) + wrs.util.sqr(query.dy)) > wrs.util.sqr(max_speed)) {
 		return cb(403, 'You are too fast!');
 	}
 };
