@@ -24,10 +24,13 @@
 'use strict';
 
 var async = require('async');
+var fs = require('fs');
 var optimist = require('optimist');
 
 var wrs = {
 	configuration:	require('./configuration.js'),
+	http:		require('./http.js'),
+	orbit:		require('./orbit.js'),
 	version:	'2.1-beta'
 };
 
@@ -44,7 +47,7 @@ async.waterfall([
 	 * Parse command line arguments
 	 */
 	function(cb) {
-		cb(optimist
+		cb(null, optimist
 			.default('configuration', 'configuration.json')
 			.describe('configuration', 'Path to configuration.json file')
 			.argv
@@ -56,6 +59,32 @@ async.waterfall([
 	 * Load configuration file
 	 */
 	function(argv, cb) {
+		fs.readFile(argv.configuration, 'UTF-8', function(err, data) {
+			if (err) {
+				cb(err);
+			} else {
+				cb(null, data)
+			}
+		});
+	},
+
+
+	/**
+	 * Parse configuration file
+	 */
+	function(data, cb) {
+		var properties = JSON.parse(data);
+		var configuration = new wrs.configuration(properties);
+		cb(null, configuration);
+	},
+
+
+	/**
+	 * Initialize game management subsystems
+	 */
+	function(configuration, cb) {
+		var orbit = new wrs.orbit();
+		var http = new wrs.http(configuration);
 	}
 
 
