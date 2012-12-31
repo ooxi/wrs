@@ -143,6 +143,7 @@ module.exports = function(_game, _team, _name) {
 			'y':		this.y,
 			'dx':		this.dx,
 			'dy':		this.dy
+		};
 	};
 
 
