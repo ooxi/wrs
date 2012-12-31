@@ -72,11 +72,8 @@ $(function() {
 			var headlen = 10;
 			var tox = x + dx;
 			var toy = y + dy;
+
 			var angle = Math.atan2(dy, dx);
-console.log(x);
-console.log(y);
-console.log(dx);
-console.log(dy);
 			context.moveTo(x, y);
 			context.lineTo(tox, toy);
 			context.lineTo(tox - headlen*Math.cos(angle-Math.PI/6), toy - headlen*Math.sin(angle-Math.PI/6));
@@ -108,14 +105,22 @@ console.log(dy);
 				0, 2 * Math.PI,
 				false
 			);
-			arrow(
-				client.public.x, client.public.y,
-				client.public.dx, client.public.dy
-			);
 			context.closePath();
 			context.fill();
 			context.stroke();
+
+			context.beginPath();
+			arrow(
+				client.public.x + configuration['game-zone'],
+				client.public.y + configuration['game-zone'],
+				parseFloat(client.public.dx),
+				parseFloat(client.public.dy)
+			);
+			context.closePath();
+			context.stroke();
 		}
+			
+
 
 
 		/* Draw all shots
