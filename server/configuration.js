@@ -35,42 +35,42 @@ module.exports = function(_properties) {
 	 * @return Half width of the quadratic game zone [m]
 	 */
 	this.getGameZone = function() {
-		return _properties['game-zone'];
+		return _properties.public['game-zone'];
 	};
 
 	/**
 	 * @return [m/s]
 	 */
 	this.getMaxShipSpeed = function() {
-		return _properties['max-ship-speed'];
+		return _properties.public['max-ship-speed'];
 	};
 
 	/**
 	 * @return [m/s]
 	 */
 	this.getMaxShotSpeed = function() {
-		return _properties['max-shot-speed'];
+		return _properties.public['max-shot-speed'];
 	};
 
 	/**
 	 * @return [m]
 	 */
 	this.getShipRadius = function() {
-		return _properties['ship-radius'];
+		return _properties.public['ship-radius'];
 	};
 
 	/**
 	 * @return [ms]
 	 */
 	this.getMinRadarInterval = function() {
-		return _properties['min-radar-interval'];
+		return _properties.public['min-radar-interval'];
 	};
 
 	/**
 	 * @return [ms]
 	 */
 	this.getMinShootInterval = function() {
-		return _properties['min-shoot-interval'];
+		return _properties.public['min-shoot-interval'];
 	};
 
 
@@ -87,6 +87,15 @@ module.exports = function(_properties) {
 	 */
 	this.getShopTicks = function() {
 		return _properties['shot-ticks'];
+	};
+
+
+
+	/**
+	 * @return HTTP port
+	 */
+	this.getHttpPort = function() {
+		return _properties['http-port'];
 	};
 
 };
