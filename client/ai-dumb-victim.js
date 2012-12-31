@@ -21,8 +21,9 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
-var configuration = require('./configuration.js');
-var ship = require('./ship.js');
+'use strict';
+
+
 
 
 
@@ -35,16 +36,16 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * Flies to the next point a view seconds away
 	 */	
 	var fly_random = function() {
-		var position = _ship.position();
+		var position = _radar.ship(_ship);
 
 		if (null === position) {
 			return;
 		}
-		position.x += configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
-		position.y += configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
+		position.x += _configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
+		position.y += _configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
 
 		_ship.fly_to(position.x, position.y, function() {
-			console.log('Reached %j', position);
+			console.log('[ai-dumb-victim] Reached %j', position);
 			fly_random();
 		});
 	};
