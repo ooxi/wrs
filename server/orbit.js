@@ -25,7 +25,7 @@
 
 var wrs = {
 	orbit: {
-		identifier:	require('../common/orbit-by-identifier.js')
+		identifier:	require('./orbit-by-identifier.js')
 	}
 };
 
