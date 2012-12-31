@@ -93,9 +93,13 @@ async.waterfall([
 		var add_ships = [];
 
 		for (var i = 0; i < configuration['ships-per-team']; ++i) {
-			add_ships.push(function(cb) {
-				api.spawn
-			});
+			(function(ship_name) {
+				add_ships.push(function(cb) {
+					api.spawn(ship_name, team.private_key(), function(ship) {
+						cb(null, ship);
+					});
+				});
+			})(wrs.client +'-'+ i);
 		}
 
 
@@ -103,6 +107,7 @@ async.waterfall([
 		 */
 		async.parallel(add_ships, function(err, ships) {
 			if (err) throw err;
+			console.log('%j', ships);
 		});
 	}
 
