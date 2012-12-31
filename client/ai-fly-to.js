@@ -97,11 +97,3 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 
 };
 
-
-
-
-
-
-
-
-
