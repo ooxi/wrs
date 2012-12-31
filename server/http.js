@@ -31,6 +31,7 @@ var wrs = {
 		configuration:	require('./http-configuration.js'),
 		dump:		require('./http-dump.js'),
 		gui:		require('./http-gui.js'),
+		is_alive:	require('./http-is-alive.js'),
 		move:		require('./http-move.js'),
 		radar:		require('./http-radar.js'),
 		response:	require('./http-response.js'),
@@ -89,7 +90,7 @@ module.exports = function(_game) {
 			} else if ('/configuration' === action.pathname) {
 				wrs.http.configuration(_game, response);
 			} else if ('/is-alive' === action.pathname) {
-				response.error(500, 'Is alive not implemented');// XXX
+				wrs.http.is_alive(_game, response);
 			} else if ('/spawn' === action.pathname) {
 				wrs.http.spawn(_game, response);
 			} else if ('/suicide' === action.pathname) {
