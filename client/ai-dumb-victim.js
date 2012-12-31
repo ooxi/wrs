@@ -23,6 +23,12 @@
  */
 'use strict';
 
+var wrs = {
+	ai: {
+		fly_to:	require('./ai-fly-to.js')
+	}
+};
+
 
 
 
@@ -31,6 +37,13 @@
  * A simple victim doing a random walk
  */
 module.exports = function(_api, _configuration, _radar, _ship) {
+
+	/**
+	 * AI used to fly the ship to a desired point
+	 */
+	var _fly_to_ai = new wrs.ai.fly_to(_api, _configuration, _radar, _ship);
+
+
 
 	/**
 	 * Flies to the next point a view seconds away
