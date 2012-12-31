@@ -144,12 +144,3 @@ module.exports = function(_server_url) {
 
 };
 
-
-
-var server_url = 'http://localhost:31337/';
-
-
-
-
-
-
