@@ -27,7 +27,7 @@ var uuid = require('../common/uuid.js');
 
 var wrs = {
 	collision: {
-		ship:	require('./collision-ship.js')
+		ship:	require('./ship.js')
 	},
 	point:		require('./point.js'),
 	spawner:	require('./spawner.js')
@@ -124,7 +124,7 @@ module.exports = function(_game, _team, _name) {
 
 		/* Remember collision information
 		 */
-		return new wrs.ship.collision(
+		return new wrs.collision.ship(
 			new wrs.point(old_x, old_y),
 			new wrs.point(this.x, this.y)
 		);
