@@ -55,17 +55,6 @@ module.exports = function(_query, _response) {
 
 
 
-	/**
-	 * Sends a JSON message
-	 */
-	this.json = function(status, obj) {
-		if ('object' !== typeof(obj)) {
-			throw 'JSON data must be an object';
-		}
-		response.writeHead(status, {'Content-Type': 'application/json'});
-		response.end(JSON.stringify(obj));
-	}
-
 
 
 	/**
@@ -79,8 +68,22 @@ module.exports = function(_query, _response) {
 		_that.json(status, {
 			error: true,
 			message: obj
+
 		});
 	};
+
+
+
+	/**
+	 * Sends a JSON message
+	 */
+	this.json = function(status, obj) {
+		if ('object' !== typeof(obj)) {
+			throw 'JSON data must be an object';
+		}
+		response.writeHead(status, {'Content-Type': 'application/json'});
+		response.end(JSON.stringify(obj));
+	}
 
 };
 
