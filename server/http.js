@@ -28,7 +28,7 @@
 /**
  * Manages HTTP interface
  */
-module.exports = function(port) {
+module.exports = function(configuration) {
 
 
 

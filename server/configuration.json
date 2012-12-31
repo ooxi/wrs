@@ -9,7 +9,8 @@
 	},
 
 	/* Internal
-	 */	
+	 */
+	"http-port":	31337,
 	"spawn-zone":	500,
 	"shot-ticks":	100
 }
