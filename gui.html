@@ -34,9 +34,17 @@ $(function() {
 	/**
 	 * Initializing GUI
 	 */
-	status('Loading GUI...');
+	var screen = $('#screen');
+
+	status('Loading configuration...');
 	configuration(function(config) {
-		status('GUI loaded');
+		status('Configuration loaded');
+		screen.width(config['game-zone'] * 2);
+		screen.height(config['game-zone'] * 2);
+
+		var context = screen.getContext('2d');
+		context.fillStyle = 'rgb(255, 0, 255)';
+		context.fillRect(0, 0, canvas.width, canvas.height);
 	});
 });
 
