@@ -42,6 +42,8 @@ module.exports = function(_configuration) {
 	this.orbit = new wrs.orbit();
 	this.teams = new wrs.teams();
 
+	this.movement = new wrs.movement(this);
+
 };
 
 
