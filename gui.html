@@ -119,14 +119,24 @@ $(function() {
 			context.closePath();
 			context.stroke();
 		}
-			
-
 
 
 		/* Draw all shots
 		 */
+		context.strokeStyle = 'yellow';
+
 		for (var id in data.shots) {
-			
+			var shot = data.shots[id];
+
+			context.beginPath();
+			arrow(
+				shot.public.x + configuration['game-zone'],
+				shot.public.y + configuration['game-zone'],
+				parseFloat(shot.public.dx),
+				parseFloat(shot.public.dy)
+			);
+			context.closePath();
+			context.stroke();
 		}
 	};
 
