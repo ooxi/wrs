@@ -78,6 +78,17 @@ module.exports = function(_ship, _old, _new) {
 
 
 
+
+
+	/**
+	 * @return Wrapped ship
+	 */
+	this.ship = function() {
+		return _ship;
+	};
+
+
+
 	/**
 	 * Computes a collision with another ship
 	 */
@@ -89,7 +100,14 @@ module.exports = function(_ship, _old, _new) {
 		var dy = self_circle.y - other_circle.y;
 		var radius_sum = self_circle.radius + other_circle.radius;
 
-		return (dx * dx - dy * dy) < (radius_sum * radius_sum);
+		/* Other ship definitly has not collided with this ship
+		 */
+		if ((dx * dx - dy * dy) > (radius_sum * radius_sum)) {
+			return;
+		}
+
+		/* Both this and the other ship will die
+		 */
 	};
 
 };
