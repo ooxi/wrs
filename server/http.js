@@ -59,7 +59,9 @@ module.exports = function(configuration) {
 
 
 
-
+	/**
+	 * Request dispatch handler
+	 */
 	var on_request = function(request, response) {
 		var action = url.parse(request.url, true);
 

@@ -30,6 +30,32 @@
 /**
  * Export public utility functions
  */
-module.exports = {
+module.exports = function(_query, _response) {
+
+	/**
+	 * @return _query
+	 */
+	this.query = function() {
+		return _query;
+	};
+
+	/**
+	 * @return _response
+	 */
+	this.response = function() {
+		return _response;
+	};
+
 };
+
+
+
+
+
+
+
+
+
+
+
 
