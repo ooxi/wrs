@@ -28,6 +28,7 @@ var optimist = require('optimist');
 
 var wrs = {
 	api:		require('./api.js'),
+	radar:		require('./radar.js'),
 	ship:		require('./ship.js'),
 	team:		require('./team.js'),
 
@@ -88,6 +89,7 @@ async.waterfall([
 	 * Spawn ships
 	 */
 	function(api, configuration, team, cb) {
+		var radar = new wrs.radar(api, configuration);
 
 		/* Ships to setup
 		 */
@@ -97,6 +99,7 @@ async.waterfall([
 			(function(ship_name) {
 				add_ships.push(function(cb) {
 					var ship = new wrs.ship(api, team, ship_name, function() {
+						radar.add(ship.public_key(), ship.private_key());
 						cb(null, ship);
 					});
 				});
@@ -108,15 +111,16 @@ async.waterfall([
 		 */
 		async.parallel(add_ships, function(err, ships) {
 			if (err) throw err;
-			cb(null, ships);
+			cb(null, api, configuration, radar, ships);
 		});
 	},
 
 
 	/**
-	 * 
+	 * Initialize APIs
 	 */
-	function(ships, cb) {
+	function(api, configuration, radar, ships, cb) {
+		console.log('%j', ships);
 	}
 
 
