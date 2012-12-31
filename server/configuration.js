@@ -34,6 +34,20 @@ module.exports = function(_properties) {
 
 
 	/**
+	 * @return Max number of team slots [1]
+	 */
+	this.getTeams = function() {
+		return _properties.public['teams'];
+	};
+
+	/**
+	 * @return Max number of ships per team [1]
+	 */
+	this.getShipsPerTeam = function() {
+		return _properties.public['ships-per-team'];
+	};
+
+	/**
 	 * @return Half width of the quadratic game zone [m]
 	 */
 	this.getGameZone = function() {
