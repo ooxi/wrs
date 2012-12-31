@@ -53,10 +53,7 @@ module.exports = function(configuration) {
 
 
 
-	/**
-	 * Initialize server
-	 */
-	http.createServer(function(request, response) {
+	var on_request = function(request, response) {
 		var action = url.parse(request.url, true);
 
 		/* Frequently used commands have to be checked first
@@ -97,8 +94,18 @@ module.exports = function(configuration) {
 		} else {
 			send(404, 'Unknown method');
 		}
-	}).listen(configuration.getHttpPort());
+	};
 
+
+
+
+
+	/**
+	 * Initialize server
+	 */
+	http	.createServer(on_request)
+		.listen(configuration.getHttpPort()
+	);
 
 };
 
