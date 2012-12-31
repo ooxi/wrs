@@ -93,18 +93,19 @@ module.exports = function(_api, _configuration) {
 				ships:	{},
 				shots:	{}
 			};
-
-			for (var i = 0; i < echo['nearby-ships']; ++i) {
+console.log('%j', echo);
+			for (var i = 0; i < echo['nearby-ships'].length; ++i) {
 				var ship = echo['nearby-ships'][i];
 				new_radar.ships[ship['public-key']] = ship;
 			}
-			for (var j = 0; j < echo['nearby-shots']; ++j) {
+			for (var j = 0; j < echo['nearby-shots'].length; ++j) {
 				var shot = echo['nearby-shots'][j];
 				new_radar.shots[shot['public-key']] = shot;
 			}
 			new_radar.ships[echo.me['public-key']] = echo.me;
 			_radar = new_radar;
 
+console.log('%j', new_radar);
 		}, function(exception) {
 			console.log('[radar] Failed receiving radar information with '+ private_key +': '+ exception);
 
