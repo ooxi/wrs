@@ -28,6 +28,33 @@
 
 
 /**
+ * @return Squared distance between a and b
+ */
+var distance_sqr = function(a, b) {
+	var dx = a.x - b.x;
+	var dy = a.y - b.y;
+	return dx * dx + dy * dy;
+};
+
+
+
+/**
+ * @return Normalized direction from self to target
+ */
+var look_at = function(self, target) {
+	var dx = target.x - self.x;
+	var dy = target.y - self.y;
+	var len = Math.sqrt(dx * dx + dy * dy);
+
+	return {
+		x: dx / len,
+		y: dy / len
+	};
+};
+
+
+
+/**
  * @return Random number between min and max. If max is not given, than it is
  *    set to min and min is set to -min
  */
@@ -42,12 +69,24 @@ var random = function(min, max) {
 
 
 
+/**
+ * @return Squared value
+ */
+var sqr = function(value) {
+	return value * value;
+};
+
+
+
 
 
 /**
  * Export public symbols
  */
 module.exports = {
-	random:	random
+	distance_sqr:	distance_sqr,
+	look_at:	look_at,
+	random:		random,
+	sqr:		sqr
 };
 

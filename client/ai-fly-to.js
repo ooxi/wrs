@@ -71,7 +71,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 			return;
 		}
 
-		var direction = util.look_at(
+		var direction = wrs.util.look_at(
 			self,
 			_desired_position
 		);
@@ -86,7 +86,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 		 * be invoked once
 		 */
 		if ('function' === typeof(_desired_cb)) {
-			if (util.distance_sqr(this.position(), _desired_position) < _desired_distance * _desired_distance) {
+			if (wrs.util.distance_sqr(this.position(), _desired_position) < _desired_distance * _desired_distance) {
 				var cb = _desired_cb;
 				_desired_cb = null;
 				cb();
