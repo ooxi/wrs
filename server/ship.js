@@ -45,8 +45,8 @@ module.exports = function(_configuration, _team, _name) {
 	/**
 	 * Public and private identification
 	 */
-	var _public_key = uuid.v4();
-	var _private_key = uuid.v4();
+	this.public_key = uuid.v4();
+	this.private_key = uuid.v4();
 
 	/**
 	 * Position
