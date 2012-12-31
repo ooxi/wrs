@@ -31,9 +31,7 @@
  * @return Squared distance between a and b
  */
 var distance_sqr = function(a, b) {
-	var dx = a.x - b.x;
-	var dy = a.y - b.y;
-	return dx * dx + dy * dy;
+	return sqr(a.x - b.x) + sqr(a.y - b.y);
 };
 
 
@@ -44,7 +42,7 @@ var distance_sqr = function(a, b) {
 var look_at = function(self, target) {
 	var dx = target.x - self.x;
 	var dy = target.y - self.y;
-	var len = Math.sqrt(dx * dx + dy * dy);
+	var len = Math.sqrt(sqr(dx) + sqr(dy));
 
 	return {
 		x: dx / len,
