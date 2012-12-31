@@ -128,14 +128,3 @@ module.exports = function(_query, _response) {
 
 };
 
-
-
-
-
-
-
-
-
-
-
-

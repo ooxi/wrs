@@ -28,9 +28,9 @@ var url = require('url');
 
 var wrs = {
 	http: {
-		connect:	require('./http-connect.js'),
 		radar:		require('./http-radar.js'),
 		response:	require('./http-response.js'),
+		spawn:		require('./http-spawn.js'),
 		team:		require('./http-team.js')
 	}
 };
@@ -84,10 +84,10 @@ module.exports = function(_game) {
 			 */
 			} else if ('/configuration' === action.pathname) {
 //				send(200, configuration);
-			} else if ('/connect' === action.pathname) {
-				wrs.http.connect(_game, response);
 			} else if ('/is-alive' === action.pathname) {
 //				is_alive(action.query, send);
+			} else if ('/spawn' === action.pathname) {
+				wrs.http.spawn(_game, response);
 			} else if ('/suicide' === action.pathname) {
 //				suicide(action.query, send);
 			} else if ('/team' === action.pathname) {
