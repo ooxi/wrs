@@ -49,10 +49,10 @@ module.exports = function(game, response) {
 
 	/* Valid team?
 	 */
-	if (!game.teams.exists(team_private_key)) {
+	if (!game.teams.exists.private(team_private_key)) {
 		return response.error(403, 'Unkown private team key');
 	}
-	var team = game.teams.get(team_private_key);
+	var team = game.teams.get.private(team_private_key);
 
 
 	/* Create and spawn new ship
