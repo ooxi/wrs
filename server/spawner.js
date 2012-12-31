@@ -23,12 +23,29 @@
  */
 'use strict';
 
-var wrs = {
-	configuration: require('./configuration.js')
+
+
+
+
+/**
+ * Different methods for spawning behaviour
+ */
+module.exports = function(_configuration) {
+
+	/**
+	 * Sets the object's position to a random value
+	 */
+	var spawn_random = function(obj) {
+		obj.x = _con
+	};
+
+
+
+	/**
+	 * Exported default behaviour
+	 */
+	this.spawn = spawn_random;
 };
-
-
-
 
 
 
