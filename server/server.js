@@ -27,7 +27,8 @@ var async = require('async');
 var optimist = require('optimist');
 
 var wrs = {
-	configuration: require('./configuration.js')
+	configuration:	require('./configuration.js'),
+	version:	'2.1-beta'
 };
 
 
@@ -43,14 +44,24 @@ async.waterfall([
 	 * Parse command line arguments
 	 */
 	function(cb) {
-		var argv = optimist
+		cb(optimist
 			.default('configuration', 'configuration.json')
 			.describe('configuration', 'Path to configuration.json file')
 			.argv
-		;
+		);
+	},
+
+
+	/**
+	 * Load configuration file
+	 */
+	function(argv, cb) {
 	}
 	
-;
+], function(err) {
+	if (err) throw err;
+	console.log('WRS '+ wrs.version +' up and running :-)');
+});
 
 
 
