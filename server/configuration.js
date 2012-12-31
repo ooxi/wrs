@@ -88,24 +88,5 @@ module.exports = function(_properties) {
 		return _properties['shot-ticks'];
 	};	
 
-
-
-
-
-
-
-		'max-ship-speed':	25,
-		'':	250,
-		'':	10,
-		'': 500,
-		'': 2500
-	},
-
-	/* Internal
-	 */	
-	'':	500,
-	'':	1000,
-	'':	100
-
 };
 
