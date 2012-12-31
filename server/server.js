@@ -33,7 +33,7 @@ var wrs = {
  * Parse command line arguments
  */
 var argv = require('optimist')
-	.demand('configuration')
+	.default('configuration', 'configuration.json')
 	.describe('configuration', 'Path to configuration.json file')
 	.argv
 ;
