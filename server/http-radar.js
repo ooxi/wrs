@@ -28,8 +28,9 @@
 
 
 /**
+ * Sends information about all objects 
  */
-module.exports = function(response) {
+module.exports = function(configuration, orbit, response) {
 
 	/* Check query
 	 */

@@ -45,6 +45,9 @@ module.exports = function(_configuration, _orbit) {
 	 * Request dispatch handler
 	 */
 	var on_request = function(request, response) {
+
+		/* Parse request into internal format
+		 */
 		var action = url.parse(request.url, true);
 
 		var response = new wrs.http.response(
@@ -57,7 +60,7 @@ module.exports = function(_configuration, _orbit) {
 		/* Frequently used commands have to be checked first
 		 */
 		if ('/radar' === action.pathname) {
-			wrs.http.radar(response);
+			wrs.http.radar(_configuration, _orbit, response);
 		} else if ('/move' === action.pathname) {
 			move(action.query, send);
 		} else if ('/shoot' === action.pathname) {
