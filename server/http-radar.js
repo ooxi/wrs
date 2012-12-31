@@ -75,6 +75,7 @@ console.log('a');
 		} else {
 			throw 'Unknown object type';
 			response.error(500, 'Unknown object');
+		}
 	});
 
 
