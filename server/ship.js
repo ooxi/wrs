@@ -64,14 +64,25 @@ module.exports = function(_game, _team, _name) {
 	this.y = NaN;
 
 	/**
-	 * Rotation and velocity
+	 * Current rotation and velocity
 	 */
 	this.dx = NaN;
 	this.dy = NaN;
 
+
+
 	/**
 	 */
 	this.move = function() {
+
+		/* Remember old position
+		 */
+		var old_x = this.x;
+		var old_y = this.y;
+
+		/* Change velocity
+		 */
+		this.
 	};
 
 
