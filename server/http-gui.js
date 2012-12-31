@@ -23,3 +23,27 @@
  */
 'use strict';
 
+
+
+
+
+/**
+ * Not really a command, simply ships the gui.html resource for convenience
+ */
+module.exports = function(game, response) {
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+ */
+
