@@ -83,8 +83,8 @@ module.exports = function(_game) {
 		}
 
 		var team = new wrs.team(name, color);
-		_teams_by_public_key.add(team.public_key, team);
-		_teams_by_private_key.add(team.private_key, team);
+		_teams_by_public_key.add(team);
+		_teams_by_private_key.add(team);
 		return team;
 	};
 
