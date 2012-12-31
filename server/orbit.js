@@ -58,7 +58,7 @@ module.exports = function() {
 	 */
 	this.get = function(id) {
 		if (!this.exists(id)) {
-			throw 'Unknown object `'+ id +'\'';
+			throw 'Cannot return unknown object `'+ id +'\'';
 		}
 		return _objects[id];
 	};
@@ -70,7 +70,7 @@ module.exports = function() {
 	 */
 	this.remove = function(id) {
 		if (!this.exists(id)) {
-			throw 'Unknown object `'+ id +'\'';
+			throw 'Cannot remove unknown object `'+ id +'\'';
 		}
 		delete _objects[id];
 	};
