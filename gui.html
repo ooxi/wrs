@@ -43,9 +43,22 @@ $(function() {
 	 */
 	var configuration = function(cb) {
 		$.getJSON('/configuration', function(data) {
-			console.log(data);
 			cb(data);
 		});
+	};
+
+	/**
+	 * Loads the status dump
+	 */
+	var dump = function(cb) {
+		$.getJSON('/dump', function(data) {
+			cb(data);
+		});
+	};
+
+	/**
+	 */
+	var render = function(data) {
 	};
 
 
