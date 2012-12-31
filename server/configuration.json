@@ -1,5 +1,8 @@
 {	/* Will be exported via http	 */
 	"public": {
+		"teams":		Infinity,
+		"ships-per-team":	Infinity,
+
 		"game-zone":		1000,
 		"ship-radius":		10,
 

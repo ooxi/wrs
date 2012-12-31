@@ -64,6 +64,9 @@ async.waterfall([
 	 * Load configuration
 	 */
 	function(api, cb) {
+		api.configuration(function(configuration) {
+			cb(null, api, configuration);
+		});
 	},
 
 
