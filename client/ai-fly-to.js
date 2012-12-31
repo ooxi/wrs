@@ -65,7 +65,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * Tries to fly to the desired position without avoiding shots
 	 */
 	this.move = function() {
-		var current_position = _radar.ship(_ship);
+		var current_position = _radar.ship(_ship.public_key());
 		if (null === current_position) {
 			console.log('[ai-fly-to] I don\'t know myself');
 			return;

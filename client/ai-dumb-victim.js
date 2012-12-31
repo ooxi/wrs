@@ -49,7 +49,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * Flies to the next point a view seconds away
 	 */	
 	var fly_random = function() {
-		var position = _radar.ship(_ship);
+		var position = _radar.ship(_ship.public_key());
 
 		if (null === position) {
 			return;
