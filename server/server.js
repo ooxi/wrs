@@ -90,16 +90,21 @@ async.waterfall([
 	function(configuration, cb) {
 		var game = new wrs.game(configuration);
 		var http = new wrs.http(game);
-		cb(null);
+		cb(null, game);
 	}
 
 
 /**
  * Tell client if setup was successful
  */	
-], function(err) {
+], function(err, game) {
 	if (err) throw err;
+
 	console.log('WRS '+ wrs.version +' up and running :-)');
+
+	setInterval(function() {
+		game.tick();
+	}, 245);
 });
 
 
