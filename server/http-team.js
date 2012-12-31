@@ -42,7 +42,7 @@ module.exports = function(game, response) {
 		response.query('color')
 	);
 
-	/* Send team information
+	/* Send team identification
 	 */
 	send(200, {
 		'public-key': team.public_key,
