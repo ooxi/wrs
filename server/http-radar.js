@@ -61,15 +61,15 @@ module.exports = function(game, response) {
 	/* Group objects by type
 	 */
 	var echo = {
-		me: ship.json(),
-		ships: [],
-		shots: []
+		'me':		ship.json(),
+		'nearby-ships':	[],
+		'nearby-shots':	[]
 	};
 
 	game.orbit.each(function(obj) {
 		if (obj instanceof wrs.ship) {
 			if (obj.public_key !== ship.public_key) {
-				echo.ships.push(obj.json());
+				echo['nearby-ships'].push(obj.json());
 			}
 		} else {
 			throw 'Unknown object type';
