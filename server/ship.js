@@ -133,6 +133,20 @@ module.exports = function(_game, _team, _name) {
 
 
 
+	/**
+	 * @return Public information encoded as JSON
+	 */
+	this.json = function() {
+		return {
+			'public-key':	this.public_key,
+			'x':		this.x,
+			'y':		this.y,
+			'dx':		this.dx,
+			'dy':		this.dy
+	};
+
+
+
 
 
 	/**
