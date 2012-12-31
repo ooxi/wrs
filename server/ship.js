@@ -125,6 +125,7 @@ module.exports = function(_game, _team, _name) {
 		/* Remember collision information
 		 */
 		return new wrs.collision.ship(
+			this,
 			new wrs.point(old_x, old_y),
 			new wrs.point(this.x, this.y)
 		);

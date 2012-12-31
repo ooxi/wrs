@@ -27,6 +27,64 @@
 
 
 
+/**
+ * A ship's collision space is determined by 
+ */
+module.exports = function(_ship, _old, _new) {
+
+	/**
+	 * Only handles ships
+	 */
+	this.type = function() {
+		return 'ship';
+	};
+
+
+
+	/**
+	 * Bouncing box around the ship movement
+	 */
+	this.bouncing_circle = function() {
+		var dx = _new.x - _old.x;
+		var dy = _new.y - _old.y;
+
+		return {
+			x:	(_new.x + _old.x) / 2.0,
+			y:	(_new.y + _old.y) / 2.0,
+			radius:	Math.sqrt(dx * dx + dy * dy) / 2.0
+		};
+	};
+
+
+
+	/**
+	 * Only collisions with other ships will be detected
+	 */
+	this.collide = function(other) {
+
+		/* Currently only collisions with other ships are computed,
+		 * collisions with shots are handled in wrs.collision.shot
+		 */
+		if ('ship' === other.type()) {
+			return collide_ship(other);
+		}
+	};
+
+
+
+	/**
+	 * Computes
+	 */
+};
+
+
+
+
+
+
+
+
+
 
 
 
