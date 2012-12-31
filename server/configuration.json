@@ -1,5 +1,4 @@
-{	/* Will be exported via http
-	 */
+{	/* Will be exported via http	 */
 	"public": {
 		"game-zone":		1000,
 		"max-ship-speed":	25,

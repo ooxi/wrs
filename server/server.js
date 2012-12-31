@@ -76,7 +76,7 @@ async.waterfall([
 
 		/* Strip comments (not part of json)
 		 */
-		data = data.replace(/[*].*?[*]/m, '');
+		data = data.replace(/[*][.\s]*?[*]/m, '');
 		console.log(data);
 
 		var properties = JSON.parse(data);
