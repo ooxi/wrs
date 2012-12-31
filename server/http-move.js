@@ -37,6 +37,7 @@ module.exports = function(game, response) {
 	var ship_private_key = response.query('ship-private-key');
 	var ship_desired_dx = parseFloat(response.query('ship-desired-dx'));
 	var ship_desired_dy = parseFloat(response.query('ship-desired-dy'));
+
 	
 	/* Check if client exists
 	 */
@@ -46,6 +47,12 @@ module.exports = function(game, response) {
 	var ship = game.orbit.get.private(ship_private_key);
 
 
+	/*
+	 */
+	var max_speed = configuration['max-ship-speed'];
+	if ((query.dx * query.dx + query.dy * query.dy) > (max_speed * max_speed)) {
+		return cb(403, 'You are too fast!');
+	}
 };
 
 
