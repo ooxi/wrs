@@ -48,6 +48,7 @@ module.exports = function(_game, _team, _name) {
 	 */
 	var _last_radar = 0;
 	var _last_shot = 0
+	var _last_move = Date.now();
 
 
 
@@ -83,10 +84,18 @@ module.exports = function(_game, _team, _name) {
 	 */
 	this.move = function() {
 
+		/* Time since last movement
+		 */
+		var now = Date.now();
+		var delta = now - _last_move;
+		_last_move = now;
+
+
 		/* Remember old position
 		 */
 		var old_x = this.x;
 		var old_y = this.y;
+
 
 		/* Change rotation and velocity
 		 */
