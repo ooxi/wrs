@@ -23,6 +23,11 @@
  */
 'use strict';
 
+var wrs = {
+	orbit:	require('./orbit.js'),
+	teams:	require('./teams.js')
+};
+
 
 
 
@@ -30,10 +35,11 @@
 /**
  * Aggregates game related modules
  */
-module.exports = function(_configuration, _orbit) {
+module.exports = function(_configuration) {
 
 	this.configuration = _configuration;
-	this.orbit = _orbit;
+	this.orbit = new wrs.orbit();
+	this.teams = new wrs.teams();
 
 };
 
