@@ -34,8 +34,18 @@ module.exports = function(game, response) {
 	if (!response.required(['ship-private-key', 'ship-desired-dx', 'ship-desired-dy'])) {
 		return;
 	}
-
+	var ship_private_key = response.query('ship-private-key');
+	var ship_desired_dx = parseFloat(response.query('ship-desired-dx'));
+	var ship_desired_dy = parseFloat(response.query('ship-desired-dy'));
 	
+	/* Check if client exists
+	 */
+	if (!game.orbit.exists.private(ship_private_key)) {
+		return cb(403, 'Unknown ship private key');
+	}
+	var ship = game.orbit.get.private(ship_private_key);
+
+
 };
 
 
