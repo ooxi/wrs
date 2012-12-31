@@ -72,9 +72,9 @@ module.exports = function(_game) {
 			if ('/radar' === action.pathname) {
 				wrs.http.radar(_game, response);
 			} else if ('/move' === action.pathname) {
-//				move(action.query, send);
+				response.error(500, 'Move not implemented');	// XXX
 			} else if ('/shoot' === action.pathname) {
-//				shoot(action.query, send);
+				response.error(500, 'Shoot not implemented');	// XXX
 
 			/* Dump must not be called by AIs but is frequently used by
 			 * GUIs
@@ -88,11 +88,11 @@ module.exports = function(_game) {
 			} else if ('/configuration' === action.pathname) {
 				wrs.http.configuration(_game, response);
 			} else if ('/is-alive' === action.pathname) {
-//				is_alive(action.query, send);
+				response.error(500, 'Is alive not implemented');// XXX
 			} else if ('/spawn' === action.pathname) {
 				wrs.http.spawn(_game, response);
 			} else if ('/suicide' === action.pathname) {
-//				suicide(action.query, send);
+				response.error(500, 'Suicide implemented');	// XXX
 			} else if ('/team' === action.pathname) {
 				wrs.http.team(_game, response);
 
