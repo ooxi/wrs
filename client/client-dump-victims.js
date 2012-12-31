@@ -61,7 +61,7 @@ async.waterfall([
 	/**
 	 * Register team
 	 */
-	function(argv, cb) {
+	function(api, cb) {
 		
 		cb(null);
 	},
