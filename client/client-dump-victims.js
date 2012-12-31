@@ -126,7 +126,9 @@ async.waterfall([
 		var ais = [];
 
 		for (var i = 0; i < ships.length; ++i) {
-			ais.push(new wrs.ai.dumb_victim(ships[i]));
+			ais.push(new wrs.ai.dumb_victim(
+				api, configuration, radar, ships[i]
+			));
 		}
 
 		setInterval(function() {

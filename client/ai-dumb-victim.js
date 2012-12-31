@@ -29,7 +29,7 @@ var ship = require('./ship.js');
 /**
  * A simple victim doing a random walk
  */
-module.exports = function(_ship) {
+module.exports = function(_api, _configuration, _radar, _ship) {
 
 	/**
 	 * Flies to the next point a view seconds away
