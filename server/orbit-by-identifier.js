@@ -102,7 +102,6 @@ module.exports = function(key, required_keys) {
 	 * Calls cb on every object in orbit
 	 */
 	this.each = function(cb) {
-console.log('%j', _objects);
 		for (var id in _objects) {
 			cb(id, _objects[id]);
 		}
