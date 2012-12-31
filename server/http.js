@@ -57,8 +57,7 @@ module.exports = function(configuration) {
 		/* Frequently used commands have to be checked first
 		 */
 		if ('/radar' === action.pathname) {
-			wrs.http.radar(utils);
-			radar(action.query, send);
+			wrs.http.radar(response);
 		} else if ('/move' === action.pathname) {
 			move(action.query, send);
 		} else if ('/shoot' === action.pathname) {
