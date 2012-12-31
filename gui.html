@@ -38,6 +38,8 @@ $(function() {
 		}, 2500);
 	};
 
+
+
 	/**
 	 * Will load configuration from backend
 	 */
@@ -46,6 +48,8 @@ $(function() {
 			cb(data);
 		});
 	};
+
+
 
 	/**
 	 * Loads the status dump
@@ -56,21 +60,39 @@ $(function() {
 		});
 	};
 
+
+
 	/**
 	 */
 	var render = function(context, configuration, data) {
+
+		/* @see http://stackoverflow.com/a/6333775
+		 */
+		var arrow = function(x, y, dx, dy) {
+			var headlen = 10;
+			var tox = x + dx;
+			var toy = y + dy;
+			var angle = Math.atan2(dy, dx);
+
+		context.moveTo(x, y);
+		context.lineTo(tox, toy);
+		context.lineTo(tox - headlen*Math.cos(angle-Math.PI/6), toy - headlen*Math.sin(angle-Math.PI/6));
+		context.moveTo(tox, toy);
+		context.lineTo(tox - headlen*Math.cos(angle+Math.PI/6), toy - headlen*Math.sin(angle+Math.PI/6));
+		};
+
 
 		/* Clear screen
 		 */
 		context.fillStyle = 'rgb(255, 0, 255)';
 		context.fillRect(0, 0, screen.width, screen.height);
 
+
 		/* Draw all clients
 		 */
 		context.fillStyle = 'lime';
 		context.lineWidth = 2;
 		context.strokeStyle = 'black';
-
 
 		for (var id in data.clients) {
 			var client = data.clients[id];
@@ -83,11 +105,24 @@ $(function() {
 				0, 2 * Math.PI,
 				false
 			);
+			arrow(
+				client.public.x, client.public.y,
+				client.public.dx, client.public.dy
+			);
 			context.closePath();
 			context.fill();
 			context.stroke();
 		}
+
+
+		/* Draw all shots
+		 */
+		for (var id in data.shots) {
+			
+		}
 	};
+
+
 
 
 
@@ -107,7 +142,7 @@ $(function() {
 		var update = function() {
 			dump(function(data) {
 				render(context, config, data);
-				setTimeout(update);
+				setTimeout(update, 250);
 			});
 		};
 
