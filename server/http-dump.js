@@ -44,6 +44,13 @@ module.exports = function(game, response) {
 		 */
 		if (obj instanceof wrs.ship) {
 			ships.push({
+				public: {
+					id:	obj.public_key,
+					x:	obj.x,
+					y:	obj.y,
+					dx:	obj.dx,
+					dy:	obj.dy
+				}
 			});
 
 		/* Unknown object type
