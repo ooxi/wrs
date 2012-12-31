@@ -27,3 +27,35 @@
 
 
 
+/**
+ * Manages all objects like ships and shots in a universe
+ */
+module.exports = function() {
+
+	/**
+	 * Every ship is controlled by a player
+	 *
+	 * @warning Currenlty a map for fast name based access, a quadtree for
+	 *     fast location based access should be added, too
+	 */
+	var _ships = {};
+
+	/**
+	 * Each shot belongs to a ship
+	 */
+	var _shots = [];
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
