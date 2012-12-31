@@ -69,12 +69,12 @@ module.exports = function(_game) {
 	/**
 	 * Adds a team if name not yet taken
 	 */
-	this.add = function(name) {
+	this.add = function(name, color) {
 		if (this.has_name(name)) {
 			throw 'Team name already used';
 		}
 
-		var team = new wrs.team(name);
+		var team = new wrs.team(name, color);
 		_teams[team.public_key] = team;
 		return team;
 	};

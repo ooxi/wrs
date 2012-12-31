@@ -32,7 +32,7 @@ var uuid = require('../common/uuid.js');
 /**
  * A team, used for statistiall purposes
  */
-module.exports = function(_game, _name) {
+module.exports = function(_game, _name, _color) {
 
 	/**
 	 * Public identifier
@@ -40,9 +40,10 @@ module.exports = function(_game, _name) {
 	this.public_key = uuid.v4();
 
 	/**
-	 * Display name
+	 * Display name and color
 	 */
 	this.name = _name;
+	this.color = _color;
 
 };
 
