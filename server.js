@@ -305,6 +305,27 @@ var suicide = function(query, cb) {
 
 
 
+/**
+ * Sends the GUI resource
+ */
+var gui = function(response) {
+	var fs = require('fs');
+	var path = require('path').join(__dirname, 'gui.html');
+
+	fs.stat(path, function(err, stats) {
+		if (err) throw err;
+
+		response.writeHead(200, {
+			'Content-Type': 'text/html',
+			'Content-Length': stats.size
+		});
+
+		fs.createReadStream(path).pipe(response);
+	});
+};
+
+
+
 
 
 /**
@@ -421,10 +442,12 @@ http.createServer(function(request, response) {
 		is_alive(action.query, send);
 	} else if ('/configuration' === action.pathname) {
 		send(200, configuration);
-	} else if ('/ich-bin-dumm-und-moechte-mich-selbst-toeten' === action.pathname) {
+	} else if ('/suicide' === action.pathname) {
 		suicide(action.query, send);
 	} else if ('/dump' === action.pathname) {
 		dump(action.query, send);
+	} else if ('/gui' === action.pathname) {
+		gui(response);
 	} else {
 		send(404, 'Unknown method');
 	}
