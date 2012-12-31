@@ -32,7 +32,10 @@
  */
 module.exports = function() {
 
-	
+	/**
+	 */
+	this.move = function() {
+	};
 
 };
 
