@@ -42,24 +42,6 @@ var wrs = {
 module.exports = function(configuration) {
 
 	/**
-	 * Sends a JSON message
-	 */
-	var send = function(status, obj) {
-		response.writeHead(status, {'Content-Type': 'application/json'});
-
-		if ((200 !== status) && ('string' === typeof(obj))) {
-			obj = {
-				error: true,
-				message: obj
-			};
-		}
-		response.end(JSON.stringify(obj));
-	};
-
-
-
-
-	/**
 	 * Request dispatch handler
 	 */
 	var on_request = function(request, response) {

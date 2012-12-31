@@ -33,6 +33,13 @@
 module.exports = function(_query, _response) {
 
 	/**
+	 * Reference to self
+	 */
+	var _that = this;
+
+
+
+	/**
 	 * @return _query
 	 */
 	this.query = function() {
@@ -44,6 +51,23 @@ module.exports = function(_query, _response) {
 	 */
 	this.response = function() {
 		return _response;
+	};
+
+
+
+	/**
+	 * Sends a JSON message
+	 */
+	this.send = function(status, obj) {
+		response.writeHead(status, {'Content-Type': 'application/json'});
+
+		if ((200 !== status) && ('string' === typeof(obj))) {
+			obj = {
+				error: true,
+				message: obj
+			};
+		}
+		response.end(JSON.stringify(obj));
 	};
 
 };
