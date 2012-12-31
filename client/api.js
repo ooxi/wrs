@@ -142,5 +142,12 @@ module.exports = function(_server_url) {
 	};
 
 
+
+	/**
+	 * Register new team
+	 */
+	this.team = function(name, color, success_cb, exception_cb) {
+	};
+
 };
 
