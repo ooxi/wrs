@@ -30,36 +30,60 @@
  */
 module.exports = function(_properties) {
 
+	/**
+	 * @return [m/s]
+	 */
 	this.getMaxShipSpeed = function() {
 		return _properties['max-ship-speed'];
 	};
 
+	/**
+	 * @return [m/s]
+	 */
 	this.getMaxShotSpeed = function() {
 		return _properties['max-shot-speed'];
 	};
 
+	/**
+	 * @return [m]
+	 */
 	this.getShipRadius = function() {
 		return _properties['ship-radius'];
 	};	
 
+	/**
+	 * @return [ms]
+	 */
 	this.getMinRadarInterval = function() {
 		return _properties['min-radar-interval'];
 	};	
 
+	/**
+	 * @return [ms]
+	 */
 	this.getMinShootInterval = function() {
 		return _properties['min-shoot-interval'];
 	};	
 
 
 
+	/**
+	 * @return Half width of the quadratic spawn zone [m]
+	 */
 	this.getSpawnZone = function() {
 		return _properties['spawn-zone'];
 	};	
 
+	/**
+	 * @return [m]
+	 */
 	this.getGameZone = function() {
 		return _properties['game-zone'];
 	};	
 
+	/**
+	 * @return Number of ticks before a shot will be automatically deleted
+	 */
 	this.getShopTicks = function() {
 		return _properties['shot-ticks'];
 	};	
