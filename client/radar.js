@@ -130,18 +130,19 @@ module.exports = function(_api, _configuration) {
 	 * @return Most current information about public_key or undefined if
 	 *     does not exist
 	 */
-	this.ship = function(ship) {
-		if (!_radar.ships.hasOwnProperty(ship.public_key)) {
+	this.ship = function(public_key) {
+console.log('%j %j', public_key, _radar);
+		if (!_radar.ships.hasOwnProperty(public_key)) {
 			return null;
 		}
-		return _radar.ships[ship.public_key];
+		return _radar.ships[public_key];
 	};
 
-	this.shot = function(shot) {
-		if (!_radar.shots.hasOwnProperty(shot.public_key)) {
+	this.shot = function(public_key) {
+		if (!_radar.shots.hasOwnProperty(public_key)) {
 			return null;
 		}
-		return _radar.shots[shot.public_key];
+		return _radar.shots[public_key];
 	};
 
 //	/**
