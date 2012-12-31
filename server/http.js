@@ -80,7 +80,7 @@ module.exports = function(_game) {
 			 * GUIs
 			 */
 			} else if ('/dump' === action.pathname) {
-				wrs.http.dump(game, response);
+				wrs.http.dump(_game, response);
 
 			/* Other commands will only occasionally be invoked, order of
 			 * check does not matter
