@@ -24,8 +24,9 @@
 'use strict';
 
 var wrs = {
-	orbit:	require('./orbit.js'),
-	teams:	require('./teams.js')
+	movement:	require('./movement.js'),
+	orbit:		require('./orbit.js'),
+	teams:		require('./teams.js')
 };
 
 

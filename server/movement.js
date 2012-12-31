@@ -28,13 +28,19 @@
 
 
 /**
- * Manages object movement and collissions
+ * Manages object movement and collisions
  */
-module.exports = function() {
+module.exports = function(game) {
 
 	/**
+	 * First moves all objects, than checks collisions between those objects
 	 */
 	this.move = function() {
+		var collisions = [];
+
+		game.orbit.each(function(obj) {
+			collisions.push(obj.move());
+		});
 	};
 
 };
