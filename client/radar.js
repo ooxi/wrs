@@ -85,7 +85,7 @@ module.exports = function(_api, _configuration) {
 		/* Update radar information
 		 */
 		var secret = secrets[current_secret];
-		api.radar(secret, function(echo) {
+		_api.radar(secret, function(echo) {
 			var new_radar = {
 				client: echo['nearby-clients'],
 				shot: echo['nearby-shots']
@@ -97,7 +97,7 @@ module.exports = function(_api, _configuration) {
 
 			/* Check if client if dead
 			 */
-			api.is_alive(public_keys[secret], function(is_alive) {
+			_api.is_alive(public_keys[secret], function(is_alive) {
 				if (!is_alive) {
 					console.log('Client '+ secret +' is definetly dead, will remove secret');
 					remove_array_element(secrets, secret);
@@ -108,7 +108,7 @@ module.exports = function(_api, _configuration) {
 
 		/* Set timeout for next check
 		 */
-		setTimeout(update_radar, (configuration['min-radar-interval'] + 10) / secrets.length);
+		setTimeout(update_radar, (_configuration['min-radar-interval'] + 10) / secrets.length);
 	};
 
 
