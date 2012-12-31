@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var wrs = {
+	team:	require('./team.js')
+};
+
 
 
 
@@ -66,6 +70,9 @@ module.exports = function(_game) {
 	 * Adds a team if name not yet taken
 	 */
 	this.add = function(name) {
+		var team = new wrs.team(name);
+		_teams.push(name);
+		return team;
 	};
 
 };
