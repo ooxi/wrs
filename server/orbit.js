@@ -28,30 +28,52 @@
 
 
 /**
- * Manages all objects like ships and shots in a universe
+ * Manages objects like ships and shots in a universe
  */
 module.exports = function() {
 
 	/**
-	 * Every ship is controlled by a player
+	 * The objects
 	 *
 	 * @warning Currenlty a map for fast name based access, a quadtree for
 	 *     fast location based access should be added, too
 	 */
-	var _ships = {};
+	var _objects = {};
 
-	/**
-	 * Each shot belongs to a ship
-	 */
-	var _shots = {};
+
 
 
 
 	/**
-	 * Constructor
+	 * @return true iff object with given id exists
 	 */
-	(function() {
-	})();
+	this.exists = function(id) {
+		return _objects.hasOwnProperty(id);
+	};
+
+
+
+	/**
+	 * @return object identified by id
+	 */
+	this.get = function(id) {
+		if (!this.exists(id)) {
+			throw 'Unknown object `'+ id +'\'';
+		}
+		return _objects[id];
+	};
+
+
+
+	/**
+	 * Removes object
+	 */
+	this.remove = function(id) {
+		if (!this.exists(id)) {
+			throw 'Unknown object `'+ id +'\'';
+		}
+		delete _objects[id];
+	};
 };
 
 
