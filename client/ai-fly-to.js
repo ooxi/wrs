@@ -24,7 +24,8 @@
 'use strict';
 
 var wrs = {
-	point:	require('../common/point.js')
+	point:	require('../common/point.js'),
+	util:	require('../common/util.js')
 };
 
 

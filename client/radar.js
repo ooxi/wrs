@@ -131,7 +131,6 @@ module.exports = function(_api, _configuration) {
 	 *     does not exist
 	 */
 	this.ship = function(public_key) {
-console.log('%j %j', public_key, _radar);
 		if (!_radar.ships.hasOwnProperty(public_key)) {
 			return null;
 		}
