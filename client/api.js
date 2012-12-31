@@ -53,58 +53,58 @@ module.exports = function(_server_url) {
 
 
 
-/**
- * Updates ship and shot information
- */
-var do_is_alive = function(public_id, success_cb, exception_cb) {
-	http.get(_server_url +'is-alive?id='+ e(public_id), read_object(function(response) {
-		success_cb(response['is-alive']);
-	}, exception_cb));
-};
+	/**
+	 * Updates ship and shot information
+	 */
+	this.is_alive = function(public_id, success_cb, exception_cb) {
+		http.get(_server_url +'is-alive?id='+ e(public_id), read_object(function(response) {
+			success_cb(response['is-alive']);
+		}, exception_cb));
+	};
 
 
 
-/**
- * Change speed and direction of client
- */
-var do_move = function(secret, dx, dy, success_cb, exception_cb) {
-	if ('function' !== typeof(success_cb)) {
-		success_cb = function() {};
-	}
+	/**
+	 * Change speed and direction of client
+	 */
+	this.move = function(secret, dx, dy, success_cb, exception_cb) {
+		if ('function' !== typeof(success_cb)) {
+			success_cb = function() {};
+		}
 
-	http.get(_server_url +'move?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(
-		success_cb, exception_cb
-	));
-};
-
-
-
-/**
- * Updates ship and shot information
- */
-var do_radar = function(secret, success_cb, exception_cb) {
-	http.get(_server_url +'radar?secret='+ e(secret), read_object(
-		success_cb, exception_cb
-	));
-};
+		http.get(_server_url +'move?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(
+			success_cb, exception_cb
+		));
+	};
 
 
 
-/**
- * Shoots
- */
-var do_shoot = function(secret, dx, dy, success_cb, exception_cb) {
-	if ('function' !== typeof(success_cb)) {
-		success_cb = function() {};
-	}
-	if ('function' !== typeof(exception_cb)) {
-		exception_cb = function() {};
-	}
+	/**
+	 * Updates ship and shot information
+	 */
+	this.radar = function(secret, success_cb, exception_cb) {
+		http.get(_server_url +'radar?secret='+ e(secret), read_object(
+			success_cb, exception_cb
+		));
+	};
 
-	http.get(_server_url +'shoot?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(
-		success_cb, exception_cb
-	));
-};
+
+
+	/**
+	 * Shoots
+	 */
+	this.shoot = function(secret, dx, dy, success_cb, exception_cb) {
+		if ('function' !== typeof(success_cb)) {
+			success_cb = function() {};
+		}
+		if ('function' !== typeof(exception_cb)) {
+			exception_cb = function() {};
+		}
+
+		http.get(_server_url +'shoot?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(
+			success_cb, exception_cb
+		));
+	};
 
 
 };
