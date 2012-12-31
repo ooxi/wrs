@@ -61,6 +61,16 @@ module.exports = function() {
 
 
 	/**
+	 * Registers a new object
+	 */
+	this.add = function(obj) {
+		_objects_by_public_key.add(obj);
+		_objects_by_private_key.add(obj);
+	};
+
+
+
+	/**
 	 * Check object existence
 	 */
 	this.exists = {
@@ -73,13 +83,15 @@ module.exports = function() {
 		}
 	};
 
+
+
 	/**
-	 * Registers a new object
+	 * @return Object identified by key
 	 */
-	this.add = function(obj) {
-		_objects_by_public_key.add(obj);
-		_objects_by_private_key.add(obj);
+	this.get = {
 	};
+
+
 
 	/**
 	 * Iterates over each object in space
