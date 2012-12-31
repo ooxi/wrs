@@ -31,7 +31,7 @@
  * Adds a new ship, if possible
  */
 module.exports = function(configuration, orbit, response) {
-	if (!response.require([])) {
+	if (!response.require(['name', 'team'])) {
 		return;
 	}
 };
