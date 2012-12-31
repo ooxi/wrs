@@ -62,7 +62,7 @@ module.exports = function(game, response) {
 	/* Set desired movement
 	 */
 	ship.desired_dx = ship_desired_dx;
-	ship.desiged_dy = ship_desired_dy;
+	ship.desired_dy = ship_desired_dy;
 
 
 	/* Everything went well

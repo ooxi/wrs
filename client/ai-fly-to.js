@@ -76,7 +76,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 			current_position,
 			_desired_position
 		);
-console.log('moving to %j %j', direction.x * _configuration['max-ship-speed'], _configuration);
+
 		_api.move(
 			_ship.private_key(),
 			direction.x * _configuration['max-ship-speed'],
