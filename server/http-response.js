@@ -85,6 +85,23 @@ module.exports = function(_query, _response) {
 		response.end(JSON.stringify(obj));
 	}
 
+
+
+	/**
+	 * Checks if all required arguments are present. If at least one is not,
+	 * the response will be terminated with an error
+	 */
+	this.require = function(arguments) {
+		for (var i = 0; i < arguments.length; ++i) {
+			if (!_query.hasOwnProperty(arguments[i])) {
+				_that.error();
+				return false;
+			}
+		}
+
+		return true;
+	};
+
 };
 
 
