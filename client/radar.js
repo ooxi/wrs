@@ -56,13 +56,13 @@ module.exports = function(_api, _configuration) {
 	/**
 	 * All available api keys
 	 */
-	var _secrets = [];
-	var _current_secret = -1;
+	var _private_ship_keys = [];
+	var _current_private_key = -1;
 
 	/**
 	 * Mapping from private to public keys
 	 */
-	var _public_keys = {
+	var _private_to_public = new wrs.orbit.identifier('private_key', []);
 
 	/**
 	 * Most current radar information
