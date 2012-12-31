@@ -85,7 +85,7 @@ module.exports = function(_game) {
 			 * check does not matter
 			 */
 			} else if ('/configuration' === action.pathname) {
-//				send(200, configuration);
+				wrs.http.configuration(_game, response);
 			} else if ('/is-alive' === action.pathname) {
 //				is_alive(action.query, send);
 			} else if ('/spawn' === action.pathname) {
