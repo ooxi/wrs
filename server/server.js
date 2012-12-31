@@ -23,22 +23,38 @@
  */
 'use strict';
 
+var async = require('async');
+var optimist = require('optimist');
+
 var wrs = {
 	configuration: require('./configuration.js')
 };
 
 
 
+
+
 /**
- * Parse command line arguments
+ * Execute initialization one by one
  */
-var argv = require('optimist')
-	.default('configuration', 'configuration.json')
-	.describe('configuration', 'Path to configuration.json file')
-	.argv
+async.waterfall([
+
+	/**
+	 * Parse command line arguments
+	 */
+	function(cb) {
+		var argv = optimist
+			.default('configuration', 'configuration.json')
+			.describe('configuration', 'Path to configuration.json file')
+			.argv
+		;
+	}
+	
 ;
 
 
+
+require
 
 
 
