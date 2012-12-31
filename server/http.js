@@ -39,7 +39,7 @@ var wrs = {
 /**
  * Manages HTTP interface
  */
-module.exports = function(configuration) {
+module.exports = function(_configuration, _orbit) {
 
 	/**
 	 * Request dispatch handler
@@ -102,8 +102,8 @@ module.exports = function(configuration) {
 	 * Initialize server
 	 */
 	http	.createServer(on_request)
-		.listen(configuration.getHttpPort()
-	);
+		.listen(_configuration.getHttpPort())
+	;
 
 };
 
