@@ -39,7 +39,7 @@ module.exports = function(game, response) {
 		'max-shot-speed':	game.configuration.getMaxShotSpeed(),
 
 		'min-radar-interval':	game.configuration.getMinRadarInterval(),
-		
+		'min-shoot-interval':	game.configuration.getMinShootInterval()
 	});
 };
 
