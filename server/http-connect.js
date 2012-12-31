@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var wrs = {
+	ship:	require('./ship.js')
+};
+
 
 
 
@@ -49,7 +53,7 @@ module.exports = function(game, response) {
 
 	/* Create and spawn new ship
 	 */
-	var ship = new wrs.ship(game, team, response.query('name');
+	var ship = new wrs.ship(game, team, response.query('name'));
 
 	/* Send ship identification
 	 */
