@@ -77,7 +77,7 @@ async.waterfall([
 		var team_name = wrs.client +'-'+ wrs.version +'-'+ Math.random();
 		var team_color = 'red';
 
-		var team = new wrs.team(team_name, team_color, function() {
+		var team = new wrs.team(api, team_name, team_color, function() {
 			cb(null, api, configuration, team);
 		});
 	},

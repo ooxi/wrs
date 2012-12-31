@@ -69,7 +69,7 @@ module.exports = function(_api, _name, _color, cb) {
 	 * Constructor
 	 */
 	(function() {
-		api.team(_that.name(), _that.color(), function(result) {
+		_api.team(_that.name(), _that.color(), function(result) {
 			_public_key = result['public-key'];
 			_private_key = result['private-key'];
 			cb();
