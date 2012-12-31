@@ -90,10 +90,10 @@ module.exports = function(_api, _configuration) {
 		_api.radar(private_key, function(echo) {
 console.log('%j', echo);
 			var new_radar = {
-				client: echo['nearby-clients'],
-				shot: echo['nearby-shots']
+				ships: echo['nearby-ships'],
+				shots: echo['nearby-shots']
 			};
-			new_radar.client[echo.me.id] = echo.me;
+			new_radar.ships[echo.me.id] = echo.me;
 			_radar = new_radar;
 		}, function(exception) {
 			console.log('[radar] Failed receiving radar information with '+ private_key +': '+ exception);
