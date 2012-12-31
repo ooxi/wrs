@@ -23,4 +23,19 @@
  */
 'use strict';
 
+var wrs = {
+	configuration: require('./configuration.js')
+};
+
+
+
+
+
+
+
+
+
+
+
+
 
