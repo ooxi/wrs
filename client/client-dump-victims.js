@@ -23,11 +23,21 @@
  */
 'use strict';
 
+var async = require('async');
 
 
 
 
 
+/* Initialization has to be done in sequence
+ */
+async.waterfall([
+
+/* Inform client
+], function(err) {
+	if (err) throw err;
+	cosole.log('Dump victims client up and running...');
+});
 
 
 
