@@ -58,6 +58,7 @@ module.exports = function(game, response) {
 	/* Create and spawn new ship
 	 */
 	var ship = new wrs.ship(game, team, ship_name);
+	game.orbit.add(ship);
 
 
 	/* Send ship identification

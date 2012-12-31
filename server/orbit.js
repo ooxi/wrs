@@ -73,5 +73,13 @@ module.exports = function() {
 		}
 	};
 
+	/**
+	 * Registers a new object
+	 */
+	this.add = function(obj) {
+		_objects_by_public_key.add(obj);
+		_objects_by_private_key.add(obj);
+	};
+
 };
 
