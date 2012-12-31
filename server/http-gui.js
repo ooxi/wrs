@@ -49,17 +49,3 @@ module.exports = function(game, response) {
 	});
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
- */
-
