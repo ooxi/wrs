@@ -73,6 +73,11 @@ async.waterfall([
 	 * Parse configuration file
 	 */
 	function(data, cb) {
+
+		/* Strip comments (not part of json)
+		 */
+		data = data.replace(/[/]\*.*?\*[/]/, '');
+
 		var properties = JSON.parse(data);
 		var configuration = new wrs.configuration(properties);
 		cb(null, configuration);
