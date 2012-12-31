@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var wrs = {
+	ship:	require('./ship.js')
+};
+
 
 
 
@@ -53,8 +57,20 @@ module.exports = function(game, response) {
 		shots: []
 	};
 
+	game.orbit.each(function(obj) {
+		if (obj instanceof wrs.ship) {
+			if (obj.public_key !== ship.public_key) {
+				echo.ships.push(obj.json());
+			}
+		} else {
+			throw 'Unknown object type';
+			response.error(500, 'Unknown object');
+	});
 
 
+	/* Send gathered information
+	 */
+	response.json(200, echo);
 
 
 
