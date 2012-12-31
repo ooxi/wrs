@@ -84,8 +84,8 @@ module.exports = function(_query, _response) {
 		if ('object' !== typeof(obj)) {
 			throw 'JSON data must be an object';
 		}
-		response.writeHead(status, {'Content-Type': 'application/json'});
-		response.end(JSON.stringify(obj));
+		_response.writeHead(status, {'Content-Type': 'application/json'});
+		_response.end(JSON.stringify(obj));
 	}
 
 
