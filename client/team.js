@@ -70,8 +70,10 @@ module.exports = function(_api, _name, _color, cb) {
 	 */
 	(function() {
 		_api.team(_that.name(), _that.color(), function(result) {
+			
 			_public_key = result['team-public-key'];
 			_private_key = result['team-private-key'];
+
 			cb();
 		});
 	})();

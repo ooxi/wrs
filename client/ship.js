@@ -77,6 +77,8 @@ module.exports = function(_api, _team, _name, cb) {
 
 			_public_key = ship['ship-public-key'];
 			_private_key = ship['ship-private-key'];
+
+			cb();
 		});
 	})();
 };
