@@ -82,10 +82,14 @@ module.exports = function(configuration) {
 			suicide(action.query, send);
 		} else if ('/dump' === action.pathname) {
 			dump(action.query, send);
+
+		/* Not a real command, just there for convenience
+		 */
 		} else if ('/' === action.pathname) {
 			gui(response);
 
-		/*
+		/* Unknown command
+		 */
 		} else {
 			send(404, 'Unknown method');
 		}
