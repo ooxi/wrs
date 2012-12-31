@@ -54,6 +54,32 @@ module.exports = function() {
 
 
 	/**
+	 * Adds a new object, must have at least the following properties `id',
+	 * `x', `y', `dx', `dy'
+	 */
+	this.add = function(obj) {
+		if (!obj.hasOwnProperty('id')) {
+			throw 'Missing `id\' property';
+		}
+		if (!obj.hasOwnProperty('x')) {
+			throw 'Missing `x\' property';
+		}
+		if (!obj.hasOwnProperty('y')) {
+			throw 'Missing `y\' property';
+		}
+		if (!obj.hasOwnProperty('dx')) {
+			throw 'Missing `dx\' property';
+		}
+		if (!obj.hasOwnProperty('dy')) {
+			throw 'Missing `dy\' property';
+		}
+
+		_objects[obj.id] = obj;
+	};
+
+
+
+	/**
 	 * @return object identified by id
 	 */
 	this.get = function(id) {
@@ -75,17 +101,4 @@ module.exports = function() {
 		delete _objects[id];
 	};
 };
-
-
-
-
-
-
-
-
-
-
-
-
-
 
