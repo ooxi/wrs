@@ -49,6 +49,15 @@ module.exports = function(game, response) {
 	var ship = game.orbit.get.private(ship_private_key);
 
 
+	/* Check if last radar invokation was not long enough away
+	 */
+	var now = Date.now();
+	if (now - client['last-radar'] < configuration['min-radar-interval']) {
+		return cb(403, 'Radar cooldown unfinished (now: '+ now +', last: '+ client['last-radar'] +', '+ (now - client['last-radar']) +' too fast)');
+	}
+	client['last-radar'] = now;
+
+
 	/* Group objects by type
 	 */
 	var echo = {
@@ -71,49 +80,13 @@ module.exports = function(game, response) {
 	/* Send gathered information
 	 */
 	response.json(200, echo);
-
-
-
-	/* Check query
-	 */
-	if (!response.require(['secret'])) {
-		return;
-	}
-	if (!query.hasOwnProperty('secret')) {
-		return cb(403, 'Missing secret argument');
-	}
-
-	if (!clients.hasOwnProperty(query.secret)) {
-		return cb(404, 'Unknown client');
-	}
-	var client = clients[query.secret];
-	var nearby_clients = {};
-	var nearby_shots = {};
-
-
-	/* Check if last radar invokation was not long enough away
-	 */
-	var now = Date.now();
-	if (now - client['last-radar'] < configuration['min-radar-interval']) {
-		return cb(403, 'Radar cooldown unfinished (now: '+ now +', last: '+ client['last-radar'] +', '+ (now - client['last-radar']) +' too fast)');
-	}
-	client['last-radar'] = now;
-
-
-	/* Aggregate client and shot information
-	 */
-	for (var secret in clients) {
-		if (secret !== query.secret) {
-			nearby_clients[clients[secret].public.id] = clients[secret].public;
-		}
-	}
-	for (var uuid in shots) {
-		nearby_shots[shots[uuid].public.id] = shots[uuid].public;
-	}
-
-	cb(200, {
-		'me': client.public,
-		'nearby-clients': nearby_clients,
-		'nearby-shots': nearby_shots
-	});
 };
+
+
+
+
+
+
+
+
+
