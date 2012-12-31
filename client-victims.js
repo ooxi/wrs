@@ -21,7 +21,10 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
-var ai_dumb_victim = require('./ai-dumb-victim.js');
+var wrs = {
+	ai_dumb_victim: require('./ai-dumb-victim.js'),
+	ship: require('./ship.js')
+};
 
 
 
@@ -34,8 +37,16 @@ var argv = require('optimist')
 ;
 
 
-console.log('%j', argv);
 
+/* Create and initialize ships
+ */
+for (var i = 0; i < argv.ships; ++i) {
+	(function() {
+		var ship = new wrs.ship('victim-'+ Math.random(), function() {
+			console.log('Ship created');
+		})
+	})();
+}
 
 
 
