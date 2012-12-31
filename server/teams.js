@@ -59,7 +59,7 @@ module.exports = function(_game) {
 	 */
 	this.has_name = function(name) {
 		if ('string' !== typeof(name)) {
-			throw 'Team name must be a string';
+			throw new Error('Team name must be a string');
 		}
 		var has_name = false;
 
