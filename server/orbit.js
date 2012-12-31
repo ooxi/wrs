@@ -43,7 +43,15 @@ module.exports = function() {
 	/**
 	 * Each shot belongs to a ship
 	 */
-	var _shots = [];
+	var _shots = {};
+
+
+
+	/**
+	 * Constructor
+	 */
+	(function() {
+	})();
 };
 
 
