@@ -28,6 +28,7 @@ var url = require('url');
 
 var wrs = {
 	http: {
+		configuration:	require('./http-configuration.js'),
 		gui:		require('./http-gui.js'),
 		radar:		require('./http-radar.js'),
 		response:	require('./http-response.js'),
