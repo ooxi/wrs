@@ -40,7 +40,7 @@ var wrs = {
 /**
  * Manages HTTP interface
  */
-module.exports = function(_configuration, _orbit) {
+module.exports = function(_game) {
 
 	/**
 	 * Request dispatch handler
@@ -61,7 +61,7 @@ module.exports = function(_configuration, _orbit) {
 		/* Frequently used commands have to be checked first
 		 */
 		if ('/radar' === action.pathname) {
-			wrs.http.radar(_configuration, _orbit, response);
+			wrs.http.radar(_game, response);
 		} else if ('/move' === action.pathname) {
 			move(action.query, send);
 		} else if ('/shoot' === action.pathname) {
@@ -79,7 +79,7 @@ module.exports = function(_configuration, _orbit) {
 		} else if ('/configuration' === action.pathname) {
 			send(200, configuration);
 		} else if ('/connect' === action.pathname) {
-			wrs.http.connect(_configuration, _orbit, response);
+			wrs.http.connect(_game, response);
 		} else if ('/is-alive' === action.pathname) {
 			is_alive(action.query, send);
 		} else if ('/suicide' === action.pathname) {
@@ -105,7 +105,7 @@ module.exports = function(_configuration, _orbit) {
 	 * Initialize server
 	 */
 	http	.createServer(on_request)
-		.listen(_configuration.getHttpPort())
+		.listen(_game.configuration.getHttpPort())
 	;
 
 };
