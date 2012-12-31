@@ -67,7 +67,7 @@ $(function() {
 
 		/* Draw all clients
 		 */
-//		context.fillStyle = 'rgb(0, 255, 0)';
+		context.fillStyle = 'lime';
 
 		for (var id in data.clients) {
 			var client = data.clients[id];
@@ -80,15 +80,11 @@ $(function() {
 				0, 2 * Math.PI,
 				false
 			);
-			context.fillStyle = 'green';
+			context.closePath();
 			context.fill();
 			context.lineWidth = 5;
 			context.strokeStyle = '#003300';
 			context.stroke();
-console.log(client.public.x + configuration['game-zone']);
-console.log(				client.public.y + configuration['game-zone']);
-console.log(				configuration['ship-radius']);
-
 		}
 	};
 
@@ -97,15 +93,16 @@ console.log(				configuration['ship-radius']);
 	/**
 	 * Initializing GUI
 	 */
-	var screen = $('#screen');
-
 	status('Loading configuration...');
+
 	configuration(function(config) {
 		status('Configuration loaded');
-		screen.width(config['game-zone'] * 2);
-		screen.height(config['game-zone'] * 2);
 
-		var context = screen[0].getContext('2d');
+		var screen = document.getElementById('screen');
+		screen.width = config['game-zone'] * 2;
+		screen.height = config['game-zone'] * 2;
+
+		var context = screen.getContext('2d');
 
 		dump(function(data) {
 			render(context, config, data);
