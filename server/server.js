@@ -87,13 +87,14 @@ async.waterfall([
 	/**
 	 * Initialize game management subsystems
 	 */
-	function(configuration, cb) {
+	function(properties, cb) {
 		var game = new wrs.game(
 			new wrs.configuration(properties),
 			new wrs.orbit()
 		);
 
 		var http = new wrs.http(game);
+		cb(null);
 	}
 
 
