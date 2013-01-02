@@ -151,13 +151,13 @@ $(function() {
 			context.closePath();
 			context.stroke();
 
-			if ('undefined' !== typeof(client.public.bc)) {
+			if ('undefined' !== typeof(shot.public.bc)) {
 				context.beginPath();
 				context.strokeStyle = 'blue';
 				context.arc(
-					client.public.bc.x + configuration['game-zone'],
-					client.public.bc.y + configuration['game-zone'],
-					client.public.bc.radius,
+					shot.public.bc.x + configuration['game-zone'],
+					shot.public.bc.y + configuration['game-zone'],
+					shot.public.bc.radius,
 					0, 2 * Math.PI,
 					false
 				);
