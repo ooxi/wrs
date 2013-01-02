@@ -90,12 +90,11 @@ $(function() {
 
 		/* Draw all clients
 		 */
-		context.fillStyle = 'lime';
-
 		for (var id in data.clients) {
 			var client = data.clients[id];
 
 			context.beginPath();
+			context.fillStyle = 'lime';
 			context.strokeStyle = 'black';
 			context.lineWidth = 2.0;
 			context.arc(
@@ -143,7 +142,7 @@ $(function() {
 			var shot = data.shots[id];
 
 			context.beginPath();
-			context.strokeStyle = 'yellow';
+			context.fillStyle = 'yellow';
 			context.arc(
 				shot.public.x + configuration['game-zone'],
 				shot.public.y + configuration['game-zone'],
