@@ -118,7 +118,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * information about the ship's current direction
 	 */
 	var fly_in_random_direction = function() {
-		var direction = set_length(new wrs.point(
+		var direction = wrs.util.set_length(new wrs.point(
 			_configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5),
 			_configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5)
 		), _configuration['max-ship-speed']);

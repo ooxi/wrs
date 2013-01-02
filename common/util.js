@@ -84,7 +84,7 @@ var random = function(min, max) {
  * @return Vector pointing in `direction' at `length'
  */
 var set_length = function(vector, length) {
-	var len = Math.sqrt(length_sqr(vector));
+	var len = Math.sqrt(length_sqr(vector.x, vector.y));
 
 	return new wrs.point(
 		vector.x / len * length,
