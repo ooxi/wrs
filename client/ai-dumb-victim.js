@@ -55,9 +55,9 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	var _max_angle_change = 45.0;
 
 	/**
-	 * Maximum velocity change (relative to current velocity)
+	 * Maximum velocity change
 	 */
-	var _max_velocity_change = 0.25;
+	var _max_velocity_change = 0.25 * _configuration['max-ship-speed'];
 
 
 
@@ -72,15 +72,21 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 		/* Extract current direction and velocity
 		 */
 		var velocity = Math.sqrt(wrs.util.length_sqr(ship_radar.dx, ship_radar.dy));
-		var direction = new wrs.point(
-			ship_radar.dx / velocity,
-			ship_radar.dy / velocity
-		);
+		var direction = undefined;
+
+		if (velocity > 0.0001) {
+			direction = new wrs.point(
+				ship_radar.dx / velocity,
+				ship_radar.dy / velocity
+			);
+		} else {
+			direction = new wrs.point(1.0, 0.0);
+		}
 
 
 		/* Change velocity
 		 */
-		var by_velocity = velocity * (Math.random() - 0.5) * 2.0 * _max_velocity_change;
+		var by_velocity = (Math.random() - 0.5) * 2.0 * _max_velocity_change;
 		console.log('Changing velocity %j by %j', velocity, by_velocity);
 		velocity += by_velocity;
 
@@ -104,6 +110,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 
 		/* Apply changes
 		 */
+		console.log('Will go from %j to %j:%j', direction, direction.x * velocity, direction.y * velocity);
 		_api.move(
 			_ship.private_key(),
 			direction.x * velocity,
@@ -144,7 +151,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 		
 		/* Information about current state of ship
 		 */
-		var ship_radar = _radar.ship(_ship);
+		var ship_radar = _radar.ship(_ship.public_key());
 
 		/* If no state is awailable, we have to fly in a random
 		 * direction, otherwise we only do a slight change
