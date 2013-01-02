@@ -72,7 +72,7 @@ module.exports = function(_game, _ship, _old, _new) {
 		 * collisions with shots are handled in wrs.collision.shot
 		 */
 		if ('ship' === other.type()) {
-			return collide_ship(other);
+			return collide_ship.call(this, other);
 		}
 	};
 

@@ -77,7 +77,7 @@ module.exports = function(_game, _shot, _old, _new) {
 			return;
 		}
 		
-		return collide_ship(other);
+		return collide_ship.call(this, other);
 	};
 
 
