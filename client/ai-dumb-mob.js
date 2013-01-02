@@ -27,6 +27,7 @@ var wrs = {
 	ai: {
 		fly_to:	require('./ai-fly-to.js')
 	},
+	point:	require('../common/point.js'),
 	util:	require('../common/util.js')
 };
 
