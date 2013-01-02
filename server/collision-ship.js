@@ -51,7 +51,7 @@ module.exports = function(_game, _ship, _old, _new) {
 		return {
 			x:	(_new.x + _old.x) / 2.0,
 			y:	(_new.y + _old.y) / 2.0,
-			radius:	Math.sqrt(dx * dx + dy * dy) / 2.0
+			radius:	Math.sqrt(dx * dx + dy * dy) / 2.0 + 2.0 * _game.configuration.getShipRadius()
 		};
 	};
 
