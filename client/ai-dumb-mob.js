@@ -181,7 +181,7 @@ module.exports = function(_api, _configuration, _radar) {
 		if (null === _victim) {
 			return;
 		}
-		var victim_radar = _radar.ship(_victim.['public-key']);
+		var victim_radar = _radar.ship(_victim['public-key']);
 
 		/* Fly all ships to that victim
 		 */
@@ -202,7 +202,7 @@ module.exports = function(_api, _configuration, _radar) {
 		if (null === _victim) {
 			return;
 		}
-		var victim_radar = _radar.ship(_victim.['public-key']);
+		var victim_radar = _radar.ship(_victim['public-key']);
 
 		/* Shoot at the current position
 		 */
