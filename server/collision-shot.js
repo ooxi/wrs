@@ -97,8 +97,8 @@ module.exports = function(_game, _shot, _old, _new) {
 	 * Computes a collision with a ship
 	 */
 	var collide_ship = function(other) {
-		var self_circle = this.bouncing_circle();
-		var other_circle = other.bouncing_circle();
+		var self_circle = this.bounding_circle();
+		var other_circle = other.bounding_circle();
 
 		var dx = self_circle.x - other_circle.x;
 		var dy = self_circle.y - other_circle.y;
