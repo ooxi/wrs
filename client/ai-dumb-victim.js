@@ -103,9 +103,10 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 		if (by_angle <= 0.0) {
 			by_angle += 360.0;
 		}
-		console.log('Changing angle %j by %j', direction, by_angle);
-		direction.x = direction.x * Math.cos(by_angle) - direction.y * Math.sin(by_angle);
-		direction.y = direction.x * Math.sin(by_angle) + direction.y * Math.cos(by_angle);
+		var rad_angle = by_angle * 0.0174532925;
+		console.log('Changing angle %j by %j deg == %j rad', direction, by_angle, rad_angle);
+		direction.x = direction.x * Math.cos(rad_angle) - direction.y * Math.sin(rad_angle);
+		direction.y = direction.x * Math.sin(rad_angle) + direction.y * Math.cos(rad_angle);
 
 
 		/* Apply changes
