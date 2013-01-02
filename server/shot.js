@@ -39,7 +39,7 @@ var wrs = {
 /**
  * Represents one shot issued by a ship
  */
-module.exports = function(_ship, _initial_direction) {
+module.exports = function(_game, _ship, _initial_direction) {
 
 	/**
 	 * Time of last actions
@@ -97,7 +97,7 @@ module.exports = function(_ship, _initial_direction) {
 		/* Remember collision information
 		 */
 		return new wrs.collision.shot(
-			game, this,
+			_game, this,
 			new wrs.point(old_x, old_y),
 			new wrs.point(this.x, this.y)
 		);
