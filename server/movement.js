@@ -38,9 +38,19 @@ module.exports = function(game) {
 	this.move = function() {
 		var collisions = [];
 
+		/* Move objects
+		 */
 		game.orbit.each(function(obj) {
 			collisions.push(obj.move());
 		});
+
+		/* Check for collisions
+		 */
+		for (var i = 0; i < collisions.length; ++i) {
+			for (var j = i + 1; j < collisions.length; ++j) {
+				collisions[i].collide(collisions[j]);
+			}
+		}
 	};
 
 };
