@@ -24,7 +24,8 @@
 'use strict';
 
 var wrs = {
-	point:	require('../common/point.js')
+	point:	require('../common/point.js'),
+	util:	require('../common/util.js')
 };
 
 
@@ -67,6 +68,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * by the configuration seen aboth
 	 */
 	var change_current_direction = function(ship_radar) {
+		var velocity = Math.sqrt(wrs.util.sqr(ship_radar.dx) + wrs.util.sqr(ship_radar.dy));
 	};
 
 
