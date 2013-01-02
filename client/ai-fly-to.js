@@ -65,7 +65,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 
 		if ('function' !== typeof(error_cb)) {
 			error_cb = function(error) {
-				console.log('Shot did not have any effect: '+ error.message);
+				console.log('Shot did not have any effect: %j', error);
 			};
 		}
 
