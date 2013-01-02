@@ -119,13 +119,13 @@ $(function() {
 			context.closePath();
 			context.stroke();
 
-			if ('undefined' !== typeof(client.public.__bc)) {
+			if ('undefined' !== typeof(client.public.bc)) {
 				context.beginPath();
 				context.strokeStyle = 'blue';
 				context.arc(
-					client.public.__bc.x + configuration['game-zone'],
-					client.public.__bc.y + configuration['game-zone'],
-					client.public.__bc.radius,
+					client.public.bc.x + configuration['game-zone'],
+					client.public.bc.y + configuration['game-zone'],
+					client.public.bc.radius,
 					0, 2 * Math.PI,
 					false
 				);
