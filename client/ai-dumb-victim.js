@@ -68,7 +68,38 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * by the configuration seen aboth
 	 */
 	var change_current_direction = function(ship_radar) {
-		var velocity = Math.sqrt(wrs.util.sqr(ship_radar.dx) + wrs.util.sqr(ship_radar.dy));
+
+		/* Extract current direction and velocity
+		 */
+		var velocity = Math.sqrt(wrs.util.length_sqr(ship_radar.dx, ship_radar.dy));
+		var direction = new wrs.point(
+			ship_radar.dx / velocity,
+			ship_radar.dy / velocity
+		);
+
+		/* Change velocity
+		 */
+		var by_velocity = velocity * (Math.random() - 0.5) * 2.0 _max_velocity_change;
+		console.log('Changing velocity %j by %j', velocity, by_velocity);
+		velocity += by_velocity;
+
+		/* Change rotation
+		 */
+		var by_angle = (Math.random() - 0.5) * 2.0 * _max_angle_change;
+		if (by_angle <= 0.0) {
+			by_angle += 360.0;
+		}
+		console.log('Changing angle %j by %j', direction, by_angle);
+		direction.x = direction.x * Math.cos(by_angle) - direction.y * Math.sin(by_angle);
+		direction.y = direction.x * Math.sin(by_angle) + direction.y * Math.cos(by_angle);
+
+		/* Apply changes
+		 */
+		_api.move(
+			_ship.private_key(),
+			direction.x * velocity,
+			direction.y * velocity
+		);
 	};
 
 
