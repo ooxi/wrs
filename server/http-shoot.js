@@ -24,6 +24,7 @@
 'use strict';
 
 var wrs = {
+	point:	require('../common/point.js'),
 	util:	require('../common/util.js')
 };
 
@@ -39,8 +40,10 @@ module.exports = function(game, response) {
 		return;
 	}
 	var ship_private_key = response.query('ship-private-key');
-	var shoot_dx = parseFloat(response.query('shoot-dx'));
-	var shoot_dy = parseFloat(response.query('shoot-dy'));
+	var shoot = new wrs.point(
+		parseFloat(response.query('shoot-dx')),
+		parseFloat(response.query('shoot-dy'))
+	);
 
 
 	/* Check if client exists
@@ -62,9 +65,8 @@ module.exports = function(game, response) {
 
 	/* Bullet will have a fixed speed
 	 */
-	var speed = Math.sqrt(wrs.util.length_sqr(shoot_dx, shoot_dy));
-	query.dx = query.dx / speed * configuration['max-shot-speed'];
-	query.dy = query.dy / speed * configuration['max-shot-speed'];
+	shoot = wrs.util.set_length(shoot, game.configuration.getMaxShotSpeed());
+
 };
 
 
