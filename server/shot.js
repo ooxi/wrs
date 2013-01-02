@@ -26,6 +26,14 @@
 var uuid = require('../common/uuid.js');
 
 
+
+
+
+/**
+ * Represents one shot issued by a ship
+ */
+module.exports = function(_ship, _initial_direction) {
+
 	/**
 	 * Public and private identification
 	 */
@@ -35,12 +43,13 @@ var uuid = require('../common/uuid.js');
 	/**
 	 * Position
 	 */
-	this.x = NaN;
-	this.y = NaN;
+	this.x = _ship.x;
+	this.y = _ship.y;
 
 	/**
 	 * Current rotation and velocity
 	 */
-	this.dx = NaN;
-	this.dy = NaN;
+	this.dx = _initial_direction.x;
+	this.dy = _initial_direction.x;
+};
 
