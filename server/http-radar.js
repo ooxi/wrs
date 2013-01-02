@@ -24,7 +24,8 @@
 'use strict';
 
 var wrs = {
-	ship:	require('./ship.js')
+	ship:	require('./ship.js'),
+	shot:	require('./shot.js')
 };
 
 
@@ -67,7 +68,9 @@ module.exports = function(game, response) {
 	};
 
 	game.orbit.each(function(obj) {
-		if (obj instanceof wrs.ship) {
+		if (obj instanceof wrs.shot) {
+			
+		} else if (obj instanceof wrs.ship) {
 			if (obj.public_key !== ship.public_key) {
 				echo['nearby-ships'].push(obj.json());
 			}
