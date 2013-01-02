@@ -42,7 +42,7 @@ module.exports = function(game, response) {
 
 		/* Export shot
 		 */
-		} else if (obj instanceof wrs.shot) {
+		if (obj instanceof wrs.shot) {
 			shots.push({
 				public: {
 					id:	obj.public_key,
