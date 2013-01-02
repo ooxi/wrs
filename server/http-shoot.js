@@ -47,6 +47,13 @@ module.exports = function(game, response) {
 	);
 
 
+	/* Check movement type
+	 */
+	if (!isNaN(shoot.x) || !isNaN(shoot.y)) {
+		return cb(403, 'Illegal shot');
+	}
+
+
 	/* Check if client exists
 	 */
 	if (!game.orbit.exists.private(ship_private_key)) {
@@ -66,9 +73,8 @@ module.exports = function(game, response) {
 
 	/* Bullet will have a fixed speed
 	 */
-console.log('before %j', shoot);
 	shoot = wrs.util.set_length(shoot, game.configuration.getMaxShotSpeed());
-console.log('after %j', shoot);
+
 
 	/* Add new bullet to orbit
 	 */
