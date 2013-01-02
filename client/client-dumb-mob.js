@@ -80,7 +80,7 @@ async.waterfall([
 	 */
 	function(api, configuration, cb) {
 		var team_name = wrs.client +'-'+ wrs.version +'-'+ Math.random();
-		var team_color = 'red';
+		var team_color = 'blue';
 
 		var team = new wrs.team(api, team_name, team_color, function() {
 			cb(null, api, configuration, team);
@@ -123,18 +123,14 @@ async.waterfall([
 	 * Initialize APIs
 	 */
 	function(api, configuration, radar, ships, cb) {
-		var ais = [];
+		var ai = new wrs.ai.dumb_mob(api, configuration, radar);
 
 		for (var i = 0; i < ships.length; ++i) {
-			ais.push(new wrs.ai.dumb_victim(
-				api, configuration, radar, ships[i]
-			));
+			ai.add(ships[i]);
 		}
 
 		setInterval(function() {
-			for (var i = 0; i < ais.length; ++i) {
-				ais[i].move();
-			}
+			ais[i].move();
 		}, 250);
 	}
 
