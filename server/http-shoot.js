@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var wrs = {
+	util:	require('../common/util.js')
+};
+
 
 
 
@@ -54,6 +58,13 @@ module.exports = function(game, response) {
 		return cb(403, 'Shoot cooldown unfinished (now: '+ now +', last: '+ ship.last_shoot +', '+ (now - ship.last_shoot) +' too fast)');
 	}
 	ship.last_shoot = now;
+
+
+	/* Bullet will have a fixed speed
+	 */
+	var speed = Math.sqrt(wrs.util.length_sqr(shoot_dx, shoot_dy));
+	query.dx = query.dx / speed * configuration['max-shot-speed'];
+	query.dy = query.dy / speed * configuration['max-shot-speed'];
 };
 
 
