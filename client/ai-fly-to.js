@@ -52,7 +52,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	this.fly_to = function(x, y, cb) {
 		_desired_position.x = x;
 		_desired_position.y = y;
-console.log('flying to %j', _desired_position);
+
 		if ('function' === typeof(cb)) {
 			_desired_cb = cb;
 		} else {
@@ -87,7 +87,7 @@ console.log('flying to %j', _desired_position);
 		 * be invoked once
 		 */
 		if ('function' === typeof(_desired_cb)) {
-console.log('%j %j', wrs.util.distance_sqr(current_position, _desired_position), wrs.util.sqr(_desired_distance));
+//console.log('%j %j', wrs.util.distance_sqr(current_position, _desired_position), wrs.util.sqr(_desired_distance));
 			if (wrs.util.distance_sqr(current_position, _desired_position) < wrs.util.sqr(_desired_distance)) {
 				var cb = _desired_cb;
 				_desired_cb = null;

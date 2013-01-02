@@ -47,12 +47,27 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 
 
 	/**
+	 * Chooses a random destination, will be used when there is no
+	 * information about the ship's current direction
+	 */
+	var fly_to_random_destination = function() {
+		var destination = new wrs.point(
+			_configuration['game-zone'] * 2.0 * (Math.random() - 0.5),
+			_configuration['game-zone'] * 2.0 * (Math.random() - 0.5)
+		);
+
+		console.log('[ai-dumb-victim] I don\'t know my own position, so I\'ll guess a random one');
+	};
+
+
+
+	/**
 	 * Flies to the next point a view seconds away
 	 */	
 	var fly_random = function() {
 		var position = _radar.ship(_ship.public_key());
 		if (null === position) {
-			console.log('[ai-dumb-victim] I don\'t know my own position, so I\'ll guess a random one');
+			
 			position = new wrs.point(
 				_configuration['game-zone'] * 2.0 * (Math.random() - 0.5),
 				_configuration['game-zone'] * 2.0 * (Math.random() - 0.5)
