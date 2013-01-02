@@ -73,7 +73,7 @@ module.exports = function(_game, _shot, _old, _new) {
 
 		/* But not with the shooter itself
 		 */
-		if (other_ship.public_key === _ship.public_key) {
+		if (other_ship.public_key === _shot.ship.public_key) {
 			return;
 		}
 		

@@ -42,6 +42,11 @@ var wrs = {
 module.exports = function(_game, _ship, _initial_direction) {
 
 	/**
+	 * Owner of bullet
+	 */
+	this.ship = _ship;
+
+	/**
 	 * Time of last actions
 	 */
 	this.last_radar = 0;
