@@ -53,10 +53,29 @@ module.exports = function(_api, _configuration, _radar) {
 	 */
 	var _target = null;
 
+
+
 	/**
 	 * Time of last change in direction and velocity
 	 */
-	
+	var _last_move = 0;
+
+	/**
+	 * Time of last shot
+	 */
+	var _last_shot = 0;
+
+
+
+	/**
+	 * Minimum interval between movements [ms]
+	 */
+	var _min_move_interval = 2500;
+
+	/**
+	 * Minimum interval between shots [ms]
+	 */
+	var _min_shoot_interval = _configuration['min-shoot-interval'];	
 
 
 
