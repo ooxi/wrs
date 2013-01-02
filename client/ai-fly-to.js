@@ -52,7 +52,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	this.fly_to = function(x, y, cb) {
 		_desired_position.x = x;
 		_desired_position.y = y;
-console.log('%j', cb);
+
 		if ('function' === typeof(cb)) {
 			_desired_cb = cb;
 		} else {

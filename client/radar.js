@@ -66,6 +66,12 @@ module.exports = function(_api, _configuration) {
 		shots: {}
 	};
 
+	/**
+	 * Callbacks wanting to be informed as soon as new information is
+	 * available
+	 */
+	var _listeners = [];
+
 
 
 	/**
@@ -89,6 +95,8 @@ module.exports = function(_api, _configuration) {
 		var private_key = _private_ship_keys[_current_private_key];
 		_api.radar(private_key, function(echo) {
 
+			/* Extract radar information
+			 */
 			var new_radar = {
 				ships:	{},
 				shots:	{}
@@ -104,6 +112,12 @@ module.exports = function(_api, _configuration) {
 			}
 			new_radar.ships[echo.me['public-key']] = echo.me;
 			_radar = new_radar;
+
+			/* Inform listeners
+			 */
+			for (var i = 0; i < _listeners.length; ++i) {
+				_listeners[i]();
+			}
 
 		}, function(exception) {
 			console.log('[radar] Failed receiving radar information with '+ private_key +': '+ exception);
@@ -161,6 +175,13 @@ module.exports = function(_api, _configuration) {
 		if (1 === _private_ship_keys.length) {
 			update_radar();
 		}
+	};
+
+	/**
+	 * Adds a callback function as listener
+	 */
+	this.listener = function(listener) {
+		_listeners.push(listener);
 	};
 
 };

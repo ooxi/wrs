@@ -50,13 +50,13 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 */	
 	var fly_random = function() {
 		var position = _radar.ship(_ship.public_key());
-
+console.log('ooo');
 		if (null === position) {
 			return;
 		}
 		position.x += _configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
 		position.y += _configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
-
+console.log('abc');
 		_fly_to_ai.fly_to(position.x, position.y, function() {
 			console.log('[ai-dumb-victim] Reached %j', position);
 			fly_random();
