@@ -47,10 +47,16 @@ module.exports = function(game) {
 		});
 
 		/* Check for collisions
+		 *
+		 * @warning Simplification to var j = i + 1 is _not_ possible,
+		 *     because ships do not collide with bulltest but bulltest
+		 *     will collide with ships
 		 */
 		for (var i = 0; i < collisions.length; ++i) {
 			for (var j = 0; j < collisions.length; ++j) {
-				collisions[i].collide(collisions[j]);
+				if (i != j) {
+					collisions[i].collide(collisions[j]);
+				}
 			}
 		}
 	};
