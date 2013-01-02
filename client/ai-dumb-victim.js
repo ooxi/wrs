@@ -71,10 +71,19 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 
 
 	/**
+	 * Changes the current direction and velocity of the ship, constrainted
+	 * by the configuration seen aboth
+	 */
+	var change_current_direction = function(ship_radar) {
+	};
+
+
+
+	/**
 	 * Chooses a random destination, will be used when there is no
 	 * information about the ship's current direction
 	 */
-	var fly_to_random_destination = function() {
+	var fly_in_random_direction = function() {
 		var dx = _configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5);
 		var dy = _configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5)
 
@@ -82,7 +91,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 			dx: dx,
 			dy: dy
 		});
-		_api.move(_ship.private_key(), direction.x, direction.y);
+		_api.move(_ship.private_key(), dx, dy);
 	};
 
 
@@ -100,9 +109,18 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 		}
 		_last_change = Date.now();
 		
-		/* Information abount current state of ship
+		/* Information about current state of ship
 		 */
 		var ship_radar = _radar.ship(_ship);
+
+		/* If no state is awailable, we have to fly in a random
+		 * direction, otherwise we only do a slight change
+		 */
+		if (null !== ship_radar) {
+			change_current_direction(ship_radar);
+		} else {
+			fly_in_random_direction();
+		}
 	};
 
 
