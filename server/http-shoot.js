@@ -71,7 +71,13 @@ module.exports = function(game, response) {
 
 	/* Add new bullet to orbit
 	 */
-	game.orbit.add(new wrs.shot(_game, ship, shoot));
+	var shot = new wrs.shot(game, ship, shoot);
+	game.orbit.add(shot);
+
+
+	/* Inform client of success
+ 	 */
+	response.json(200, shot.json());
 };
 
 
