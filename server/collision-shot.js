@@ -85,7 +85,16 @@ module.exports = function(_game, _ship, _old, _new) {
 
 
 	/**
-	 * Computes a collision with another ship
+	 * @return Wrapped shot
+	 */
+	this.shot = function() {
+		return _shot;
+	};
+
+
+
+	/**
+	 * Computes a collision with a ship
 	 */
 	var collide_ship = function(other) {
 		var self_circle = this.bouncing_circle();
@@ -95,7 +104,7 @@ module.exports = function(_game, _ship, _old, _new) {
 		var dy = self_circle.y - other_circle.y;
 		var radius_sum = self_circle.radius + other_circle.radius;
 
-		/* Other ship definitly has not collided with this ship
+		/* Bullet has definitly not collided with ship
 		 */
 		if ((dx * dx - dy * dy) > (radius_sum * radius_sum)) {
 			return;
@@ -103,8 +112,8 @@ module.exports = function(_game, _ship, _old, _new) {
 
 		/* Both this and the other ship will die
 		 */
-		_game.kill(this.ship(), other.ship());
-		_game.kill(other.ship(), this.ship());
+		_game.kill(this.shot(), other.ship());
+		_game.kill(other.ship(), this.shot());
 	};
 
 };
