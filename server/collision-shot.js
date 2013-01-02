@@ -49,11 +49,13 @@ module.exports = function(_game, _shot, _old, _new) {
 		var dx = _new.x - _old.x;
 		var dy = _new.y - _old.y;
 
-		return {
+		var a = {
 			x:	(_new.x + _old.x) / 2.0,
 			y:	(_new.y + _old.y) / 2.0,
 			radius:	Math.sqrt(dx * dx + dy * dy) / 2.0
 		};
+console.log('a %j');
+return a;
 	};
 
 
