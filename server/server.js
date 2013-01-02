@@ -104,7 +104,7 @@ async.waterfall([
 
 	setInterval(function() {
 		game.tick();
-	}, 245);
+	}, game.configuration.getTickInterval());
 });
 
 
