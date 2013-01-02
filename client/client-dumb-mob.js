@@ -35,7 +35,7 @@ var wrs = {
 	ship:		require('./ship.js'),
 	team:		require('./team.js'),
 
-	client:		'dump-victim',
+	client:		'dumb-mob',
 	version:	'0.1-beta'
 };
 
