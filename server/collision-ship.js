@@ -28,7 +28,7 @@
 
 
 /**
- * A ship's collision space is determined by 
+ * A ship's collision space is determined by TODO
  */
 module.exports = function(_game, _ship, _old, _new) {
 
