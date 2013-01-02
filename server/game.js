@@ -68,7 +68,7 @@ module.exports = function(_configuration) {
 	 */
 	this.hit = function(what, damage, aggressor) {
 		what.health -= damage;
-		console.log('[game] '+ aggressor.id +' dealt '+ damage +' to '+ what.id);
+		console.log('[game] '+ aggressor.public_key +' dealt '+ damage +' to '+ what.public_key);
 	};
 
 };
