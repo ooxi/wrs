@@ -35,6 +35,7 @@ var wrs = {
 		move:		require('./http-move.js'),
 		radar:		require('./http-radar.js'),
 		response:	require('./http-response.js'),
+		shoot:		require('./http-shoot.js'),
 		spawn:		require('./http-spawn.js'),
 		team:		require('./http-team.js')
 	}
@@ -76,7 +77,7 @@ module.exports = function(_game) {
 			} else if ('/move' === action.pathname) {
 				wrs.http.move(_game, response);
 			} else if ('/shoot' === action.pathname) {
-				response.error(500, 'Shoot not implemented');	// XXX
+				wrs.http.shoot(_game, response);
 
 			/* Dump must not be called by AIs but is frequently used by
 			 * GUIs

@@ -143,11 +143,8 @@ module.exports = function(_server_url) {
 		if ('function' !== typeof(success_cb)) {
 			success_cb = function() {};
 		}
-		if ('function' !== typeof(exception_cb)) {
-			exception_cb = function() {};
-		}
 
-		http.get(_server_url +'shoot?secret='+ e(secret) +'&dx='+ e(dx) +'&dy='+ e(dy), read_object(
+		http.get(_server_url +'shoot?ship-private-key='+ e(secret) +'&shoot-dx='+ e(dx) +'&shoot-dy='+ e(dy), read_object(
 			success_cb, exception_cb
 		));
 	};

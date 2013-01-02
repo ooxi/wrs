@@ -169,7 +169,7 @@ module.exports = function(_api, _configuration, _radar) {
 		 */
 		if ('undefined' !== typeof(victim)) {
 			_victim = victim;
-			console.log('[ai-dumb-victim] Chose '+ victim.name +' as victim');
+			console.log('[ai-dumb-victim] Chose '+ victim['public-key'] +' as victim');
 		} else {
 			console.log('[ai-dumb-victim] Found no victim in sight');
 		}
