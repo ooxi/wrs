@@ -39,6 +39,13 @@ var wrs = {
 module.exports = function(_api, _configuration, _radar) {
 
 	/**
+	 * Self reference
+	 */
+	var _that = this;
+
+
+
+	/**
 	 * All ships belonging to this mob (indexed by private key)
 	 */
 	var _ships = {};
@@ -63,7 +70,7 @@ module.exports = function(_api, _configuration, _radar) {
 	/**
 	 * Time of last shot
 	 */
-	var _last_shot = 0;
+	var _last_shoot = 0;
 
 
 
@@ -95,6 +102,42 @@ module.exports = function(_api, _configuration, _radar) {
 		delete _ships[ship.private_key()];
 	};
 
+
+
+	/**
+	 * Main method
+	 */
+	this.tick = function() {
+
+		/* Do not act, if not enough time since the last action has
+		 * passed
+		 */
+		var now = Date.now();
+
+		if ((now - _last_move) > _min_move_interval) {
+			_last_move = now;
+			move();
+		}
+
+		if ((now - _last_shoot) > _min_shoot_interval) {
+			_last_shoot = now;
+			shoot();
+		}
+	};
+
+
+
+
+
+	/**
+	 * Constructor
+	 */
+	(function() {
+		_radar.listen(function() {
+			_that.tick()
+		});
+		_that.tick();
+	})();
 };
 
 
