@@ -51,7 +51,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	/**
 	 * Shoots a bullet at the specified target
 	 */
-	this.shoot_at = function(x, y, cb) {
+	this.shoot_at = function(x, y, success_cb, error_cb) {
 		var current_position = _radar.ship(_ship.public_key());
 		if (null === current_position) {
 			console.log('[ai-fly-to] Cannot shoot, I don\'t know myself');
@@ -63,11 +63,18 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 			new wrs.point(x, y)
 		);
 
+		if ('function' !== typeof(error_cb)) {
+			error_cb = function(error) {
+				console.log('Shot did not have any effect: '+ error.message);
+			};
+		}
+
 		_api.shoot(
 			_ship.private_key(),
 			direction.x * _configuration['max-shot-speed'],
 			direction.y * _configuration['max-shot-speed'],
-			cb
+			success_cb,
+			error_cb
 		);
 	};
 
