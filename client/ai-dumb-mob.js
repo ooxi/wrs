@@ -58,7 +58,7 @@ module.exports = function(_api, _configuration, _radar) {
 	/**
 	 * Chosen target
 	 */
-	var _target = null;
+	var _victim = null;
 
 
 
@@ -109,9 +109,12 @@ module.exports = function(_api, _configuration, _radar) {
 
 
 	/**
-	 * All ships are
+	 * All ships
 	 */
 	var move = function() {
+
+		/* If no victim is chosen, we cannot do anything
+		 */
 	};
 
 
@@ -120,6 +123,13 @@ module.exports = function(_api, _configuration, _radar) {
 	 * Main method
 	 */
 	this.tick = function() {
+
+		/* If no target is chosen, choose the nearest
+		 */
+		if (null === _victim) {
+			choose_victim();
+		}
+
 
 		/* Do not act, if not enough time since the last action has
 		 * passed
@@ -134,6 +144,13 @@ module.exports = function(_api, _configuration, _radar) {
 		if ((now - _last_shoot) > _min_shoot_interval) {
 			_last_shoot = now;
 			shoot();
+		}
+
+
+		/* Execute ship fly-to AI
+		 */
+		for (var private_key in _fly_to) {
+			_fly_to[private_key].move();
 		}
 	};
 
