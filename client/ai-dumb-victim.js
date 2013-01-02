@@ -44,6 +44,21 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 */
 	var _fly_to_ai = new wrs.ai.fly_to(_api, _configuration, _radar, _ship);
 
+	/**
+	 * Last time the direction was changed
+	 */
+	var _last_change = 0;
+
+	/**
+	 * Maximum direction change (angle in [0, 180])
+	 */
+	var _max_angle_change = 45.0;
+
+	/**
+	 * Maximum velocity change (relative to current velocity)
+	 */
+	var _max_velocity_change = 0.25;
+
 
 
 	/**
@@ -56,7 +71,8 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 			_configuration['game-zone'] * 2.0 * (Math.random() - 0.5)
 		);
 
-		console.log('[ai-dumb-victim] I don\'t know my own position, so I\'ll guess a random one');
+		console.log('[ai-dumb-victim] I chose %j as random destination', destination);
+		_fly_to_ai.fly_to(destination.x, destination.y, fly_random);
 	};
 
 
