@@ -69,7 +69,7 @@ module.exports = function(game, response) {
 
 	game.orbit.each(function(obj) {
 		if (obj instanceof wrs.shot) {
-			
+			echo['nearby-shots'].push(obj.json());
 		} else if (obj instanceof wrs.ship) {
 			if (obj.public_key !== ship.public_key) {
 				echo['nearby-ships'].push(obj.json());
