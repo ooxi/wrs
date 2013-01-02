@@ -54,7 +54,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	this.shoot_at = function(x, y, cb) {
 		var current_position = _radar.ship(_ship.public_key());
 		if (null === current_position) {
-			console.log('[ai-fly-to] I don\'t know myself');
+			console.log('[ai-fly-to] Cannot shoot, I don\'t know myself');
 			return;
 		}
 
@@ -97,7 +97,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	this.move = function() {
 		var current_position = _radar.ship(_ship.public_key());
 		if (null === current_position) {
-			console.log('[ai-fly-to] I don\'t know myself');
+			console.log('[ai-fly-to] Cannot move, I don\'t know myself');
 			return;
 		}
 
