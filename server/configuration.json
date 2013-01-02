@@ -21,6 +21,6 @@
 	"spawn-zone":		500,
 
 	"shot-ticks":		100,
-	"tick-interval":	234
+	"tick-interval":	2340
 }
 
