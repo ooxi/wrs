@@ -51,6 +51,11 @@ module.exports = function(_game, _ship, _initial_direction) {
 
 
 	/**
+	 * Shot still active (== not yet collided)
+	 */
+	this.alive = true;
+
+	/**
 	 * Public and private identification
 	 */
 	this.public_key = uuid.v4();

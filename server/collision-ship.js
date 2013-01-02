@@ -64,7 +64,7 @@ module.exports = function(_game, _ship, _old, _new) {
 
 		/* If myself ain't alive it cannot collide with anything else
 		 */
-		if (!_ship.alive()) {
+		if (_ship.health <= 0.00001) {
 			return;
 		}
 

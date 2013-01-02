@@ -63,6 +63,11 @@ module.exports = function(_game, _team, _name) {
 	this.name = _name;
 
 	/**
+	 * Ship health
+	 */
+	this.health = 1.0;
+
+	/**
 	 * Public and private identification
 	 */
 	this.public_key = uuid.v4();
