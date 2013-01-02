@@ -67,7 +67,9 @@ module.exports = function(_game, _ship, _initial_direction) {
 	 */
 	this.dx = _initial_direction.x;
 	this.dy = _initial_direction.y;
-console.log('movement %j', _initial_direction);
+
+
+
 
 
 	/**
