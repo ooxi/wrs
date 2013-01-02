@@ -64,14 +64,11 @@ module.exports = function(_configuration) {
 	 *
 	 * @param what Object to be harmed
 	 * @param damage Damage to be dealt
-	 * @param aggressor (optional) Object responsble for attack
+	 * @param aggressor Object responsible for attack
 	 */
 	this.hit = function(what, damage, aggressor) {
 		what.health -= damage;
-
-		if ('undefined' !== typeof(aggressor)) {
-			console.log('[game] '+ aggressor.id +' dealt '+ damage +' to '+ what.id);
-		}
+		console.log('[game] '+ aggressor.id +' dealt '+ damage +' to '+ what.id);
 	};
 
 };

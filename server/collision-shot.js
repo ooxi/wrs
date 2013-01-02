@@ -112,8 +112,8 @@ module.exports = function(_game, _shot, _old, _new) {
 
 		/* Both this and the other ship will die
 		 */
-		_game.kill(other.ship(), other.ship().health, this.shot());
-		_game.kill(this.shot(), this.shot().health, other.ship());
+		_game.hit(other.ship(), other.ship().health, this.shot());
+		_game.hit(this.shot(), this.shot().health, other.ship());
 	};
 
 };
