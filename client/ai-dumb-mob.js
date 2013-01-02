@@ -93,6 +93,9 @@ module.exports = function(_api, _configuration, _radar) {
 	 */
 	this.add = function(ship) {
 		_ships[ship.private_key()] = ship;
+		_fly_to[ship.private_key()] = new wrs.ai.fly_to(
+			_api, _configuration, _radar, ship
+		);
 	};
 
 	/**
@@ -100,6 +103,15 @@ module.exports = function(_api, _configuration, _radar) {
 	 */
 	this.remove = function(ship) {
 		delete _ships[ship.private_key()];
+		delete _fly_to[ship.private_key()];
+	};
+
+
+
+	/**
+	 * All ships are
+	 */
+	var move = function() {
 	};
 
 
