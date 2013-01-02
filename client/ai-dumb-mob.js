@@ -51,7 +51,7 @@ module.exports = function(_api, _configuration, _radar) {
 	var _ships = {};
 
 	/**
-	 * Fly-To AIs responsible for these ships (indexed by private ship key)
+	 * Fly-To AIs responsible for these ships (indexed by public ship key)
 	 */
 	var _fly_to = {};
 
@@ -93,7 +93,7 @@ module.exports = function(_api, _configuration, _radar) {
 	 */
 	this.add = function(ship) {
 		_ships[ship.private_key()] = ship;
-		_fly_to[ship.private_key()] = new wrs.ai.fly_to(
+		_fly_to[ship.public_key()] = new wrs.ai.fly_to(
 			_api, _configuration, _radar, ship
 		);
 	};
@@ -103,18 +103,62 @@ module.exports = function(_api, _configuration, _radar) {
 	 */
 	this.remove = function(ship) {
 		delete _ships[ship.private_key()];
-		delete _fly_to[ship.private_key()];
+		delete _fly_to[ship.public_key()];
 	};
 
 
 
 	/**
-	 * All ships
+	 * Select the vicitm, which is closest to the center of our ships
+	 */
+	var choose_victim = function() {
+
+		/* Get center
+		 */
+		var center = new wrs.point(0.0, 0.0);
+		var ships = 0;
+
+		for (var private_key in _ships) {
+			var ship_radar = radar.ship(private_key);
+
+			if (null !== ship_radar) {
+				center.x += ship_radar.x;
+				center.y += ship_radar.y;
+				++ships;
+			}
+		}
+
+		/* We have no ships (or at least no information about the
+		 * position of our ships) so we cannot make an informed choise
+		 */
+		if (0 === ships) {
+			return null;
+		}
+
+
+		/* Find the victim closest to the center
+		 */
+		var victims = _radar.ships();
+
+		for (var public_key in victims) {
+			
+		}
+	};
+
+
+
+	/**
+	 * All ships try to get closer to the victim
 	 */
 	var move = function() {
 
 		/* If no victim is chosen, we cannot do anything
 		 */
+		if (null === _victim) {
+			return;
+		}
+
+		
 	};
 
 
@@ -150,7 +194,8 @@ module.exports = function(_api, _configuration, _radar) {
 		/* Execute ship fly-to AI
 		 */
 		for (var private_key in _fly_to) {
-			_fly_to[private_key].move();
+			var ship = _ships[private_key];
+			_fly_to[ship.public_key()].move();
 		}
 	};
 

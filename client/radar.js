@@ -158,12 +158,12 @@ module.exports = function(_api, _configuration) {
 		return _radar.shots[public_key];
 	};
 
-//	/**
-//	 * @return All clients
-//	 */
-//	this.clients = function() {
-//		return radar.client;
-//	};
+	/**
+	 * @return All ships, indexed by public key
+	 */
+	this.ships = function() {
+		return radar.ships;
+	};
 
 	/**
 	 * Adds new private ship key
