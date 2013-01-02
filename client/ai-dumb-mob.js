@@ -26,7 +26,8 @@
 var wrs = {
 	ai: {
 		fly_to:	require('./ai-fly-to.js')
-	}
+	},
+	util:	require('../common/util.js')
 };
 
 
@@ -132,16 +133,39 @@ module.exports = function(_api, _configuration, _radar) {
 		 * position of our ships) so we cannot make an informed choise
 		 */
 		if (0 === ships) {
-			return null;
+			return;
 		}
+		center.x /= ships;
+		center.y /= ships;
 
 
 		/* Find the victim closest to the center
 		 */
 		var victims = _radar.ships();
+		var min_distance_sqr = Infinity;
+		var victim = undefined;
 
 		for (var public_key in victims) {
 			
+			/* If we own that ship, don't treat it as enemy
+			 */
+			if (_fly_to.hasOwnProperty(public_key)) {
+				continue;
+			}
+
+			var distance_sqr = wrs.util.distance_sqr(center, victims[public_key]);
+
+			if (distance_sqr < min_distance_sqr) {
+				min_distance_sqr = distance_sqr;
+				victim = victims[public_key];
+			}
+		}
+
+
+		/* Select chosen victim
+		 */
+		if ('undefined' !== typeof(victim)) {
+			_victim = victim;
 		}
 	};
 
@@ -157,8 +181,37 @@ module.exports = function(_api, _configuration, _radar) {
 		if (null === _victim) {
 			return;
 		}
+		var victim_radar = _radar.ship(_victim.['public-key']);
 
-		
+		/* Fly all ships to that victim
+		 */
+		for (var public_key in _fly_to) {
+			_fly_to[public_key].fly_to(victim_radar.x, victim_radar.y);
+		}
+	};
+
+
+
+	/**
+	 * Shoot at the victim :-)
+	 */
+	var shoot = function() {
+
+		/* No victim to shoot at
+		 */
+		if (null === _victim) {
+			return;
+		}
+		var victim_radar = _radar.ship(_victim.['public-key']);
+
+		/* Shoot at the current position
+		 */
+		for (var private_key in _ships) {
+			var direction = wrs.util.look_at(
+				_ships[private_key], victim_radar
+			);
+			_api.shoot(private_key, direction.x, direction.y);
+		}
 	};
 
 
