@@ -97,23 +97,23 @@ module.exports = function(_game, _shot, _old, _new) {
 	 * Computes a collision with a ship
 	 */
 	var collide_ship = function(other) {
-		var self_circle = this.bounding_circle();
-		var other_circle = other.bounding_circle();
-
-		var dx = self_circle.x - other_circle.x;
-		var dy = self_circle.y - other_circle.y;
-		var radius_sum = self_circle.radius + other_circle.radius;
-
-		/* Bullet has definitly not collided with ship
-		 */
-		if ((dx * dx + dy * dy) > (radius_sum * radius_sum)) {
-			return;
-		}
-
-		/* Both this and the other ship will die
-		 */
-		_game.hit(other.ship(), other.ship().health, this.shot());
-		_game.hit(this.shot(), this.shot().health, other.ship());
+//		var self_circle = this.bounding_circle();
+//		var other_circle = other.bounding_circle();
+//
+//		var dx = self_circle.x - other_circle.x;
+//		var dy = self_circle.y - other_circle.y;
+//		var radius_sum = self_circle.radius + other_circle.radius;
+//
+//		/* Bullet has definitly not collided with ship
+//		 */
+//		if ((dx * dx + dy * dy) > (radius_sum * radius_sum)) {
+//			return;
+//		}
+//
+//		/* Both this and the other ship will die
+//		 */
+//		_game.hit(other.ship(), other.ship().health, this.shot());
+//		_game.hit(this.shot(), this.shot().health, other.ship());
 	};
 
 };
