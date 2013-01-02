@@ -121,7 +121,8 @@ module.exports = function(_api, _configuration, _radar) {
 		var ships = 0;
 
 		for (var private_key in _ships) {
-			var ship_radar = _radar.ship(private_key);
+			var ship = _ships[private_key];
+			var ship_radar = _radar.ship(ship.public_key());
 
 			if (null !== ship_radar) {
 				center.x += ship_radar.x;
@@ -217,6 +218,9 @@ module.exports = function(_api, _configuration, _radar) {
 		if (null === _victim) {
 			console.log('[ai-dumb-mob] No victim chosen');
 			choose_victim();
+		}
+		if (null === _victim) {
+			return;
 		}
 		var victim_radar = _radar.ship(_victim['public-key']);
 
