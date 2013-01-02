@@ -25,6 +25,13 @@
 
 var uuid = require('../common/uuid.js');
 
+var wrs = {
+	collision: {
+		shot:	require('./collision-shot.js')
+	},
+	point:	require('../common/point.js')
+};
+
 
 
 
@@ -33,6 +40,15 @@ var uuid = require('../common/uuid.js');
  * Represents one shot issued by a ship
  */
 module.exports = function(_ship, _initial_direction) {
+
+	/**
+	 * Time of last actions
+	 */
+	this.last_radar = 0;
+	this.last_shoot = 0
+	var _last_move = Date.now();
+
+
 
 	/**
 	 * Public and private identification
@@ -51,5 +67,52 @@ module.exports = function(_ship, _initial_direction) {
 	 */
 	this.dx = _initial_direction.x;
 	this.dy = _initial_direction.x;
+
+
+
+	/**
+	 * Updates the shot's position
+	 */
+	this.move = function() {
+
+		/* Time since last movement
+		 */
+		var now = Date.now();
+		var delta = parseFloat(now - _last_move) / 1000.0;
+		_last_move = now;
+
+
+		/* Remember old position
+		 */
+		var old_x = this.x;
+		var old_y = this.y;
+
+
+		/* Change position
+		 */
+		this.x = this.x + this.dx * delta;
+		this.y = this.y + this.dy * delta;
+
+
+		/* Remember collision information
+		 */
+		return new wrs.collision.shot(
+			_game, this,
+			new wrs.point(old_x, old_y),
+			new wrs.point(this.x, this.y)
+		);
+	};
+
 };
+
+
+
+
+
+
+
+
+
+
+
 
