@@ -31,7 +31,7 @@
  * Shots do not collide with each other but with ships (unless it's the ship
  * which fired that shot)
  */
-module.exports = function(_game, _ship, _old, _new) {
+module.exports = function(_game, _shot, _old, _new) {
 
 	/**
 	 * Only handles ships

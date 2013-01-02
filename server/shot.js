@@ -97,7 +97,7 @@ module.exports = function(_ship, _initial_direction) {
 		/* Remember collision information
 		 */
 		return new wrs.collision.shot(
-			_game, this,
+			game, this,
 			new wrs.point(old_x, old_y),
 			new wrs.point(this.x, this.y)
 		);
