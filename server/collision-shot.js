@@ -63,7 +63,7 @@ module.exports = function(_game, _shot, _old, _new) {
 	 * detected
 	 */
 	this.collide = function(other) {
-console.log('x %j', other.type());
+
 		/* Only collisions with ships
 		 */
 		if ('ship' !== other.type()) {
@@ -73,7 +73,6 @@ console.log('x %j', other.type());
 
 		/* But not with the shooter itself
 		 */
-console.log('%j == %j', other_ship.public_key, _shot.ship.public_key);
 		if (other_ship.public_key === _shot.ship.public_key) {
 			return;
 		}
