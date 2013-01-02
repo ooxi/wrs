@@ -67,6 +67,10 @@ module.exports = function(game, response) {
 	 */
 	shoot = wrs.util.set_length(shoot, game.configuration.getMaxShotSpeed());
 
+
+	/* Add new bullet to orbit
+	 */
+	game.orbit.add(new wrs.shot(ship, shoot));
 };
 
 
