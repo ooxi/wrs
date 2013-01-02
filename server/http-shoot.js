@@ -49,7 +49,7 @@ module.exports = function(game, response) {
 
 	/* Check movement type
 	 */
-	if (!isNaN(shoot.x) || !isNaN(shoot.y)) {
+	if (isNaN(shoot.x) || isNaN(shoot.y)) {
 		return cb(403, 'Illegal shot');
 	}
 
