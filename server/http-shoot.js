@@ -66,8 +66,9 @@ module.exports = function(game, response) {
 
 	/* Bullet will have a fixed speed
 	 */
+console.log('before %j', shoot);
 	shoot = wrs.util.set_length(shoot, game.configuration.getMaxShotSpeed());
-
+console.log('after %j', shoot);
 
 	/* Add new bullet to orbit
 	 */
