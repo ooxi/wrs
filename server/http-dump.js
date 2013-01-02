@@ -50,7 +50,8 @@ module.exports = function(game, response) {
 					x:	obj.x,
 					y:	obj.y,
 					dx:	obj.dx,
-					dy:	obj.dy
+					dy:	obj.dy,
+					bc:	obj.__bc
 				}
 			});
 
