@@ -60,9 +60,9 @@ module.exports = function(_configuration) {
 		 */
 		var to_remove = [];
 
-		this.orbit.each(function(public_key, obj) {
+		this.orbit.each(function(obj) {
 			if (obj.health < 0.00001) {
-				console.log('[game] Dead object '+ public_key +' will be removed from game');
+				console.log('[game] Dead object '+ obj.public_key +' will be removed from game');
 				to_remove.push(obj);
 			}
 		});
