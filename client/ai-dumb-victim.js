@@ -24,9 +24,6 @@
 'use strict';
 
 var wrs = {
-	ai: {
-		fly_to:	require('./ai-fly-to.js')
-	},
 	point:	require('../common/point.js')
 };
 
@@ -38,11 +35,6 @@ var wrs = {
  * A simple victim doing a random walk
  */
 module.exports = function(_api, _configuration, _radar, _ship) {
-
-//	/**
-//	 * AI used to fly the ship to a desired point
-//	 */
-//	var _fly_to_ai = new wrs.ai.fly_to(_api, _configuration, _radar, _ship);
 
 	/**
 	 * Last time the direction was changed
