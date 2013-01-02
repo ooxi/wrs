@@ -24,7 +24,8 @@
 'use strict';
 
 var wrs = {
-	ship:	require('./ship.js')
+	ship:	require('./ship.js'),
+	shot:	require('./shot.js')
 };
 
 
