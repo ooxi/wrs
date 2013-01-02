@@ -56,7 +56,8 @@ module.exports = function(game, response) {
 		/* Unknown object type
 		 */
 		} else {
-			throw 'Object of unknown type cannot be dumped';
+			response.error(500, 'Unknown object type');
+			throw new Error('Object of unknown type cannot be dumped');
 		}
 	});
 

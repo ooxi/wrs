@@ -72,8 +72,8 @@ module.exports = function(game, response) {
 				echo['nearby-ships'].push(obj.json());
 			}
 		} else {
-			throw 'Unknown object type';
-			response.error(500, 'Unknown object');
+			response.error(500, 'Unknown object type');
+			throw new Error('Unknown object type');
 		}
 	});
 
