@@ -46,6 +46,14 @@ module.exports = function(game, response) {
 	}
 	var ship = game.orbit.get.private(ship_private_key);
 
+
+	/* Check if last shot invokation was not long enough away
+	 */
+	var now = Date.now();
+	if (now - ship.last_shoot < game.configuration.getMinShootInterval()) {
+		return cb(403, 'Shoot cooldown unfinished (now: '+ now +', last: '+ ship.last_shoot +', '+ (now - ship.last_shoot) +' too fast)');
+	}
+	ship.last_shoot = now;
 };
 
 

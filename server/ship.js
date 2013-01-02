@@ -51,7 +51,7 @@ module.exports = function(_game, _team, _name) {
 	 * Time of last actions
 	 */
 	this.last_radar = 0;
-	var _last_shot = 0
+	this.last_shoot = 0
 	var _last_move = Date.now();
 
 
