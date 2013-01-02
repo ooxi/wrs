@@ -25,6 +25,7 @@
 
 var wrs = {
 	point:	require('../common/point.js'),
+	shot:	require('./shot.js'),
 	util:	require('../common/util.js')
 };
 
