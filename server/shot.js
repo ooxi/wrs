@@ -53,7 +53,7 @@ module.exports = function(_game, _ship, _initial_direction) {
 	/**
 	 * Shot still active (== not yet collided)
 	 */
-	this.alive = true;
+	this.health = 1.0;
 
 	/**
 	 * Public and private identification
