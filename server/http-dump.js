@@ -44,7 +44,6 @@ module.exports = function(game, response) {
 		/* Export shot
 		 */
 		if (obj instanceof wrs.shot) {
-console.log('shot %j', obj);
 			shots.push({
 				public: {
 					id:	obj.public_key,
