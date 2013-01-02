@@ -71,6 +71,7 @@ module.exports = function(_configuration) {
 
 		if ('undefined' !== typeof(aggressor)) {
 			console.log('[game] '+ aggressor.id +' dealt '+ damage +' to '+ what.id);
+		}
 	};
 
 };
