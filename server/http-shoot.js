@@ -34,8 +34,18 @@ module.exports = function(game, response) {
 	if (!response.require(['ship-private-key', 'shoot-dx', 'shoot-dy'])) {
 		return;
 	}
+	var ship_private_key = response.query('ship-private-key');
+	var shoot_dx = parseFloat(response.query('shoot-dx'));
+	var shoot_dy = parseFloat(response.query('shoot-dy'));
 
-	
+
+	/* Check if client exists
+	 */
+	if (!game.orbit.exists.private(ship_private_key)) {
+		return response.error(403, 'Unknown ship private key');
+	}
+	var ship = game.orbit.get.private(ship_private_key);
+
 };
 
 
