@@ -121,7 +121,7 @@ module.exports = function(_api, _configuration, _radar) {
 		var ships = 0;
 
 		for (var private_key in _ships) {
-			var ship_radar = radar.ship(private_key);
+			var ship_radar = _radar.ship(private_key);
 
 			if (null !== ship_radar) {
 				center.x += ship_radar.x;
@@ -175,19 +175,12 @@ module.exports = function(_api, _configuration, _radar) {
 	/**
 	 * All ships try to get closer to the victim
 	 */
-	var move = function() {
-
-		/* If no victim is chosen, we cannot do anything
-		 */
-		if (null === _victim) {
-			return;
-		}
-		var victim_radar = _radar.ship(_victim['public-key']);
+	var move = function(victim) {
 
 		/* Fly all ships to that victim
 		 */
 		for (var public_key in _fly_to) {
-			_fly_to[public_key].fly_to(victim_radar.x, victim_radar.y);
+			_fly_to[public_key].fly_to(victim.x, victim.y);
 		}
 	};
 
@@ -196,20 +189,13 @@ module.exports = function(_api, _configuration, _radar) {
 	/**
 	 * Shoot at the victim :-)
 	 */
-	var shoot = function() {
-
-		/* No victim to shoot at
-		 */
-		if (null === _victim) {
-			return;
-		}
-		var victim_radar = _radar.ship(_victim['public-key']);
+	var shoot = function(victim) {
 
 		/* Shoot at the current position
 		 */
 		for (var private_key in _ships) {
 			var direction = wrs.util.look_at(
-				_ships[private_key], victim_radar
+				_ships[private_key], victim
 			);
 			_api.shoot(private_key, direction.x, direction.y);
 		}
@@ -225,7 +211,17 @@ module.exports = function(_api, _configuration, _radar) {
 		/* If no target is chosen, choose the nearest
 		 */
 		if (null === _victim) {
+			console.log('[ai-dumb-mob] No victim chosen');
 			choose_victim();
+		}
+		var victim_radar = _radar.ship(_victim['public-key']);
+
+
+		/* Victim out of sight or dead
+		 */
+		if (null === victim_radar) {
+			_victim = null;
+			return;
 		}
 
 
@@ -236,20 +232,19 @@ module.exports = function(_api, _configuration, _radar) {
 
 		if ((now - _last_move) > _min_move_interval) {
 			_last_move = now;
-			move();
+			move(victim_radar);
 		}
 
 		if ((now - _last_shoot) > _min_shoot_interval) {
 			_last_shoot = now;
-			shoot();
+			shoot(victim_radar);
 		}
 
 
 		/* Execute ship fly-to AI
 		 */
-		for (var private_key in _fly_to) {
-			var ship = _ships[private_key];
-			_fly_to[ship.public_key()].move();
+		for (var public_key in _fly_to) {
+			_fly_to[public_key].move();
 		}
 	};
 

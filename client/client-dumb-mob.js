@@ -130,7 +130,7 @@ async.waterfall([
 		}
 
 		setInterval(function() {
-			ais[i].move();
+			ai.tick();
 		}, 250);
 	}
 
