@@ -162,7 +162,7 @@ module.exports = function(_api, _configuration) {
 	 * @return All ships, indexed by public key
 	 */
 	this.ships = function() {
-		return radar.ships;
+		return _radar.ships;
 	};
 
 	/**
