@@ -75,15 +75,14 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * information about the ship's current direction
 	 */
 	var fly_to_random_destination = function() {
-		var destination = new wrs.point(
-			_configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5),
-			_configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5)
-		);
+		var dx = _configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5);
+		var dy = _configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5)
 
-		console.log('[ai-dumb-victim] I chose %j as random direction', destination);
-		var direction = wrs.util.look_at(destination);
-		_last_change = Date.now();
-		_fly_to_ai.fly_to(destination.x, destination.y, fly_random);
+		console.log('[ai-dumb-victim] I chose %j as random direction', {
+			dx: dx,
+			dy: dy
+		});
+		_api.move(_ship.private_key(), direction.x, direction.y);
 	};
 
 
@@ -91,27 +90,22 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	/**
 	 * Changes current velocity and rotation if enought time has passed
 	 */
-	
-	/**
-	 * Flies to the next point a view seconds away
-	 *
 	var fly_random = function() {
-		var position = _radar.ship(_ship.public_key());
-		if (null === position) {
-			
-			position = new wrs.point(
-				_configuration['game-zone'] * 2.0 * (Math.random() - 0.5),
-				_configuration['game-zone'] * 2.0 * (Math.random() - 0.5)
-			);
-		}
-		position.x += _configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
-		position.y += _configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
 
-		_fly_to_ai.fly_to(position.x, position.y, function() {
-			console.log('[ai-dumb-victim] Reached %j', position);
-			fly_random();
-		});
-	};*/
+		/* Don't flood the network with too many requests
+		 */
+		var now = Date.now();
+		if ((now - _last_change) < _min_change_interval) {
+			return;
+		}
+		_last_change = Date.now();
+		
+		/* Information abount current state of ship
+		 */
+		var ship_radar = _radar.ship(_ship);
+	};
+
+
 
 
 
