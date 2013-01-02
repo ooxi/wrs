@@ -50,7 +50,7 @@ module.exports = function(game, response) {
 	/* Check movement type
 	 */
 	if (isNaN(shoot.x) || isNaN(shoot.y)) {
-		return cb(403, 'Illegal shot');
+		return response.error(403, 'Illegal shot');
 	}
 
 
@@ -66,7 +66,7 @@ module.exports = function(game, response) {
 	 */
 	var now = Date.now();
 	if (now - ship.last_shoot < game.configuration.getMinShootInterval()) {
-		return cb(403, 'Shoot cooldown unfinished (now: '+ now +', last: '+ ship.last_shoot +', '+ (now - ship.last_shoot) +' too fast)');
+		return response.error(403, 'Shoot cooldown unfinished (now: '+ now +', last: '+ ship.last_shoot +', '+ (now - ship.last_shoot) +' too fast)');
 	}
 	ship.last_shoot = now;
 
