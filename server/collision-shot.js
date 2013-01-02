@@ -63,7 +63,7 @@ module.exports = function(_game, _shot, _old, _new) {
 	 * detected
 	 */
 	this.collide = function(other) {
-
+console.log('x %j', other.type());
 		/* Only collisions with ships
 		 */
 		if ('ship' !== other.type()) {
