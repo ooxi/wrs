@@ -23,6 +23,12 @@
  */
 'use strict';
 
+var wrs = {
+	ai: {
+		fly_to:	require('./ai-fly-to.js')
+	}
+};
+
 
 
 
@@ -33,9 +39,26 @@
 module.exports = function(_api, _configuration, _radar) {
 
 	/**
-	 * All ships belonging to this mob (indexed by private id)
+	 * All ships belonging to this mob (indexed by private key)
 	 */
 	var _ships = {};
+
+	/**
+	 * Fly-To AIs responsible for these ships (indexed by private ship key)
+	 */
+	var _fly_to = {};
+
+	/**
+	 * Chosen target
+	 */
+	var _target = null;
+
+	/**
+	 * Time of last change in direction and velocity
+	 */
+	
+
+
 
 
 
