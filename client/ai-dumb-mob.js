@@ -70,7 +70,7 @@ module.exports = function(_api, _configuration, _radar) {
 	/**
 	 * Minimum interval between movements [ms]
 	 */
-	var _min_move_interval = 2500;
+	var _min_move_interval = _configuration['min-radar-interval'];
 
 	/**
 	 * Minimum interval between shots [ms]
