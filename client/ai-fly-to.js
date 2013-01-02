@@ -52,7 +52,23 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * Shoots a bullet at the specified target
 	 */
 	this.shoot_at = function(x, y, cb) {
-		
+		var current_position = _radar.ship(_ship.public_key());
+		if (null === current_position) {
+			console.log('[ai-fly-to] I don\'t know myself');
+			return;
+		}
+
+		var direction = wrs.util.look_at(
+			current_position,
+			new wrs.point(x, y)
+		);
+
+		_api.shoot(
+			_ship.private_key(),
+			direction.x * _configuration['max-shot-speed'],
+			direction.y * _configuration['max-shot-speed'],
+			cb
+		);
 	};
 
 
