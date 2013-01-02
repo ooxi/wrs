@@ -39,15 +39,22 @@ var wrs = {
  */
 module.exports = function(_api, _configuration, _radar, _ship) {
 
-	/**
-	 * AI used to fly the ship to a desired point
-	 */
-	var _fly_to_ai = new wrs.ai.fly_to(_api, _configuration, _radar, _ship);
+//	/**
+//	 * AI used to fly the ship to a desired point
+//	 */
+//	var _fly_to_ai = new wrs.ai.fly_to(_api, _configuration, _radar, _ship);
 
 	/**
 	 * Last time the direction was changed
 	 */
 	var _last_change = 0;
+
+
+
+	/**
+	 * Minimum time between two changes [ms]
+	 */
+	var _min_change_interval = 2500;
 
 	/**
 	 * Maximum direction change (angle in [0, 180])
@@ -69,17 +76,22 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 */
 	var fly_to_random_destination = function() {
 		var destination = new wrs.point(
-			_configuration['game-zone'] * 2.0 * (Math.random() - 0.5),
-			_configuration['game-zone'] * 2.0 * (Math.random() - 0.5)
+			_configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5),
+			_configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5)
 		);
 
-		console.log('[ai-dumb-victim] I chose %j as random destination', destination);
+		console.log('[ai-dumb-victim] I chose %j as random direction', destination);
+		var direction = wrs.util.look_at(destination);
 		_last_change = Date.now();
 		_fly_to_ai.fly_to(destination.x, destination.y, fly_random);
 	};
 
 
 
+	/**
+	 * Changes current velocity and rotation if enought time has passed
+	 */
+	
 	/**
 	 * Flies to the next point a view seconds away
 	 *
@@ -107,7 +119,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * Moves the ship
 	 */
 	this.move = function() {
-		_fly_to_ai.move();
+		fly_random();
 	};
 
 
