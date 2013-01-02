@@ -55,7 +55,7 @@ module.exports = function(game, response) {
 	 */
 	var max_speed = game.configuration.getMaxShipSpeed();
 	if (wrs.util.length_sqr(ship_desired_dx, ship_desired_dy) > wrs.util.sqr(max_speed + 0.0001)) {
-		return response.error(403, 'You are too fast %j > %j!', wrs.util.length_sqr(ship_desired_dx, ship_desired_dy), wrs.util.sqr(max_speed + 0.0001));
+		return response.error(403, 'You are too fast '+ Math.sqrt(wrs.util.length_sqr(ship_desired_dx, ship_desired_dy)) +' > '+ Math.sqrt(wrs.util.sqr(max_speed + 0.0001)));
 	}
 
 

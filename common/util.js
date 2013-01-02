@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var wrs = {
+	point:	require('./point.js')
+};
+
 
 
 
@@ -53,10 +57,10 @@ var look_at = function(self, target) {
 	var dy = target.y - self.y;
 	var len = Math.sqrt(sqr(dx) + sqr(dy));
 
-	return {
-		x: dx / len,
-		y: dy / len
-	};
+	return new wrs.point(
+		dx / len,
+		dy / len
+	);
 };
 
 
@@ -72,6 +76,20 @@ var random = function(min, max) {
 	}
 
 	return Math.random() * (max - min) + min;
+};
+
+
+
+/**
+ * @return Vector pointing in `direction' at `length'
+ */
+var set_length = function(vector, length) {
+	var len = Math.sqrt(length_sqr(vector));
+
+	return new wrs.point(
+		vector.x / len * length,
+		vector.y / len * length
+	);
 };
 
 
@@ -95,6 +113,7 @@ module.exports = {
 	length_sqr:	length_sqr,
 	look_at:	look_at,
 	random:		random,
+	set_length:	set_length,
 	sqr:		sqr
 };
 

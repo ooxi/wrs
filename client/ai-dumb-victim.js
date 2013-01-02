@@ -77,11 +77,19 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 			ship_radar.dy / velocity
 		);
 
+
 		/* Change velocity
 		 */
 		var by_velocity = velocity * (Math.random() - 0.5) * 2.0 * _max_velocity_change;
 		console.log('Changing velocity %j by %j', velocity, by_velocity);
 		velocity += by_velocity;
+
+		if (velocity < 0.0) {
+			velocity = 0.0;
+		} else if (velocity > _configuration['max-ship-speed']) {
+			velocity = _configuration['max-ship-speed'];
+		}
+
 
 		/* Change rotation
 		 */
@@ -92,6 +100,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 		console.log('Changing angle %j by %j', direction, by_angle);
 		direction.x = direction.x * Math.cos(by_angle) - direction.y * Math.sin(by_angle);
 		direction.y = direction.x * Math.sin(by_angle) + direction.y * Math.cos(by_angle);
+
 
 		/* Apply changes
 		 */
@@ -109,14 +118,13 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * information about the ship's current direction
 	 */
 	var fly_in_random_direction = function() {
-		var dx = _configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5);
-		var dy = _configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5)
+		var direction = set_length(new wrs.point(
+			_configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5),
+			_configuration['max-ship-speed'] * 2.0 * (Math.random() - 0.5)
+		), _configuration['max-ship-speed']);
 
-		console.log('[ai-dumb-victim] I chose %j as random direction', {
-			dx: dx,
-			dy: dy
-		});
-		_api.move(_ship.private_key(), dx, dy);
+		console.log('[ai-dumb-victim] I chose %j as random direction', direction);
+		_api.move(_ship.private_key(), direction.x, direction.y);
 	};
 
 
