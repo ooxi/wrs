@@ -61,6 +61,8 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 
 
 
+
+
 	/**
 	 * Chooses a random destination, will be used when there is no
 	 * information about the ship's current direction
@@ -72,6 +74,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 		);
 
 		console.log('[ai-dumb-victim] I chose %j as random destination', destination);
+		_last_change = Date.now();
 		_fly_to_ai.fly_to(destination.x, destination.y, fly_random);
 	};
 
@@ -79,7 +82,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 
 	/**
 	 * Flies to the next point a view seconds away
-	 */	
+	 *
 	var fly_random = function() {
 		var position = _radar.ship(_ship.public_key());
 		if (null === position) {
@@ -96,7 +99,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 			console.log('[ai-dumb-victim] Reached %j', position);
 			fly_random();
 		});
-	};
+	};*/
 
 
 
@@ -113,6 +116,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * Constructor
 	 */
 	(function() {
+		radar.listen(fly_random);
 		fly_random();
 	})();
 };
