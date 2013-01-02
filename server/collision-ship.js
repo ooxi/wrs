@@ -99,10 +99,10 @@ module.exports = function(_game, _ship, _old, _new) {
 		var dx = self_circle.x - other_circle.x;
 		var dy = self_circle.y - other_circle.y;
 		var radius_sum = self_circle.radius + other_circle.radius;
-console.log('%j %j %j %j %j', self_circle, other_circle, radius_sum, (dx * dx - dy * dy), (radius_sum * radius_sum));
+//console.log('%j %j %j %j %j', self_circle, other_circle, radius_sum, (dx * dx - dy * dy), (radius_sum * radius_sum));
 		/* Other ship definitly has not collided with this ship
 		 */
-		if ((dx * dx - dy * dy) > (radius_sum * radius_sum)) {
+		if ((dx * dx + dy * dy) > (radius_sum * radius_sum)) {
 			return;
 		}
 

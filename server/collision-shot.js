@@ -106,7 +106,7 @@ module.exports = function(_game, _shot, _old, _new) {
 
 		/* Bullet has definitly not collided with ship
 		 */
-		if ((dx * dx - dy * dy) > (radius_sum * radius_sum)) {
+		if ((dx * dx + dy * dy) > (radius_sum * radius_sum)) {
 			return;
 		}
 
