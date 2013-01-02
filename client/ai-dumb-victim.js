@@ -59,6 +59,11 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 */
 	var _max_velocity_change = 0.25 * _configuration['max-ship-speed'];
 
+	/**
+	 * Minimum velocity
+	 */
+	var _min_velocity = 0.75 * _configuration['max-ship-speed'];
+
 
 
 
@@ -87,11 +92,10 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 		/* Change velocity
 		 */
 		var by_velocity = (Math.random() - 0.5) * 2.0 * _max_velocity_change;
-		console.log('Changing velocity %j by %j', velocity, by_velocity);
 		velocity += by_velocity;
 
-		if (velocity < 0.0) {
-			velocity = 0.0;
+		if (velocity < _min_velocity) {
+			velocity = _min_velocity;
 		} else if (velocity > _configuration['max-ship-speed']) {
 			velocity = _configuration['max-ship-speed'];
 		}
@@ -104,19 +108,19 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 			by_angle += 360.0;
 		}
 		var rad_angle = by_angle * 0.0174532925;
-		console.log('Changing angle %j by %j deg == %j rad', direction, by_angle, rad_angle);
 		direction.x = direction.x * Math.cos(rad_angle) - direction.y * Math.sin(rad_angle);
 		direction.y = direction.x * Math.sin(rad_angle) + direction.y * Math.cos(rad_angle);
 
 
+		/* This should not be neccessary, but sometimes the rotation
+		 * results in a direction with length > 1 o_O
+		 */
+		direction = wrs.util.set_length(direction, velocity);
+
+
 		/* Apply changes
 		 */
-		console.log('Will go from %j to %j:%j', direction, direction.x * velocity, direction.y * velocity);
-		_api.move(
-			_ship.private_key(),
-			direction.x * velocity,
-			direction.y * velocity
-		);
+		_api.move(_ship.private_key(), direction.x, direction.y);
 	};
 
 
