@@ -199,9 +199,11 @@ module.exports = function(_api, _configuration, _radar) {
 		/* Shoot at the current position
 		 */
 		for (var private_key in _ships) {
+			console.log('%j %j', _ships[private_key], victim);
 			var direction = wrs.util.look_at(
 				_ships[private_key], victim
 			);
+			console.log('%j', direction);
 			_api.shoot(private_key, direction.x, direction.y);
 		}
 	};
