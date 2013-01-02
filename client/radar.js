@@ -180,7 +180,7 @@ module.exports = function(_api, _configuration) {
 	/**
 	 * Adds a callback function as listener
 	 */
-	this.listener = function(listener) {
+	this.listen = function(listener) {
 		_listeners.push(listener);
 	};
 

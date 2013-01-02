@@ -79,7 +79,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 
 		/* Change velocity
 		 */
-		var by_velocity = velocity * (Math.random() - 0.5) * 2.0 _max_velocity_change;
+		var by_velocity = velocity * (Math.random() - 0.5) * 2.0 * _max_velocity_change;
 		console.log('Changing velocity %j by %j', velocity, by_velocity);
 		velocity += by_velocity;
 
@@ -165,7 +165,7 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 * Constructor
 	 */
 	(function() {
-		radar.listen(fly_random);
+		_radar.listen(fly_random);
 		fly_random();
 	})();
 };
