@@ -112,6 +112,25 @@ module.exports = function() {
 
 
 	/**
+	 * Removes an object
+	 */
+	this.remove = {
+		public: function(public_key) {
+			var private_key = _that.get.public(public_key).private_key;
+			_objects_by_public_key.remove(public_key);
+			_objects_by_private_key.remove(private_key);
+		},
+
+		private: function(private_key) {
+			var public_key = _that.get.private(private_key).public_key;
+			_objects_by_public_key.remove(public_key);
+			_objects_by_private_key.remove(private_key);
+		}
+	};
+
+
+
+	/**
 	 * Iterates over each object in space
 	 */
 	this.each = function(cb) {

@@ -55,6 +55,21 @@ module.exports = function(_configuration) {
 	 */
 	this.tick = function() {
 		this.movement.move();
+
+		/* Remove all dead objects from the game
+		 */
+		var to_remove = [];
+
+		this.orbit.each(function(public_key, obj) {
+			if (obj.health < 0.00001) {
+				console.log('[game] Dead object '+ public_key +' will be removed from game');
+				to_remove.push(obj);
+			}
+		});
+
+		for (var i = 0; i < to_remove.length; ++i) {
+			this.orbit.remove.public(to_remove[i].public_key);
+		}
 	};
 
 
