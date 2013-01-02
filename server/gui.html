@@ -142,6 +142,19 @@ $(function() {
 
 			context.beginPath();
 			context.strokeStyle = 'yellow';
+			context.arc(
+				shot.public.x + configuration['game-zone'],
+				shot.public.y + configuration['game-zone'],
+				2.0,
+				0, 2 * Math.PI,
+				false
+			);
+			context.closePath();
+			context.fill();
+			context.stroke();
+
+			context.beginPath();
+			context.strokeStyle = 'black';
 			arrow(
 				shot.public.x + configuration['game-zone'],
 				shot.public.y + configuration['game-zone'],
