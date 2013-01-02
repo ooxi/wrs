@@ -37,6 +37,15 @@ var distance_sqr = function(a, b) {
 
 
 /**
+ * @return Squared length of vector
+ */
+var length_sqr = function(x, y) {
+	return sqr(x) + sqr(y);
+};
+
+
+
+/**
  * @return Normalized direction from self to target
  */
 var look_at = function(self, target) {
@@ -83,6 +92,7 @@ var sqr = function(value) {
  */
 module.exports = {
 	distance_sqr:	distance_sqr,
+	length_sqr:	length_sqr,
 	look_at:	look_at,
 	random:		random,
 	sqr:		sqr
