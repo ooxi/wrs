@@ -43,7 +43,7 @@ module.exports = function(_game, _ship, _old, _new) {
 
 
 	/**
-	 * Bounding circle around the ship movement
+	 * Bounding circle around the bullet movement
 	 */
 	this.bounding_circle = function() {
 		var dx = _new.x - _old.x;
@@ -59,34 +59,28 @@ module.exports = function(_game, _ship, _old, _new) {
 
 
 	/**
-	 * Only collisions with other ships will be detected
+	 * Only collisions with ships which did not fire this shot will be
+	 * detected
 	 */
 	this.collide = function(other) {
 
-		/* If myself ain't alive it cannot collide with anything else
+		/* Only collisions with ships
 		 */
-		if (!_ship.alive()) {
+		if ('ship' !== other.type()) {
 			return;
 		}
+		var other_ship = other.ship();
 
-		/* Currently only collisions with other ships are computed,
-		 * collisions with shots are handled in wrs.collision.shot
+		/* But not with the shooter itself
 		 */
-		if ('ship' === other.type()) {
-			return collide_ship(other);
+		if (other_ship.public_key === _ship.public_key) {
+			return;
 		}
+		
+		return collide_ship(other);
 	};
 
 
-
-
-
-	/**
-	 * @return Wrapped ship
-	 */
-	this.ship = function() {
-		return _ship;
-	};
 
 
 
