@@ -6,7 +6,7 @@
 		"game-zone":		1000,
 		"ship-radius":		10,
 
-		"max-ship-speed":	25,
+		"max-ship-speed":	50,
 		"max-shot-speed":	250,
 
 		"min-radar-interval":	500,
