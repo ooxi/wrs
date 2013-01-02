@@ -50,9 +50,12 @@ module.exports = function(_api, _configuration, _radar, _ship) {
 	 */	
 	var fly_random = function() {
 		var position = _radar.ship(_ship.public_key());
-console.log('ooo');
 		if (null === position) {
-			return;
+			console.log('[ai-dumb-victim] I don\'t know my own position, so I\'ll guess a random one');
+			position = new wrs.point(
+				_configuration['game-zone'] * 2.0 * (Math.random() - 0.5),
+				_configuration['game-zone'] * 2.0 * (Math.random() - 0.5)
+			);
 		}
 		position.x += _configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
 		position.y += _configuration['max-ship-speed'] * 5.0 * (Math.random() - 0.5);
