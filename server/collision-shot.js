@@ -37,15 +37,15 @@ module.exports = function(_game, _ship, _old, _new) {
 	 * Only handles ships
 	 */
 	this.type = function() {
-		return 'ship';
+		return 'shot';
 	};
 
 
 
 	/**
-	 * Bouncing box around the ship movement
+	 * Bounding circle around the ship movement
 	 */
-	this.bouncing_circle = function() {
+	this.bounding_circle = function() {
 		var dx = _new.x - _old.x;
 		var dy = _new.y - _old.y;
 
