@@ -23,6 +23,12 @@
  */
 'use strict';
 
+var wrs = {
+	movement: {
+		avoid_border:	require('./movement-avoid-border.js')
+	}
+};
+
 
 
 
@@ -31,6 +37,19 @@
  * Used to determine the best movement for a ship
  */
 module.exports = function(_ai) {
+
+	/**
+	 * @return Number describing the advantage of flying to that position
+	 *     in a linear movement from the ship's current position
+	 */
+	this.value = function(ship, position) {
+
+		/* Even without the ship's position some (static) value based
+		 * movement evaluation can be done
+		 */
+		var ship_position = _ai.radar.ship(ship.public_key());
+	};
+
 };
 
 
