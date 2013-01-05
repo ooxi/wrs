@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var wrs = {
+	movement:	require('./movement.js')
+};
+
 
 
 
@@ -32,9 +36,17 @@
  */
 module.exports = function(_configuration, _api, _radar) {
 
+	/**
+	 * Independent modules
+	 */
 	this.configuration = _configuration;
 	this.api = _api;
 	this.radar = _radar;
+
+	/**
+	 * Dependent modules
+	 */
+	this.movement = new wrs.movement(this);
 
 };
 
