@@ -45,6 +45,9 @@ module.exports = function(_ai, initial_modules) {
 		[1.0, new wrs.movement.avoid_border(_ai)]
 	];
 
+	var _weight_index = 0;
+	var _module_index = 1;
+
 
 
 	/**
@@ -64,7 +67,9 @@ module.exports = function(_ai, initial_modules) {
 		var sum = 0.0;
 
 		for (var i = 0; i < _modules.length; ++i) {
-			sum += _modules[i].value(ship, ship_position, position);
+			var weight = _modules[i][_weight_index];
+			var module = _modules[i][_module_index];
+			sum += weight * modules.value(ship, ship_position, position);
 		}
 
 
