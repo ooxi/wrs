@@ -21,7 +21,7 @@
  * 
  *  3. This notice may not be removed or altered from any source distribution.
  */
-﻿var http = require('http');
+﻿var http = require('./http-fuckup.js');
 var dgram = require('dgram');
 var configuration = require('./configuration.js');
 var util = require('./util.js');
