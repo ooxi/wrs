@@ -30,9 +30,10 @@
 /**
  * Common AI stuff
  */
-module.exports = function(_configuration, _radar) {
+module.exports = function(_configuration, _api, _radar) {
 
 	this.configuration = _configuration;
+	this.api = _api;
 	this.radar = _radar;
 
 };
