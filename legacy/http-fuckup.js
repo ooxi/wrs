@@ -23,6 +23,28 @@
  */
 'use strict';
 
+var http = require('http');
 
 
+
+
+
+/**
+ * Emulating http.get via http.request
+ */
+var http_get = function(url, cb) {
+};
+
+
+
+
+
+/**
+ * This should definitly not be necessary! But somehow http.get fails on my
+ * machine while http.request does not o_O
+ */
+module.exports = {
+	get:		http_get,
+	request:	http.request
+};
 
