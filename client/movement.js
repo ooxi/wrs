@@ -42,7 +42,7 @@ module.exports = function(_ai, initial_modules) {
 	 * The movement is calculated by the weighted sum of different modules
 	 */
 	var _modules = initial_modules || [
-		[1.0, new wrs.movement.avoid_border(_ai)]
+		[5.0, new wrs.movement.avoid_border(_ai)]
 	];
 
 	var _weight_index = 0;

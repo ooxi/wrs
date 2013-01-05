@@ -71,22 +71,46 @@ module.exports = function(_ai) {
 		/* Value describing action for one border
 		 */
 		var value = function(border) {
-			var src_border_distance = src_distance[border];
-			var dest_border_distance = src_distance[border];
+			var dist = dest_distance[border];
 
-			/* Calculus is done with minimum distance. If the
-			 * destination is farer away than the source, than
-			 * we want to go there, even if is's still in th danger
-			 * zone
+			if (dist > _soft_warning) {
+				return 0.0;
+			}
+			if (dist < _hard_warning) {
+				return +1.0;
+			}
+
+			/* Soft warning is relative to distance
 			 */
-			var min_distance = Math.min(
-				src_border_distance,
-				dest_border_distance
-			);
-			var prefix = src_border_distance > dest_border_distance
-				? +1 : -1
-			;
+			var span = _soft_warning - _hard_warning;
+			var at = dist - _hard_warning;
+
+			return (at / span) * 0.5;
 		};
+
+
+		return value('top') + value('bottom') + value('left') + value('right');
+
+
+//		/* Value describing action for one border
+//		 */
+//		var value = function(border) {
+//			var src_border_distance = src_distance[border];
+//			var dest_border_distance = src_distance[border];
+//
+//			/* Calculus is done with minimum distance. If the
+//			 * destination is farer away than the source, than
+//			 * we want to go there, even if is's still in th danger
+//			 * zone
+//			 */
+//			var min_distance = Math.min(
+//				src_border_distance,
+//				dest_border_distance
+//			);
+//			var prefix = src_border_distance > dest_border_distance
+//				? +1 : -1
+//			;
+//		};
 
 	};
 
