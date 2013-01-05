@@ -47,6 +47,10 @@ module.exports = function(_ai) {
 
 
 
+
+	/**
+ 	 */
+	this.value = function(ship, ship_position, 
 	/**
 	 * Constructor
 	 */

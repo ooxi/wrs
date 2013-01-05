@@ -50,16 +50,22 @@ module.exports = function(_ai, initial_modules) {
 
 
 
+
+
 	/**
 	 * @return Number describing the advantage of flying to that position
 	 *     in a linear movement from the ship's current position
 	 */
 	this.value = function(ship, position) {
 
-		/* Even without the ship's position some (static) value based
-		 * movement evaluation can be done
+		/* Without the ships position, a static evaluation could
+		 * possibly be done but this has no usecase here
 		 */
 		var ship_position = _ai.radar.ship(ship.public_key());
+
+		if (null === ship_position) {
+			return 0.0;
+		}
 
 
 		/* Calculate weighted sum
