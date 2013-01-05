@@ -49,8 +49,51 @@ module.exports = function(_ai) {
 
 
 	/**
+	 * Issues a warning (relative to proximity of ship to border) if ship
+	 * is near a border or a halt if ship is too close
  	 */
-	this.value = function(ship, ship_position, 
+	this.value = function(ship, src_position, dest_position) {
+
+		/* Distance of position to all four enclosing borders
+		 */
+		var distance = function(position) {
+			return {
+				top:	+_ai.configuration['game-zone'] - position.y,
+				bottom:	-_ai.configuration['game-zone'] + position.y,
+				left:	+_ai.configuration['game-zone'] - position.x,
+				right:	-_ai.configuration['game-zone'] + position.x
+			}
+		};
+		var src_distance = distance(src_position);
+		var dest_distance = distance(dest_position);
+
+
+		/* Value describing action for one border
+		 */
+		var value = function(border) {
+			var src_border_distance = src_distance[border];
+			var dest_border_distance = src_distance[border];
+
+			/* Calculus is done with minimum distance. If the
+			 * destination is farer away than the source, than
+			 * we want to go there, even if is's still in th danger
+			 * zone
+			 */
+			var min_distance = Math.min(
+				src_border_distance,
+				dest_border_distance
+			);
+			var prefix = src_border_distance > dest_border_distance
+				? +1 : -1
+			;
+		};
+
+	};
+
+
+
+
+
 	/**
 	 * Constructor
 	 */
