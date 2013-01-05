@@ -48,6 +48,25 @@ module.exports = function(_configuration, _api, _radar) {
 	 */
 	this.movement = new wrs.movement(this);
 
+
+
+
+
+	/**
+	 * Has to be invoked periodically
+	 */
+	this.tick = function() {
+	};
+
+
+
+
+
+	/**
+	 * Constructor
+	 */
+	
+
 };
 
 
