@@ -65,8 +65,9 @@ module.exports = function(_configuration, _api, _radar) {
 	/**
 	 * Constructor
 	 */
-	
-
+	(function() {
+		async.
+	})();
 };
 
 
