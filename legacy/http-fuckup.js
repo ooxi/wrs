@@ -53,6 +53,7 @@ var http_get = function(url, cb) {
 //	});
 
 	request.end();
+	return request;
 };
 
 
