@@ -23,7 +23,7 @@
  */
 'use strict';
 
-var http = require('http');
+var http = require('./http-fuckup.js');
 
 
 
