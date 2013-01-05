@@ -22,3 +22,26 @@
  *  3. This notice may not be removed or altered from any source distribution.
  */
 'use strict';
+
+
+
+
+
+/**
+ * Common AI stuff
+ */
+module.exports = function(_configuration, _radar) {
+
+	this.configuration = _configuration;
+	this.radar = _radar;
+
+};
+
+
+
+
+
+
+
+
+
