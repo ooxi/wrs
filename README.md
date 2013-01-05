@@ -5,6 +5,16 @@ WRS
 API
 ---
 
+Usually a client invokes the API in the following order
+
+ 1. `/configuration`
+ 2. `/team`
+ 3. `/spawn`
+ 4. Loop over
+   * `/radar`
+   * `/move`
+   * `/shoot`
+
 ### `/configuration`
 
 No Arguments
