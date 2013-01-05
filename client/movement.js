@@ -58,9 +58,17 @@ module.exports = function(_ai, initial_modules) {
 		 */
 		var ship_position = _ai.radar.ship(ship.public_key());
 
+
 		/* Calculate weighted sum
 		 */
-		for 
+		var sum = 0.0;
+
+		for (var i = 0; i < _modules.length; ++i) {
+			sum += _modules[i].value(ship, ship_position, position);
+		}
+
+
+		return sum;
 	};
 
 };
