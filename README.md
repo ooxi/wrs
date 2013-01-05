@@ -15,9 +15,16 @@ Usually a client invokes the API in the following order
    * `/move`
    * `/shoot`
 
-### `/configuration`
 
-No Arguments
+### Configuration `/configuration`
+
+Used to get game settings like ship speed, team size and orbit dimensions.
+
+#### Request
+
+No arguments necessary
+
+#### Response
 
 ```json
 {	"teams":1000,
