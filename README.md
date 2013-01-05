@@ -28,6 +28,8 @@ Used to get game settings like ship speed, team size and orbit dimensions.
 
 #### Request
 
+`http://example.net:31337/configuration`
+
 No arguments necessary
 
 #### Response
@@ -60,14 +62,44 @@ living, even if you do not see them on your radar.
 
 #### Request
 
-`http://example.net:31337/is-alive?public-key=???`
+`http://example.net:31337/is-alive?public-key=f0afa14e-959d-4d1f-8f00-c268ae5f5cd7`
 
- * `public-key`: Public identification of the ship you are interested in
+ * `public-key`: Public identification of the object you are interested in
 
 #### Response
 
 ````json
+{	"is-alive":true
+}
 ````
+
+The information you care about is contained as boolean in the `is-alive`
+property.
+
+
+***
+
+
+### Spawn a new ship `/spawn`
+
+#### Request
+
+`http://example.net:31337/spawn?team-private-key=ee6d1e6c-6f44-4e76-8c29-32ba98b561b2&ship-name=my-ship`
+
+ * `team-private-key` Team secret obtained with `/team`
+ * `ship-name` Name of your new ship
+
+#### Response
+
+````json
+{	"ship-public-key":"f0afa14e-959d-4d1f-8f00-c268ae5f5cd7",
+	"ship-private-key":"2f0d1b45-7d56-4b6a-a070-45d6b0179ec2"
+}
+````
+
+While `ship-public-key` contains a public ship identifier, you'll need to keep
+`ship-private-key` for yourself. It is used for manovering, shooting and even
+suicide.
 
 
 ***
@@ -83,7 +115,7 @@ can then be used to spawn new ships.
 `http://example.net:31337/team?team-name=my-team&team-color=red`
 
  * `team-name` Name of your team
- * `team-color` Color of your team, see [http://en.wikipedia.org/wiki/Web_colors](Web colors)
+ * `team-color` Color of your team, see [web colors](http://en.wikipedia.org/wiki/Web_colors)
 
 #### Response
 
