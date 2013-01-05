@@ -64,7 +64,9 @@ req.end();
 };
 
 
-
+http_get('http://www.google.com', function(response) {
+	console.log(response.statusCode);
+});
 
 
 /**
