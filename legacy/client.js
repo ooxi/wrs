@@ -27,10 +27,15 @@ var configuration = require('./configuration.js');
 var util = require('./util.js');
 
 var e = encodeURIComponent;
-var server_url = 'http://localhost:31337/';
+var server_url = 'http://localhost:31339/';
 var udp_port = parseInt(10000 + Math.floor(Math.random() * 50000));
 
-
+http.get("http://173.194.69.100/index.html", function(res) {
+  console.log("Got response: " + res.statusCode);
+}).on('error', function(e) {
+  console.log("Got error: " + e.message);
+});
+return;
 
 /**
  * Parses a JSON object from a http response
@@ -68,9 +73,9 @@ var read_object = function(cb) {
 /**
  * Update configuration
  */
-//http.get(server_url +'configuration', read_object(function(response) {
-//	configuration = response;
-//}));
+http.get(server_url +'configuration', read_object(function(response) {
+	configuration = response;
+}));
 
 
 
@@ -121,7 +126,9 @@ var do_radar = function(secret, cb) {
  * Register a new client
  */
 var do_connect = function(name, cb) {
-	http.get(server_url +'connect?name='+ e(name) +'&udp-port='+ e(udp_port), read_object(function(response) {
+	var url = server_url +'connect?name='+ e(name) +'&udp-port='+ e(udp_port);
+
+	http.get(url, read_object(function(response) {
 
 		/* Activate radar
 		 */
@@ -141,7 +148,10 @@ var do_connect = function(name, cb) {
 
 		ships.push(response.secret);
 		cb(response);
-	}));
+	})).on('error', function(e) {
+		console.log('Connection to %j failed', url);
+		throw e;
+	});
 };
 
 
