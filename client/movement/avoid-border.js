@@ -28,9 +28,36 @@
 
 
 /**
- * Avoids getting destroyed by 
+ * Avoids getting destroyed by hitting the border
  */
 module.exports = function(_ai) {
+
+	/**
+	 * As soon as the client is this close to the border a warning will be
+	 * issued
+	 */
+	var _soft_warning = undefined;
+
+	/**
+	 * As soon as the client is this close to the border, the client will
+	 * be stopped going any further
+	 */
+	var _hard_warning = undefined;
+
+
+
+
+	/**
+	 * Constructor
+	 */
+	(function() {
+		_soft_warning = Math.max(
+			_ai.configuration['game-zone'] / 10.0,
+			_ai.configuration['max-ship-speed'] * 3.0 + _ai.configuration['ship-radius']
+		);
+
+		_hard_warning = _ai.configuration['max-ship-speed'] + _ai.configuration['ship-radius'];
+	})();
 };
 
 
