@@ -27,7 +27,7 @@ var configuration = require('./configuration.js');
 var util = require('./util.js');
 
 var e = encodeURIComponent;
-var server_url = 'http://localhost:31339/';
+var server_url = 'http://localhost:31337/';
 var udp_port = parseInt(10000 + Math.floor(Math.random() * 50000));
 
 
@@ -66,11 +66,11 @@ var read_object = function(cb) {
 };
 
 /**
- * Konfiguration aktualisieren
+ * Update configuration
  */
-http.get(server_url +'configuration', read_object(function(response) {
-	configuration = response;
-}));
+//http.get(server_url +'configuration', read_object(function(response) {
+//	configuration = response;
+//}));
 
 
 
