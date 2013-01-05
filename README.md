@@ -35,17 +35,17 @@ No arguments necessary
 #### Response
 
 ```json
-{	"teams":1000,
-	"ships-per-team":2,
+{	"teams":		1000,
+	"ships-per-team":	2,
 
-	"game-zone":1000,
-	"ship-radius":10,
+	"game-zone":		1000,
+	"ship-radius":		10,
 
-	"max-ship-speed":25,
-	"max-shot-speed":250,
+	"max-ship-speed":	25,
+	"max-shot-speed":	250,
 
-	"min-radar-interval":500,
-	"min-shoot-interval":2500
+	"min-radar-interval":	500,
+	"min-shoot-interval":	2500
 }
 ```
 
@@ -69,12 +69,35 @@ living, even if you do not see them on your radar.
 #### Response
 
 ````json
-{	"is-alive":true
+{	"is-alive":	true
 }
 ````
 
 The information you care about is contained as boolean in the `is-alive`
 property.
+
+
+***
+
+
+### Manovering `/move`
+
+Static ships are an too easy target :-)
+
+#### Request
+
+`http://example.net:31337/move?ship-private-key=2f0d1b45-7d56-4b6a-a070-45d6b0179ec2&ship-desired-dx=0.5&ship-desired-dy=0.5`
+
+ * `ship-private-key` Ship secret obtained with `/spawn`
+ * `ship-desired-dx` Desired velocity in the x axis
+ * `ship-desired-dy` Desired velocity in the y axis
+
+Be aware that the server will reject `/move` invokations where the ships speed
+is higher than `max-ship-speed`.
+
+#### Response
+
+No response if invokation was successflu.
 
 
 ***
@@ -92,8 +115,8 @@ property.
 #### Response
 
 ````json
-{	"ship-public-key":"f0afa14e-959d-4d1f-8f00-c268ae5f5cd7",
-	"ship-private-key":"2f0d1b45-7d56-4b6a-a070-45d6b0179ec2"
+{	"ship-public-key":	"f0afa14e-959d-4d1f-8f00-c268ae5f5cd7",
+	"ship-private-key":	"2f0d1b45-7d56-4b6a-a070-45d6b0179ec2"
 }
 ````
 
@@ -120,8 +143,8 @@ can then be used to spawn new ships.
 #### Response
 
 ````json
-{	"team-public-key":"e2fa4c28-3e82-4f9c-a482-bdb21316e6e6",
-	"team-private-key":"ee6d1e6c-6f44-4e76-8c29-32ba98b561b2"
+{	"team-public-key":	"e2fa4c28-3e82-4f9c-a482-bdb21316e6e6",
+	"team-private-key":	"ee6d1e6c-6f44-4e76-8c29-32ba98b561b2"
 }
 ````
 
