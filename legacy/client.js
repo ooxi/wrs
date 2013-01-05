@@ -30,12 +30,9 @@ var e = encodeURIComponent;
 var server_url = 'http://localhost:31339/';
 var udp_port = parseInt(10000 + Math.floor(Math.random() * 50000));
 
-http.get("http://173.194.69.100/index.html", function(res) {
-  console.log("Got response: " + res.statusCode);
-}).on('error', function(e) {
-  console.log("Got error: " + e.message);
-});
-return;
+
+
+
 
 /**
  * Parses a JSON object from a http response
