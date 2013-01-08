@@ -121,5 +121,14 @@ module.exports = function(_properties) {
 		return _properties['http-port'];
 	};
 
+
+
+
+
+	/**
+	 * Configuration sanity check
+	 */
+	(function() {
+	})();
 };
 
