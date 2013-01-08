@@ -52,7 +52,7 @@ module.exports = Class.extend({
 		 */
 		this.configuration = _configuration;
 		this.api = _api;
-		this.team = team;
+		this.team = _team;
 
 		/**
 		 * Dependent modules
