@@ -39,6 +39,41 @@ var wrs = {
  * A dumb mob trying to kill one of the nearest enemy ships
  */
 module.exports = function(_api, _configuration, _radar) {
+
+	/**
+	 * Self reference
+	 */
+	var _that = this;
+
+
+
+	/**
+	 * All ships belonging to this mob (indexed by private key)
+	 */
+	var _ships = {};
+
+
+
+
+
+	/**
+	 * Add ship to mob
+	 */
+	this.add = function(ship) {
+		_ships[ship.private_key()] = ship;
+		_fly_to[ship.public_key()] = new wrs.ai.fly_to(
+			_api, _configuration, _radar, ship
+		);
+	};
+
+	/**
+	 * Remove ship from mob
+	 */
+	this.remove = function(ship) {
+		delete _ships[ship.private_key()];
+		delete _fly_to[ship.public_key()];
+	};
+
 };
 
 
