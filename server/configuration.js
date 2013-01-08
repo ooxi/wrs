@@ -32,6 +32,14 @@
  */
 module.exports = function(_properties) {
 
+	/**
+	 * Self reference
+	 */
+	var _that = this;
+
+
+
+
 
 	/**
 	 * @return Max number of team slots [1]
@@ -129,6 +137,9 @@ module.exports = function(_properties) {
 	 * Configuration sanity check
 	 */
 	(function() {
+		if (_that.getSpawnZone() >= _that.getGameZone()) {
+			throw new Error('[configuration] Spawn zone must not be bigger than game zone');
+		}
 	})();
 };
 
