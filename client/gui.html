@@ -89,7 +89,7 @@ $(function() {
 
 
 		/* Draw all clients
-		 */
+		 *
 		for (var id in data.clients) {
 			var client = data.clients[id];
 
@@ -137,7 +137,7 @@ $(function() {
 
 
 		/* Draw all shots
-		 */
+		 *
 		for (var id in data.shots) {
 			var shot = data.shots[id];
 
@@ -180,6 +180,7 @@ $(function() {
 				context.stroke();
 			}
 		}
+		*/
 	};
 
 
@@ -200,7 +201,7 @@ $(function() {
 		var context = screen.getContext('2d');
 
 		var update = function() {
-			dump(function(data) {
+			listen(function(data) {
 				render(context, config, data);
 				setTimeout(update, 250);
 			});
