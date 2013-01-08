@@ -23,7 +23,7 @@
  */
 'use strict';
 
-var optimist = require('optimist');
+
 
 
 
@@ -35,12 +35,22 @@ var _ais = {
 	'dumb-victim':	'./client/dumb-victim.js'
 };
 
+
+/* Check whether an AI is given
+ */
 if (process.argv.length < 3) {
 	console.log('Usage: client <%j>', Object.keys(_ais));
 	return;
 }
+var ai = process.argv[2];
 
 
+/* Does requested AI exist?
+ */
+if (!_ais.hasOwnProperty(ai)) {
+	console.log('Unkown AI %j, needs to be an element of %j', ai, Objekt.keys(_ais));
+	return;
+}
 
 
 
