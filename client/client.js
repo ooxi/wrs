@@ -28,7 +28,8 @@ var optimist = require('optimist');
 
 var wrs = {
 	ais:	require('./ais.js'),
-	api:	require('./api.js')
+	api:	require('./api.js'),
+	team:	require('./team.js')
 };
 
 
