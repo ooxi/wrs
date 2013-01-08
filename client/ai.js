@@ -58,7 +58,7 @@ module.exports = Class.extend({
 		 * Dependent modules
 		 */
 		this.movement = new wrs.movement(this);
-		this.radar = new wrs.radar(this.configuration, this.api);
+		this.radar = new wrs.radar(this.api, this.configuration);
 
 		/**
 		 * Registered ships
