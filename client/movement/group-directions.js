@@ -61,7 +61,7 @@ module.exports = function(directions, max_delta) {
 
 
 	/* Initialize with first angle
-	 */
+	 *
 	var current_angles = [angles[0]];
 	var current_score_min = directions[angles[0]];
 	var current_score_max = directions[angles[0]];
@@ -74,7 +74,7 @@ module.exports = function(directions, max_delta) {
 
 
 	/* Gather all groups
-	 */
+	 *
 	var groups = [];
 
 	for (var i = 1; i < angles.length; ++i) {
@@ -82,9 +82,9 @@ module.exports = function(directions, max_delta) {
 
 	
 	/* Check if last group can be merged with first group
-	 */
+	 *
 	TODO;
-
+*/
 
 };
 
