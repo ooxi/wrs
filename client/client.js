@@ -30,7 +30,7 @@
 /**
  * Selects the client AI to load
  */
-var _ais = {
+var registered_ais = {
 	'dumb-mob':	'./client/dumb-mob.js',
 	'dumb-victim':	'./client/dumb-victim.js'
 };
@@ -39,31 +39,21 @@ var _ais = {
 /* Check whether an AI is given
  */
 if (process.argv.length < 3) {
-	console.log('Usage: client <%j>', Object.keys(_ais));
+	console.log('Usage: client <%j>', Object.keys(registered_ais));
 	return;
 }
-var ai = process.argv[2];
+var ai_name = process.argv[2];
 
 
 /* Does requested AI exist?
  */
-if (!_ais.hasOwnProperty(ai)) {
-	console.log('Unkown AI %j, needs to be an element of %j', ai, Object.keys(_ais));
+if (!registered_ais.hasOwnProperty(ai_name)) {
+	console.log('Unkown AI %j, needs to be an element of %j', ai_name, Object.keys(registered_ais));
 	return;
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Load and execute AI
+ */
+require(registered_ais[ai_name]);
 
