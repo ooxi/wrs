@@ -35,7 +35,7 @@ var wrs = {
 	ship:		require('../ship.js'),
 	team:		require('../team.js'),
 
-	client:		'dumb-mob',
+	client:		'heinz',
 	version:	'0.1-beta'
 };
 
@@ -81,7 +81,7 @@ async.waterfall([
 	 */
 	function(api, configuration, cb) {
 		var team_name = wrs.client +'-'+ wrs.version +'-'+ Math.random();
-		var team_color = 'blue';
+		var team_color = 'white';
 
 		var team = new wrs.team(api, team_name, team_color, function() {
 			cb(null, api, configuration, team);

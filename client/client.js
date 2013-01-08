@@ -32,7 +32,8 @@
  */
 var registered_ais = {
 	'dumb-mob':	'./client/dumb-mob.js',
-	'dumb-victims':	'./client/dumb-victims.js'
+	'dumb-victims':	'./client/dumb-victims.js',
+	'heinz':	'./client/heinz.js'
 };
 
 
