@@ -112,9 +112,13 @@ module.exports = Class.extend({
 	/**
 	 * Has to be invoked periodically
 	 *
-	 * Base implementation will move all ships according to 
+	 * Base implementation will only move ships according to value matrix
 	 */
 	tick: function() {
+
+		/* Iterate through all ships an invoke movement predication if
+		 * position is available
+		 */
 		for (var private_key in this.ships) {
 			var ship = this.ships[private_key];
 			var position = this.radar.ship(ship.public_key());
@@ -134,6 +138,13 @@ module.exports = Class.extend({
 	 * Will be called to change ship movement
 	 */
 	'protected-move-ship': function(ship, position) {
+
+		/* Different positions to try, distributed even around current
+		 * ship position
+		 */
+		var steps = 30;
+
+		this.api.move(ship.private_key(), 5.0, 5.0);
 	},
 
 });
