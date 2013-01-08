@@ -155,6 +155,7 @@ module.exports = function(_ai, port) {
 			from.y,
 			direction.x,
 			direction.y,
+			width,
 			_that.color(stroke)
 		]);
 	};
