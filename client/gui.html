@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>WRS 2.0</title>
+		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
+		<style type="text/css">
+
+#status {
+	background-color: #EFEFEF;
+	border-top: 1px solid black;
+	border-right: 1px solid black;
+	position: fixed;
+	bottom: 0px;
+	padding: 0.25em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+}
+
+		</style>
+	</head>
+	<body>
+		<div id="status">GUI is loading...</div>
+		<canvas id="screen" width="100" height="100"></canvas>
+		<script src="//code.jquery.com/jquery.min.js" type="text/javascript"></script>
+		<script type="text/javascript">
+
+$(function() {
+
+	/**
+	 * Changes the status message
+	 */
+	var status = function(message) {
+		var dom = $('#status');
+		dom.text(message);
+		dom.show();
+		setTimeout(function() {
+			dom.fadeOut(1500);
+		}, 2500);
+	};
+
+
+
+	/**
+	 * Will load configuration from backend
+	 */
+	var configuration = function(cb) {
+		$.getJSON('/configuration', function(data) {
+			cb(data);
+		});
+	};
+
+
+
+	/**
+	 * Loads the status dump
+	 */
+	var dump = function(cb) {
+		$.getJSON('/dump', function(data) {
+			cb(data);
+		});
+	};
+
+
+
+	/**
+	 */
+	var render = function(context, configuration, data) {
+
+		/* @see http://stackoverflow.com/a/6333775
+		 */
+		var arrow = function(x, y, dx, dy) {
+			var headlen = 10;
+			var tox = x + dx;
+			var toy = y + dy;
+
+			var angle = Math.atan2(dy, dx);
+			context.moveTo(x, y);
+			context.lineTo(tox, toy);
+			context.lineTo(tox - headlen*Math.cos(angle-Math.PI/6), toy - headlen*Math.sin(angle-Math.PI/6));
+			context.moveTo(tox, toy);
+			context.lineTo(tox - headlen*Math.cos(angle+Math.PI/6), toy - headlen*Math.sin(angle+Math.PI/6));
+		};
+
+
+		/* Clear screen
+		 */
+		context.fillStyle = 'rgb(255, 0, 255)';
+		context.fillRect(0, 0, screen.width, screen.height);
+
+
+		/* Draw all clients
+		 */
+		for (var id in data.clients) {
+			var client = data.clients[id];
+
+			context.beginPath();
+			context.fillStyle = 'lime';
+			context.strokeStyle = 'black';
+			context.lineWidth = 2.0;
+			context.arc(
+				client.public.x + configuration['game-zone'],
+				client.public.y + configuration['game-zone'],
+				configuration['ship-radius'],
+				0, 2 * Math.PI,
+				false
+			);
+			context.closePath();
+			context.fill();
+			context.stroke();
+
+			context.beginPath();
+			context.lineWidth = 1.0;
+			arrow(
+				client.public.x + configuration['game-zone'],
+				client.public.y + configuration['game-zone'],
+				parseFloat(client.public.dx),
+				parseFloat(client.public.dy)
+			);
+			context.closePath();
+			context.stroke();
+
+			if ('undefined' !== typeof(client.public.bc)) {
+				context.beginPath();
+				context.strokeStyle = 'blue';
+				context.lineWidth = 0.5;
+				context.arc(
+					client.public.bc.x + configuration['game-zone'],
+					client.public.bc.y + configuration['game-zone'],
+					client.public.bc.radius,
+					0, 2 * Math.PI,
+					false
+				);
+				context.closePath();
+				context.stroke();
+			}
+		}
+
+
+		/* Draw all shots
+		 */
+		for (var id in data.shots) {
+			var shot = data.shots[id];
+
+			context.beginPath();
+			context.fillStyle = 'yellow';
+			context.arc(
+				shot.public.x + configuration['game-zone'],
+				shot.public.y + configuration['game-zone'],
+				5.0,
+				0, 2 * Math.PI,
+				false
+			);
+			context.closePath();
+			context.fill();
+
+			context.beginPath();
+			context.strokeStyle = 'black';
+			context.lineWidth = 1.0;
+			arrow(
+				shot.public.x + configuration['game-zone'],
+				shot.public.y + configuration['game-zone'],
+				parseFloat(shot.public.dx),
+				parseFloat(shot.public.dy)
+			);
+			context.closePath();
+			context.stroke();
+
+			if ('undefined' !== typeof(shot.public.bc)) {
+				context.beginPath();
+				context.strokeStyle = 'blue';
+				context.lineWidth = 0.5;
+				context.arc(
+					shot.public.bc.x + configuration['game-zone'],
+					shot.public.bc.y + configuration['game-zone'],
+					shot.public.bc.radius,
+					0, 2 * Math.PI,
+					false
+				);
+				context.closePath();
+				context.stroke();
+			}
+		}
+	};
+
+
+
+
+
+	/**
+	 * Initializing GUI
+	 */
+	status('Loading configuration...');
+	var screen = document.getElementById('screen');
+
+	configuration(function(config) {
+		status('Configuration loaded');
+
+		screen.width = config['game-zone'] * 2;
+		screen.height = config['game-zone'] * 2;
+		var context = screen.getContext('2d');
+
+		var update = function() {
+			dump(function(data) {
+				render(context, config, data);
+				setTimeout(update, 250);
+			});
+		};
+
+		update();
+	});
+});
+
+		</script>
+	</body>
+</html>
