@@ -74,6 +74,31 @@ module.exports = function(_api, _configuration, _radar) {
 		delete _fly_to[ship.public_key()];
 	};
 
+
+
+
+
+	/**
+	 * Main method
+	 */
+	this.tick = function() {
+
+	};
+
+
+
+
+
+	/**
+	 * Constructor
+	 */
+	(function() {
+		_radar.listen(function() {
+			_that.tick()
+		});
+		_that.tick();
+	})();
+
 };
 
 
