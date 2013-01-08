@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var node = {
+	fs:	require('fs')
+};
+
 
 
 
@@ -32,7 +36,7 @@
  */
 module.exports = new (function() {
 
-	
+	console.log('%j', node.fs.readdirSync('ai'));
 
 })();
 
