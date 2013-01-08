@@ -51,6 +51,23 @@ module.exports = function(cb) {
 
 
 	/**
+	 * Loads a registered AI by name
+	 *
+	 * @warning Does not create an instance
+	 */
+	this.load = function(name) {
+		if (!_ais.hasOwnProperty(name)) {
+			throw new Error('Unknown AI '+ name);
+		}
+
+		return _ais[name];
+	};
+
+
+
+
+
+	/**
 	 * Constuctor
 	 */
 	(function() {
