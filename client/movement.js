@@ -78,7 +78,7 @@ module.exports = function(_ai, initial_modules) {
 		for (var i = 0; i < _modules.length; ++i) {
 			var weight = _modules[i][_weight_index];
 			var module = _modules[i][_module_index];
-			sum += weight * modules.value(ship, ship_position, position);
+			sum += weight * module.value(ship, ship_position, position);
 		}
 
 
