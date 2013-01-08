@@ -100,8 +100,13 @@ $(function() {
 			};
 
 			context.beginPath();
-			context.fillStyle = circle.fill;
-			context.strokeStyle = circle.stroke;
+
+			if (null != circle.fill) {
+				context.fillStyle = circle.fill;
+			}
+			if (null != circle.stroke) {
+				context.strokeStyle = circle.stroke;
+			}
 			context.lineWidth = 2.0;
 			context.arc(
 				circle.x + configuration['game-zone'],

@@ -132,7 +132,7 @@ module.exports = Class.extend({
 				continue;
 			}
 			
-			this.gui.circle(position, this.configuration['ship-radius']);
+			this.gui.circle(position, this.configuration['ship-radius'], 'lime', 'black');
 			this['protected-move-ship'](ship, position);
 		}
 	},
