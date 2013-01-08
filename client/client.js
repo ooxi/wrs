@@ -30,7 +30,15 @@ var optimist = require('optimist');
 /**
  * Selects the client AI to load
  */
-console.log(process.argv);
+var _ais = {
+	'dumb-mob':	'./client/dumb-mob.js',
+	'dumb-victim':	'./client/dumb-victim.js'
+};
+
+if (process.argv.length < 3) {
+	console.log('Usage: client <%j>', Object.keys(_ais));
+	return;
+}
 
 
 
