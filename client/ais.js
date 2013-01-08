@@ -28,6 +28,16 @@
 
 
 /**
+ * Module registration
+ */
+module.exports = new (function() {
+
+	
+
+})();
+
+
+/**
  * Selects the client AI to load
  *
 var registered_ais = {
