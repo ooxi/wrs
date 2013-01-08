@@ -62,6 +62,25 @@ module.exports = Class.extend({
 
 
 
+
+
+	/**
+	 * AI name (will be used as team name)
+	 */
+	getAiName: function() {
+		console.log('[ai] AI implementation has to overwrite getAiName');
+		return 'unknown-ai';
+	},
+
+	/**
+	 * AI version
+	 */
+	getAiVersion: function() {
+		console.log('[ai] AI implementation has to overwrite getAiVersion');
+		return '0.1';
+	},
+
+
 	/**
 	 * Has to be invoked periodically
 	 */
