@@ -26,6 +26,10 @@
 var async = require('async');
 var optimist = require('optimist');
 
+var wrs = {
+	ais:	require('./ais.js')
+};
+
 
 
 
@@ -47,27 +51,37 @@ async.waterfall([
 
 
 	/**
-	 * Initialize API
+	 * Initialize API and load AI
 	 */
 	function(argv, cb) {
-		cb(null, new wrs.api(argv['server-url']));
+		var ai = wrs.ais.load(argv['ai']);
+		var api = new wrs.api(argv['server-url']);
+		cb(null, ai, api);
 	},
 
 
 	/**
 	 * Load configuration
 	 */
-	function(api, cb) {
+	function(ai, api, cb) {
 		api.configuration(function(configuration) {
-			cb(null, api, configuration);
+			cb(null, ai, api, configuration);
 		});
+	},
+
+
+	/**
+	 * Initialize AI with API and configuration
+	 */
+	function(ai, api, configuration, cb) {
+		cb(null, new ai(api, configuration));
 	},
 
 
 	/**
 	 * Register team
 	 */
-	function(api, configuration, cb) {
+	function(ai, cb) {
 		var team_name = wrs.client +'-'+ wrs.version +'-'+ Math.random();
 		var team_color = 'white';
 
