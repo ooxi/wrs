@@ -35,7 +35,7 @@ var node = {
 /**
  * HTTP server exporting internal AI state
  */
-module.exports = function(port) {
+module.exports = function(_ai, port) {
 
 	/**
 	 * Self reference
@@ -170,13 +170,21 @@ module.exports = function(port) {
 			/* Send GUI bootstrap code
 			 */
 			} else if ('/' === url.pathname) {
+				response.writeHead(200, {'Content-Type': 'text/html'});
 
-			/* Unknown request
+			/* Send game configuration
+			 */
+			} else if ('/configuration' === url.pathname) {
+				response.writeHead(200, {'Content-Type': 'application/json'});
+				response.end(JSON.stringify(_ai.configuration));
+
+			/* Unknown method
 			 */
 			} else {
 				response.writeHead(403, {'Content-Type': 'application/json'});
 				response.end(JSON.stringify({
-					error:	'Unknown request'
+					error:	'Unknown method',
+					method:	url.pathname
 				});
 			}
 		}).listen(port);
