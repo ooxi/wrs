@@ -65,11 +65,26 @@ module.exports = function(directions, max_delta) {
 	var current_angles = [angles[0]];
 	var current_score_min = directions[angles[0]];
 	var current_score_max = directions[angles[0]];
-	var groups = [];
-	var current_group = {};
 
-	for (var angle in directions) {
+	var current_group = {
+		'min-angle':	angles[0],
+		'max-angle':	angles[0]
+	};
+	current_group[angles[0]] = directions[angles[0]];
+
+
+	/* Gather all groups
+	 */
+	var groups = [];
+
+	for (var i = 1; i < angles.length; ++i) {
 	}
+
+	
+	/* Check if last group can be merged with first group
+	 */
+	TODO;
+
 
 };
 
