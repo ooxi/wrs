@@ -67,6 +67,7 @@ module.exports = function(_api, _team, _name, cb) {
 	 * Constructor
 	 */
 	(function() {
+console.log(_api);
 		_api.spawn(_that.team().private_key(), _that.name(), function(ship) {
 			if (!ship.hasOwnProperty('ship-public-key')) {
 				throw new Error('Missing ship-public-key');

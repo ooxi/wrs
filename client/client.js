@@ -115,7 +115,7 @@ async.waterfall([
 		for (var i = 0; i < ai.configuration['ships-per-team']; ++i) {
 			(function(ship_name) {
 				add_ships.push(function(cb) {
-					var ship = new wrs.ship(api, team, ship_name, function() {
+					var ship = new wrs.ship(ai.api, ai.team, ship_name, function() {
 						ai.addShip(ship);
 						cb(null);
 					});
