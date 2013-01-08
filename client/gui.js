@@ -162,9 +162,22 @@ module.exports = function(port) {
 		node.http.createServer(function(request, response) {
 			var url = node.url.parse(request.url, true);
 
-			if ('/dump' === url.pathname) {
+
+			/* Register client for next tick
+			 */
+			if ('/listen' === url.pathname) {
+
+			/* Send GUI bootstrap code
+			 */
 			} else if ('/' === url.pathname) {
+
+			/* Unknown request
+			 */
 			} else {
+				response.writeHead(403, {'Content-Type': 'application/json'});
+				response.end(JSON.stringify({
+					error:	'Unknown request'
+				});
 			}
 		}).listen(port);
 	})();
