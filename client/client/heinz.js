@@ -28,7 +28,7 @@ var optimist = require('optimist');
 
 var wrs = {
 	ai: {
-		dumb_mob:	require('../ai-dumb-mob.js')
+		value:	require('../ai-heinz.js')
 	},
 	api:		require('../api.js'),
 	radar:		require('../radar.js'),
@@ -141,6 +141,6 @@ async.waterfall([
  */
 ], function(err) {
 	if (err) throw err;
-	cosole.log('Dump victims client up and running...');
+	cosole.log('Heinz client up and running...');
 });
 
