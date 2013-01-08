@@ -153,9 +153,9 @@ module.exports = function(_ai, port) {
 		_objects.arrows.push([
 			from.x,
 			from.y,
-			to.x,
-			to.y,
-			_this.color(stroke)
+			direction.x,
+			direction.y,
+			_that.color(stroke)
 		]);
 	};
 
