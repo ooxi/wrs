@@ -28,12 +28,12 @@ var optimist = require('optimist');
 
 var wrs = {
 	ai: {
-		dumb_victim:	require('./ai-dumb-victim.js')
+		dumb_victim:	require('../ai-dumb-victim.js')
 	},
-	api:		require('./api.js'),
-	radar:		require('./radar.js'),
-	ship:		require('./ship.js'),
-	team:		require('./team.js'),
+	api:		require('../api.js'),
+	radar:		require('../radar.js'),
+	ship:		require('../ship.js'),
+	team:		require('../team.js'),
 
 	client:		'dumb-victim',
 	version:	'0.1-beta'
