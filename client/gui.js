@@ -203,7 +203,7 @@ module.exports = function(_ai, port) {
 				response.end(JSON.stringify({
 					error:	'Unknown method',
 					method:	url.pathname
-				});
+				}));
 			}
 		}).listen(port);
 	})();
