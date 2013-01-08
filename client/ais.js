@@ -52,7 +52,7 @@ module.exports = function(cb) {
 		 * exactly one AI
 		 */
 		node.fs.readdir('./ai', function(files) {
-			
+			console.log('xxx %j', files);
 		});
 	})();
 };
