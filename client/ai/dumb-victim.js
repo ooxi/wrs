@@ -26,6 +26,7 @@
 var Class = require('uberclass');
 
 var wrs = {
+	ai:	require('../ai.js')
 };
 
 
@@ -36,4 +37,32 @@ var wrs = {
  * A dumb victim only tries to avoid getting destroyed by hitting the game
  * border
  */
+module.exports = wrs.ai.extend({
+
+	/**
+	 * @return AI name
+	 */
+	getAiName: function() {
+		return 'dumb-victim';
+	},
+
+	/**
+	 * @return AI version
+	 */
+	getAiVersion: function() {
+		return '0.2-beta';
+	}
+
+});
+
+
+
+
+
+
+
+
+
+
+
 
