@@ -45,6 +45,9 @@ module.exports = function(_ai, initial_modules) {
 		[5.0, new wrs.movement.avoid_border(_ai)]
 	];
 
+	/**
+	 * Do not change, required for array access
+	 */
 	var _weight_index = 0;
 	var _module_index = 1;
 
