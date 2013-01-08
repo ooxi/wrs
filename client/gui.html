@@ -54,7 +54,7 @@ $(function() {
 	/**
 	 * Blocks until the next data is available
 	 */
-	var listens = function(cb) {
+	var listen = function(cb) {
 		$.getJSON('/listen', function(data) {
 			cb(data);
 		});
