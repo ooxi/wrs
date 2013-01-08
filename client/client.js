@@ -139,6 +139,7 @@ async.waterfall([
 	function(ai, cb) {
 		setInterval(function() {
 			ai.tick();
+			ai.gui.tick();
 		}, 250);
 
 		cb(null, ai);
