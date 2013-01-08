@@ -191,6 +191,7 @@ module.exports = Class.extend({
 		var direction = wrs.util.look_at(position, best_position);
 		var movement = wrs.util.set_length(direction, this.configuration['max-ship-speed']);
 
+		this.gui.arrow(position, movement, 1.0, 'black');
 		this.api.move(ship.private_key(), movement.x, movement.y);
 	},
 

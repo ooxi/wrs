@@ -126,99 +126,30 @@ $(function() {
 		}
 
 
-		/* Draw all clients
-		 *
-		for (var id in data.clients) {
-			var client = data.clients[id];
+		/* Draw all arrows
+		 */
+		for (var i = 0; i < data.arrows.length; ++i) {
+			var arrow = {
+				x:		data.arrows[i][0],
+				y:		data.arrows[i][1],
+				dx:		data.arrows[i][2],
+				dy:		data.arrows[i][3],
+				'line-width':	data.arrows[i][4],
+				stroke:		data.colors[data.arrows[i][5]]
+			};
 
 			context.beginPath();
-			context.fillStyle = 'lime';
-			context.strokeStyle = 'black';
-			context.lineWidth = 2.0;
-			context.arc(
-				client.public.x + configuration['game-zone'],
-				client.public.y + configuration['game-zone'],
-				configuration['ship-radius'],
-				0, 2 * Math.PI,
-				false
-			);
-			context.closePath();
-			context.fill();
-			context.stroke();
-
-			context.beginPath();
-			context.lineWidth = 1.0;
+			context.strokeStyle = arrow.stroke;
+			context.lineWidth = arrow['line-width'];
 			arrow(
-				client.public.x + configuration['game-zone'],
-				client.public.y + configuration['game-zone'],
-				parseFloat(client.public.dx),
-				parseFloat(client.public.dy)
+				arrow.x + configuration['game-zone'],
+				arrow.y + configuration['game-zone'],
+				parseFloat(arrow.dx),
+				parseFloat(arrow.dy)
 			);
 			context.closePath();
 			context.stroke();
-
-			if ('undefined' !== typeof(client.public.bc)) {
-				context.beginPath();
-				context.strokeStyle = 'blue';
-				context.lineWidth = 0.5;
-				context.arc(
-					client.public.bc.x + configuration['game-zone'],
-					client.public.bc.y + configuration['game-zone'],
-					client.public.bc.radius,
-					0, 2 * Math.PI,
-					false
-				);
-				context.closePath();
-				context.stroke();
-			}
 		}
-
-
-		/* Draw all shots
-		 *
-		for (var id in data.shots) {
-			var shot = data.shots[id];
-
-			context.beginPath();
-			context.fillStyle = 'yellow';
-			context.arc(
-				shot.public.x + configuration['game-zone'],
-				shot.public.y + configuration['game-zone'],
-				5.0,
-				0, 2 * Math.PI,
-				false
-			);
-			context.closePath();
-			context.fill();
-
-			context.beginPath();
-			context.strokeStyle = 'black';
-			context.lineWidth = 1.0;
-			arrow(
-				shot.public.x + configuration['game-zone'],
-				shot.public.y + configuration['game-zone'],
-				parseFloat(shot.public.dx),
-				parseFloat(shot.public.dy)
-			);
-			context.closePath();
-			context.stroke();
-
-			if ('undefined' !== typeof(shot.public.bc)) {
-				context.beginPath();
-				context.strokeStyle = 'blue';
-				context.lineWidth = 0.5;
-				context.arc(
-					shot.public.bc.x + configuration['game-zone'],
-					shot.public.bc.y + configuration['game-zone'],
-					shot.public.bc.radius,
-					0, 2 * Math.PI,
-					false
-				);
-				context.closePath();
-				context.stroke();
-			}
-		}
-		*/
 	};
 
 

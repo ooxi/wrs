@@ -149,7 +149,7 @@ module.exports = function(_ai, port) {
 	/**
 	 * Adds an arrow
 	 */
-	this.arrow = function(from, to, stroke) {
+	this.arrow = function(from, direction, width, stroke) {
 		_objects.arrows.push([
 			from.x,
 			from.y,
