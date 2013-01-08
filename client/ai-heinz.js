@@ -24,9 +24,6 @@
 'use strict';
 
 var wrs = {
-	ai: {
-		fly_to:	require('./ai-fly-to.js')
-	},
 	point:	require('../common/point.js'),
 	util:	require('../common/util.js')
 };
@@ -61,9 +58,6 @@ module.exports = function(_api, _configuration, _radar) {
 	 */
 	this.add = function(ship) {
 		_ships[ship.private_key()] = ship;
-		_fly_to[ship.public_key()] = new wrs.ai.fly_to(
-			_api, _configuration, _radar, ship
-		);
 	};
 
 	/**
@@ -71,7 +65,6 @@ module.exports = function(_api, _configuration, _radar) {
 	 */
 	this.remove = function(ship) {
 		delete _ships[ship.private_key()];
-		delete _fly_to[ship.public_key()];
 	};
 
 
