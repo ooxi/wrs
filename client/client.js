@@ -23,9 +23,111 @@
  */
 'use strict';
 
+var async = require('async');
+var optimist = require('optimist');
 
 
 
 
 
+/* Initialization has to be done in sequence
+ */
+async.waterfall([
+
+	/**
+	 * Parse arguments
+	 */
+	function(cb) {
+		cb(null, optimist
+			.default('server-url', 'http://localhost:31337/')
+			.argv
+		);
+	},
+
+
+	/**
+	 * Initialize API
+	 */
+	function(argv, cb) {
+		cb(null, new wrs.api(argv['server-url']));
+	},
+
+
+	/**
+	 * Load configuration
+	 */
+	function(api, cb) {
+		api.configuration(function(configuration) {
+			cb(null, api, configuration);
+		});
+	},
+
+
+	/**
+	 * Register team
+	 */
+	function(api, configuration, cb) {
+		var team_name = wrs.client +'-'+ wrs.version +'-'+ Math.random();
+		var team_color = 'white';
+
+		var team = new wrs.team(api, team_name, team_color, function() {
+			cb(null, api, configuration, team);
+		});
+	},
+
+
+	/**
+	 * Spawn ships
+	 */
+	function(api, configuration, team, cb) {
+		var radar = new wrs.radar(api, configuration);
+
+		/* Ships to setup
+		 */
+		var add_ships = [];
+
+		for (var i = 0; i < configuration['ships-per-team']; ++i) {
+			(function(ship_name) {
+				add_ships.push(function(cb) {
+					var ship = new wrs.ship(api, team, ship_name, function() {
+						radar.add(ship.public_key(), ship.private_key());
+						cb(null, ship);
+					});
+				});
+			})(wrs.client +'-'+ i);
+		}
+
+
+		/* Setup ships in parallel
+		 */
+		async.parallel(add_ships, function(err, ships) {
+			if (err) throw err;
+			cb(null, api, configuration, radar, ships);
+		});
+	},
+
+
+	/**
+	 * Initialize APIs
+	 */
+	function(api, configuration, radar, ships, cb) {
+		var ai = new wrs.ai.dumb_mob(api, configuration, radar);
+
+		for (var i = 0; i < ships.length; ++i) {
+			ai.add(ships[i]);
+		}
+
+		setInterval(function() {
+			ai.tick();
+		}, 250);
+	}
+
+
+
+/* Inform client of setup success or failure
+ */
+], function(err) {
+	if (err) throw err;
+	cosole.log('Heinz client up and running...');
+});
 
