@@ -33,14 +33,22 @@ var node = {
 
 /**
  * Auto registers all available AIs
- *
- * @warning Will block while reading the filesystem
  */
-module.exports = new (function() {
+module.exports = function(cb) {
 
+	/**
+	 * Registered AIs
+	 */
+	var _ais = {};
+
+
+
+	/**
+	 * Constuctor
+	 */
 	console.log('%j', node.fs.readdirSync('ai'));
 
-})();
+};
 
 
 
