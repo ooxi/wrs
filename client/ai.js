@@ -26,7 +26,7 @@
 var Class = require('uberclass');
 
 var wrs = {
-	gui:		requrie('./gui.js'),
+	gui:		require('./gui.js'),
 	movement:	require('./movement.js'),
 	point:		require('../common/point.js'),
 	radar:		require('./radar.js'),
