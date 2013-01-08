@@ -22,3 +22,42 @@
  *  3. This notice may not be removed or altered from any source distribution.
  */
 'use strict';
+
+var node = {
+	http:	require('http')
+};
+
+
+
+
+
+/**
+ * HTTP server exporting internal AI state
+ */
+module.exports = function(port) {
+
+	this.circle = function(center, radius, fill, stroke) {
+	};
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
