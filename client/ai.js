@@ -45,13 +45,14 @@ module.exports = Class.extend({
 	 * @param _configuration Loaded game configuration
 	 * @param _api Initialized API
 	 */
-	init: function(_configuration, _api) {
+	init: function(_configuration, _api, _team) {
 
 		/**
 		 * Independent modules
 		 */
 		this.configuration = _configuration;
 		this.api = _api;
+		this.team = team;
 
 		/**
 		 * Dependent modules

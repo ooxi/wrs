@@ -71,31 +71,30 @@ async.waterfall([
 
 
 	/**
-	 * Initialize AI with API and configuration
-	 */
-	function(ai, api, configuration, cb) {
-		cb(null, new ai(api, configuration));
-	},
-
-
-	/**
 	 * Register team
 	 */
-	function(ai, cb) {
+	function(ai, api, configuration, cb) {
 		var team_name = wrs.client +'-'+ wrs.version +'-'+ Math.random();
 		var team_color = 'white';
 
 		var team = new wrs.team(api, team_name, team_color, function() {
-			cb(null, api, configuration, team);
+			cb(null, ai, api, configuration, team);
 		});
+	},
+
+
+	/**
+	 * Initialize AI with API and configuration
+	 */
+	function(ai, api, configuration, team, cb) {
+		cb(null, new ai(api, configuration, team));
 	},
 
 
 	/**
 	 * Spawn ships
 	 */
-	function(api, configuration, team, cb) {
-		var radar = new wrs.radar(api, configuration);
+	function(ai, cb) {
 
 		/* Ships to setup
 		 */
@@ -105,33 +104,28 @@ async.waterfall([
 			(function(ship_name) {
 				add_ships.push(function(cb) {
 					var ship = new wrs.ship(api, team, ship_name, function() {
-						radar.add(ship.public_key(), ship.private_key());
-						cb(null, ship);
+						ai.radar.add(ship.public_key(), ship.private_key());
+						ai.add(ship);
+						cb(null);
 					});
 				});
-			})(wrs.client +'-'+ i);
+			})(ai.getAiName() +'-'+ i);
 		}
 
 
 		/* Setup ships in parallel
 		 */
-		async.parallel(add_ships, function(err, ships) {
+		async.parallel(add_ships, function(err) {
 			if (err) throw err;
-			cb(null, api, configuration, radar, ships);
+			cb(null, ai);
 		});
 	},
 
 
 	/**
-	 * Initialize APIs
+	 * Execute AI
 	 */
-	function(api, configuration, radar, ships, cb) {
-		var ai = new wrs.ai.dumb_mob(api, configuration, radar);
-
-		for (var i = 0; i < ships.length; ++i) {
-			ai.add(ships[i]);
-		}
-
+	function(ai, cb) {
 		setInterval(function() {
 			ai.tick();
 		}, 250);
