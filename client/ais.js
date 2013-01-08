@@ -57,7 +57,7 @@ module.exports = function(cb) {
 	 */
 	this.load = function(name) {
 		if (!_ais.hasOwnProperty(name)) {
-			throw new Error('Unknown AI '+ name);
+			throw new Error('Unknown AI '+ name +', must be an element of '+ JSON.stringify(Object.keys(_ais)));
 		}
 
 		return _ais[name];
