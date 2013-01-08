@@ -37,9 +37,16 @@ var node = {
 module.exports = function(cb) {
 
 	/**
+	 * Self reference
+	 */
+	var _that = this;
+
+	/**
 	 * Registered AIs
 	 */
 	var _ais = {};
+
+
 
 
 
@@ -67,17 +74,9 @@ module.exports = function(cb) {
 					_ais[ai_name] = require('./ai/'+ ai_file);
 				}
 			}
+
+			cb(_that);
 		});
 	})();
 };
-
-
-
-
-
-
-
-
-
-
 
