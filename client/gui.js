@@ -24,7 +24,8 @@
 'use strict';
 
 var node = {
-	http:	require('http')
+	http:	require('http'),
+	url:	require('url')
 };
 
 
@@ -150,6 +151,18 @@ module.exports = function(port) {
 		]);
 	};
 
+
+
+
+
+	/**
+	 * Setup HTTP server
+	 */
+	(function() {
+		node.http.createServer(function(request, response) {
+			var url = node.url.parse(request.url, true);
+		}).listen(port);
+	})();
 };
 
 
