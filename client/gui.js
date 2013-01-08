@@ -161,6 +161,8 @@ module.exports = function(_ai, port) {
 	 * Setup HTTP server
 	 */
 	(function() {
+		_that.tick();
+
 		node.http.createServer(function(request, response) {
 			var url = node.url.parse(request.url, true);
 
