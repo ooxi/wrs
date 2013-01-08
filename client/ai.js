@@ -149,10 +149,13 @@ module.exports = Class.extend({
 		var distance = this.configuration['ship-radius'] * 2.0;
 
 
+		/* Try each step
+		 */
 		var step = 2 * Math.PI / steps;
 
 		for (var i = 0; i < steps; ++i) {
-			var angle = 
+			var angle = step * i;
+		}
 
 
 		this.api.move(ship.private_key(), 5.0, 5.0);
