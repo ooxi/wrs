@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>WRS 2.0</title>
+		<title>WRS &mdash; Client AI</title>
 		<link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
 		<style type="text/css">
 
@@ -86,6 +86,39 @@ $(function() {
 		 */
 		context.fillStyle = 'rgb(255, 0, 255)';
 		context.fillRect(0, 0, screen.width, screen.height);
+
+
+		/* Draw all circles
+		 */
+		for (var i = 0; i < data.circles.length; ++i) {
+			var circle = {
+				x:	data.circles[i][0],
+				y:	data.circles[i][1],
+				radius:	data.circles[i][2],
+				fill:	data.colors[data.circles[i][3]],
+				stroke:	data.colors[data.circles[i][4]]
+			};
+
+			context.beginPath();
+			context.fillStyle = circle.fill;
+			context.strokeStyle = circle.stroke;
+			context.lineWidth = 2.0;
+			context.arc(
+				circle.x + configuration['game-zone'],
+				circle.y + configuration['game-zone'],
+				circle.radius,
+				0, 2 * Math.PI,
+				false
+			);
+			context.closePath();
+
+			if (null !== circle.fill) {
+				context.fill();
+			}
+			if (null !== circle.stroke) {
+				context.stroke();
+			}
+		}
 
 
 		/* Draw all clients
