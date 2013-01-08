@@ -30,6 +30,10 @@ var node = {
 	url:	require('url')
 };
 
+var wrs = {
+	point:	require('../common/point.js')
+};
+
 
 
 
@@ -127,6 +131,9 @@ module.exports = function(_ai, port) {
 	this.circle = function(center, radius, fill, stroke) {
 		if ('undefined' === typeof(_objects)) {
 			console.log('[gui] Call to circle between ticks');
+		}
+		if (!(center instanceof wrs.point)) {
+			console.log('[gui] Circule center should be a position');
 		}
 
 		_objects.circles.push([
