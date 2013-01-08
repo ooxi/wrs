@@ -27,7 +27,8 @@ var async = require('async');
 var optimist = require('optimist');
 
 var wrs = {
-	ais:	require('./ais.js')
+	ais:	require('./ais.js'),
+	api:	require('./api.js')
 };
 
 
