@@ -171,6 +171,11 @@ module.exports = Class.extend({
 			);
 			var value = this.movement.value(ship, try_position);
 
+			this.gui.arrow(try_position, new wrs.point(
+				Math.cos(angle) * value,
+				Math.sin(angle) * value
+			), 0.5, 'blue');
+
 			if (value > best_value) {
 				best_value = value;
 				best_position = try_position;
