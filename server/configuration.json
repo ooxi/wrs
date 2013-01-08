@@ -3,7 +3,7 @@
 		"teams":		1000,
 		"ships-per-team":	2,
 
-		"game-zone":		1000,
+		"game-zone":		500,
 		"ship-radius":		10,
 
 		"max-ship-speed":	25,
