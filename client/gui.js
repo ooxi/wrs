@@ -161,6 +161,11 @@ module.exports = function(port) {
 	(function() {
 		node.http.createServer(function(request, response) {
 			var url = node.url.parse(request.url, true);
+
+			if ('/dump' === url.pathname) {
+			} else if ('/' === url.pathname) {
+			} else {
+			}
 		}).listen(port);
 	})();
 };
