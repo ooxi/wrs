@@ -47,6 +47,7 @@ module.exports = function(game, response) {
 			shots.push({
 				public: {
 					id:	obj.public_key,
+					name:	obj.name,
 					x:	obj.x,
 					y:	obj.y,
 					dx:	obj.dx,
