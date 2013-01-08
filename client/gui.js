@@ -37,6 +37,13 @@ var node = {
 module.exports = function(port) {
 
 	/**
+	 * Self reference
+	 */
+	var _that = this;
+
+
+
+	/**
 	 * Objects to draw in current tick
 	 */
 	var _objects = undefined;
@@ -95,6 +102,23 @@ module.exports = function(port) {
 
 
 	/**
+	 * @return Color index
+	 */
+	this.color = function(name) {
+		if (_colors.hasOwnProperty(name)) {
+			return _colors[name];
+		};
+
+		var index = _objects.color.length;
+		_objects.push(name);
+		_colors[name] = index;
+
+		return index;
+	};
+
+
+
+	/**
 	 * Adds a circle
 	 */
 	this.circle = function(center, radius, fill, stroke) {
@@ -102,12 +126,27 @@ module.exports = function(port) {
 			console.log('[gui] Call to circle between ticks');
 		}
 
-		_objects.circules.push([
+		_objects.circles.push([
 			center.x,
 			center.y,
 			radius,
-			_colors[fill],
-			_colors[stroke]
+			_that.color(fill),
+			_that.color(stroke)
+		]);
+	};
+
+
+
+	/**
+	 * Adds an arrow
+	 */
+	this.arrow = function(from, to, stroke) {
+		_objects.arrows.push([
+			from.x,
+			from.y,
+			to.x,
+			to.y,
+			_this.color(stroke)
 		]);
 	};
 
