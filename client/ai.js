@@ -115,8 +115,26 @@ module.exports = Class.extend({
 	 * Base implementation will move all ships according to 
 	 */
 	tick: function() {
-		console.log('[ai] AI implementation has to overwrite tick');
-	}
+		for (var private_key in this.ships) {
+			var ship = this.ships[private_key];
+			var position = this.radar.ship(ship.public_key());
+
+			if (null === position) {
+				console.log('Position of ship '+ ship.public_key +' unknown');
+				continue;
+			}
+			
+			this['protected-move-ship'](ship, position);
+		}
+	},
+
+
+
+	/**
+	 * Will be called to change ship movement
+	 */
+	'protected-move-ship': function(ship, position) {
+	},
 
 });
 
