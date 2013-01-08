@@ -34,8 +34,8 @@ var wrs = {
 
 
 /**
- * A dumb victim only tries to avoid getting destroyed by hitting the game
- * border
+ * A group of dumb victims only tries to avoid getting destroyed by hitting the
+ * game border
  */
 module.exports = wrs.ai.extend({
 
