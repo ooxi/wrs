@@ -46,8 +46,13 @@ module.exports = function(cb) {
 	/**
 	 * Constuctor
 	 */
-	console.log('%j', node.fs.readdirSync('ai'));
+	(function() {
 
+		/* All JavaScript files beneath ./ai are assumed to contain
+		 * exactly one AI
+		 */
+		node.fs.readdir('./ai')
+	})();
 };
 
 
