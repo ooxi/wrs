@@ -68,7 +68,7 @@ $(function() {
 
 		/* @see http://stackoverflow.com/a/6333775
 		 */
-		var arrow = function(x, y, dx, dy) {
+		var draw_arrow = function(x, y, dx, dy) {
 			var headlen = 10;
 			var tox = x + dx;
 			var toy = y + dy;
@@ -141,7 +141,7 @@ $(function() {
 			context.beginPath();
 			context.strokeStyle = arrow.stroke;
 			context.lineWidth = arrow['line-width'];
-			arrow(
+			draw_arrow(
 				arrow.x + configuration['game-zone'],
 				arrow.y + configuration['game-zone'],
 				parseFloat(arrow.dx),
