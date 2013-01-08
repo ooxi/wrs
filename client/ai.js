@@ -89,7 +89,7 @@ module.exports = Class.extend({
 		console.log('[ai] AI implementation has to overwrite tick');
 	}
 
-};
+});
 
 
 
