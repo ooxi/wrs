@@ -48,7 +48,7 @@ var ai = process.argv[2];
 /* Does requested AI exist?
  */
 if (!_ais.hasOwnProperty(ai)) {
-	console.log('Unkown AI %j, needs to be an element of %j', ai, Objekt.keys(_ais));
+	console.log('Unkown AI %j, needs to be an element of %j', ai, Object.keys(_ais));
 	return;
 }
 
