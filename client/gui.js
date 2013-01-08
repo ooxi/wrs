@@ -57,9 +57,9 @@ module.exports = function(_ai, port) {
 	var _colors = undefined;
 
 	/**
-	 * Requests waiting for current tick to finish
+	 * Listeners waiting for current tick to finish
 	 */
-	var _requests = [];
+	var _listeners = [];
 
 
 
@@ -74,7 +74,7 @@ module.exports = function(_ai, port) {
 		/* Reset internal objects
 		 */
 		var objects = _objects;
-		var requests = _requests;
+		var listeners = _listeners;
 
 		_objects = {
 			'colors':	[],
@@ -86,17 +86,17 @@ module.exports = function(_ai, port) {
 			null:	0,
 		};
 
-		_requests = [];
+		_listeners = [];
 
 
 		/* Send objects from last tick to waiting listeners
 		 */
-		if (('undefined' === typeof(objects)) || (0 === requests.length)) {
+		if (('undefined' === typeof(objects)) || (0 === listeners.length)) {
 			return;
 		}
 
-		for (var i = 0; i < requests.length; ++i) {
-			requests[i].end(JSON.stringify(objects));
+		for (var i = 0; i < listeners.length; ++i) {
+			listeners[i].end(JSON.stringify(objects));
 		}
 	};
 
@@ -168,17 +168,33 @@ module.exports = function(_ai, port) {
 			/* Register client for next tick
 			 */
 			if ('/listen' === url.pathname) {
+				response.writeHead(200, {'Content-Type': 'application/json'});
+				_listeners.push(response);
+
 
 			/* Send GUI bootstrap code
 			 */
 			} else if ('/' === url.pathname) {
-				response.writeHead(200, {'Content-Type': 'text/html'});
+				var file = path.join(__dirname, 'gui.html');
+
+				fs.stat(file, function(err, stats) {
+					if (err) throw err;
+
+					response.writeHead(200, {
+						'Content-Type': 'text/html',
+						'Content-Length': stats.size
+					});
+
+					fs.createReadStream(file).pipe(response);
+				});
+
 
 			/* Send game configuration
 			 */
 			} else if ('/configuration' === url.pathname) {
 				response.writeHead(200, {'Content-Type': 'application/json'});
 				response.end(JSON.stringify(_ai.configuration));
+
 
 			/* Unknown method
 			 */

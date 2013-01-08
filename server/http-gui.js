@@ -37,6 +37,8 @@ module.exports = function(game, response) {
 	response = response.response();
 	var file = path.join(__dirname, 'gui.html');
 
+	/* @warning Inform client if an error occurs (end response)
+	 */
 	fs.stat(file, function(err, stats) {
 		if (err) throw err;
 
