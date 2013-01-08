@@ -52,10 +52,10 @@ $(function() {
 
 
 	/**
-	 * Loads the status dump
+	 * Blocks until the next data is available
 	 */
-	var dump = function(cb) {
-		$.getJSON('/dump', function(data) {
+	var listens = function(cb) {
+		$.getJSON('/listen', function(data) {
 			cb(data);
 		});
 	};
