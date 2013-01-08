@@ -47,38 +47,28 @@ module.exports = Class.extend({
 	 */
 	init: function(_configuration, _api) {
 
-	/**
-	 * Independent modules
-	 */
-	this.configuration = _configuration;
-	this.api = _api;
-	this.radar = _radar;
+		/**
+		 * Independent modules
+		 */
+		this.configuration = _configuration;
+		this.api = _api;
 
-	/**
-	 * Dependent modules
-	 */
-	this.movement = new wrs.movement(this);
-
-
+		/**
+		 * Dependent modules
+		 */
+		this.movement = new wrs.movement(this);
+		this.radar = new wrs.radar(this.configuration, this.api);
+	},
 
 
 
 	/**
 	 * Has to be invoked periodically
 	 */
-	this.tick = function() {
-	};
+	tick: function() {
+		console.log('[ai] AI implementation has to overwrite tick');
+	}
 
-
-
-
-
-	/**
-	 * Constructor
-	 */
-	(function() {
-		async.
-	})();
 };
 
 
