@@ -59,6 +59,11 @@ module.exports = Class.extend({
 		 */
 		this.movement = new wrs.movement(this);
 		this.radar = new wrs.radar(this.configuration, this.api);
+
+		/**
+		 * Registered ships
+		 */
+		this.ships = {};
 	},
 
 
@@ -82,8 +87,31 @@ module.exports = Class.extend({
 	},
 
 
+
+
+
+	/**
+	 * Add ship to AI
+	 */
+	this.addShip = function(ship) {
+		this.ships[ship.private_key()] = ship;
+	};
+
+	/**
+	 * Remove ship from AI
+	 */
+	this.removeShip = function(ship) {
+		delete this.ships[ship.private_key()];
+	};
+
+
+
+
+
 	/**
 	 * Has to be invoked periodically
+	 *
+	 * Base implementation will move all ships according to 
 	 */
 	tick: function() {
 		console.log('[ai] AI implementation has to overwrite tick');
