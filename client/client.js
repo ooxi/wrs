@@ -29,6 +29,7 @@ var optimist = require('optimist');
 var wrs = {
 	ais:	require('./ais.js'),
 	api:	require('./api.js'),
+	ship:	require('./ship.js'),
 	team:	require('./team.js')
 };
 
@@ -114,7 +115,7 @@ async.waterfall([
 		for (var i = 0; i < ai.configuration['ships-per-team']; ++i) {
 			(function(ship_name) {
 				add_ships.push(function(cb) {
-					var ship = new wrs.ship(api, ai.team, ship_name, function() {
+					var ship = new wrs.ship(ai.api, ai.team, ship_name, function() {
 						ai.addShip(ship);
 						cb(null);
 					});
