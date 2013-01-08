@@ -24,7 +24,9 @@
 'use strict';
 
 var node = {
+	fs:	require('fs'),
 	http:	require('http'),
+	path:	require('path'),
 	url:	require('url')
 };
 
