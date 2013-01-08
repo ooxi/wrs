@@ -40,6 +40,34 @@
  */
 module.exports = function(directions, max_delta) {
 
+	/* Sort angles (object keys don't have to be sorted by numerical value)
+	 */
+	var angles = (function() {
+		var keys = Object.keys(directions);
+
+		for (var i = 0; i < keys.length; ++i) {
+			keys[i] = parseFloat(keys[i]);
+		}
+		keys.sort();
+		return keys;
+	})();
+
+
+	/* No directions so sort? Easy!
+	 */
+	if (0 === angles.length) {
+		return [];
+	}
+
+
+	/* Initialize with first angle
+	 */
+	var current_angles = [angles[0]];
+	var current_score_min = directions[angles[0]];
+	var current_score_max = directions[angles[0]];
+	var groups = [];
+	var current_group = {};
+
 	for (var angle in directions) {
 	}
 
