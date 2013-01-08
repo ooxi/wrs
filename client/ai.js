@@ -162,15 +162,15 @@ module.exports = Class.extend({
 			var x_diff = Math.cos(angle) * distance;
 			var y_diff = Math.sin(angle) * distance;
 
-			var position = new wrs.point(
+			var try_position = new wrs.point(
 				position.x + x_diff,
 				position.y + y_diff
 			);
-			var value = this.movement.value(ship, position);
+			var value = this.movement.value(ship, try_position);
 
 			if (value > best_value) {
 				best_value = value;
-				best_position = position;
+				best_position = try_position;
 			}
 		}
 
@@ -185,7 +185,10 @@ module.exports = Class.extend({
 
 		/* Move ship in best direction
 		 */
-		this.api.move(ship.private_key(), position.x);
+		var direction = wrs.util.look_at(position, best_position);
+		var movement = wrs.util.set_length(direction, this.configuration['max-ship-speed']);
+
+		this.api.move(ship.private_key(), movement.x, movement.y);
 	},
 
 });
