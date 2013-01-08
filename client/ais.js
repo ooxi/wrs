@@ -57,10 +57,16 @@ module.exports = function(cb) {
 
 			for (var i = 0; i < files.length; ++i) {
 				var file = files[i];
+				var match = pattern.exec(file);
 
-				console.log('%j', pattern.exec(file));
+				if (match) {
+					var ai_name = match[1];
+					var ai_file = match[0];
+					console.log('[ais] Will register %j', ai_name);
+
+					_ais[ai_name] = require('./ai/'+ ai_file);
+				}
 			}
-			console.log('xxx %j', files);
 		});
 	})();
 };
