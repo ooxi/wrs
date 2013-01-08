@@ -175,9 +175,9 @@ module.exports = function(_ai, port) {
 			/* Send GUI bootstrap code
 			 */
 			} else if ('/' === url.pathname) {
-				var file = path.join(__dirname, 'gui.html');
+				var file = node.path.join(__dirname, 'gui.html');
 
-				fs.stat(file, function(err, stats) {
+				node.fs.stat(file, function(err, stats) {
 					if (err) throw err;
 
 					response.writeHead(200, {
@@ -185,7 +185,7 @@ module.exports = function(_ai, port) {
 						'Content-Length': stats.size
 					});
 
-					fs.createReadStream(file).pipe(response);
+					node.fs.createReadStream(file).pipe(response);
 				});
 
 
