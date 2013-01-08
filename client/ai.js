@@ -93,7 +93,7 @@ module.exports = Class.extend({
 	/**
 	 * Add ship to AI
 	 */
-	this.addShip = function(ship) {
+	addShip: function(ship) {
 		this.ships[ship.private_key()] = ship;
 		this.radar.add(ship.public_key(), ship.private_key());
 	};
@@ -101,7 +101,7 @@ module.exports = Class.extend({
 	/**
 	 * Remove ship from AI
 	 */
-	this.removeShip = function(ship) {
+	removeShip: function(ship) {
 		delete this.ships[ship.private_key()];
 	};
 
