@@ -70,7 +70,6 @@ module.exports = function(_ai, port) {
 	 * tick objects will be send to all waiting clients.
 	 */
 	this.tick = function() {
-
 		/* Reset internal objects
 		 */
 		var objects = _objects;
@@ -112,8 +111,8 @@ module.exports = function(_ai, port) {
 			return _colors[name];
 		};
 
-		var index = _objects.color.length;
-		_objects.push(name);
+		var index = _objects.colors.length;
+		_objects.colors.push(name);
 		_colors[name] = index;
 
 		return index;
