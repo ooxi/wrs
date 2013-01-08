@@ -140,14 +140,16 @@ async.waterfall([
 		setInterval(function() {
 			ai.tick();
 		}, 250);
+
+		cb(null, ai);
 	}
 
 
 
 /* Inform client of setup success or failure
  */
-], function(err) {
+], function(err, ai) {
 	if (err) throw err;
-	cosole.log('Heinz client up and running...');
+	console.log('Client using %j:%j up and running...', ai.getAiName(), ai.getAiVersion());
 });
 
