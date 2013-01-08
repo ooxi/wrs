@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 github/ooxi
+ * Copyright (c) 2013 github/ooxi
  *     https://github.com/ooxi/wrs
  *     violetland@mail.ru
  *
