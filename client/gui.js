@@ -70,10 +70,10 @@ module.exports = function(_ai, port) {
 	 * tick objects will be send to all waiting clients.
 	 */
 	this.tick = function() {
+
 		/* Reset internal objects
 		 */
 		var objects = _objects;
-		var listeners = _listeners;
 
 		_objects = {
 			'colors':	[],
@@ -85,14 +85,15 @@ module.exports = function(_ai, port) {
 			null:	0,
 		};
 
-		_listeners = [];
-
 
 		/* Send objects from last tick to waiting listeners
 		 */
-		if (('undefined' === typeof(objects)) || (0 === listeners.length)) {
+		if (('undefined' === typeof(objects)) || (0 === _listeners.length)) {
 			return;
 		}
+
+		var listeners = _listeners;
+		_listeners = [];
 
 		for (var i = 0; i < listeners.length; ++i) {
 			listeners[i].end(JSON.stringify(objects));
