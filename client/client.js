@@ -40,6 +40,7 @@ async.waterfall([
 	function(cb) {
 		cb(null, optimist
 			.default('server-url', 'http://localhost:31337/')
+			.demand('ai').describe('ai', 'Registered AI')
 			.argv
 		);
 	},
