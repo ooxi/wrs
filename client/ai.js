@@ -26,6 +26,7 @@
 var Class = require('uberclass');
 
 var wrs = {
+	gui:		requrie('./gui.js'),
 	movement:	require('./movement.js'),
 	point:		require('../common/point.js'),
 	radar:		require('./radar.js'),
@@ -59,6 +60,7 @@ module.exports = Class.extend({
 		/**
 		 * Dependent modules
 		 */
+		this.gui = new wrs.gui(this, 1337);
 		this.movement = new wrs.movement(this);
 		this.radar = new wrs.radar(this.api, this.configuration);
 
