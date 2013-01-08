@@ -23,8 +23,11 @@
  */
 'use strict';
 
+var Class = require('uberclass.js');
+
 var wrs = {
-	movement:	require('./movement.js')
+	movement:	require('./movement.js'),
+	radar:		require('./radar.js')
 };
 
 
@@ -34,7 +37,15 @@ var wrs = {
 /**
  * Common AI stuff
  */
-module.exports = function(_configuration, _api, _radar) {
+module.exports = Class.extend({
+
+	/**
+	 * Constructor
+	 *
+	 * @param _configuration Loaded game configuration
+	 * @param _api Initialized API
+	 */
+	init: function(_configuration, _api) {
 
 	/**
 	 * Independent modules
