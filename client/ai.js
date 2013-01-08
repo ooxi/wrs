@@ -155,6 +155,10 @@ module.exports = Class.extend({
 
 		for (var i = 0; i < steps; ++i) {
 			var angle = step * i;
+			var x_diff = Math.cos(angle) * distance;
+			var y_diff = Math.sin(angle) * distance;
+
+			console.log('Trying %j %j', x_diff, y_diff);
 		}
 
 
