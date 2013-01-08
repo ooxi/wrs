@@ -95,6 +95,7 @@ module.exports = Class.extend({
 	 */
 	this.addShip = function(ship) {
 		this.ships[ship.private_key()] = ship;
+		this.radar.add(ship.public_key(), ship.private_key());
 	};
 
 	/**

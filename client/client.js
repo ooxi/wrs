@@ -116,7 +116,6 @@ async.waterfall([
 			(function(ship_name) {
 				add_ships.push(function(cb) {
 					var ship = new wrs.ship(api, team, ship_name, function() {
-						ai.radar.add(ship.public_key(), ship.private_key());
 						ai.addShip(ship);
 						cb(null);
 					});
