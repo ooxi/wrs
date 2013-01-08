@@ -36,7 +36,79 @@ var node = {
  */
 module.exports = function(port) {
 
+	/**
+	 * Objects to draw in current tick
+	 */
+	var _objects = undefined;
+
+	/**
+	 * Color name cache
+	 */
+	var _colors = undefined;
+
+	/**
+	 * Requests waiting for current tick to finish
+	 */
+	var _requests = [];
+
+
+
+
+
+	/**
+	 * Starts a new tick by resetting objects to draw. Meanwhile the last
+	 * tick objects will be send to all waiting clients.
+	 */
+	this.tick = function() {
+
+		/* Reset internal objects
+		 */
+		var objects = _objects;
+		var requests = _requests;
+
+		_objects = {
+			'colors':	[],
+			'circles':	[],
+			'arrows':	[]
+		};
+
+		_colors = {
+			null:	0,
+		};
+
+		_requests = [];
+
+
+		/* Send objects from last tick to waiting listeners
+		 */
+		if (('undefined' === typeof(objects)) || (0 === requests.length)) {
+			return;
+		}
+
+		for (var i = 0; i < requests.length; ++i) {
+			requests[i].end(JSON.stringify(objects));
+		}
+	};
+
+
+
+
+
+	/**
+	 * Adds a circle
+	 */
 	this.circle = function(center, radius, fill, stroke) {
+		if ('undefined' === typeof(_objects)) {
+			console.log('[gui] Call to circle between ticks');
+		}
+
+		_objects.circules.push([
+			center.x,
+			center.y,
+			radius,
+			_colors[fill],
+			_colors[stroke]
+		]);
 	};
 
 };
