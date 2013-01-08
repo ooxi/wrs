@@ -51,7 +51,9 @@ module.exports = function(cb) {
 		/* All JavaScript files beneath ./ai are assumed to contain
 		 * exactly one AI
 		 */
-		node.fs.readdir('./ai')
+		node.fs.readdir('./ai', function(files) {
+			
+		});
 	})();
 };
 

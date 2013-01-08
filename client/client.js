@@ -39,10 +39,20 @@ var wrs = {
 async.waterfall([
 
 	/**
-	 * Parse arguments
+	 * Auto register available AIs
 	 */
 	function(cb) {
-		cb(null, optimist
+		new wrs.ais(function(ais) {
+			cb(null, ais);
+		});
+	},
+
+
+	/**
+	 * Parse arguments
+	 */
+	function(ais, cb) {
+		cb(null, ais, optimist
 			.default('server-url', 'http://localhost:31337/')
 			.demand('ai').describe('ai', 'Registered AI')
 			.argv
@@ -53,8 +63,8 @@ async.waterfall([
 	/**
 	 * Initialize API and load AI
 	 */
-	function(argv, cb) {
-		var ai = wrs.ais.load(argv['ai']);
+	function(ais, argv, cb) {
+		var ai = ais.load(argv['ai']);
 		var api = new wrs.api(argv['server-url']);
 		cb(null, ai, api);
 	},
