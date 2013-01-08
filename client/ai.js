@@ -23,7 +23,7 @@
  */
 'use strict';
 
-var Class = require('uberclass.js');
+var Class = require('uberclass');
 
 var wrs = {
 	movement:	require('./movement.js'),
