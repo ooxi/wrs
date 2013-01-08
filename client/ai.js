@@ -27,7 +27,9 @@ var Class = require('uberclass');
 
 var wrs = {
 	movement:	require('./movement.js'),
-	radar:		require('./radar.js')
+	point:		require('../common/point.js'),
+	radar:		require('./radar.js'),
+	util:		require('../common/util.js')
 };
 
 
@@ -149,8 +151,10 @@ module.exports = Class.extend({
 		var distance = this.configuration['ship-radius'] * 2.0;
 
 
-		/* Try each step
+		/* Try each step and remember best position & value
 		 */
+		var best_position = null;
+		var best_value = -Infinity;
 		var step = 2 * Math.PI / steps;
 
 		for (var i = 0; i < steps; ++i) {
@@ -158,11 +162,30 @@ module.exports = Class.extend({
 			var x_diff = Math.cos(angle) * distance;
 			var y_diff = Math.sin(angle) * distance;
 
-			console.log('Trying %j %j', x_diff, y_diff);
+			var position = new wrs.point(
+				position.x + x_diff,
+				position.y + y_diff
+			);
+			var value = this.movement.value(ship, position);
+
+			if (value > best_value) {
+				best_value = value;
+				best_position = position;
+			}
 		}
 
 
-		this.api.move(ship.private_key(), 5.0, 5.0);
+		/* Could not find any position o_O
+		 */
+		if (null == best_position) {
+			console.log('[ai] Cannot move '+ ship.public_key() +' because no position could be determined');
+			return;
+		}
+
+
+		/* Move ship in best direction
+		 */
+		this.api.move(ship.private_key(), position.x);
 	},
 
 });
