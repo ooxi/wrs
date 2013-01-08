@@ -51,7 +51,15 @@ module.exports = function(cb) {
 		/* All JavaScript files beneath ./ai are assumed to contain
 		 * exactly one AI
 		 */
-		node.fs.readdir('./ai', function(files) {
+		node.fs.readdir('./ai', function(err, files) {
+			if (err) throw err;
+			var pattern = new RegExp('^(.+)\\.js$', 'i');
+
+			for (var i = 0; i < files.length; ++i) {
+				var file = files[i];
+
+				console.log('%j', pattern.exec(file));
+			}
 			console.log('xxx %j', files);
 		});
 	})();
