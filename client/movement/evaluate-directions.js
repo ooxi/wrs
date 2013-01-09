@@ -38,18 +38,23 @@
  *
  * @return Array containing objects describing the tested positions
  *     .angle Angle from the current position
+ *     .x Tested position x
+ *     .y Tested position y
  *     .dx Direction dx (normalized)
  *     .dy Direction dy (normalized)
  *     .value Position's value
  */
 module.exports = function(movement, ship, ship_position, steps, distance) {
-
-	/* Try each step
-	 */
 	var result = [];
 	var step = 2 * Math.PI / steps;
 
+
+	/* Try each step
+	 */
 	for (var i = 0; i < steps; ++i) {
+
+		/* Basic math ftw
+		 */
 		var angle = step * i;
 		var x_diff = Math.cos(angle) * distance;
 		var y_diff = Math.sin(angle) * distance;
@@ -60,11 +65,31 @@ module.exports = function(movement, ship, ship_position, steps, distance) {
 		);
 		var value = this.movement.value(ship, try_position);
 
+
+		/* Draw arrow in gui describing tested position and value
+		 */
 		this.gui.arrow(try_position, new wrs.point(
 			Math.cos(angle) * (5.0 - value) * 10.0,
 			Math.sin(angle) * (5.0 - value) * 10.0
 		), 0.5, 'blue');
+
+
+		/* Remember score
+		 */
+		result.push({
+			angle:	angle,
+			x:	try_position.x,
+			y:	try_position.y,
+			dx:	x_diff / distance,
+			dy:	y_diff / distance,
+			vaue:	value
+		});
 	}
+
+
+	/* Return scores
+	 */
+	return results;
 };
 
 
