@@ -91,6 +91,7 @@ module.exports = function(_ai, initial_modules) {
 	 */
 	this.evaluate_directions = require('./movement/evaluate-directions.js');
 	this.group_directions = require('./movement/group-directions.js');
+	this.choose_direction = require('./movement/choose-direction.js');
 
 };
 
