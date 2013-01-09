@@ -24,7 +24,7 @@
 'use strict';
 
 var wrs = {
-	util:	require('../../common/utils.js')
+	util:	require('../../common/util.js')
 };
 
 
