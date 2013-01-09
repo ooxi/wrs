@@ -25,5 +25,7 @@ shot.
 ### Movement
 
 It is especially hard for the enemy to avoid bullets if they are coming from
-different directions and at close range.
+different directions and at close range. Thus the Cluster AI tries to form a
+circle around the enemy at mid range. A too close distance would enable the
+enemy to kill friendly ships too easy.
 
