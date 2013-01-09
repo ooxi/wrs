@@ -30,6 +30,10 @@ var node = {
 	url:	require('url')
 };
 
+var wrs = {
+	point:	require('../common/point.js')
+};
+
 
 
 
@@ -147,7 +151,7 @@ module.exports = function(_ai, port) {
 
 
 	/**
-	 * Adds an arrow
+	 * Adds an arrow (with a relative direction)
 	 */
 	this.arrow = function(from, direction, width, stroke) {
 		_objects.arrows.push([
@@ -159,6 +163,19 @@ module.exports = function(_ai, port) {
 			_that.color(stroke)
 		]);
 	};
+
+	/**
+	 * Adds an arrow pointing from one point to another
+	 */
+	this.absolute_arrow = function(from, to, width, stroke) {
+		var direction = new wrs.point(
+			to.x - from.x,
+			to.y - from.y
+		);
+
+		this.arrow(from, direction, width, stroke);
+	};
+
 
 
 
