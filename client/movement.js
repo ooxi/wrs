@@ -29,7 +29,7 @@ var wrs = {
 		go_to_position:	require('./movement/go-to-position.js'),
 	},
 	point:	require('../common/point.js'),
-	point:	require('../common/util.js'),
+	util:	require('../common/util.js')
 };
 
 
