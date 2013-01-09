@@ -82,7 +82,7 @@ module.exports = function(ship, position, direction_groups) {
 			best_center_angle = angle;
 		}
 	}
-	console.log('Best approximation for %j is %j', exact_center_angle, best_center_angle);
+	console.log('Best approximation for %j between %j and %j is %j', exact_center_angle, min_angle, max_angle, best_center_angle);
 
 
 	/* Fly to best angle of that group
