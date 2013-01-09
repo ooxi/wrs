@@ -84,6 +84,13 @@ module.exports = function(directions) {
 	 *     i > angles.length
 	 */
 	var get_delta = function(i) {
+		var current = i % angles.length;
+		var next = (i + 1) % angles.length;
+
+		var current_score = directions[angles[current]];
+		var next_score = directions[angles[next]];
+
+		return Math.abs(current_score - next_score);
 	};
 
 
