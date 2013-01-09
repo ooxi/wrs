@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var wrs = {
+	point:	require('../common/point.js')
+};
+
 
 
 
@@ -31,6 +35,7 @@
  * Evaluates a couple of directions around a given ship position
  *
  * @param this Position evaluation function to use
+ * @param ai AI using this function
  * @param ship Ship to test
  * @param ship_position Position of that ship, must not be null
  * @param steps Amount of directions to try
@@ -44,7 +49,7 @@
  *     .dy Direction dy (normalized)
  *     .value Position's value
  */
-module.exports = function(ship, ship_position, steps, distance) {
+module.exports = function(ai, ship, ship_position, steps, distance) {
 	var result = [];
 	var step = 2 * Math.PI / steps;
 
@@ -68,7 +73,7 @@ module.exports = function(ship, ship_position, steps, distance) {
 
 		/* Draw arrow in gui describing tested position and value
 		 */
-		this.gui.arrow(try_position, new wrs.point(
+		ai.gui.arrow(try_position, new wrs.point(
 			Math.cos(angle) * (5.0 - value) * 10.0,
 			Math.sin(angle) * (5.0 - value) * 10.0
 		), 0.5, 'blue');

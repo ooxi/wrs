@@ -114,7 +114,7 @@ module.exports = function(directions) {
 	return [_.extend(directions, {
 		'min-angle':	angles[0],
 		'max-angle':	angles[angles.length - 1],
-	}];
+	})];
 
 
 	/* Prepare resultset

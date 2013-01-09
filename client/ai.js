@@ -157,7 +157,7 @@ module.exports = Class.extend({
 		/* Evaluate a couple of directions around current position
 		 */
 		var directions = this.movement.evaluate_directions(
-			ship, position,
+			this, ship, position,
 			steps, distance
 		);
 console.log('%j', directions);
