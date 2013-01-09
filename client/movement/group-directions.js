@@ -155,7 +155,7 @@ module.exports = function(directions) {
 			current_group['by-angle'][angle] = direction;
 			current_group['max-angle'] = angle;
 
-			if (direction.value > current_group[current_group['best-angle']].value) {
+			if (direction.value > current_group['by-angle'][current_group['best-angle']].value) {
 				current_group['best-angle'] = angle;
 			}
 
