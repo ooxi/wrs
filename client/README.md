@@ -15,8 +15,15 @@ cluster those ships.
 Cluster AI (TODO)
 -----------------
 
+### Attack
+
 Knows it's target and a group of friendly ships from the Über AI. Tries to
 attack the enemy by coordinated shots -- meaning a couple of shots passing near
 the enemy at roughly the same time so the enemy has a hard time to avoid being
 shot.
+
+### Movement
+
+It is especially hard for the enemy to avoid bullets if they are coming from
+different directions and at close range.
 
