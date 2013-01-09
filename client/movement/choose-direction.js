@@ -110,19 +110,23 @@ module.exports = function(ship, position, direction_groups) {
 	var approx_ship_angle = null;
 
 	if (null !== exact_ship_angle) {
-		if ((min_angle <= exact_ship_angle) && (exact_ship_angle <= max_angle)) {
-			approx_ship_angle = get_approximation(exact_ship_angle);
-		} else if ((min_angle <= exact_ship_angle + 2.0 * Math.PI) && (exact_ship_angle + 2.0 * Math.PI <= max_angle))
-			approx_ship_angle = get_approximation(exact_ship_angle);
-		}
+		approx_ship_angle = get_approximation(exact_ship_angle);
 	}
-
-	console.log('%j => %j', exact_ship_angle, approx_ship_angle);
 
 
 
 	/* Try to continue movement, if value is only neglegable 
+	 */
+	var get_value_diff = function(angle_a, angle_b) {
+		var value_a = best_group['by-angle'][angle_a].value;
+		var value_b = best_group['by-angle'][angle_b].value;
+
+		return Math.abs(value_a - value_b);
+	};
+
 	var fly_to_angle = best_group['best-angle'];
+
+	if (
 
 
 
