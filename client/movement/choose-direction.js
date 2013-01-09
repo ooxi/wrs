@@ -51,7 +51,7 @@ module.exports = function(ship, position, direction_groups) {
 
 	/* Fly to best angle of that group
 	 */
-	console.log('best-angle: %j, best-value: %j', best_group['best-angle'], best_group['by-angle'][best_group['best-angle']].value);
+	console.log('best-angle: %j, best-value: %j of %j', best_group['best-angle'], best_group['by-angle'][best_group['best-angle']].value, best_group);
 	return best_group['by-angle'][best_group['best-angle']];
 
 };
