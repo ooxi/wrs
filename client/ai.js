@@ -173,7 +173,7 @@ module.exports = Class.extend({
 		for (var i = 0; i < direction_groups.length; ++i) {
 			var group = direction_groups[i];
 			var color = colors[i % colors.length];
-
+console.log('group: %j', group['by-angle']);
 			for (var angle in group['by-angle']) {
 				this.gui.arrow(
 					group['by-angle'][angle],

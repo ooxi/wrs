@@ -137,7 +137,7 @@ module.exports = function(directions) {
 		/* Belongs to same group
 		 */
 		if (get_delta(i) < significant_delta) {
-			current_group[angle] = direction;
+			current_group['by-angle'][angle] = direction;
 			current_group['max-angle'] = angle;
 
 			if (direction.value > current_group[current_group['best-angle']].value) {
