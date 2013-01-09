@@ -164,7 +164,7 @@ module.exports = Class.extend({
 		/* Group directions
 		 */
 		var direction_groups = this.movement.group_directions(directions);
-
+console.log('groups: %j', direction_groups);
 
 		/* Draw groups
 		 */
