@@ -29,3 +29,14 @@ different directions and at close range. Thus the Cluster AI tries to form a
 circle around the enemy at mid range. A too close distance would enable the
 enemy to kill friendly ships too easy.
 
+
+Commander AI (TODO)
+-------------------
+
+### Attack
+
+
+### Movement
+
+
+
