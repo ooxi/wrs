@@ -126,31 +126,21 @@ module.exports = function(ship, position, direction_groups) {
 
 	var fly_to_angle = best_group['best-angle'];
 
-	if (
-
-
-
-
-	
+	if (get_value_diff(fly_to_angle, approx_center_angle) < 0.001) {
+		fly_to_angle = approx_center_angle;
+	}
+	if (null !== approx_ship_angle) {
+		if (get_value_diff(fly_to_angle, approx_ship_angle) < 0.001) {
+			fly_to_angle = approx_ship_angle;
+		}
+	}
 
 
 
 	/* If difference between best angle and center angle is neglegable,
 	 * choose center angle
 	 */
-
 	return best_group['by-angle'][fly_to_angle];
-//	var best_angle_value = best_group['by-angle'][fly_to_angle].value;
-//	var center_angle_value = best_group['by-angle'][best_center_angle].value;
-//
-//	if ((best_angle_value - center_angle_value) < 0.001) {
-//		fly_to_angle = best_center_angle;
-//	}
-//
-//
-//	/* Fly to chosten angle
-//	 */
-//	return best_group['by-angle'][fly_to_angle];
 };
 
 
