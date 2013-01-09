@@ -120,43 +120,46 @@ module.exports = function(directions) {
 	/* Prepare resultset
 	 */
 	var groups = [];
-	var current_group = null;
+	var current_group = {
+		'min-angle':	angles[first_significant_delta],
+		'max-angle':	angles[first_significant_delta]
+	};
+	current_group[angles[first_significant_delta]] = directions[angles[first_significant_delta]];
 
 
 	/* Group angles by score
 	 */
-	for (var i = 0; i < angles.length; ++i) {
-		if (get_delta(i) > significant_delta) {
+	for (var i = first_significant_delta + 1; i < angles.length + first_significant_delta; ++i) {
+		var angle = angles[i];
+		var score = directions[angle];
+
+		/* Belongs to same group
+		 */
+		if (get_delta(i) < significant_delta) {
+			current_group[angle] = score;
+			current_group['max-angle'] = angle;
+
+		/* Save current group and start new one
+		 */
+		} else {
+			groups.push(current_group);
+			current_group = {
+				'min-angle':	angle,
+				'max-angle':	angle,
+			};
+			current_group[angle] = score;
 		}
 	}
 
 
-	/* Initialize with first angle
-	 *
-	var current_angles = [angles[0]];
-	var current_score_min = directions[angles[0]];
-	var current_score_max = directions[angles[0]];
-
-	var current_group = {
-		'min-angle':	angles[0],
-		'max-angle':	angles[0]
-	};
-	current_group[angles[0]] = directions[angles[0]];
+	/* Current group is always valid and not jet saved
+	 */
+	groups.push(current_group);
 
 
-	/* Gather all groups
-	 *
-	var groups = [];
-
-	for (var i = 1; i < angles.length; ++i) {
-	}
-
-	
-	/* Check if last group can be merged with first group
-	 *
-	TODO;
-*/
-
+	/* Return calculated groups
+	 */
+	return groups;
 };
 
 
