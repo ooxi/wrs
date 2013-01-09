@@ -76,7 +76,10 @@ module.exports = function(ship, position, direction_groups) {
 
 	for (var angle in best_group['by-angle']) {
 		var best_diff = Math.abs(exact_center_angle - best_center_angle);
-		var current_diff = Math.abs(exact_center_angle - angle);
+		var current_diff = Math.min(
+			Math.abs(exact_center_angle - angle),
+			Math.abs(exact_center_angle - (angle + 2.0 * Math.PI))
+		);
 
 		if (current_diff < best_diff) {
 			best_center_angle = angle;
