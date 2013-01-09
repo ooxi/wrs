@@ -128,7 +128,7 @@ module.exports = Class.extend({
 			var position = this.radar.ship(ship.public_key());
 
 			if (null === position) {
-				console.log('Position of ship '+ ship.public_key +' unknown');
+				console.log('Position of ship '+ ship.public_key() +' unknown');
 				continue;
 			}
 			
@@ -160,6 +160,10 @@ module.exports = Class.extend({
 			this, ship, position,
 			steps, distance
 		);
+
+		/* Group directions
+		 */
+		var direction_groups = this.movement.group_directions(directions);
 console.log('%j', directions);
 
 

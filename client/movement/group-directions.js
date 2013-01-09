@@ -33,8 +33,7 @@ var _ = require('cloneextend');
  * Takes a list of rated directions by angle and tries to group them in order to
  * ease the decision of which to take
  *
- * @param directions Object direction score indexed by angle from current
- *     position
+ * @param directions Object direction score returned by evaluate-directions
  *
  * @return Array containing group of directions
  */
@@ -66,7 +65,7 @@ module.exports = function(directions) {
 	var max_socre = -Infinity;
 
 	for (var i = 0; i < angles.length; ++i) {
-		var score = directions[angles[i]];
+		var score = directions[angles[i]].value;
 
 		if (score < min_score) {
 			min_score = score;
@@ -89,8 +88,8 @@ module.exports = function(directions) {
 		var current = i % angles.length;
 		var next = (i + 1) % angles.length;
 
-		var current_score = directions[angles[current]];
-		var next_score = directions[angles[next]];
+		var current_score = directions[angles[current]].value;
+		var next_score = directions[angles[next]].value;
 
 		return Math.abs(current_score - next_score);
 	};
@@ -131,12 +130,12 @@ module.exports = function(directions) {
 	 */
 	for (var i = first_significant_delta + 1; i < angles.length + first_significant_delta; ++i) {
 		var angle = angles[i];
-		var score = directions[angle];
+		var direction = directions[angle];
 
 		/* Belongs to same group
 		 */
 		if (get_delta(i) < significant_delta) {
-			current_group[angle] = score;
+			current_group[angle] = direction;
 			current_group['max-angle'] = angle;
 
 		/* Save current group and start new one
@@ -147,7 +146,7 @@ module.exports = function(directions) {
 				'min-angle':	angle,
 				'max-angle':	angle,
 			};
-			current_group[angle] = score;
+			current_group[angle] = direction;
 		}
 	}
 
