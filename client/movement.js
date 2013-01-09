@@ -27,7 +27,9 @@ var wrs = {
 	movement: {
 		avoid_border:	require('./movement/avoid-border.js'),
 		go_to_position:	require('./movement/go-to-position.js'),
-	}
+	},
+	point:	require('../common/point.js'),
+	point:	require('../common/util.js'),
 };
 
 
@@ -44,7 +46,10 @@ module.exports = function(_ai, initial_modules) {
 	 */
 	var _modules = initial_modules || [
 		[5.0, new wrs.movement.avoid_border(_ai)],
-		[1.0, new wrs.movement.go_to_position(_ai)]
+		[1.0, new wrs.movement.go_to_position(_ai, new wrs.point(
+			wrs.util.random(_ai.configuration['game-zone']),
+			wrs.util.random(_ai.configuration['game-zone'])
+		))]
 	];
 
 	/**
