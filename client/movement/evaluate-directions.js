@@ -24,7 +24,7 @@
 'use strict';
 
 var wrs = {
-	point:	require('../common/point.js')
+	point:	require('../../common/point.js')
 };
 
 
@@ -65,8 +65,8 @@ module.exports = function(ai, ship, ship_position, steps, distance) {
 		var y_diff = Math.sin(angle) * distance;
 
 		var try_position = new wrs.point(
-			position.x + x_diff,
-			position.y + y_diff
+			ship_position.x + x_diff,
+			ship_position.y + y_diff
 		);
 		var value = this.value(ship, try_position);
 
@@ -94,7 +94,7 @@ module.exports = function(ai, ship, ship_position, steps, distance) {
 
 	/* Return scores
 	 */
-	return results;
+	return result;
 };
 
 
