@@ -66,6 +66,7 @@ module.exports = function(_ai, initial_position) {
 		var destination_angle = wrs.util.atan2(ship_to_destination.y, ship_to_destination.x);
 		var target_angle = wrs.util.atan2(ship_to_target.y, ship_to_target.x);
 		var angle_diff = Math.min(
+			Math.abs((destination_angle + 2.0 * Math.PI) - target_angle),
 			Math.abs(destination_angle - target_angle),
 			Math.abs(destination_angle - (target_angle + 2.0 * Math.PI))
 		);
