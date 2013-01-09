@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var wrs = {
+	util:	require('../../common/utils.js')
+};
+
 
 
 
@@ -48,6 +52,9 @@ module.exports = function(_ai) {
 
 
 
+	/**
+	 * @return Warning of closest ship nearby
+	 */
 	this.value = function(ship, src_position, dest_position) {
 		var my_public_key = ship.public_key();
 		var max_warning = 0.0;
@@ -73,6 +80,19 @@ module.exports = function(_ai) {
 		/* Do _not_ go where a warning is
 		 */
 		return -max_warning;
+	};
+
+
+
+	/**
+	 * @return Warning level of other ship
+	 */
+	var get_warning = function(self_position, other_position) {
+		var distance_sqr = wrs.util.distance_sqr(
+			self_position, other_position
+		);
+
+		if (distance_sqr < wrs.util.sqr
 	};
 
 
