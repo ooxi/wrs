@@ -77,14 +77,14 @@ module.exports = function(_ai) {
 				return 0.0;
 			}
 			if (dist < _hard_warning) {
-				return +1.0;
+				return -1.0;
 			}
 
 			/* Soft warning is relative to distance
 			 */
 			var span = _soft_warning - _hard_warning;
 			var at = dist - _hard_warning;
-			return (at / span) * 0.5;
+			return -(at / span) * 0.5;
 		};
 
 
