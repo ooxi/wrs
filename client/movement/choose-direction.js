@@ -70,22 +70,35 @@ module.exports = function(ship, position, direction_groups) {
 		max_angle += 2.0 * Math.PI;
 	}
 
-	/* Find best approximation for center angle
+
+
+	/* @return Best approximation of an angle
+	 */
+	var get_approximation = function(exact_angle) {
+		var best_approximation = min_angle;
+
+		for (var angle in best_group['by-angle']) {
+			var best_diff = Math.abs(exact_angle - best_approximation);
+			var current_diff = Math.min(
+				Math.abs(exact_angle - parseFloat(angle)),
+				Math.abs(exact_angle - (parseFloat(angle) + 2.0 * Math.PI))
+			);
+
+			if (current_diff < best_diff) {
+				best_approximation = parseFloat(angle);
+			}
+		}
+
+		return best_approximation;
+	};
+
+	/* Find best approximation for center angle and directiont the player
+	 * is flying to
 	 */
 	var exact_center_angle = (max_angle - min_angle) / 2.0 + min_angle;
-	var best_center_angle = min_angle;
+	var exact_ship_angle = 
 
-	for (var angle in best_group['by-angle']) {
-		var best_diff = Math.abs(exact_center_angle - best_center_angle);
-		var current_diff = Math.min(
-			Math.abs(exact_center_angle - parseFloat(angle)),
-			Math.abs(exact_center_angle - (parseFloat(angle) + 2.0 * Math.PI))
-		);
-
-		if (current_diff < best_diff) {
-			best_center_angle = parseFloat(angle);
-		}
-	}
+	
 
 
 
