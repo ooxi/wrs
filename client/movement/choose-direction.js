@@ -39,18 +39,20 @@ module.exports = function(ship, position, direction_groups) {
 	/* @return Best value of group
 	 */
 	var best_value = function(group) {
-		return group['by-angle'][group['best-angle'];
+		return group['by-angle'][group['best-angle']].value;
 	};
 
 
 
 	/* Choose group with best value
+	 *
+	 * @warning i can start from 1
 	 */
 	var best_group = direction_groups[0];
 
 	for (var i = 0; i < direction_groups.length; ++i) {
 		var direction_group = direction_groups[i];
-		console.log('group %j has %j', i, best_value(direction_group));
+		console.log('group %j has %j of %j', i, best_value(direction_group), direction_group);
 
 		if (best_value(direction_group) > best_value(best_group)) {
 			best_group = direction_group;
