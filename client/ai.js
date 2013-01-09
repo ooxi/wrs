@@ -166,6 +166,27 @@ module.exports = Class.extend({
 		 */
 		var direction_groups = this.movement.group_directions(directions);
 
+		/* Select direction
+		 */
+		var direction = this.movement.choose_direction(
+			ship, position, direction_groups
+		);
+
+
+
+		/* Move to chosen direction
+		 */
+		var move_instruction = wrs.util.set_length(new wrs.point(
+			direction.dx,
+			direction.dy
+		), this.configuration['max-ship-speed']);
+
+		this.api.move(
+			ship.private_key(),
+			move_instruction.x,
+			move_instruction.y
+		);
+		
 
 
 		/* Draw groups
@@ -177,15 +198,15 @@ module.exports = Class.extend({
 			var color = colors[i % colors.length];
 
 			for (var angle in group['by-angle']) {
-				var direction = group['by-angle'][angle];
+				var group_direction = group['by-angle'][angle];
 
 				if (Math.abs(direction.value) > 0.00001) {
 				this.gui.arrow(					
-						direction,
+						group_direction,
 						wrs.util.set_length(new wrs.point(
-							direction.dx,
-							direction.dy
-						), direction.value),
+							group_direction.dx,
+							group_direction.dy
+						), group_direction.value),
 						0.5,
 						color
 					);
@@ -194,7 +215,7 @@ module.exports = Class.extend({
 		}
 
 
-		this.api.move(ship.private_key(), this.configuration['max-ship-speed'], 0.0);
+
 
 //		/* Could not find any position o_O
 //		 */
