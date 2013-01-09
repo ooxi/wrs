@@ -64,7 +64,7 @@ module.exports = function(directions) {
 	var max_socre = -Infinity;
 
 	for (var i = 0; i < angles.length; ++i) {
-		var score = directions[angle];
+		var score = directions[angles[i]];
 
 		if (score < min_score) {
 			min_score = score;
@@ -78,6 +78,13 @@ module.exports = function(directions) {
 	/* A significant score change is a .25 of max score difference
 	 */
 	var significant_delta = (max_score - min_score) * 0.25;
+
+
+	/* @return Change between angle i and angle i+1 with auto wrapping if
+	 *     i > angles.length
+	 */
+	var get_delta = function(i) {
+	};
 
 
 	/* Initialize with first angle
