@@ -58,8 +58,6 @@ module.exports = function(ship, position, direction_groups) {
 
 
 
-
-
 	/* Get the half angle of the best group (the angle in between the min-
 	 * and max angle)
 	 */
