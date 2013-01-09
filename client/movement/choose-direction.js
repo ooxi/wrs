@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var wrs = {
+	util:	require('../../common/util.js')
+};
+
 
 
 
@@ -96,6 +100,8 @@ module.exports = function(ship, position, direction_groups) {
 	 * is flying to
 	 */
 	var exact_center_angle = (max_angle - min_angle) / 2.0 + min_angle;
+
+	var ship_speed = Math.sqrt(wrs.util.length_sqr(position.dx, position.dy));
 	var exact_ship_angle = 
 
 	
