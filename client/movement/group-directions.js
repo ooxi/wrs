@@ -62,7 +62,7 @@ module.exports = function(directions) {
 	/* Get minimum and maximum score
 	 */
 	var min_score = Infinity;
-	var max_socre = -Infinity;
+	var max_score = -Infinity;
 
 	for (var i = 0; i < angles.length; ++i) {
 		var score = directions[angles[i]].value;
@@ -121,7 +121,8 @@ module.exports = function(directions) {
 	var groups = [];
 	var current_group = {
 		'min-angle':	angles[first_significant_delta],
-		'max-angle':	angles[first_significant_delta]
+		'max-angle':	angles[first_significant_delta],
+		'best-angle':	angles[first_significant_delta]
 	};
 	current_group[angles[first_significant_delta]] = directions[angles[first_significant_delta]];
 
@@ -138,6 +139,10 @@ module.exports = function(directions) {
 			current_group[angle] = direction;
 			current_group['max-angle'] = angle;
 
+			if (direction.value > current_group[current_group['best-angle']].value) {
+				current_group['best-angle'] = angle;
+			}
+
 		/* Save current group and start new one
 		 */
 		} else {
@@ -145,6 +150,7 @@ module.exports = function(directions) {
 			current_group = {
 				'min-angle':	angle,
 				'max-angle':	angle,
+				'best-angle':	angle
 			};
 			current_group[angle] = direction;
 		}
