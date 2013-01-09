@@ -176,13 +176,13 @@ module.exports = Class.extend({
 
 			for (var angle in group['by-angle']) {
 				var direction = group['by-angle'][angle];
-console.log('%j', direction);
+
 				this.gui.arrow(					
 					direction,
 					wrs.util.set_length(new wrs.point(
 						direction.dx,
 						direction.dy
-					), 5.0),
+					), (5.0 - direction.value) * 10.0),
 					0.5,
 					color
 				);
