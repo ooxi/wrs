@@ -99,13 +99,30 @@ module.exports = function(ship, position, direction_groups) {
 	/* Find best approximation for center angle and directiont the player
 	 * is flying to
 	 */
-	var ship_speed = Math.sqrt(wrs.util.length_sqr(position.dx, position.dy));
-
-	var exact_ship_angle = Math.acos(position.dx / ship_speed);
 	var exact_center_angle = (max_angle - min_angle) / 2.0 + min_angle;
-
-	var approx_ship_angle = null !== exact_ship_angle ? get_approximation(exact_ship_angle) : null;
 	var approx_center_angle = get_approximation(exact_center_angle);
+
+	/* If player is moving and his direction is in the best group, than
+	 * consider that angle, too
+	 */
+	var ship_speed = Math.sqrt(wrs.util.length_sqr(position.dx, position.dy));
+	var exact_ship_angle = Math.acos(position.dx / ship_speed);
+	var approx_ship_angle = null;
+
+	if (null !== exact_ship_angle) {
+		if ((min_angle <= exact_ship_angle) && (exact_ship_angle <= max_angle)) {
+			approx_ship_angle = get_approximation(exact_ship_angle);
+		} else if ((min_angle <= exact_ship_angle + 2.0 * Math.PI) && (exact_ship_angle + 2.0 * Math.PI <= max_angle))
+			approx_ship_angle = get_approximation(exact_ship_angle);
+		}
+	}
+
+	console.log('%j => %j', exact_ship_angle, approx_ship_angle);
+
+
+
+	/* Try to continue movement, if value is only neglegable 
+	var fly_to_angle = best_group['best-angle'];
 
 
 
@@ -117,7 +134,7 @@ module.exports = function(ship, position, direction_groups) {
 	/* If difference between best angle and center angle is neglegable,
 	 * choose center angle
 	 */
-	var fly_to_angle = best_group['best-angle'];
+
 	return best_group['by-angle'][fly_to_angle];
 //	var best_angle_value = best_group['by-angle'][fly_to_angle].value;
 //	var center_angle_value = best_group['by-angle'][best_center_angle].value;
