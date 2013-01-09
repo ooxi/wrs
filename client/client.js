@@ -33,7 +33,9 @@ var wrs = {
 	team:	require('./team.js')
 };
 
-
+var test = {};
+test[1.0] = 3.0];
+console.log('%j', test);
 
 
 
