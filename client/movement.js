@@ -25,7 +25,8 @@
 
 var wrs = {
 	movement: {
-		avoid_border:	require('./movement/avoid-border.js')
+		avoid_border:	require('./movement/avoid-border.js'),
+		go_to_position:	require('./movement/go-to-position.js'),
 	}
 };
 
@@ -42,7 +43,8 @@ module.exports = function(_ai, initial_modules) {
 	 * The movement is calculated by the weighted sum of different modules
 	 */
 	var _modules = initial_modules || [
-		[5.0, new wrs.movement.avoid_border(_ai)]
+		[5.0, new wrs.movement.avoid_border(_ai)],
+		[1.0, new wrs.movement.go_to_position(_ai)]
 	];
 
 	/**
