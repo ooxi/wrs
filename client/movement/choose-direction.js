@@ -99,11 +99,16 @@ module.exports = function(ship, position, direction_groups) {
 	/* Find best approximation for center angle and directiont the player
 	 * is flying to
 	 */
+	var ship_speed = Math.sqrt(wrs.util.length_sqr(position.dx, position.dy));
+
+	var exact_ship_angle = Math.acos(position.dx / ship_speed);
 	var exact_center_angle = (max_angle - min_angle) / 2.0 + min_angle;
 
-	var ship_speed = Math.sqrt(wrs.util.length_sqr(position.dx, position.dy));
-	var exact_ship_angle = Math.acos(position.dx / ship_speed);
-	console.log('%j', exact_ship_angle);
+	var approx_ship_angle = null !== exact_ship_angle ? get_approximation(exact_ship_angle) : null;
+	var approx_center_angle = get_approximation(exact_center_angle);
+
+
+
 
 	
 
