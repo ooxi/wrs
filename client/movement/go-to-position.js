@@ -69,6 +69,7 @@ module.exports = function(_ai, initial_position) {
 			Math.abs(destination_angle - target_angle),
 			Math.abs(destination_angle - target_angle + 2.0 * Math.PI)
 		);
+console.log('%j - %j = %j', destination_angle, target_angle, angle_diff);
 
 		_ai.gui.absolute_arrow(dest_position, _destination, 1.0, 'orange');
 		return (Math.PI - angle_diff) / Math.PI;
