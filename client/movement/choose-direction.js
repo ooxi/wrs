@@ -111,6 +111,13 @@ module.exports = function(ship, position, direction_groups) {
 
 	if (null !== exact_ship_angle) {
 		approx_ship_angle = get_approximation(exact_ship_angle);
+
+		/* Do not use approximation if it's off more than an eight of
+		 * a full circle
+		 */
+		if (Math.abs(exact_ship_angle - approx_ship_angle) > 0.25 * Math.PI) {
+			approx_ship_angle = null;
+		}
 	}
 
 
