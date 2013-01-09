@@ -87,7 +87,7 @@ module.exports = function(ai, ship, ship_position, steps, distance) {
 			y:	try_position.y,
 			dx:	x_diff / distance,
 			dy:	y_diff / distance,
-			vaue:	value
+			value:	value
 		};
 	}
 
