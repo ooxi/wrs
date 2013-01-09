@@ -71,7 +71,7 @@ module.exports = function(ship, position, direction_groups) {
 
 	/* Find best approximation for center angle
 	 */
-	var exact_center_angle = (max_angle - min_angle) / 2.0;
+	var exact_center_angle = (max_angle - min_angle) / 2.0 + min_angle;
 	var best_center_angle = min_angle;
 
 	for (var angle in best_group['by-angle']) {
