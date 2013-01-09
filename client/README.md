@@ -47,6 +47,8 @@ position at roughly the same time.
 ### Movement
 
 While the attack motions are generally given advance, the Commander AI also
+tries to follow the generall direction of the enemy by pursuiting a position
+on a circle around the enemy.
 
 
 Survival AI
@@ -54,5 +56,5 @@ Survival AI
 
 The Survival AI has no aggressive components. It's sole purpose is to keep the
 ship alive by avoiding collisions with the game border or other ships and
-dodging bullets.
+dodging bullets (TODO).
 
