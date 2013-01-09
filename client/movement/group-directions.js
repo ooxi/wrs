@@ -94,6 +94,39 @@ module.exports = function(directions) {
 	};
 
 
+	/* Get first significant change
+	 */
+	var first_significant_delta = (function() {
+		for (var i = 0; i < angles.length; ++i) {
+			if (get_delta(i) > significant_delta) {
+				return i;
+			}
+		}
+
+		return undefined;
+	})();
+
+
+	/* No significant change at all
+	 */
+	return [{
+	}];
+
+
+	/* Prepare resultset
+	 */
+	var groups = [];
+	var current_group = null;
+
+
+	/* Group angles by score
+	 */
+	for (var i = 0; i < angles.length; ++i) {
+		if (get_delta(i) > significant_delta) {
+		}
+	}
+
+
 	/* Initialize with first angle
 	 *
 	var current_angles = [angles[0]];
