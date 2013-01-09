@@ -166,8 +166,26 @@ module.exports = Class.extend({
 		var direction_groups = this.movement.group_directions(directions);
 
 
-		/* 
+		/* Draw groups
 		 */
+		var colors ['blue', 'pink', 'yellow'];
+
+		for (var i = 0; i < direction_groups.length; ++i) {
+			var group = direction_groups[i];
+			var color = colors[i % colors.length];
+
+			for (var angle in group['by-angle']) {
+				this.gui.arrow(
+					group['by-angle'][angle],
+					new wrs.point(
+						group['by-angle'].dx,
+						group['by-angle'].dy
+					),
+					0.5,
+					color
+				);
+			}
+		}
 
 
 //		/* Could not find any position o_O

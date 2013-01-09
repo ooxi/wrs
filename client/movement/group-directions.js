@@ -122,9 +122,10 @@ module.exports = function(directions) {
 	var current_group = {
 		'min-angle':	angles[first_significant_delta],
 		'max-angle':	angles[first_significant_delta],
-		'best-angle':	angles[first_significant_delta]
+		'best-angle':	angles[first_significant_delta],
+		'by-angle':	{}
 	};
-	current_group[angles[first_significant_delta]] = directions[angles[first_significant_delta]];
+	current_group['by-angle'][angles[first_significant_delta]] = directions[angles[first_significant_delta]];
 
 
 	/* Group angles by score
@@ -150,9 +151,10 @@ module.exports = function(directions) {
 			current_group = {
 				'min-angle':	angle,
 				'max-angle':	angle,
-				'best-angle':	angle
+				'best-angle':	angle,
+				'by-angle':	{}
 			};
-			current_group[angle] = direction;
+			current_group['by-angle'][angle] = direction;
 		}
 	}
 
