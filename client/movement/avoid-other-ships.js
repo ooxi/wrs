@@ -46,7 +46,33 @@ module.exports = function(_ai) {
 
 
 
+
+
 	this.value = function(ship, src_position, dest_position) {
+		var my_public_key = ship.public_key();
+		var max_warning = 0.0;
+
+		for (var other_public_key in _ai.radar.ships()) {
+
+			/* No collision with self possible
+			 */
+			if (other_public_key === my_public_key) {
+				continue;
+			}
+
+			var warning = get_warning(
+				dest_position,
+				_ai.radar.ship(other_public_key)
+			);
+
+			if (warning > max_warning) {
+				max_warning = warning;
+			}
+		}
+
+		/* Do _not_ go where a warning is
+		 */
+		return -max_warning;
 	};
 
 
