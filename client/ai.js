@@ -168,7 +168,7 @@ module.exports = Class.extend({
 
 		/* Draw groups
 		 */
-		var colors ['blue', 'pink', 'yellow'];
+		var colors = ['blue', 'pink', 'yellow'];
 
 		for (var i = 0; i < direction_groups.length; ++i) {
 			var group = direction_groups[i];
@@ -187,6 +187,8 @@ module.exports = Class.extend({
 			}
 		}
 
+
+		this.api.move(ship.private_key(), this.configuration['max-ship-speed'], 0.0);
 
 //		/* Could not find any position o_O
 //		 */
