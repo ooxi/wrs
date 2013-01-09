@@ -81,7 +81,6 @@ module.exports = function(_ai, initial_modules) {
 			sum += weight * module.value(ship, ship_position, position);
 		}
 
-
 		return sum;
 	};
 
