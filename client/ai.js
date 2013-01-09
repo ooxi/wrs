@@ -182,13 +182,13 @@ module.exports = Class.extend({
 					wrs.util.set_length(new wrs.point(
 						direction.dx,
 						direction.dy
-					), (5.0 - direction.value) * 10.0),
+					), 5.0),
 					0.5,
 					color
 				);
 			}
 		}
-
+//(5.0 - direction.value) * 10.0
 
 		this.api.move(ship.private_key(), this.configuration['max-ship-speed'], 0.0);
 

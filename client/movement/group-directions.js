@@ -146,9 +146,9 @@ module.exports = function(directions) {
 	/* Group angles by score
 	 */
 	for (var i = first_significant_delta + 1; i < angles.length + first_significant_delta; ++i) {
-		var angle = angles[i];
+		var angle = angles[i % angles.length];
 		var direction = directions[angle];
-console.log('%j %j', angle, direction);
+
 		/* Belongs to same group
 		 */
 		if (get_delta(i) < significant_delta) {
