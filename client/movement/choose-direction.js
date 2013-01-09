@@ -57,6 +57,34 @@ module.exports = function(ship, position, direction_groups) {
 	}
 
 
+	/* Get the half angle of the best group (the angle in between the min-
+	 * and max angle)
+	 */
+	var min_angle = best_group['min-angle'];
+	var max_angle = best_group['max-angle'];
+
+	/* Happens if one group wrapps around angle 0
+	 */
+	if (min_angle > max_angle) {
+		max_angle += 2.0 * Math.PI;
+	}
+
+	/* Find best approximation for center angle
+	 */
+	var exact_center_angle = (max_angle - min_angle) / 2.0;
+	var best_center_angle = min_angle;
+
+	for (var angle in best_group['by-angle']) {
+		var best_diff = Math.abs(exact_center_angle - best_center_angle);
+		var current_diff = Math.abs(exact_center_angle - angle);
+
+		if (current_diff < best_diff) {
+			best_center_angle = angle;
+		}
+	}
+	console.log('Best approximation for %j is %j', exact_center_angle, best_center_angle);
+
+
 	/* Fly to best angle of that group
 	 */
 	console.log('best-angle: %j, best-value: %j', best_group['best-angle'], best_group['by-angle'][best_group['best-angle']].value);
