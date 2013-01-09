@@ -154,7 +154,11 @@ module.exports = Class.extend({
 		var distance = this.configuration['ship-radius'] * 2.0;
 
 
-
+		/* Evaluate a couple of directions around current position
+		 */
+		var directions = this.movement.evaluate_directions(
+			
+		);
 
 
 		/* Could not find any position o_O

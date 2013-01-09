@@ -30,7 +30,7 @@
 /**
  * Evaluates a couple of directions around a given ship position
  *
- * @param movement Position evaluation function to use
+ * @param this Position evaluation function to use
  * @param ship Ship to test
  * @param ship_position Position of that ship, must not be null
  * @param steps Amount of directions to try
@@ -44,7 +44,7 @@
  *     .dy Direction dy (normalized)
  *     .value Position's value
  */
-module.exports = function(movement, ship, ship_position, steps, distance) {
+module.exports = function(ship, ship_position, steps, distance) {
 	var result = [];
 	var step = 2 * Math.PI / steps;
 
@@ -63,7 +63,7 @@ module.exports = function(movement, ship, ship_position, steps, distance) {
 			position.x + x_diff,
 			position.y + y_diff
 		);
-		var value = this.movement.value(ship, try_position);
+		var value = this.value(ship, try_position);
 
 
 		/* Draw arrow in gui describing tested position and value
