@@ -85,6 +85,14 @@ module.exports = function(_ai, initial_modules) {
 		return sum;
 	};
 
+
+
+	/**
+	 * General utility functions which are too big to inclue directly
+	 */
+	this.evaluate_directions = require('./movement/evaluate-directions.js');
+	this.group_directions = require('./movement/group-directions.js);
+
 };
 
 
