@@ -33,12 +33,10 @@
  *
  * @param directions Object direction score indexed by angle from current
  *     position
- * @param max_delta Max difference between two scores belonging to the same
- *     group
  *
  * @return Array containing group of directions
  */
-module.exports = function(directions, max_delta) {
+module.exports = function(directions) {
 
 	/* Sort angles (object keys don't have to be sorted by numerical value)
 	 */
@@ -58,6 +56,28 @@ module.exports = function(directions, max_delta) {
 	if (0 === angles.length) {
 		return [];
 	}
+
+
+	/* Get minimum and maximum score
+	 */
+	var min_score = Infinity;
+	var max_socre = -Infinity;
+
+	for (var i = 0; i < angles.length; ++i) {
+		var score = directions[angle];
+
+		if (score < min_score) {
+			min_score = score;
+		}
+		if (score > max_score) {
+			max_score = score;
+		}
+	}
+
+
+	/* A significant score change is a .25 of max score difference
+	 */
+	var significant_delta = (max_score - min_score) * 0.25;
 
 
 	/* Initialize with first angle
