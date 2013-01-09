@@ -148,7 +148,7 @@ module.exports = function(directions) {
 	for (var i = first_significant_delta + 1; i < angles.length + first_significant_delta; ++i) {
 		var angle = angles[i];
 		var direction = directions[angle];
-
+console.log('%j %j', angle, direction);
 		/* Belongs to same group
 		 */
 		if (get_delta(i) < significant_delta) {
