@@ -164,7 +164,10 @@ module.exports = Class.extend({
 		/* Group directions
 		 */
 		var direction_groups = this.movement.group_directions(directions);
-console.log('%j', direction_groups);
+
+
+		/* 
+		 */
 
 
 //		/* Could not find any position o_O
