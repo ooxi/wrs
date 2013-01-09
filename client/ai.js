@@ -154,33 +154,7 @@ module.exports = Class.extend({
 		var distance = this.configuration['ship-radius'] * 2.0;
 
 
-		/* Try each step and remember best position & value
-		 */
-		var best_position = null;
-		var best_value = -Infinity;
-		var step = 2 * Math.PI / steps;
 
-		for (var i = 0; i < steps; ++i) {
-			var angle = step * i;
-			var x_diff = Math.cos(angle) * distance;
-			var y_diff = Math.sin(angle) * distance;
-
-			var try_position = new wrs.point(
-				position.x + x_diff,
-				position.y + y_diff
-			);
-			var value = this.movement.value(ship, try_position);
-
-			this.gui.arrow(try_position, new wrs.point(
-				Math.cos(angle) * (5.0 - value) * 10.0,
-				Math.sin(angle) * (5.0 - value) * 10.0
-			), 0.5, 'blue');
-
-			if (value > best_value) {
-				best_value = value;
-				best_position = try_position;
-			}
-		}
 
 
 		/* Could not find any position o_O
