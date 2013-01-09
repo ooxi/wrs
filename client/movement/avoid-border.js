@@ -59,9 +59,9 @@ module.exports = function(_ai) {
 		var distance = function(position) {
 			return {
 				top:	+_ai.configuration['game-zone'] - position.y,
-				bottom:	-_ai.configuration['game-zone'] + position.y,
+				bottom:	Math.abs(_ai.configuration['game-zone'] + position.y),
 				left:	+_ai.configuration['game-zone'] - position.x,
-				right:	-_ai.configuration['game-zone'] + position.x
+				right:	Math.abs(_ai.configuration['game-zone'] + position.x)
 			}
 		};
 		var src_distance = distance(src_position);
@@ -74,11 +74,9 @@ module.exports = function(_ai) {
 			var dist = dest_distance[border];
 
 			if (dist > _soft_warning) {
-console.log('no warning for %j', border);
 				return 0.0;
 			}
 			if (dist < _hard_warning) {
-console.log('hard warning for %j', border);
 				return +1.0;
 			}
 
@@ -86,34 +84,11 @@ console.log('hard warning for %j', border);
 			 */
 			var span = _soft_warning - _hard_warning;
 			var at = dist - _hard_warning;
-console.log('soft warning for %j', border);
 			return (at / span) * 0.5;
 		};
 
 
 		return value('top') + value('bottom') + value('left') + value('right');
-
-
-//		/* Value describing action for one border
-//		 */
-//		var value = function(border) {
-//			var src_border_distance = src_distance[border];
-//			var dest_border_distance = src_distance[border];
-//
-//			/* Calculus is done with minimum distance. If the
-//			 * destination is farer away than the source, than
-//			 * we want to go there, even if is's still in th danger
-//			 * zone
-//			 */
-//			var min_distance = Math.min(
-//				src_border_distance,
-//				dest_border_distance
-//			);
-//			var prefix = src_border_distance > dest_border_distance
-//				? +1 : -1
-//			;
-//		};
-
 	};
 
 
