@@ -154,6 +154,7 @@ module.exports = Class.extend({
 		var distance = this.configuration['ship-radius'] * 2.0;
 
 
+
 		/* Evaluate a couple of directions around current position
 		 */
 		var directions = this.movement.evaluate_directions(
@@ -164,6 +165,7 @@ module.exports = Class.extend({
 		/* Group directions
 		 */
 		var direction_groups = this.movement.group_directions(directions);
+
 
 
 		/* Draw groups
@@ -177,15 +179,17 @@ module.exports = Class.extend({
 			for (var angle in group['by-angle']) {
 				var direction = group['by-angle'][angle];
 
+				if (Math.abs(direction.value) > 0.00001) {
 				this.gui.arrow(					
-					direction,
-					wrs.util.set_length(new wrs.point(
-						direction.dx,
-						direction.dy
-					), direction.value),
-					0.5,
-					color
-				);
+						direction,
+						wrs.util.set_length(new wrs.point(
+							direction.dx,
+							direction.dy
+						), direction.value),
+						0.5,
+						color
+					);
+				}
 			}
 		}
 

@@ -174,7 +174,6 @@ module.exports = function(directions) {
 
 	/* Current group is always valid and not jet saved
 	 */
-	console.log('current-group: %j', current_group);
 	groups.push(current_group);
 
 
