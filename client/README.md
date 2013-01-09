@@ -35,8 +35,18 @@ Commander AI (TODO)
 
 ### Attack
 
+The movement of the Commander AI is tighly coupled with it's aggressiv elements.
+The commander is informed by the Cluster AI of an interval at which bullets
+should hit the enemy for coordinated fire. The Commander AI first tries to to
+get a clear vision for shooting -- no friendly ships in it's line of fire,
+neigher in front of nor behind the enemy -- by manovering the ship. If the line
+of fire is clear or friendly ships are distant enough to dodge the shots the
+Commander AI times the firing so that all bullets of a cluster arrive at the
+predicted enemy position at roughly the same time.
 
 ### Movement
+
+While the attack motions are generally preferred
 
 
 Survival AI
