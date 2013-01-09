@@ -182,10 +182,12 @@ module.exports = Class.extend({
 					wrs.util.set_length(new wrs.point(
 						direction.dx,
 						direction.dy
-					), 5.0),
+					), direction.value),
 					0.5,
 					color
 				);
+
+console.log(direction.value);
 			}
 		}
 //(5.0 - direction.value) * 10.0
