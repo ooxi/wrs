@@ -40,3 +40,10 @@ Commander AI (TODO)
 
 
 
+Survival AI
+-----------
+
+The Survival AI has no aggressive components. It's sole purpose is to keep the
+ship alive by avoiding collisions with the game border or other ships and
+dodging bullets.
+
