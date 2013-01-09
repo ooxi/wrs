@@ -157,25 +157,27 @@ module.exports = Class.extend({
 		/* Evaluate a couple of directions around current position
 		 */
 		var directions = this.movement.evaluate_directions(
-			
+			ship, position,
+			steps, distance
 		);
+console.log('%j', directions);
 
 
-		/* Could not find any position o_O
-		 */
-		if (null == best_position) {
-			console.log('[ai] Cannot move '+ ship.public_key() +' because no position could be determined');
-			return;
-		}
-
-
-		/* Move ship in best direction
-		 */
-		var direction = wrs.util.look_at(position, best_position);
-		var movement = wrs.util.set_length(direction, this.configuration['max-ship-speed']);
-
-		this.gui.arrow(position, movement, 1.0, 'black');
-		this.api.move(ship.private_key(), movement.x, movement.y);
+//		/* Could not find any position o_O
+//		 */
+//		if (null == best_position) {
+//			console.log('[ai] Cannot move '+ ship.public_key() +' because no position could be determined');
+//			return;
+//		}
+//
+//
+//		/* Move ship in best direction
+//		 */
+//		var direction = wrs.util.look_at(position, best_position);
+//		var movement = wrs.util.set_length(direction, this.configuration['max-ship-speed']);
+//
+//		this.gui.arrow(position, movement, 1.0, 'black');
+//		this.api.move(ship.private_key(), movement.x, movement.y);
 	},
 
 });
