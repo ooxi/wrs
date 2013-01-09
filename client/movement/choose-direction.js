@@ -35,6 +35,21 @@
  * @param direction_groups Direction groups to choose from
  */
 module.exports = function(ship, position, direction_groups) {
+
+	/* Choose group with best value
+	 */
+	var best_group = direction_groups[0];
+
+	for (var i = 0; i < direction_groups.length; ++i) {
+		var direction_group = direction_groups[i];
+
+		if (direction_group.value > best_group.value) {
+			best_group = direction_group;
+		}
+	}
+
+
+	
 };
 
 
