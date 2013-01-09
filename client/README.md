@@ -39,7 +39,6 @@ Commander AI (TODO)
 ### Movement
 
 
-
 Survival AI
 -----------
 
