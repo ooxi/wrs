@@ -102,7 +102,8 @@ module.exports = function(ship, position, direction_groups) {
 	var exact_center_angle = (max_angle - min_angle) / 2.0 + min_angle;
 
 	var ship_speed = Math.sqrt(wrs.util.length_sqr(position.dx, position.dy));
-	var exact_ship_angle = 
+	var exact_ship_angle = Math.acos(position.dx / ship_speed);
+	console.log('%j', exact_ship_angle);
 
 	
 
@@ -112,17 +113,18 @@ module.exports = function(ship, position, direction_groups) {
 	 * choose center angle
 	 */
 	var fly_to_angle = best_group['best-angle'];
-	var best_angle_value = best_group['by-angle'][fly_to_angle].value;
-	var center_angle_value = best_group['by-angle'][best_center_angle].value;
-
-	if ((best_angle_value - center_angle_value) < 0.001) {
-		fly_to_angle = best_center_angle;
-	}
-
-
-	/* Fly to chosten angle
-	 */
 	return best_group['by-angle'][fly_to_angle];
+//	var best_angle_value = best_group['by-angle'][fly_to_angle].value;
+//	var center_angle_value = best_group['by-angle'][best_center_angle].value;
+//
+//	if ((best_angle_value - center_angle_value) < 0.001) {
+//		fly_to_angle = best_center_angle;
+//	}
+//
+//
+//	/* Fly to chosten angle
+//	 */
+//	return best_group['by-angle'][fly_to_angle];
 };
 
 
