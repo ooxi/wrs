@@ -111,8 +111,6 @@ module.exports = function(directions) {
 	/* No significant change at all
 	 */
 	if ('undefined' === typeof(first_significant_delta)) {
-		console.log('no significant change');
-
 		return [{
 			'min-angle':	angles[0],
 			'max-angle':	angles[angles.length - 1],

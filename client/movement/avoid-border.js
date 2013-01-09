@@ -74,9 +74,11 @@ module.exports = function(_ai) {
 			var dist = dest_distance[border];
 
 			if (dist > _soft_warning) {
+console.log('no warning for %j', border);
 				return 0.0;
 			}
 			if (dist < _hard_warning) {
+console.log('hard warning for %j', border);
 				return +1.0;
 			}
 
@@ -84,7 +86,7 @@ module.exports = function(_ai) {
 			 */
 			var span = _soft_warning - _hard_warning;
 			var at = dist - _hard_warning;
-
+console.log('soft warning for %j', border);
 			return (at / span) * 0.5;
 		};
 
