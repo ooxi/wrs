@@ -23,3 +23,39 @@
  */
 'use strict';
 
+
+
+
+
+/**
+ * Avoids getting destroyed by hitting another ship
+ */
+module.exports = function(_ai) {
+
+	this.value = function(ship, src_position, dest_position) {
+	};
+
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
