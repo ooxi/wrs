@@ -33,7 +33,8 @@
  * @param movement Position evaluation function to use
  * @param ship Ship to test
  * @param ship_position Position of that ship, must not be null
- * @param directions Amount of directions to try
+ * @param steps Amount of directions to try
+ * @param distance 
  *
  * @return Array containing objects describing the tested positions
  *     .angle Angle from the current position
@@ -41,7 +42,7 @@
  *     .dy Direction dy (normalized)
  *     .value Position's value
  */
-module.exports = function(movement, ship, ship_position, directions) {
+module.exports = function(movement, ship, ship_position, steps, distance) {
 
 };
 
