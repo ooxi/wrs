@@ -28,9 +28,32 @@
 
 
 /**
- 
+ * Tries to reach a position
  */
-module.exports = function() {
+module.exports = function(_ai, initial_position) {
+
+	/**
+	 * Desired destination
+	 */
+	var _destination = initial_position || null;
+
+
+
+	/**
+	 * Change desired position
+	 */
+	this.setDestination = function(destination) {
+		_destination = destination;
+	};
+
+
+
+	/**
+	 * A position is preferred, if it's pointing in the right direction
+	 */
+	this.value = function(ship, src_position, dest_position) {
+	};
+
 };
 
 
