@@ -110,10 +110,25 @@ module.exports = function(directions) {
 
 	/* No significant change at all
 	 */
-	return [_.extend(directions, {
-		'min-angle':	angles[0],
-		'max-angle':	angles[angles.length - 1],
-	})];
+	if ('undefined' === typeof(first_significant_delta)) {
+		console.log('no significant change');
+
+		return [{
+			'min-angle':	angles[0],
+			'max-angle':	angles[angles.length - 1],
+			'best-angle':	(function() {
+				var best_angle = angles[0];
+
+				for (var i = 0; i < angles.length; ++i) {
+					if (directions[angles[i]].value > directions[best_angle].value) {
+						best_angle = angles[i];
+					}
+					return best_angle;
+				}
+			})(),
+			'by-angle':	directions
+		}];
+	}
 
 
 	/* Prepare resultset
