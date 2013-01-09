@@ -63,7 +63,11 @@ module.exports = function(_ai, initial_position) {
 		var ship_to_destination = wrs.util.look_at(src_position, _destination);
 		var ship_to_target = wrs.util.look_at(src_position, dest_position);
 
-		var destination_angle = 
+		var destination_angle = wrs.util.atan2(ship_to_destination.y, ship_to_destination.x);
+		var target_angle = wrs.util.atan2(ship_to_target.y, ship_to_target.x);
+		var angle_diff = Math.abs(destination_angle - target_angle);
+
+		
 	};
 
 };
