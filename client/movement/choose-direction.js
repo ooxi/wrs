@@ -106,10 +106,7 @@ module.exports = function(ship, position, direction_groups) {
 	 * consider that angle, too
 	 */
 	var ship_speed = Math.sqrt(wrs.util.length_sqr(position.dx, position.dy));
-	var exact_ship_angle = Math.atan2(position.dy, position.dx);
-	if (exact_ship_angle < 0.0) {
-		exact_ship_angle += 2.0 * Math.PI;
-	}
+	var exact_ship_angle = wrs.util.atan2(position.dy, position.dx);
 	var approx_ship_angle = null;
 
 	if (null !== exact_ship_angle) {

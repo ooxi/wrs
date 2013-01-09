@@ -32,6 +32,20 @@ var wrs = {
 
 
 /**
+ * @return Like atan2 but in interval [0, 2pi] instead of [-pi, pi]
+ */
+var atan2 = function(y, x) {
+	var result = Math.atan2(y, x);
+
+	if (result < 0.0) {
+		result += 2.0 * Math.PI;
+	}
+	return result;
+};
+
+
+
+/**
  * @return Squared distance between a and b
  */
 var distance_sqr = function(a, b) {
@@ -109,6 +123,7 @@ var sqr = function(value) {
  * Export public symbols
  */
 module.exports = {
+	atan2:		atan2,
 	distance_sqr:	distance_sqr,
 	length_sqr:	length_sqr,
 	look_at:	look_at,

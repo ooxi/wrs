@@ -23,6 +23,10 @@
  */
 'use strict';
 
+var wrs = {
+	util:	require('../../common/util.js')
+};
+
 
 
 
@@ -52,6 +56,14 @@ module.exports = function(_ai, initial_position) {
 	 * A position is preferred, if it's pointing in the right direction
 	 */
 	this.value = function(ship, src_position, dest_position) {
+		if (null === _destination) {
+			return 0.0;
+		}
+
+		var ship_to_destination = wrs.util.look_at(src_position, _destination);
+		var ship_to_target = wrs.util.look_at(src_position, dest_position);
+
+		var destination_angle = 
 	};
 
 };
