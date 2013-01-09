@@ -32,9 +32,34 @@
  */
 module.exports = function(_ai) {
 
+	/**
+	 * As soon as the client is this close to another ship a warning will be
+	 * issued
+	 */
+	var _soft_warning = undefined;
+
+	/**
+	 * As soon as the client is this close to another ship, the client will
+	 * be stopped going any further
+	 */
+	var _hard_warning = undefined;
+
+
+
 	this.value = function(ship, src_position, dest_position) {
 	};
 
+
+
+
+
+	/**
+	 * Constructor
+	 */
+	(function() {
+		_soft_warning = _ai.configuration['max-ship-speed'] * 3.0 + _ai.configuration['ship-radius'];
+		_hard_warning = _ai.configuration['max-ship-speed'] * 1.0 + _ai.configuration['ship-radius'];
+	})();
 };
 
 
