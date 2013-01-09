@@ -92,7 +92,18 @@ module.exports = function(_ai) {
 			self_position, other_position
 		);
 
-		if (distance_sqr < wrs.util.sqr
+		if (distance_sqr > wrs.util.sqr(_soft_warning)) {
+			return 0.0;
+		}
+		if (distance_sqr < wrs.util.sqr(_hard_warning)) {
+			return 1.0;
+		}
+
+		/* Warning is relativ to distance
+		 */
+		var span = _soft_warning - _hard_warning;
+		var at = Math.sqrt(distance_sqr) - _hard_warning;
+		return (at / span) * 0.5;
 	};
 
 
