@@ -23,6 +23,8 @@
  */
 'use strict';
 
+var _ = require('cloneextend');
+
 
 
 
@@ -109,7 +111,9 @@ module.exports = function(directions) {
 
 	/* No significant change at all
 	 */
-	return [{
+	return [_.extend(directions, {
+		'min-angle':	angles[0],
+		'max-angle':	angles[angles.length - 1],
 	}];
 
 
