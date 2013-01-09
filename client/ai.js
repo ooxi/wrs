@@ -206,7 +206,7 @@ module.exports = Class.extend({
 						wrs.util.set_length(new wrs.point(
 							group_direction.dx,
 							group_direction.dy
-						), group_direction.value * 10.0),
+						), group_direction.value * 50.0),
 						0.5,
 						color
 					);

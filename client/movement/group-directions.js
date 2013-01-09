@@ -76,9 +76,9 @@ module.exports = function(directions) {
 	}
 
 
-	/* A significant score change is a .25 of max score difference
+	/* A significant score change is a .05 of max score difference
 	 */
-	var significant_delta = (max_score - min_score) * 0.25;
+	var significant_delta = (max_score - min_score) * 0.05;
 
 
 	/* @return Change between angle i and angle i+1 with auto wrapping if
