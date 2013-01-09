@@ -57,6 +57,9 @@ module.exports = function(ship, position, direction_groups) {
 	}
 
 
+
+
+
 	/* Get the half angle of the best group (the angle in between the min-
 	 * and max angle)
 	 */
@@ -77,22 +80,32 @@ module.exports = function(ship, position, direction_groups) {
 	for (var angle in best_group['by-angle']) {
 		var best_diff = Math.abs(exact_center_angle - best_center_angle);
 		var current_diff = Math.min(
-			Math.abs(exact_center_angle - angle),
-			Math.abs(exact_center_angle - (angle + 2.0 * Math.PI))
+			Math.abs(exact_center_angle - parseFloat(angle)),
+			Math.abs(exact_center_angle - (parseFloat(angle) + 2.0 * Math.PI))
 		);
 
 		if (current_diff < best_diff) {
-			best_center_angle = angle;
+			best_center_angle = parseFloat(angle);
 		}
 	}
-	console.log('Best approximation for %j between %j and %j is %j', exact_center_angle, min_angle, max_angle, best_center_angle);
 
 
-	/* Fly to best angle of that group
+
+	/* If difference between best angle and center angle is neglegable,
+	 * choose center angle
 	 */
-	console.log('best-angle: %j, best-value: %j', best_group['best-angle'], best_group['by-angle'][best_group['best-angle']].value);
-	return best_group['by-angle'][best_group['best-angle']];
+	var fly_to_angle = best_group['best-angle'];
+	var best_angle_value = best_group['by-angle'][fly_to_angle].value;
+	var center_angle_value = best_group['by-angle'][best_center_angle].value;
 
+	if ((best_angle_value - center_angle_value) < 0.001) {
+		fly_to_angle = best_center_angle;
+	}
+
+
+	/* Fly to chosten angle
+	 */
+	return best_group['by-angle'][fly_to_angle];
 };
 
 
