@@ -49,7 +49,10 @@ module.exports = function(ship, position, direction_groups) {
 	}
 
 
-	
+	/* Fly to best angle of that group
+	 */
+	return best_group['by-angle'][best_group['best-angle']];
+
 };
 
 
