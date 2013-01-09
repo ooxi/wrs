@@ -36,14 +36,23 @@
  */
 module.exports = function(ship, position, direction_groups) {
 
+	/* @return Best value of group
+	 */
+	var best_value = function(group) {
+		return group['by-angle'][group['best-angle'];
+	};
+
+
+
 	/* Choose group with best value
 	 */
 	var best_group = direction_groups[0];
 
 	for (var i = 0; i < direction_groups.length; ++i) {
 		var direction_group = direction_groups[i];
+		console.log('group %j has %j', i, best_value(direction_group));
 
-		if (direction_group.value > best_group.value) {
+		if (best_value(direction_group) > best_value(best_group)) {
 			best_group = direction_group;
 		}
 	}
@@ -51,7 +60,7 @@ module.exports = function(ship, position, direction_groups) {
 
 	/* Fly to best angle of that group
 	 */
-	console.log('best-angle: %j, best-value: %j of %j', best_group['best-angle'], best_group['by-angle'][best_group['best-angle']].value, best_group);
+	console.log('best-angle: %j, best-value: %j', best_group['best-angle'], best_group['by-angle'][best_group['best-angle']].value);
 	return best_group['by-angle'][best_group['best-angle']];
 
 };
