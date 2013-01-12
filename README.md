@@ -134,7 +134,7 @@ objects nearby, where the meaning of nearby is server defined.
 ##### Ship information
 
 ````json
-{	"public-key": "f0afa14e-959d-4d1f-8f00-c268ae5f5cd7"
+{	"public-key": "f0afa14e-959d-4d1f-8f00-c268ae5f5cd7",
 	"x": 100.0,
 	"y": 200.0,
 	"dx": 25.0,
@@ -145,11 +145,11 @@ objects nearby, where the meaning of nearby is server defined.
 ##### Shot information
 
 ````json
-{	"public-key": "c0afa14e-959d-4d1f-8f00-c268ae5f5cd7"
-	"x": 100.0,
-	"y": 200.0,
-	"dx": 25.0,
-	"dy": 25.0
+{	"public-key": "c0afa14e-959d-4d1f-8f00-c268ae5f5cd7",
+	"x": 0.0,
+	"y": -300.0,
+	"dx": 50.0,
+	"dy": 0.0
 }
 ````
 
