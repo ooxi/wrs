@@ -103,6 +103,60 @@ No response if invokation was successflu.
 ***
 
 
+### Get radar information `/radar`
+
+#### Request
+
+`http://example.net:31337/radar?ship-private-key=2f0d1b45-7d56-4b6a-a070-45d6b0179ec2`
+
+ * `ship-private-key` Ship secret obtaineed with `/spawn`
+
+#### Response
+
+````json
+{	"me": a_ship,
+
+	"nearby-ships": [
+		a_ship
+	],
+
+	"nearby-shots": [
+		a_shot
+	]
+}
+````
+
+On the one hand the `me` property contains ship information about the ship,
+which send the radar request. On the other hand the `nearby-ships` and
+`nearby-shots` properties both contain an array of ship / shot information of
+objects nearby, where the meaning of nearby is server defined.
+
+##### Ship information
+
+````json
+{	"public-key": "f0afa14e-959d-4d1f-8f00-c268ae5f5cd7",
+	"x": 100.0,
+	"y": 200.0,
+	"dx": 25.0,
+	"dy": 25.0
+}
+````
+
+##### Shot information
+
+````json
+{	"public-key": "c0afa14e-959d-4d1f-8f00-c268ae5f5cd7",
+	"x": 0.0,
+	"y": -300.0,
+	"dx": 50.0,
+	"dy": 0.0
+}
+````
+
+
+***
+
+
 ### Spawn a new ship `/spawn`
 
 #### Request
