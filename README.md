@@ -131,6 +131,32 @@ which send the radar request. On the other hand the `nearby-ships` and
 `nearby-shots` properties both contain an array of ship / shot information of
 objects nearby, where the meaning of nearby is server defined.
 
+##### Ship information
+
+````json
+{	"public-key": "f0afa14e-959d-4d1f-8f00-c268ae5f5cd7"
+	"x": 100.0,
+	"y": 200.0,
+	"dx": 25.0,
+	"dy": 25.0
+}
+````
+
+##### Shot information
+
+````json
+{	"public-key": "c0afa14e-959d-4d1f-8f00-c268ae5f5cd7"
+	"x": 100.0,
+	"y": 200.0,
+	"dx": 25.0,
+	"dy": 25.0
+}
+````
+
+
+***
+
+
 ### Spawn a new ship `/spawn`
 
 #### Request
