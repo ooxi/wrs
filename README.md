@@ -103,6 +103,20 @@ No response if invokation was successflu.
 ***
 
 
+### Get radar information `/radar`
+
+#### Request
+
+`http://example.net:31337/radar?ship-private-key=2f0d1b45-7d56-4b6a-a070-45d6b0179ec2`
+
+ * `ship-private-key` Ship secret obtaineed with `/spawn`
+
+#### Response
+
+````json
+````
+
+
 ### Spawn a new ship `/spawn`
 
 #### Request
