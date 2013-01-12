@@ -114,6 +114,16 @@ No response if invokation was successflu.
 #### Response
 
 ````json
+{	"me": a_ship,
+
+	"nearby-ships": [
+		a_ship
+	],
+
+	"nearby-shots": [
+		a_shot
+	}
+}
 ````
 
 
